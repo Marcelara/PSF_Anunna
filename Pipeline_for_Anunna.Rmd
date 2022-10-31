@@ -17,6 +17,7 @@ editor_options:
 
 # Summary
 This file aims to keep track of how microbiome samples from the PSF experiment were pre-processed. 
+This document was mainly written by Marcela Aragon and Kris de Kreek but gathers tips and tricks given by Pedro Beschoren da Costa and Roland Berdager from WUR, as well as several online resources. 
 
 
 # Why doing this? 
@@ -26,15 +27,6 @@ The reason for using a super computer or High Performance Computer -HPC for shor
 MiSeq data is usually pre-processed with the [Qiime2 pipeline ][https://docs.qiime2.org/2022.8/], for this, Pedro Beschoren has already adapted this Qiime2 workflow to be used in the HPC. If your samples were sequenced with MiSeq you can have a look at his [GitHub repository][https://github.com/PedroBeschoren/WUR_HPC_Annuna] instead.
 
 If, however, your samples were sequenced with NovaSeq the story changes. 
-
-
-
-
-# Get prepared
-
-If you are not familiar with bash, linux and using a super computer and you are also doing other things at the same time as I was let me tell you in advance that **this takes a lot of time: as in WEEKS!**. We really hope to help you making this time shorter with this guide, but still getting familiar with a new language and finding your way around the terminal will be a hassle. Also get prepared for some of your scripts to not run at the first time and to find that maybe after you've been waiting for some days your code had an error! We are telling you all this not to kill your hopes but on the contrary so you know that this is normal and for you to be mentally ready for the task ahead (both in spirit and in your time planning ;).  
-
-Having said that, you could start to get familiar with bash by practicing some of the most basic commands that you'll use. 
 
 
 
@@ -61,7 +53,31 @@ cd /lustre/nobackup/INDIVIDUAL/arago004
 
 ```
 
-#Running Ernakovich pipeline for NovaSeq data
+
+
+# Get prepared
+
+If you are not familiar with bash, linux and using a super computer and you are also doing other things at the same time as I was let me tell you in advance that **this takes a lot of time: as in WEEKS!**. We really hope to help you making this time shorter with this guide, but still getting familiar with a new language and finding your way around the terminal will be a hassle. Also get prepared for some of your scripts to not run at the first time and to find that maybe after you've been waiting for some days your code had an error! We are telling you all this not to kill your hopes but on the contrary so you know that this is normal and for you to be mentally ready for the task ahead (both in spirit and in your time planning ;).  
+
+Having said that, you could start to get familiar with bash by practicing some of the most basic commands that you'll use. 
+
+
+## Linux commands 
+
+
+## Moving files between the HPC and your local computer
+
+
+## Checking differences in code
+
+[Diffchecker]()
+
+
+## Pimping your terminal 
+
+
+
+#Running the DADA2 (Ernakovich pipeline) for NovaSeq data
 
 #
 
@@ -192,20 +208,29 @@ followed by a tail of this:
 --> Now you are ready for Script 06!
 
 
-## 06_remove_chimeras_assign_taxonomy_dada2_tutorial_16S
+## 06_remove_chimeras_dada2_tutorial_16S
 
-Now comes the part in which you have to remove chimeras and assign taxonomy to your ASVs according to a database (Step 3 in the [Ernakovich pipeline](https://github.com/ErnakovichLab/dada2_ernakovichlab)). For this we use the [SILVA rRNA database](https://www.arb-silva.de/) which is a huge database that matches taxonomy with the sequence of the small subunit of ribosomal RNA (16S/18S). You'll have to download the most updated database file from the SILVA webpage, in the section called "arb files" (https://www.arb-silva.de/download/arb-files/). In our case we ended up with a downloaded file in named `SILVA_138.1_SSURef_NR99_12_06_20_opt.arb.gz` stored in our local computer.
-
-
-![Fig.X Downloading SILVA database](images/06_SilvaDatabase.JPG)
+Now comes the part in which you have to remove chimeras and assign taxonomy to your ASVs according to a database (Step 3 in the [Ernakovich pipeline](https://github.com/ErnakovichLab/dada2_ernakovichlab)). For this we use the [SILVA rRNA database](https://www.arb-silva.de/) which is a huge database that matches taxonomy with the sequence of the small subunit of ribosomal RNA (16S/18S). You'll have to download the most updated database file from the SILVA webpage, in the "Downloads" tab under the "arb files" section (https://www.arb-silva.de/download/arb-files/). The file is a bit hidden, as you'll have to click on the "File Archive" link as shown highlighter in the picture below: 
 
 
-After the download you'll need to transfer the file to the terminal using Filezilla as we explained before in **Section X**. The file is large, so it takes about ~3 minutes for it to be transfered. Be wary of where you store the  file in your HPC directory as you'll need to specify the path later on in R script file. Before doing that, as now it's a `.qz` file you'll need to decompress it to a `.fa` file. 
+![Fig.X Finding SILVA database](images/06_SilvaDatabase.JPG)
+
+Once there you'll have a long list of releases, go to the latest one, in our case "release_138.1" and then click on the "[Exports]" folder. In there you'll have another long list with many options, you can have a look at the "README.txt" file to see what the different names stand for.
+
+![Fig.X Codes for different types of files](images/06_SilvaDatabase_README.JPG)
+
+We chose the `SILVA_138.1_SSURef_tax_silva_trunc.fasta.gz` option as we want the reference database to be truncated which means that contains only the nucleotides for the 16S gene. **Not sure about difference between full_trunc and just _trunc though**. 
+
+![Fig.X Finding FASTA file of SILVA database](images/06_SilvaDatabase_README_2.JPG)
+
+
+After the download (about ~3 minutes) you'll need to transfer the file to the terminal using Filezilla as we explained before in **Section X**. The file is large, so it takes a couple of mins for it to be transfered. Be wary of where you store the  file in your HPC directory as you'll need to specify the path later on in R script file. 
 
 
 ![Fig.X Transfering SILVA database](images/06_SilvaDatabase_transfer.JPG)
 
 
+As now it's a `.qz` file you'll need to decompress it to a `.fasta` file using the command `gunzip -c SILVA_138.1_SSURef_tax_silva_trunc.fasta.gz`, you can check [this webpage](https://www.cyberciti.biz/faq/unpack-tgz-linux-command-line/) for instructions of how to unpack files from the command line. After you press Enter your terminal will go a bit crazy with a rain of A, C, T anfd G's as all the sequences available in the database are being decompressed, you'll have to wait for some good **30 minutes**.  
 
 
 
