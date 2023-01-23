@@ -15,15 +15,26 @@ editor_options:
   chunk_output_type: console
 ---
 
+
+```{r include=FALSE}
+
+knitr::opts_chunk$set(error=TRUE)
+knitr::opts_chunk$set(eval = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+
+
 # Summary
 
 This file aims to keep track of how microbiome samples from the PSF experiment were pre-processed. This document was mainly written by Marcela Aragon and Kris de Kreek but gathers tips and tricks given by Pedro Beschoren da Costa and Roland Berdager from WUR, as well as several online resources.
 
 # Why doing this?
 
-The reason for using a super computer or High Performance Computer -HPC for short- is that pre-processing of (lots of) microbiome samples requires high computational power which often is not available with normal PCs or laptops. Thus, to make it faster (and doable) we need to make use of an HPC. WUR has its own HPC which is called **"Anunna"**, people who run the HPC at WUR have made a \[Wiki\]\[<https://wiki.anunna.wur.nl/index.php/Main_Page>\] available for users which contains a lot of information.
+The reason for using a super computer or High Performance Computer -HPC for short- is that pre-processing of (lots of) microbiome samples requires high computational power which often is not available with normal PCs or laptops. Thus, to make it faster (and doable) we need to make use of an HPC. WUR has its own HPC which is called **"Anunna"**, people who run the HPC at WUR have made a [Wiki](https://wiki.anunna.wur.nl/index.php/Main_Page) available for users which contains a lot of information.
 
-MiSeq data is usually pre-processed with the \[Qiime2 pipeline \]\[<https://docs.qiime2.org/2022.8/>\], for this, Pedro Beschoren has already adapted this Qiime2 workflow to be used in the HPC. If your samples were sequenced with MiSeq you can have a look at his \[GitHub repository\]\[<https://github.com/PedroBeschoren/WUR_HPC_Annuna>\] instead.
+MiSeq data is usually pre-processed with the [Qiime2 pipeline](https://docs.qiime2.org/2022.8), for this, Pedro Beschoren has already adapted this Qiime2 workflow to be used in the HPC. If your samples were sequenced with MiSeq you can have a look at his [GitHub repository](https://github.com/PedroBeschoren/WUR_HPC_Annuna) instead.
 
 If, however, your samples were sequenced with NovaSeq the story changes.
 
@@ -43,7 +54,7 @@ Before going too technical, if you need to use Anunna from WUR you first need to
 
 Always check the Anunna wiki (<https://wiki.anunna.wur.nl/index.php/Main_Page>) for more updated instructions.
 
-```{bash eval=FALSE}
+```{bash eval=F, echo=T, error=T}
 
 cd /lustre/nobackup/INDIVIDUAL/arago004 
 
@@ -69,7 +80,7 @@ Having said that, you could start to get familiar with bash by practicing some o
 
 # 
 
-# 
+# Running the pipeline
 
 ## 01_pre-processed
 
@@ -87,13 +98,13 @@ Now, let's look at what changes we've made to the slurm and .R files:
 
 **R**
 
-```{r}
+```{r eval=F, echo=T}
 
 ```
 
 **Slurm**
 
-![Fig.X Settings for HPC to run script 04](images/04_slurm.JPG)
+![Fig.X Settings for HPC to run script 04](./images/04_slurm.JPG)
 
 **Description about why these settings are changed**
 
@@ -101,7 +112,7 @@ After you run the `04_learn_error_rates_dada2_tutorial_16S.R` script you can fin
 
 You can find these plots on your `processed` folder --> `02_filter` --> `preprocessed_F` & `preprocessed_R` --> `filtered` (all the way down, after you've passed all your .gz sequences, **Fig. X**).
 
-![Fig.X_04_output_plot-location](images/04_output_plot-location.JPG)
+![Fig.X_04_output_plot-location](./images/04_output_plot-location.JPG)
 
 As you see, you'll have 2 plots per option per forward and reverse = 8 plots (+2 of traditional example just to compare). We suggest you to transfer them to you computer and paste them on some slides so you can compare between them on one go.
 
@@ -109,37 +120,37 @@ With my samples I got this output:
 
 **Traditional way**
 
-![Fig.X_04_output_0-traditional](images/04_output_0-traditional.JPG)
+![Fig.X_04_output_0-traditional](./images/04_output_0-traditional.JPG)
 
 As you can see if I was to use the traditional way my results would be a bit crappy
 
 **Option 1**
 
-![Fig.X Option 1](images/04_output_1.JPG)
+![Fig.X Option 1](./images/04_output_1.JPG)
 
 Doesn't look that bad
 
 **Option 2**
 
-![Fig.X Option 2](images/04_output_2.JPG)
+![Fig.X Option 2](./images/04_output_2.JPG)
 
 It looks off --> not the one to choose
 
 **Option 3**
 
-![Fig.X Option 3](images/04_output_3.JPG)
+![Fig.X Option 3](./images/04_output_3.JPG)
 
 Doesn't look that bad but Option 1 still looks better
 
 **Option 4**
 
-![Fig.X Option 4](images/04_output_4.JPG)
+![Fig.X Option 4](./images/04_output_4.JPG)
 
 Also doesn't look that bad, so now it's between Option 1 and Option 4.
 
 **Comparison between 1 and 4**
 
-![Fig.X Comparison between Option 1 and 4](images/04_output_1vs4.JPG)
+![Fig.X Comparison between Option 1 and 4](./images/04_output_1vs4.JPG)
 
 Honestly I can't see a difference between these 2 options, both of them go down across the x axis and points seem to be scattered in the same way across the black line. Looking at this **I will choose Option IV**, only for the reason of keeping it consistent with Pedro's choice for the Family Experiment (where half of my samples come from). This error rate learning option will be used on Script 05.
 
@@ -172,15 +183,15 @@ for(sam in sample.names) {
 }
 ```
 
-**slurm** ![Fig.X Settings for HPC to run script 05](images/)
+**slurm** Fig.X Settings for HPC to run script 05
 
 **output** After sbatching this script and if everything goes well you should have in your `05_infer_ASVs_dada2_numberX.output` file something like this:
 
-![Fig.X Slurm output Script 05 1/2](images/05_output_1.JPG)
+![Fig.X Slurm output Script 05 1/2](./images/05_output_1.JPG)
 
 followed by a tail of this:
 
-![Fig.X Slurm output Script 05 2/2](images/05_output_2.JPG)
+![Fig.X Slurm output Script 05 2/2](./images/05_output_2.JPG)
 
 --> Now you are ready for Script 06!
 
@@ -244,7 +255,7 @@ saveRDS(seqtab.nochim, paste0(table.fp, "/seqtab_final.rds"))
 
 Changed names inside of function and save only the repset in .fasta and .txt formats
 
-```{r}
+```{r eval=F, echo=T}
 # Write repset to fasta file
 # create a function that writes fasta sequences
 writeRepSetFasta<-function(data, filename){
@@ -269,7 +280,7 @@ write.table(seqtab.t, file = paste0(table.fp, "/seqtab_final.txt"),
 
 **slurm**
 
-![Fig.X Settings for HPC to run script 06](images/06_slurm.JPG)
+![Fig.X Settings for HPC to run script 06](./images/06_slurm.JPG)
 
 **output**
 
@@ -277,18 +288,39 @@ For my samples it took about \~2 hours to run,
 
 In my `06_remove_chimeras_dada2_###.output` file I had something like this at the beginning:
 
-![Fig.X Slurm output Script 06 1/2](images/06_output1.JPG)
+![Fig.X Slurm output Script 06 1/2](./images/06_output1.JPG)
 
 that finished with this:
 
-![Fig.X Slurm output Script 06 2/2](images/06_output2.JPG)
+![Fig.X Slurm output Script 06 2/2](./images/06_output2.JPG)
 
-I find it strange that in denoised F and denoised R I have `0`, so I check the `tracking_reads_summary_plot.png` file and I see that something must have gone wrong after the filtering step!!
+I found strange that in denoised F and denoised R I have `0`, so I check the `tracking_reads_summary_plot.png` file and saw that something must have gone wrong after the filtering step!!
 
 ![Fig.X Summary plot of reads throughout pipeline](images/06_tracking_reads_summary_plot-fail.png)
 
+After trying several things I realized that the process was okay & I didn't have 0 reads at the end but the 'Sample' names were not the same for all dataframes that were joined so I had to modify a bit again the script to:
+
+```{r eval=F, echo=T}
+
+# tracking reads by counts
+filt_out_track <- filt_out %>%
+  data.frame() %>%
+  mutate(Sample = gsub("_R1.fastq.gz","",rownames(.))) %>% #changed to avoid mistake
+  rename(input = reads.in, filtered = reads.out)
+rownames(filt_out_track) <- filt_out_track$Sample
 
 
+```
+
+Be careful to change in between the "" with how your files are ending!!
+
+After doing this, then I get this new `tracking_reads_summary_plot.png`:
+
+![Fig.X Summary plot of reads throughout pipeline-Good one](./images/06_tracking_reads_summary_plot-good.png)
+
+It looks like something went wrong in the 'Merging' step as the number of reads drop about 20%. ***This needs to be checked***
+
+STILL NEED TO GO BACK AND CHECK 'MERGE PAIRED READS' STEP from DADA2!! ([\<https://benjjneb.github.io/dada2/tutorial.html>](https://benjjneb.github.io/dada2/tutorial.html){.uri})
 
 ## 07_Assigning taxonomies to ASVs
 
@@ -296,32 +328,100 @@ As mentioned before we will now assign taxonomy to each of our ASVs according to
 
 [Qiime2](https://docs.qiime2.org/2022.8/about/) is a streamlined pipeline used to analyze microbiome data. It takes you from the very start (raw reads) and it finishes with multiple options of statistical analysis and visualizations. For another explanation/summary of Qiime2, you can visit this tutorial: [https://hackmd.io/\@MAE-MBL/HylpoaOF5#Bioinformatics-III-qiime2](https://hackmd.io/@MAE-MBL/HylpoaOF5#Bioinformatics-III-qiime2){.uri} that I find easier to follow than the original one. One of the steps of the Qiime2 pipeline is, of course, to assign taxonomy to ASVs according to a (*trained*) database.
 
-I highlight the word *trained* as this is an **extra step** that you will have to do in case you didn't use the same primers we did (see table below) for your 16S/ITS regions.
+I highlight the word *trained* as this is an **extra step** that you will have to do in case you didn't use the same primers we did (see table below) for your 16S/ITS regions. In a nutshell, training means that you keep only the region of your interest so the SILVA database can assign taxonomy with more accuracy.If you need to train your classifier, please follow [this tutorial to train your SILVA database with RESCRIPt](https://forum.qiime2.org/t/processing-filtering-and-evaluating-the-silva-database-and-other-reference-sequence-data-with-rescript/15494).
 
-+---------+--------+-------------------------+--------+--------------------------+
-|         | 16S    | 16S                     | ITS    | ITS                      |
-+=========+:======:+:=======================:+:======:+:========================:+
-|         | Region |                         | Region |                          |
-+---------+--------+-------------------------+--------+--------------------------+
-| Forward | 341f   | "CCTACGGGNGGCWGCAG"     | ITS1F  | "CTTGGTCATTTAGAGGAAGTAA" |
-+---------+--------+-------------------------+--------+--------------------------+
-| Reverse | 805r   | "GACTACHVGGGTATCTAATCC" | ITS2R  | "GCTGCGTTCTTCATCGATGC"   |
-+---------+--------+-------------------------+--------+--------------------------+
++-----------+-----------+-------------------------+-----------+--------------------------+
+|           | 16S       | 16S                     | ITS       | ITS                      |
++===========+:=========:+:=======================:+:=========:+:========================:+
+|           | Region    |                         | Region    |                          |
++-----------+-----------+-------------------------+-----------+--------------------------+
+| Forward   | 341f      | "CCTACGGGNGGCWGCAG"     | ITS1F     | "CTTGGTCATTTAGAGGAAGTAA" |
++-----------+-----------+-------------------------+-----------+--------------------------+
+| Reverse   | 805r      | "GACTACHVGGGTATCTAATCC" | ITS2R     | "GCTGCGTTCTTCATCGATGC"   |
++-----------+-----------+-------------------------+-----------+--------------------------+
 
 : Set of 16S and ITS primers used
 
--you might need to install the conda environment
+As I'm using the same primers to amplify the V3-V4 16S region that both Pedro and Roland used, I can use the same already-trained SILVA database that they used and skip the training step.
 
--you'll have to follow a tutorial: link
+To run Qiime2 you need to [install it, and activate within a conda environment inside the HPC](https://docs.qiime2.org/2022.8/install/native/#install-qiime-2-within-a-conda-environment) if you don't have it already installed. The instructions are straightforward, but most likely this step will take you time as you'll have to wait some time for conda and plug-ins to get downloaded (so take it into account).
 
--short explanation of why to train classifier
-
--Add classifier file to GitHub
-
--Add .sh script
+Once installed, you'll have to run script 07 which it will be the actual script that you'll run directly with *sbatch* (not like the previous R scripts)
 
 **slurm**
 
+```{bash eval=F, echo=T}
+
+#!/bin/bash -login
+
+#SBATCH --time=16:00:00                                 ### limit of wall clock time - how long the job will run (same as -t)
+#SBATCH --ntasks=1                                            ### number of tasks - how many tasks (nodes) that you require (same as -n)
+#SBATCH --cpus-per-task=16                        ### number of CPUs (or cores) per task (same as -c)
+#SBATCH --mem=64G                                               ### memory required per node - amount of memory (in bytes)
+#SBATCH --job-name="07_assing_taxonomy_sklearn"                 ### you can give your job a name for easier identification (same as -J)
+#SBATCH --output="07_assign_taxonomy_sklearn_%j.output"
+
+# activates qiime2 environment
+conda activate qiime2-2022.8
+
+# imports representative sequences in FASTA format
+qiime tools import \
+  --input-path /lustre/nobackup/INDIVIDUAL/arago004/ernakovichlab_pipeline/16S_processed_MA/03_tabletax/repset.fasta \
+  --output-path /lustre/nobackup/INDIVIDUAL/arago004/ernakovichlab_pipeline/16S_processed_MA/03_tabletax/rep-seqs_16S.qza \
+  --type 'FeatureData[Sequence]'
+
+
+# assing taxonomy ranks on your representative sequences, based on the trained SILVA reference
+qiime feature-classifier classify-sklearn \
+  --i-classifier /lustre/nobackup/INDIVIDUAL/arago004/ernakovichlab_pipeline/silva-138.1-ssu-nr99-341f-805r-classifier.qza \
+  --i-reads /lustre/nobackup/INDIVIDUAL/arago004/ernakovichlab_pipeline/16S_processed_MA/03_tabletax/rep-seqs_16S.qza \
+  --o-classification /lustre/nobackup/INDIVIDUAL/arago004/ernakovichlab_pipeline/16S_processed_MA/03_tabletax/taxonomy_16S.qza
+
+
+# Export the taxonomy from the .qza taxonomy assingment trained with the correct priemr set, it also crates a new folder in the process
+qiime tools export \
+--input-path /lustre/nobackup/INDIVIDUAL/arago004/ernakovichlab_pipeline/16S_processed_MA/03_tabletax/taxonomy_16S.qza \
+--output-path /lustre/nobackup/INDIVIDUAL/arago004/ernakovichlab_pipeline/16S_processed_MA/03_tabletax/16S_sklearn_taxonomy
+
+conda deactivate
+
+```
+
 **output**
 
-## 08_Adding a phylogenetic tree
+the `07_assign_taxonomy_sklearn_#.output` file should contain just a couple of lines letting you know that all the steps you asked for were made:
+
+```{bash eval=F, echo=T}
+
+Imported /lustre/nobackup/INDIVIDUAL/arago004/ernakovichlab_pipeline/16S_processed_MA/03_tabletax/repset.fasta as DNASequencesDirectoryFormat to /lustre/nobackup/INDIVIDUAL/arago004/ernakovichlab_pipeline/16S_processed_MA/03_tabletax/re$Saved FeatureData[Taxonomy] to: /lustre/nobackup/INDIVIDUAL/arago004/ernakovichlab_pipeline/16S_processed_MA/03_tabletax/taxonomy_16S.qza
+Exported /lustre/nobackup/INDIVIDUAL/arago004/ernakovichlab_pipeline/16S_processed_MA/03_tabletax/taxonomy_16S.qza as TSVTaxonomyDirectoryFormat to directory /lustre/nobackup/INDIVIDUAL/arago004/ernakovichlab_pipeline/16S_processes/03_t$
+
+```
+
+
+And that's it, you've made it! Now you are ready to import your data to R. The files that you will need are inside of the 03.Taxonomy folder and are:
+
+* The `seqtab_final.txt` --> that will be your OTU table (otu_table)
+* `repset.fasta` --> that will be the DNA sequences for each ASV (refseq)
+* `taxonomy.tsv` --> that will be your the taxonomy table (tax_table)
+
+* and your **metadata** file, in my case `Mapping_file_16S_Family_experiment.txt` that will be your metadata (sample_data) 
+
+
+![Fig.X Location of seqtab_final.txt and repset.fasta files](./images/07_refseq_and_otutable.JPG)
+
+![Fig.X Location of taxonomy.tsv file](./images/07_taxtable.JPG)
+
+![Fig.X Location of metadata file](./images/07_metadata.JPG)
+
+Finally, transfer these 4 files to your local computer and think about whether you would like to re-name them so their title is a bit more informative. For instance to track back that were for 16S and not ITS ;)
+
+![Fig.X Location of metadata file](./images/07_final_files_renamed.JPG)
+
+
+## 08_Importing data to R
+
+
+
+
+
