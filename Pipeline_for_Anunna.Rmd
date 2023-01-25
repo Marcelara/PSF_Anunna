@@ -65,7 +65,7 @@ cd /lustre/nobackup/INDIVIDUAL/arago004
 After you have received access to the HPC, you need to install software that can connect your computer to the HPC. There are multiple ways to do this. [PuTTY](https://putty.org/) is a software that can connect to a remote terminal to work on the HPC. When opening **PuTTY**, you have to specify the host name (login.anunna.wur.nl) and the Port 22 with connection type SSH. You can save your basic login settings. More information about this and other settings can be found on the [Annuna wiki](https://wiki.anunna.wur.nl/index.php/Log_in_to_Anunna). 
 
 ![PuTTY login window](images/Putty.png)
-*[Marcela, you use another way to enter the HPC right?]*
+*[@Marcela, you use another way to enter the HPC right?]*
 
 # Get prepared
 
@@ -95,6 +95,12 @@ squeue -u kreek001 #check the status of the jobs you submitted
 ```
 
 As you can see, you can add extra arguments to a command by using a '-' in front of a command. The help file of the command lists all the differed arguments that can be uses.
+
+## File structure in the HPC
+The structure of the HPC can be puzzling, and probably, I still do not fully understand it. From the root of the HPC, there are a bunch of folders of which we only need a few.
+When you enter the HPC, you are in your home directory, for instance: '/home/WUR/kreek001'. The first '/' we call the root. Every user of the HPC does have its own home directory. 
+
+*Tell about lustre and archive.*
 
 ## Moving files between the HPC and your local computer
 
