@@ -28,7 +28,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Summary
 
-This file aims to keep track of how microbiome samples from the PSF experiment were pre-processed. This document was mainly written by Marcela Aragon and Kris de Kreek but gathers tips and tricks given by Pedro Beschoren da Costa and Roland Berdager from WUR, as well as several online resources.
+This file aims to keep track of how microbiome samples from the plant-soil feedback (PSF) experiment were pre-processed. This document was mainly written by Marcela Aragon and Kris de Kreek but gathers tips and tricks given by Pedro Beschoren da Costa and Roland Berdager from WUR, as well as several online resources.
 
 # Why doing this?
 
@@ -44,7 +44,7 @@ Making use of an HPC is tricky, as it works on **Linux** as an operating system 
 
 ## Access to Anunna
 
-Before going too technical, if you need to use Anunna from WUR you first need to ask for access as there are costs involved with using it. To do this you'll need to send an email to a staff member from Anunna stating that:
+Before going too technical, if you need to use Anunna from WUR, you first need to ask for access as there are costs involved with using it. To do this, you'll need to send an email to a staff member from Anunna stating that:
 
 1.  you have permission from your manager/supervisor
 2.  your WUR user account and,
@@ -67,6 +67,26 @@ If you are not familiar with bash, linux and using a super computer and you are 
 Having said that, you could start to get familiar with bash by practicing some of the most basic commands that you'll use.
 
 ## Linux commands
+
+Before you can get started in the HPC, you need to get familiar with Bash. There are many tutorials on the internet that can help you with this *[Do we have some examples?]*. Furthermore, the staff members of Annuna offer some basic courses. I can recomend the **Linux Basic course** which is offered multiple times a year. There are also the **HPC Basic Course** and the **HPC Advanced Course**. I did not join these two last courses but they may be helpful as well. An overview of the upcoming courses can be found on the [Wiki](https://wiki.anunna.wur.nl/index.php/Main_Page#Events). 
+
+There are some basic commands that you will use all the time. We will discuss them down here.
+
+```{bash eval=F, echo=T, error=T}
+ls # print a list with all files in the current directory
+ll # print a long (elaborate) list with all files in the current directory
+ls -l # other option for print a long (elaborate) list with all files in the current directory
+
+cd Test/ # set the working directory to the directory "Test"
+cd ../ # set the working directory one directory back
+
+cat text.R # Print the R file in the console
+nano text.R # Open the R file in a text editor
+
+sbach test.slurm #running a slurm script (submit a job)
+squeue -u kreek001 #check the status of the jobs you submitted
+```
+
 
 ## Moving files between the HPC and your local computer
 
