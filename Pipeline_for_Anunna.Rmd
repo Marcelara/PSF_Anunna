@@ -60,6 +60,13 @@ cd /lustre/nobackup/INDIVIDUAL/arago004
 
 ```
 
+## Entering the HPC
+
+After you have received access to the HPC, you need to install software that can connect your computer to the HPC. There are multiple ways to do this. [PuTTY](https://putty.org/) is a software that can connect to a remote terminal to work on the HPC. When opening **PuTTY**, you have to specify the host name (login.anunna.wur.nl) and the Port 22 with connection type SSH. You can save your basic login settings. More information about this and other settings can be found on the [Annuna wiki](https://wiki.anunna.wur.nl/index.php/Log_in_to_Anunna). 
+
+![PuTTY login window](images/Putty.png)
+*[Marcela, you use another way to enter the HPC right?]*
+
 # Get prepared
 
 If you are not familiar with bash, linux and using a super computer and you are also doing other things at the same time as I was let me tell you in advance that **this takes a lot of time: as in WEEKS!**. We really hope to help you making this time shorter with this guide, but still getting familiar with a new language and finding your way around the terminal will be a hassle. Also get prepared for some of your scripts to not run at the first time and to find that maybe after you've been waiting for some days your code had an error! We are telling you all this not to kill your hopes but on the contrary so you know that this is normal and for you to be mentally ready for the task ahead (both in spirit and in your time planning ;).
