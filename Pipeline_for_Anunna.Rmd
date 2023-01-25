@@ -68,7 +68,7 @@ Having said that, you could start to get familiar with bash by practicing some o
 
 ## Linux commands
 
-Before you can get started in the HPC, you need to get familiar with Bash. There are many tutorials on the internet that can help you with this *[Do we have some examples?]*. Furthermore, the staff members of Annuna offer some basic courses. I can recomend the **Linux Basic course** which is offered multiple times a year. There are also the **HPC Basic Course** and the **HPC Advanced Course**. I did not join these two last courses but they may be helpful as well. An overview of the upcoming courses can be found on the [Wiki](https://wiki.anunna.wur.nl/index.php/Main_Page#Events). 
+Before you can get started in the HPC, you need to get familiar with Bash. There are many tutorials on the internet that can help you with this *[Do we have some examples?]*. Furthermore, the staff members of Annuna offer some basic courses. I can recommend the **Linux Basic course** which is offered multiple times a year. There are also the **HPC Basic Course** and the **HPC Advanced Course**. I did not join these two last courses but they may be helpful as well. An overview of the upcoming courses can be found on the [Wiki](https://wiki.anunna.wur.nl/index.php/Main_Page#Events). 
 
 There are some basic commands that you will use all the time. We will discuss them down here.
 
@@ -87,6 +87,7 @@ sbach test.slurm #running a slurm script (submit a job)
 squeue -u kreek001 #check the status of the jobs you submitted
 ```
 
+As you can see, you can add extra arguments to a command by using a '-' in front of a command. The help file of the command lists all the differed arguments that can be uses.
 
 ## Moving files between the HPC and your local computer
 
