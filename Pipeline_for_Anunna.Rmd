@@ -124,9 +124,53 @@ Try yourself navigating throught the directories of the HPC using de `cd` and `l
 
 ## Pimping your terminal
 
+#Downloading data
+
+## md5 file
+
+# Seperating data
+
 #Running the DADA2 (Ernakovich pipeline) for NovaSeq data
 
-# 
+Before starting, we would strongly recommend to read the information about the [Ernakovich pipeline on GitHub](https://github.com/ErnakovichLab/dada2_ernakovichlab). The next part of this file is an addition to this information given by the Ernakovich lab. By this file we would like to give you a better understanding of the code, more information on interpreting the output, and specific information on running the pipeline on Annuna in stead of premise (HPC of the Ernakovich lab). 
+
+
+# Preperations before running the pipline
+
+There are a few things you need to do before you can start as listed in [Set up part 1](https://github.com/ErnakovichLab/dada2_ernakovichlab). 
+
+1. Install the tutoria in your `lustre` directory. 
+
+2. Install conda or [miniconda](https://ostechnix.com/how-to-install-miniconda-in-linux/)    
+Miniconda is smaller than conda and works perfect. I used the version: Miniconda3-py39_4.12.0-Linux-x86_64. You can use the following code to make sure that miniconda is not activated automatically at start up.
+```{bash eval=F, echo=T, error=T}
+conda config --set auto_activate_base false
+```
+
+You can activate and deactivate the conda environment like the code below. You will see a conda appearing in front of your working directory.
+```{bash eval=F, echo=T, error=T}
+conda activate
+conda deactivate
+```
+
+3. Create environment to conda-dada2
+Now you will create a special conda dada2_Ernakovich environment in which you are going to run the pipeline. Navigate to the Ernakovich pipeline directory and run the following code to install the environment.
+```{bash eval=F, echo=T, error=T}
+module purge 		#Deactivates all activated modules
+conda activate
+cd dada2_ernakovichlab-main
+conda env create -f dada2_ernakovich.yml
+conda activate dada2_ernakovich
+```
+
+Now, the conda dada2_ernakovich environment is installed and activated. You can deactivate it for now. You will activate and deactivate this enviroment every time you are running a slurm script.
+```{bash eval=F, echo=T, error=T}
+conda activate dada2_ernakovich
+conda deactivate
+```
+
+
+You will run this pipeline twice in case you have both a data set of ITS and 16S. In that case, I would advice to copy the data2_ernakovichlab directory for analysing ITS after running the pipeline for 16S. Many changes in the scripts for 16S also apply for ITS. Before running the pipeline for the first time, change the name of the original folder data2_ernakovichlab_main to data2_ernakovichlab_16S (or _ITS) for clarity. 
 
 # Running the pipeline
 
