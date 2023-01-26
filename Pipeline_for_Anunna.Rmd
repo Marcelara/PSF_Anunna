@@ -91,19 +91,22 @@ cd Test/ # set the working directory to the directory "Test"
 cd ../ # set the working directory one directory back
 
 cat text.R # Print the R file in the console
-nano text.R # Open the R file in a text editor
+zcat text.fastq.qz # Print the compressed (zipped) file in the console
+nano text.R # Open the R script in a text editor
+head text.R  # Print the head of the R script in the console
 
 sbach test.slurm #running a slurm script (submit a job)
 squeue -u kreek001 #check the status of the jobs you submitted
 ```
 
-As you can see, you can add extra arguments to a command by using a '-' in front of a command. The help file of the command lists all the differed arguments that can be uses.
+As you can see, you can add extra arguments to a command by using a `-` in front of a command. The help file of the command lists all the differed arguments that can be uses.
 
-*add part on handy keys like cntr C and tab complete*
+There are some very handy keys that will accelerate coding in Linux. Like in R, the name of a function, directory or file can be completed by pressing `tab` when typing the first few letters. When there are multiple options, i.e. multiple folder start with these same letters, you can show all options by pressing `tab` twice.   
+Furthermore, you may sometimes print a file in the console that is very large. You can stop the printing by pressing `CTRL C`.    
 
 ## File structure in the HPC
 The structure of the HPC can be puzzling, and probably, I still do not fully understand it. From the root of the HPC, there are a bunch of folders of which we only need a few.
-When you enter the HPC, you are in your home directory, for instance: '/home/WUR/kreek001'. The first '/' we call the root. Every user of the HPC does have its own home directory. 
+When you enter the HPC, you are in your home directory, for instance: `/home/WUR/kreek001`. The first `/` we call the root. Every user of the HPC does have its own home directory. 
 
 *Tell about lustre and archive.*
 
