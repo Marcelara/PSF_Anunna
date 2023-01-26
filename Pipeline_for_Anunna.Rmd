@@ -95,7 +95,7 @@ zcat text.fastq.qz # Print the compressed (zipped) file in the console
 nano text.R # Open the R script in a text editor
 head text.R  # Print the head of the R script in the console
 
-sbach test.slurm #running a slurm script (submit a job)
+sbach test1.slurm #running a slurm script (submit a job)
 squeue -u kreek001 #check the status of the jobs you submitted
 ```
 
@@ -105,10 +105,14 @@ There are some very handy keys that will accelerate coding in Linux. Like in R, 
 Furthermore, you may sometimes print a file in the console that is very large. You can stop the printing by pressing `CTRL C`.    
 
 ## File structure in the HPC
-The structure of the HPC can be puzzling, and probably, I still do not fully understand it. From the root of the HPC, there are a bunch of folders of which we only need a few.
-When you enter the HPC, you are in your home directory, for instance: `/home/WUR/kreek001`. The first `/` we call the root. Every user of the HPC does have its own home directory. 
+The structure of the HPC can be puzzling. From the root of the HPC, there are a bunch of folders of which we only need a few.
+When you enter the HPC, you are in your home directory, for instance: `/home/WUR/kreek001`. The first `/` we call the root, so your home directory is a directory in the `WUR` directory and that directory is a directory in the `home` directory in the root of the HPC. Every user of the HPC does have its own home directory. To be honest, you will not use your home directory much. You will use two other directories in the root of the HPC: `lustre` and `archive`.
 
-*Tell about lustre and archive.*
+You will use your `lustre` directory as your own 'working directory' where you will store your data and scripts you are working with at that moment. From  here, you can submit jobs to the HPC. The file path to get to your own `lustre` directory will be similar to this: `/lustre/nobackup/INDIVIDUAL/kreek001/`. As there is no shared directory from the Plans science group, yo will have a shared directory in `INDIVIDUAL`.
+
+`archive` is mostly used for storing a backup of your data and data and scripts from `lustre` on which you do not work anymore. After finishing a project on `lustre`, it is wise to move all you files to `archive` as there is limited storage capacity on `lustre`. The file path to there will be similar to this: `/archive/INDIVIDUAL/kreek001/`.
+
+Try yourself navigating throught the directories of the HPC using de `cd` and `ls` commands to get familiar with it.
 
 ## Moving files between the HPC and your local computer
 
