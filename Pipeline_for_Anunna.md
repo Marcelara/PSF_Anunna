@@ -22,7 +22,7 @@ editor_options:
 
 # Summary
 
-This file aims to keep track of how microbiome samples from the PSF experiment were pre-processed. This document was mainly written by Marcela Aragon and Kris de Kreek but gathers tips and tricks given by Pedro Beschoren da Costa and Roland Berdager from WUR, as well as several online resources.
+This file aims to keep track of how microbiome samples from the plant-soil feedback (PSF) experiment were pre-processed. This document was mainly written by Marcela Aragon and Kris de Kreek but gathers tips and tricks given by Pedro Beschoren da Costa and Roland Berdager from WUR, as well as several online resources.
 
 # Why doing this?
 
@@ -38,7 +38,7 @@ Making use of an HPC is tricky, as it works on **Linux** as an operating system 
 
 ## Access to Anunna
 
-Before going too technical, if you need to use Anunna from WUR you first need to ask for access as there are costs involved with using it. To do this you'll need to send an email to a staff member from Anunna stating that:
+Before going too technical, if you need to use Anunna from WUR, you first need to ask for access as there are costs involved with using it. To do this, you'll need to send an email to a staff member from Anunna stating that:
 
 1.  you have permission from your manager/supervisor
 2.  your WUR user account and,
@@ -55,6 +55,16 @@ cd /lustre/nobackup/INDIVIDUAL/arago004
 
 ```
 
+## Entering the HPC
+
+After you have received access to the HPC, you need to install software that can connect your computer to the HPC. There are multiple ways to do this. [PuTTY](https://putty.org/) is a software that can connect to a remote terminal to work on the HPC. When opening **PuTTY**, you have to specify the host name (login.anunna.wur.nl) and the Port 22 with connection type SSH. You can save your basic login settings. More information about this and other settings can be found on the [Annuna wiki](https://wiki.anunna.wur.nl/index.php/Log_in_to_Anunna). 
+
+*tell about logging in when you are in the terminal*    
+   
+![PuTTY login window](images/Putty.png)
+   
+*[@Marcela, you use another way to enter the HPC right?]*   
+   
 # Get prepared
 
 If you are not familiar with bash, linux and using a super computer and you are also doing other things at the same time as I was let me tell you in advance that **this takes a lot of time: as in WEEKS!**. We really hope to help you making this time shorter with this guide, but still getting familiar with a new language and finding your way around the terminal will be a hassle. Also get prepared for some of your scripts to not run at the first time and to find that maybe after you've been waiting for some days your code had an error! We are telling you all this not to kill your hopes but on the contrary so you know that this is normal and for you to be mentally ready for the task ahead (both in spirit and in your time planning ;).
@@ -62,6 +72,36 @@ If you are not familiar with bash, linux and using a super computer and you are 
 Having said that, you could start to get familiar with bash by practicing some of the most basic commands that you'll use.
 
 ## Linux commands
+
+Before you can get started in the HPC, you need to get familiar with Bash. There are many tutorials on the internet that can help you with this *[Do we have some examples?]*. Furthermore, the staff members of Annuna offer some basic courses. I can recommend the **Linux Basic course** which is offered multiple times a year. There are also the **HPC Basic Course** and the **HPC Advanced Course**. I did not join these two last courses but they may be helpful as well. An overview of the upcoming courses can be found on the [Wiki](https://wiki.anunna.wur.nl/index.php/Main_Page#Events). 
+
+There are some basic commands that you will use all the time. We will discuss them down here.
+
+
+```bash
+ls # print a list with all files in the current directory
+ll # print a long (elaborate) list with all files in the current directory
+ls -l # other option for print a long (elaborate) list with all files in the current directory
+
+cd Test/ # set the working directory to the directory "Test"
+cd ../ # set the working directory one directory back
+
+cat text.R # Print the R file in the console
+nano text.R # Open the R file in a text editor
+
+sbach test.slurm #running a slurm script (submit a job)
+squeue -u kreek001 #check the status of the jobs you submitted
+```
+
+As you can see, you can add extra arguments to a command by using a '-' in front of a command. The help file of the command lists all the differed arguments that can be uses.
+
+*add part on handy keys like cntr C and tab complete*
+
+## File structure in the HPC
+The structure of the HPC can be puzzling, and probably, I still do not fully understand it. From the root of the HPC, there are a bunch of folders of which we only need a few.
+When you enter the HPC, you are in your home directory, for instance: '/home/WUR/kreek001'. The first '/' we call the root. Every user of the HPC does have its own home directory. 
+
+*Tell about lustre and archive.*
 
 ## Moving files between the HPC and your local computer
 
