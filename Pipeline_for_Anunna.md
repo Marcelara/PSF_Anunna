@@ -58,10 +58,10 @@ cd /lustre/nobackup/INDIVIDUAL/arago004
 ## Entering the HPC
 
 After you have received access to the HPC, you need to install software that can connect your computer to the HPC. There are multiple ways to do this. [PuTTY](https://putty.org/) is a software that can connect to a remote terminal to work on the HPC. When opening **PuTTY**, you have to specify the host name (login.anunna.wur.nl) and the Port 22 with connection type SSH. You can save your basic login settings. More information about this and other settings can be found on the [Annuna wiki](https://wiki.anunna.wur.nl/index.php/Log_in_to_Anunna). 
-
-*tell about logging in when you are in the terminal*    
    
 ![PuTTY login window](images/Putty.png)
+   
+You will have to type your password When entering the HPC. Your password is not visible (not even dots). This may be confusing. After this step, you are ready to use the HPC!    
    
 *[@Marcela, you use another way to enter the HPC right?]*   
    
@@ -87,21 +87,30 @@ cd Test/ # set the working directory to the directory "Test"
 cd ../ # set the working directory one directory back
 
 cat text.R # Print the R file in the console
-nano text.R # Open the R file in a text editor
+zcat text.fastq.qz # Print the compressed (zipped) file in the console
+nano text.R # Open the R script in a text editor
+head text.R  # Print the head of the R script in the console
 
-sbach test.slurm #running a slurm script (submit a job)
+sbach test1.slurm #running a slurm script (submit a job)
 squeue -u kreek001 #check the status of the jobs you submitted
 ```
 
-As you can see, you can add extra arguments to a command by using a '-' in front of a command. The help file of the command lists all the differed arguments that can be uses.
+As you can see, you can add extra arguments to a command by using a `-` in front of a command. The help file of the command lists all the differed arguments that can be uses.
 
-*add part on handy keys like cntr C and tab complete*
+There are some very handy keys that will accelerate coding in Linux. Like in R, the name of a function, directory or file can be completed by pressing `tab` when typing the first few letters. When there are multiple options, i.e. multiple folder start with these same letters, you can show all options by pressing `tab` twice.   
+Furthermore, you may sometimes print a file in the console that is very large. You can stop the printing by pressing `CTRL C`.    
+
+Many, many things are possible in Linux. So Google is your friend when you want to do something and you do not know the commands to do it.
 
 ## File structure in the HPC
-The structure of the HPC can be puzzling, and probably, I still do not fully understand it. From the root of the HPC, there are a bunch of folders of which we only need a few.
-When you enter the HPC, you are in your home directory, for instance: '/home/WUR/kreek001'. The first '/' we call the root. Every user of the HPC does have its own home directory. 
+The structure of the HPC can be puzzling. From the root of the HPC, there are a bunch of folders of which we only need a few.
+When you enter the HPC, you are in your home directory, for instance: `/home/WUR/kreek001`. The first `/` we call the root, so your home directory is a directory in the `WUR` directory and that directory is a directory in the `home` directory in the root of the HPC. Every user of the HPC does have its own home directory. To be honest, you will not use your home directory much. You will use two other directories in the root of the HPC: `lustre` and `archive`.
 
-*Tell about lustre and archive.*
+You will use your `lustre` directory as your own 'working directory' where you will store your data and scripts you are working with at that moment. From  here, you can submit jobs to the HPC. The file path to get to your own `lustre` directory will be similar to this: `/lustre/nobackup/INDIVIDUAL/kreek001/`. As there is no shared directory from the Plans science group, yo will have a shared directory in `INDIVIDUAL`.
+
+`archive` is mostly used for storing a backup of your data and data and scripts from `lustre` on which you do not work anymore. After finishing a project on `lustre`, it is wise to move all you files to `archive` as there is limited storage capacity on `lustre`. The file path to there will be similar to this: `/archive/INDIVIDUAL/kreek001/`.
+
+Try yourself navigating throught the directories of the HPC using de `cd` and `ls` commands to get familiar with it.
 
 ## Moving files between the HPC and your local computer
 
@@ -111,9 +120,57 @@ When you enter the HPC, you are in your home directory, for instance: '/home/WUR
 
 ## Pimping your terminal
 
+#Downloading data
+
+## md5 file
+
+# Seperating data
+
 #Running the DADA2 (Ernakovich pipeline) for NovaSeq data
 
-# 
+Before starting, we would strongly recommend to read the information about the [Ernakovich pipeline on GitHub](https://github.com/ErnakovichLab/dada2_ernakovichlab). The next part of this file is an addition to this information given by the Ernakovich lab. By this file we would like to give you a better understanding of the code, more information on interpreting the output, and specific information on running the pipeline on Annuna in stead of premise (HPC of the Ernakovich lab). 
+
+
+# Preperations before running the pipline
+
+There are a few things you need to do before you can start as listed in [Set up part 1](https://github.com/ErnakovichLab/dada2_ernakovichlab). 
+
+1. Install the tutoria in your `lustre` directory. 
+
+2. Install conda or [miniconda](https://ostechnix.com/how-to-install-miniconda-in-linux/)    
+Miniconda is smaller than conda and works perfect. I used the version: Miniconda3-py39_4.12.0-Linux-x86_64. You can use the following code to make sure that miniconda is not activated automatically at start up.
+
+```bash
+conda config --set auto_activate_base false
+```
+
+You can activate and deactivate the conda environment like the code below. You will see a conda appearing in front of your working directory.
+
+```bash
+conda activate
+conda deactivate
+```
+
+3. Create environment to conda-dada2
+Now you will create a special conda dada2_Ernakovich environment in which you are going to run the pipeline. Navigate to the Ernakovich pipeline directory and run the following code to install the environment.
+
+```bash
+module purge 		#Deactivates all activated modules
+conda activate
+cd dada2_ernakovichlab-main
+conda env create -f dada2_ernakovich.yml
+conda activate dada2_ernakovich
+```
+
+Now, the conda dada2_ernakovich environment is installed and activated. You can deactivate it for now. You will activate and deactivate this enviroment every time you are running a slurm script.
+
+```bash
+conda activate dada2_ernakovich
+conda deactivate
+```
+
+
+You will run this pipeline twice in case you have both a data set of ITS and 16S. In that case, I would advice to copy the data2_ernakovichlab directory for analysing ITS after running the pipeline for 16S. Many changes in the scripts for 16S also apply for ITS. Before running the pipeline for the first time, change the name of the original folder data2_ernakovichlab_main to data2_ernakovichlab_16S (or _ITS) for clarity. 
 
 # Running the pipeline
 
