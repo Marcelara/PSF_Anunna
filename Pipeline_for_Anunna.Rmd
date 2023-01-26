@@ -104,6 +104,8 @@ As you can see, you can add extra arguments to a command by using a `-` in front
 There are some very handy keys that will accelerate coding in Linux. Like in R, the name of a function, directory or file can be completed by pressing `tab` when typing the first few letters. When there are multiple options, i.e. multiple folder start with these same letters, you can show all options by pressing `tab` twice.   
 Furthermore, you may sometimes print a file in the console that is very large. You can stop the printing by pressing `CTRL C`.    
 
+Many, many things are possible in Linux. So Google is your friend when you want to do something and you do not know the commands to do it.
+
 ## File structure in the HPC
 The structure of the HPC can be puzzling. From the root of the HPC, there are a bunch of folders of which we only need a few.
 When you enter the HPC, you are in your home directory, for instance: `/home/WUR/kreek001`. The first `/` we call the root, so your home directory is a directory in the `WUR` directory and that directory is a directory in the `home` directory in the root of the HPC. Every user of the HPC does have its own home directory. To be honest, you will not use your home directory much. You will use two other directories in the root of the HPC: `lustre` and `archive`.
