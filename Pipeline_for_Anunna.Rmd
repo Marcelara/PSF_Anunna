@@ -124,13 +124,13 @@ Try yourself navigating throught the directories of the HPC using de `cd` and `l
 
 ## Pimping your terminal
 
-#Downloading data
+# Downloading data
 
 ## md5 file
 
 # Seperating data
 
-#Running the DADA2 (Ernakovich pipeline) for NovaSeq data
+# Running the DADA2 (Ernakovich pipeline) for NovaSeq data
 
 Before starting, we would strongly recommend to read the information about the [Ernakovich pipeline on GitHub](https://github.com/ErnakovichLab/dada2_ernakovichlab). The next part of this file is an addition to this information given by the Ernakovich lab. By this file we would like to give you a better understanding of the code, more information on interpreting the output, and specific information on running the pipeline on Annuna in stead of premise (HPC of the Ernakovich lab). 
 
