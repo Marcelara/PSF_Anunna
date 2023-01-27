@@ -215,7 +215,7 @@ First, determine what the sample names are of the samples you want to select. Fo
 
 After that, you can try to build a regular expression that covers all the files you need but does not cover any of the other files. I used the following expression for the files I wanted to grep: `"[2-5][0-9]-.*-P05`. It means I want a value in my file name that starts with a number 2 to 5 followed by a number 0 to 9. After that, there should be a dash. After that, there can by something else of an undefined length that I define by `.*`. finally, I want to have a dash and P05 in my name. Before and after this expression, there can be other things in the name as I do not define that the expressions in my regular expression are at the beginning or the end of the expression.
 
-You can try your own regular expression on a file with all file names in there. The `grep` function takes out of the `Filename` file all file names that match with the regular expression and puts it in a new file called `Selectedfilenames`. Afterwares, you can count the number of lines in the new file to check whether you greped the right number of names.
+You can try your own regular expression on a file with all file names in there. The `grep` function takes out of the `Filename` file all file names that match with the regular expression and puts it in a new file called `Selectedfilenames`. Afterwards, you can count the number of lines in the new file to check whether you greped the right number of names.
 
 ```{bach eval=F, echo=T, error=T}
 grep -E "[2-5][0-9]-.*-P05" Filenames > SelectedFilenames # grep the file names
@@ -244,7 +244,7 @@ Before starting, we would strongly recommend to read the information about the [
 
 There are a few things you need to do before you can start as listed in [Set up part 1](https://github.com/ErnakovichLab/dada2_ernakovichlab). 
 
-1. Install the tutoria in your `lustre` directory. 
+1. Install the tutorial in your `lustre` directory. 
 
 2. Install conda or [miniconda](https://ostechnix.com/how-to-install-miniconda-in-linux/)    
 Miniconda is smaller than conda and works perfect. I used the version: Miniconda3-py39_4.12.0-Linux-x86_64. You can use the following code to make sure that miniconda is not activated automatically at start up.
@@ -268,7 +268,7 @@ conda env create -f dada2_ernakovich.yml
 conda activate dada2_ernakovich
 ```
 
-Now, the conda dada2_ernakovich environment is installed and activated. You can deactivate it for now. You will activate and deactivate this enviroment every time you are running a slurm script.
+Now, the conda dada2_ernakovich environment is installed and activated. You can deactivate it for now. You will activate and deactivate this environment every time you are running a slurm script.
 ```{bash eval=F, echo=T, error=T}
 conda activate dada2_ernakovich
 conda deactivate
@@ -278,6 +278,16 @@ conda deactivate
 You will run this pipeline twice in case you have both a data set of ITS and 16S. In that case, I would advice to copy the data2_ernakovichlab directory for analysing ITS after running the pipeline for 16S. Many changes in the scripts for 16S also apply for ITS. Before running the pipeline for the first time, change the name of the original folder data2_ernakovichlab_main to data2_ernakovichlab_16S (or _ITS) for clarity. 
 
 # Running the pipeline
+
+Okay, finally we can start with running the pipeline. Keep in mind that you will encounter some errors on the way, and that it may take hours to find a solution every. But to give you some mental support, you will get to the end!
+
+There are two kind of scripts: **slurm** scripts and **R** scripts. A slurm script is the script that is needed to run a job on the HPC. In here, you define parameters like the memory the script needs and the time the script is allowed to run. Furthermore, this script can contain commands that define what you want the script to do. Most of the time in this pipeline, we will only write in the slurm script that is has to run an R script as you can not directly run an R script in the HPC. 
+
+Before running the slurm script, check in the slurm script and the corresponding R scipt whether the file paths are correct. Yoiu can use nano to change the paths when this is not the case.
+
+## 00_setup_dada2
+
+
 
 ## 01_pre-processed
 
