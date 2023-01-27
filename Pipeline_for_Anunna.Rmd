@@ -240,7 +240,7 @@ ls ../raw_reads_Kris/ITS | wc -l # count the number of files
 Before starting, we would strongly recommend to read the information about the [Ernakovich pipeline on GitHub](https://github.com/ErnakovichLab/dada2_ernakovichlab). The next part of this file is an addition to this information given by the Ernakovich lab. By this file we would like to give you a better understanding of the code, more information on interpreting the output, and specific information on running the pipeline on Annuna in stead of premise (HPC of the Ernakovich lab). 
 
 
-# Preperations before running the pipline
+# Preperations 
 
 There are a few things you need to do before you can start as listed in [Set up part 1](https://github.com/ErnakovichLab/dada2_ernakovichlab). 
 

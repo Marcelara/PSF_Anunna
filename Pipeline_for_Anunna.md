@@ -79,19 +79,23 @@ There are some basic commands that you will use all the time. We will discuss th
 
 
 ```bash
-ls # print a list with all files in the current directory
-ll # print a long (elaborate) list with all files in the current directory
+ls    # print a list with all files in the current directory
+ll    # print a long (elaborate) list with all files in the current directory
 ls -l # other option for print a long (elaborate) list with all files in the current directory
 
 cd Test/ # set the working directory to the directory "Test"
-cd ../ # set the working directory one directory back
+cd ../   # set the working directory one directory back
 
-cat text.R # Print the R file in the console
+cat text.R         # Print the R script in the console
 zcat text.fastq.qz # Print the compressed (zipped) file in the console
-nano text.R # Open the R script in a text editor
-head text.R  # Print the head of the R script in the console
+nano text.R        # Open the R script in a text editor
+head text.R        # Print the head of the R script in the console
 
-sbach test1.slurm #running a slurm script (submit a job)
+mv text.R /RScripts/ # move the R script to the directory RScripts that is existing the current directory
+cp text.R /RScripts/ # copy the R script to the directory RScripts that is existing the current directory
+mv text.R script1.R  # rename a the R script
+
+sbach test1.slurm  #running a slurm script (submit a job)
 squeue -u kreek001 #check the status of the jobs you submitted
 ```
 
@@ -102,7 +106,9 @@ Furthermore, you may sometimes print a file in the console that is very large. Y
 
 Many, many things are possible in Linux. So Google is your friend when you want to do something and you do not know the commands to do it.
 
-## File structure in the HPC
+
+## File structure of the HPC
+
 The structure of the HPC can be puzzling. From the root of the HPC, there are a bunch of folders of which we only need a few.
 When you enter the HPC, you are in your home directory, for instance: `/home/WUR/kreek001`. The first `/` we call the root, so your home directory is a directory in the `WUR` directory and that directory is a directory in the `home` directory in the root of the HPC. Every user of the HPC does have its own home directory. To be honest, you will not use your home directory much. You will use two other directories in the root of the HPC: `lustre` and `archive`.
 
@@ -110,9 +116,19 @@ You will use your `lustre` directory as your own 'working directory' where you w
 
 `archive` is mostly used for storing a backup of your data and data and scripts from `lustre` on which you do not work anymore. After finishing a project on `lustre`, it is wise to move all you files to `archive` as there is limited storage capacity on `lustre`. The file path to there will be similar to this: `/archive/INDIVIDUAL/kreek001/`.
 
-Try yourself navigating throught the directories of the HPC using de `cd` and `ls` commands to get familiar with it.
+Try yourself navigating through the directories of the HPC using de `cd` and `ls` commands to get familiar with it.
+
 
 ## Moving files between the HPC and your local computer
+
+The easiest way to move files between your local computer and the HPC is via an FTP client like FileZilla. After downloading and opening the FileZilla software, you will see multiple windows. The files of you local computer are shown in the middle on the right. The files of the HPC can be shown on the left of that. You have to connect to the HPC to do so and this will be similar as log in in via PuTTY. Go to File > Site manager. Click on New site. You need `SFTP - SSH File Transfer Protocol` and the `login.annuna.wur.nl` as host with port `22`. You can fill out your own username and pass word. Click on Connect and you will connect to the HPC. These settings are stored and you can connect to the HPC the next time via the Site manager without filling out the settings again.
+
+*add screen shot of FileZilla and the site manager*
+
+Now, you can drag and drop files from the HPC to your local computer and the other way around. Files will also be transferred when you double click on a file. When yo want to open a file, click with the right mouse button on a file and chose Open.
+
+It can take a while to navigate through the directories of the HPC to get into the right folder as it may take a while before the folder is loaded. You can make bookmarks of frequently used directories to reduce the navigation time. You can do this at the drop down menu bookmarks.
+
 
 ## Checking differences in code
 
@@ -120,22 +136,118 @@ Try yourself navigating throught the directories of the HPC using de `cd` and `l
 
 ## Pimping your terminal
 
-#Downloading data
+# Downloading data
 
-## md5 file
+The sequencing company will provide you the information for downloading the data from there remote server to the HPC. This is an example of the email we received:
+
+
+```r
+# Dear Pedro,
+# your 16S/ITS metabarcoding data (internal ID2577) is ready for download (delivery_20220922) via:
+# web-app: http://support.igatech.it/delivery
+# or
+# SFTP: support.igatech.it (command line or using an FTP client such as FileZilla or WinSCP)
+# by using
+# Username : beschoren-da-costa_pedro
+# Password : xxexamplexx
+```
+
+As the email stats, there are two options to access the data, directly from the HPC with Bash commands or via a FTP client like FileZilla. The first option may be a bit more exiting wile the second one is a bit more intuitive. I would advice to store a copy of the data on the archive and on lustre. And make a backup of the data on an external hard drive to have an extra copy, just in case.
+
+**Downloading data with Bash commands**
+
+So, you go to the folder on the HPC where you want to store the data. First, you need to connect to the remote server of the sequencing company. The email states that you can do this via `SFTP`. After some googling, we found a [tutorial](https://linuxize.com/post/how-to-use-linux-sftp-command-to-transfer-files/) to explain how to do this. In short you first access the server of the sequencing company with the information provided in the email:
+
+
+```bach
+sftp beschoren-da-costa_pedro@support.igatech.it
+```
+
+After that, you can navigate through the directories and you should see the same files as when you open the internet link in the email. After that you can use the `get` command to download the data. The `-r` argument is used to specify that you want to download a directory.
+
+
+```bach
+sftp get -r remote_directory
+```
+
+You can read the tutorial for more information.
+
+**Dowloading data with FileZilla**
+
+Just like you connected to the HPC in FileZilla, you can connect to the remote sever of the sequencing company. So go to the Site manager, click on New site and fill out the open fields like for instance:
+
+
+```r
+#	Protocol: SFTP
+#	Host: support.igatech.it
+#	Port: 22 (provided by igatch)
+#	Inlogtype: normal
+#	Username: beschoren-da-costa_pedro
+#	Password:
+```
+
+Next, you can download the data to and external hard drive and the HPC.
+
+## Checking download with checksums
+
+We would like to know whether all files are downloaded well. We can compare this by comparing the checksums of the files with sequencing data before and after downloading. A checksum is a unique code of a file. This code does not change when the file is downloaded correctly. The sequencing company will provide a file with the checksums of all files. Such a file is called a md5file. After downloading, you can make your own md5file and compare the two. Go to the directory with your sequencing data files and do the following:
+
+
+```bach
+md5sum * > filename
+```
+
+The `*` means you want to target all files and store the checksums in the file called `filename`. 
+
+Next, copy the checksums and file of the md5file before and after downloading into two different Excel sheets. Order the file names both sheets in the same way. Next, copy the check sums and file names of one sheet next to the file names and check sums of the other sheet and lat Excel compare the checksums. For instance, when the checksums of the sequencing company are in column A and the checksums after downloading are in column D, you can type in column F `=A1=D1`. Excel will print `TRUE` when the checksums are the same and `FALSE` when they are not. You can use a function to count the number of False. This number should be 0.
+
+*Show of screen shot of the Excel file*
 
 # Seperating data
 
-#Running the DADA2 (Ernakovich pipeline) for NovaSeq data
+It can happen that samples of multiple of your experiments are sequenced at once. In that case, you have to separate the sequence data of the experiments before doing the analysis. It is wise to backup your data before doing this. Regular expressions can be used to select the files of one experiment. A very nice tutorial about regular expressions can be found [here](https://www.howtogeek.com/661101/how-to-use-regular-expressions-regexes-on-linux/). 
+
+First, determine what the sample names are of the samples you want to select. For instance, I wanted the samples
+   `IDXXXX_20-R11-P05-D03`   
+    Up to   
+   `IDXXXX_49-R2C10-P05-A07`   
+    And   
+   `IDXXXX_50-MOCK5-P05-A07`   
+
+After that, you can try to build a regular expression that covers all the files you need but does not cover any of the other files. I used the following expression for the files I wanted to grep: `"[2-5][0-9]-.*-P05`. It means I want a value in my file name that starts with a number 2 to 5 followed by a number 0 to 9. After that, there should be a dash. After that, there can by something else of an undefined length that I define by `.*`. finally, I want to have a dash and P05 in my name. Before and after this expression, there can be other things in the name as I do not define that the expressions in my regular expression are at the beginning or the end of the expression.
+
+You can try your own regular expression on a file with all file names in there. The `grep` function takes out of the `Filename` file all file names that match with the regular expression and puts it in a new file called `Selectedfilenames`. Afterwards, you can count the number of lines in the new file to check whether you greped the right number of names.
+
+
+```bach
+grep -E "[2-5][0-9]-.*-P05" Filenames > SelectedFilenames # grep the file names
+wc -l SelectedFilenames # count the number of lines
+```
+
+When this works well and you can select all files you need, you can copy or move all the files itself to another directory. Afterwards, you can count the number of files again to check if the expected number of files are moved.
+
+For instance, here I was in a directory with the ITS and 16S directory. I moved from the ITS and 16S directory these files, one directory back and then into two other directories. Mind here that the coding of regular expressions is a little bit differed for files than for lines in a file. In stead of a `.*`, we use a `*` to indicate there can be anything for a given number of characters. We have to put a `*` at the beginning and the end of the expression when the general expression does not start at the beginning of the file name and does not end at the end.
+
+
+```bach
+mv ITS/*[2-5][0-9]-*-P05* ../raw_reads_Kris/ITS # move files
+mv 16S/*[2-5][0-9]-*-P05* ../raw_reads_Kris/16S # move files
+
+ls ../raw_reads_Kris/16S | wc -l # count the number of files
+ls ../raw_reads_Kris/ITS | wc -l # count the number of files
+```
+
+
+# Running the DADA2 (Ernakovich pipeline) for NovaSeq data
 
 Before starting, we would strongly recommend to read the information about the [Ernakovich pipeline on GitHub](https://github.com/ErnakovichLab/dada2_ernakovichlab). The next part of this file is an addition to this information given by the Ernakovich lab. By this file we would like to give you a better understanding of the code, more information on interpreting the output, and specific information on running the pipeline on Annuna in stead of premise (HPC of the Ernakovich lab). 
 
 
-# Preperations before running the pipline
+# Preperations 
 
 There are a few things you need to do before you can start as listed in [Set up part 1](https://github.com/ErnakovichLab/dada2_ernakovichlab). 
 
-1. Install the tutoria in your `lustre` directory. 
+1. Install the tutorial in your `lustre` directory. 
 
 2. Install conda or [miniconda](https://ostechnix.com/how-to-install-miniconda-in-linux/)    
 Miniconda is smaller than conda and works perfect. I used the version: Miniconda3-py39_4.12.0-Linux-x86_64. You can use the following code to make sure that miniconda is not activated automatically at start up.
@@ -162,7 +274,7 @@ conda env create -f dada2_ernakovich.yml
 conda activate dada2_ernakovich
 ```
 
-Now, the conda dada2_ernakovich environment is installed and activated. You can deactivate it for now. You will activate and deactivate this enviroment every time you are running a slurm script.
+Now, the conda dada2_ernakovich environment is installed and activated. You can deactivate it for now. You will activate and deactivate this environment every time you are running a slurm script.
 
 ```bash
 conda activate dada2_ernakovich
@@ -174,7 +286,99 @@ You will run this pipeline twice in case you have both a data set of ITS and 16S
 
 # Running the pipeline
 
+Okay, finally we can start with running the pipeline in lustre. Keep in mind that you will encounter some errors on the way, and that it may take hours to find a solution every. But to give you some mental support, you will get to the end!
+
+There are two kind of scripts: **slurm** scripts and **R** scripts. A slurm script is the script that is needed to run a job on the HPC. In here, you define parameters like the memory the script needs and the time the script is allowed to run. Furthermore, this script can contain commands that define what you want the script to do. Most of the time in this pipeline, we will only write in the slurm script that is has to run an R script as you can not directly run an R script in the HPC. 
+
+Before running the slurm script, check in the slurm script and the corresponding R script whether the file paths are correct. You can use nano to change the paths when this is not the case.
+
+## 00_setup_dada2
+
+We first have to setup the data2 pipeline by installing the necessary R packages and creating an R environment by running the 00_setup slurm script. Before doing so, change the file of where data is stored and where the output will to be stored in the R script. You do not have to create the output directory yourself as the R script will do this for you. You can add the mapping file as well but you can skip this as well.
+
+**slurm script**
+
+The Ernakovich lab has made very elaborate slurm scripts that contains a lot of interesting information. You can reed this once. After that, you can reduce the script to the following essential elements. `#SBATCH` is a command for the slurm script, the line is a command when having two or more #s.
+
+
+```bash
+#!/bin/bash -login 	            ### -login is essential to activate conda environment
+
+#SBATCH --time=2:00:00          ### limit of wall clock time - how long the job will run
+#SBATCH --ntasks=1              ### number of tasks - how many nodes you need
+#SBATCH --cpus-per-task=1       ### number of CPUs (or cores) per task
+#SBATCH --mem=4G                ### memory required per node (in bytes)
+
+#SBATCH --job-name 00_setup_dada2         ### you can give your job a name
+#SBATCH --output=00_setup_dada2_%j.output ### name of the output file
+
+conda activate dada2_ernakovich
+
+Rscript ../R/00_setup_dada2_tutorial_16S.R    ### Run R script
+
+conda deactivate
+```
+
+
 ## 01_pre-processed
+
+Here, we will remove sequences with many unknown nucleotides (Ns) and the primer sequences by using cutadapt. 
+
+**R script**
+
+Change the primer sequences in the R script to the primer sequences you have used. An example is shown in a snapshot of the chunck below.
+
+
+```r
+# Set up the primer sequences to pass along to cutadapt
+FWD <- "CCTACGGGNGGCWGCAG"  ## changed to 16S-341R
+REV <- "GACTACHVGGGTATCTAATCC"  ## Changed to 16S-805R
+
+# FWD <- "CTTGGTCATTTAGAGGAAGTAA" ## added by Kris to ITS1F primers
+# REV <- "GCTGCGTTCTTCATCGATGC" ## added by Kris to ITS2R primers
+```
+
+Furthermore, Pedro added some lines to the function that runs cutadapt.
+
+
+```r
+# Run Cutadapt                    ## Some additions of Pedro used by Kris
+for (i in seq_along(fnFs)) {
+  system2(cutadapt, args = c("-j", 0, R1.flags, R2.flags, "-n", 2, # -n 2 required to remove FWD and REV from reads
+                             "--match-read-wildcards",             # PEDRO's addition, allow N within reads
+                             "--discard-untrimmed",                # PEDRO's addition, remove reads without primers
+                             "-e 0", "--overlap 8",                # PEDRO's addition, max error in primer sequence in zero, minimum overlap is 8
+                             "-o", fnFs.cut[i], "-p", fnRs.cut[i], # output files
+                             fnFs.filtN[i], fnRs.filtN[i]))        # input files
+}
+```
+
+**slurm script**
+
+This slurm script is run with the minimal CPUs and memory to run the R script. 
+
+
+```rbash
+#!/bin/bash -login 	            ### -login is essential to activate conda environment
+
+#SBATCH --time=1:00:00          ### limit of wall clock time - how long the job will run
+#SBATCH --ntasks=1              ### number of tasks - how many nodes you need
+#SBATCH --cpus-per-task=16      ### number of CPUs (or cores) per task
+#SBATCH --mem=64G               ### memory required per node (in bytes)
+
+#SBATCH --job-name 01_pre-process_dada2            ### you can give your job a name
+#SBATCH --output=01_pre-process_dada2_%j.output    ### output name
+
+conda activate dada2_ernakovich
+
+Rscript ../R/01_pre-process_dada2_tutorial_16S.R
+
+conda deactivate
+```
+
+**output**
+
+
 
 ## 02_check-quality
 
