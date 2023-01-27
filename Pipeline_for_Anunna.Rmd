@@ -279,14 +279,35 @@ You will run this pipeline twice in case you have both a data set of ITS and 16S
 
 # Running the pipeline
 
-Okay, finally we can start with running the pipeline. Keep in mind that you will encounter some errors on the way, and that it may take hours to find a solution every. But to give you some mental support, you will get to the end!
+Okay, finally we can start with running the pipeline in lustre. Keep in mind that you will encounter some errors on the way, and that it may take hours to find a solution every. But to give you some mental support, you will get to the end!
 
 There are two kind of scripts: **slurm** scripts and **R** scripts. A slurm script is the script that is needed to run a job on the HPC. In here, you define parameters like the memory the script needs and the time the script is allowed to run. Furthermore, this script can contain commands that define what you want the script to do. Most of the time in this pipeline, we will only write in the slurm script that is has to run an R script as you can not directly run an R script in the HPC. 
 
-Before running the slurm script, check in the slurm script and the corresponding R scipt whether the file paths are correct. Yoiu can use nano to change the paths when this is not the case.
+Before running the slurm script, check in the slurm script and the corresponding R script whether the file paths are correct. You can use nano to change the paths when this is not the case.
 
 ## 00_setup_dada2
 
+We first have to setup the data2 pipeline by installing the necessary R packages and creating an R environment by running the 00_setup slurm script. Before doing so, change the file of where data is stored and where the output will to be stored in the R script. You do not have to create the output directory yourself as the R script will do this for you. You can add the mapping file as well but you can skip this as well.
+
+The Ernakovich lab has made very elaborate slurm scripts that contains a lot of interesting information. You can reed this once. After that, you can reduce the script to the following essential elements.
+
+```{bash eval=F, echo=T, error=T}
+#!/bin/bash -login 	            ### -login is essential to be able to activate conda environment
+
+#SBATCH --time=2:00:00          ### limit of wall clock time - how long the job will run (same as -t)
+#SBATCH --ntasks=1              ### number of tasks - how many tasks (nodes) that you require (same as -n)
+#SBATCH --cpus-per-task=1       ### number of CPUs (or cores) per task (same as -c)
+#SBATCH --mem=4G                ### memory required per node - amount of memory (in bytes)
+
+#SBATCH --job-name 00_setup_dada2         ### you can give your job a name for easier identification (same as -J)
+#SBATCH --output=00_setup_dada2_%j.output ### name of the output file (same as -o)
+
+conda activate dada2_ernakovich
+
+Rscript ../R/00_setup_dada2_tutorial_16S.R    ### Run R script
+
+conda deactivate
+```
 
 
 ## 01_pre-processed
