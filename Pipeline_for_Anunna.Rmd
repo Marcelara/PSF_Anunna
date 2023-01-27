@@ -110,7 +110,9 @@ Furthermore, you may sometimes print a file in the console that is very large. Y
 
 Many, many things are possible in Linux. So Google is your friend when you want to do something and you do not know the commands to do it.
 
-## File structure in the HPC
+
+## File structure of the HPC
+
 The structure of the HPC can be puzzling. From the root of the HPC, there are a bunch of folders of which we only need a few.
 When you enter the HPC, you are in your home directory, for instance: `/home/WUR/kreek001`. The first `/` we call the root, so your home directory is a directory in the `WUR` directory and that directory is a directory in the `home` directory in the root of the HPC. Every user of the HPC does have its own home directory. To be honest, you will not use your home directory much. You will use two other directories in the root of the HPC: `lustre` and `archive`.
 
@@ -118,9 +120,19 @@ You will use your `lustre` directory as your own 'working directory' where you w
 
 `archive` is mostly used for storing a backup of your data and data and scripts from `lustre` on which you do not work anymore. After finishing a project on `lustre`, it is wise to move all you files to `archive` as there is limited storage capacity on `lustre`. The file path to there will be similar to this: `/archive/INDIVIDUAL/kreek001/`.
 
-Try yourself navigating throught the directories of the HPC using de `cd` and `ls` commands to get familiar with it.
+Try yourself navigating through the directories of the HPC using de `cd` and `ls` commands to get familiar with it.
+
 
 ## Moving files between the HPC and your local computer
+
+The easiest way to move files between your local computer and the HPC is via an FTP client like FileZilla. After downloading and opening the FileZilla software, you will see multiple windows. The files of you local computer are shown in the middle on the right. The files of the HPC can be shown on the left of that. You have to connect to the HPC to do so and this will be similar as log in in via PuTTY. Go to File > Site manager. Click on New site. You need `SFTP - SSH File Transfer Protocol` and the `login.annuna.wur.nl` as host with port `22`. You can fill out your own username and pass word. Click on Connect and you will connect to the HPC. These settings are stored and you can connect to the HPC the next time via the Site manager without filling out the settings again.
+
+*add screen shot of FileZilla and the site manager*
+
+Now, you can drag and drop files from the HPC to your local computer and the other way around. Files will also be transferred when you double click on a file. When yo want to open a file, click with the right mouse button on a file and chose Open.
+
+It can take a while to navigate through the directories of the HPC to get into the right folder as it may take a while before the folder is loaded. You can make bookmarks of frequently used directories to reduce the navigation time. You can do this at the drop down menu bookmarks.
+
 
 ## Checking differences in code
 
@@ -145,7 +157,7 @@ The sequencing company will provide you the information for downloading the data
 
 As the email stats, there are two options to access the data, directly from the HPC with Bash commands or via a FTP client like FileZilla. The first option may be a bit more exiting wile the second one is a bit more intuitive. I would advice to store a copy of the data on the archive and on lustre. And make a backup of the data on an external hard drive to have an extra copy, just in case.
 
-## Downloading with Bash commands 
+## Downloading data with Bash commands 
 
 So, you go to the folder on the HPC where you want to store the data. First, you need to connect to the remote server of the sequencing company. The email states that you can do this via `SFTP`. After some googling, we found a [tutorial](https://linuxize.com/post/how-to-use-linux-sftp-command-to-transfer-files/) to explain how to do this. In short you first access the server of the sequencing company with the information provided in the email:
 
@@ -161,7 +173,9 @@ sftp get -r remote_directory
 
 You can read the tutorial for more information.
 
-## md5 file
+## Dowloading daa with FileZilla
+
+## Checkign download with md5 file
 
 # Seperating data
 
