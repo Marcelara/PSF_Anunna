@@ -175,6 +175,19 @@ You can read the tutorial for more information.
 
 ## Dowloading daa with FileZilla
 
+Just like you connected to the HPC in fileZilla, you can connect to the remote sever of the sequencing company. So go to the Site manager, click on New site and fill out the open fields like for instance:
+
+```{r eval=F, echo=T, error=T}
+#	Protocol: SFTP
+#	Host: support.igatech.it
+#	Port: 22 (provided by igatch)
+#	Inlogtype: normal
+#	Username: beschoren-da-costa_pedro
+#	Password:
+```
+
+Next, you can download the data to and external hard drive and the HPC.
+
 ## Checkign download with md5 file
 
 # Seperating data
