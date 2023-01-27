@@ -332,14 +332,14 @@ REV <- "GACTACHVGGGTATCTAATCC"  ## Changed to 16S-805R
 Furthermore, Pedro added some lines to the function that runs cutadapt.
 
 ```{r eval=F, echo=T, error=T}
-# Run Cutadapt                                                          ## Some additions of Pedro used by Kris
+# Run Cutadapt                    ## Some additions of Pedro used by Kris
 for (i in seq_along(fnFs)) {
-  system2(cutadapt, args = c("-j", 0, R1.flags, R2.flags, "-n", 2,      # -n 2 required to remove FWD and REV from reads
-                             "--match-read-wildcards",                  # PEDRO's addition, allow N within reads
-                             "--discard-untrimmed",                     # PEDRO's addition, remove reads without primers
-                             "-e 0", "--overlap 8",                     # PEDRO's addition, max error in primer sequence in zero, minimum overlap is 8
-                             "-o", fnFs.cut[i], "-p", fnRs.cut[i],      # output files
-                             fnFs.filtN[i], fnRs.filtN[i]))             # input files
+  system2(cutadapt, args = c("-j", 0, R1.flags, R2.flags, "-n", 2, # -n 2 required to remove FWD and REV from reads
+                             "--match-read-wildcards",             # PEDRO's addition, allow N within reads
+                             "--discard-untrimmed",                # PEDRO's addition, remove reads without primers
+                             "-e 0", "--overlap 8",                # PEDRO's addition, max error in primer sequence in zero, minimum overlap is 8
+                             "-o", fnFs.cut[i], "-p", fnRs.cut[i], # output files
+                             fnFs.filtN[i], fnRs.filtN[i]))        # input files
 }
 ```
 
