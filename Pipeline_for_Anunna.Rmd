@@ -83,19 +83,23 @@ Before you can get started in the HPC, you need to get familiar with Bash. There
 There are some basic commands that you will use all the time. We will discuss them down here.
 
 ```{bash eval=F, echo=T, error=T}
-ls # print a list with all files in the current directory
-ll # print a long (elaborate) list with all files in the current directory
+ls    # print a list with all files in the current directory
+ll    # print a long (elaborate) list with all files in the current directory
 ls -l # other option for print a long (elaborate) list with all files in the current directory
 
 cd Test/ # set the working directory to the directory "Test"
-cd ../ # set the working directory one directory back
+cd ../   # set the working directory one directory back
 
-cat text.R # Print the R file in the console
+cat text.R         # Print the R script in the console
 zcat text.fastq.qz # Print the compressed (zipped) file in the console
-nano text.R # Open the R script in a text editor
-head text.R  # Print the head of the R script in the console
+nano text.R        # Open the R script in a text editor
+head text.R        # Print the head of the R script in the console
 
-sbach test1.slurm #running a slurm script (submit a job)
+mv text.R /RScripts/ # move the R script to the directory RScripts that is existing the current directory
+cp text.R /RScripts/ # copy the R script to the directory RScripts that is existing the current directory
+mv text.R script1.R  # rename a the R script
+
+sbach test1.slurm  #running a slurm script (submit a job)
 squeue -u kreek001 #check the status of the jobs you submitted
 ```
 
