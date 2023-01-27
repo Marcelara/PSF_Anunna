@@ -204,6 +204,37 @@ Next, copy the checksums and file of the md5file before and after downloading in
 
 # Seperating data
 
+It can happen that samples of multiple of your experiments are sequenced at once. In that case, you have to separate the sequence data of the experiments before doing the analysis. It is wise to backup your data before doing this. Regular expressions can be used to select the files of one experiment. A very nice tutorial about regular expressions can be found [here](https://www.howtogeek.com/661101/how-to-use-regular-expressions-regexes-on-linux/). 
+
+First, determine what the sample names are of the samples you want to select. For instance, I wanted the samples
+   `IDXXXX_20-R11-P05-D03`   
+    Up to   
+   `IDXXXX_49-R2C10-P05-A07`   
+    And   
+   `IDXXXX_50-MOCK5-P05-A07`   
+
+After that, you can try to build a regular expression that covers all the files you need but does not cover any of the other files. I used the following expression for the files I wanted to grep: `"[2-5][0-9]-.*-P05`. It means I want a value in my file name that starts with a number 2 to 5 followed by a number 0 to 9. After that, there should be a dash. After that, there can by something else of an undefined length that I define by `.*`. finally, I want to have a dash and P05 in my name. Before and after this expression, there can be other things in the name as I do not define that the expressions in my regular expression are at the beginning or the end of the expression.
+
+You can try your own regular expression on a file with all file names in there. The `grep` function takes out of the `Filename` file all file names that match with the regular expression and puts it in a new file called `Selectedfilenames`. Afterwares, you can count the number of lines in the new file to check whether you greped the right number of names.
+
+```{bach eval=F, echo=T, error=T}
+grep -E "[2-5][0-9]-.*-P05" Filenames > SelectedFilenames # grep the file names
+wc -l SelectedFilenames # count the number of lines
+```
+
+When this works well and you can select all files you need, you can copy or move all the files itself to another directory. Afterwards, you can count the number of files again to check if the expected number of files are moved.
+
+For instance, here I was in a directory with the ITS and 16S directory. I moved from the ITS and 16S directory these files, one directory back and then into two other directories. Mind here that the coding of regular expressions is a little bit differed for files than for lines in a file. In stead of a `.*`, we use a `*` to indicate there can be anything for a given number of characters. We have to put a `*` at the beginning and the end of the expression when the general expression does not start at the beginning of the file name and does not end at the end.
+
+```{bach eval=F, echo=T, error=T}
+mv ITS/*[2-5][0-9]-*-P05* ../raw_reads_Kris/ITS # move files
+mv 16S/*[2-5][0-9]-*-P05* ../raw_reads_Kris/16S # move files
+
+ls ../raw_reads_Kris/16S | wc -l # count the number of files
+ls ../raw_reads_Kris/ITS | wc -l # count the number of files
+```
+
+
 # Running the DADA2 (Ernakovich pipeline) for NovaSeq data
 
 Before starting, we would strongly recommend to read the information about the [Ernakovich pipeline on GitHub](https://github.com/ErnakovichLab/dada2_ernakovichlab). The next part of this file is an addition to this information given by the Ernakovich lab. By this file we would like to give you a better understanding of the code, more information on interpreting the output, and specific information on running the pipeline on Annuna in stead of premise (HPC of the Ernakovich lab). 
