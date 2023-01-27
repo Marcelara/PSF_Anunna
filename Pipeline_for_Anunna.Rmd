@@ -188,7 +188,19 @@ Just like you connected to the HPC in fileZilla, you can connect to the remote s
 
 Next, you can download the data to and external hard drive and the HPC.
 
-## Checkign download with md5 file
+## Checking download with checksums
+
+We would like to know whether all files are downloaded well. We can compare this by comparing the checksums of the files with sequencing data before and after downloading. A checksum is a unique code of a file. This code does not change when the file is downloaded correctly. The sequencing company will provide a file with the checksums of all files. Such a file is called a md5file. After downloading, you can make your own md5file and compare the two. Go to the directory with your sequencing data files and do the following:
+
+```{bach eval=F, echo=T, error=T}
+md5sum * > filename
+```
+
+The `*` means you want to target all files and store the checksums in the file called `filename`. 
+
+Next, copy the checksums and file of the md5file before and after downloading into two different Excel sheets. Order the file names both sheets in the same way. Next, copy the check sums and file names of one sheet next to the file names and check sums of the other sheet and lat Excel compare the checksums. For instance, when the checksums of the sequencing company are in column A and the checksums after downloading are in column D, you can type in column F `=A1=D1`. Excel will print `TRUE` when the checksums are the same and `FALSE` when they are not. You can use a function to count the number of False. This number should be 0.
+
+*Show of screen shot of the Excel file*
 
 # Seperating data
 
