@@ -1,7 +1,0 @@
-remove gcc 11.2.0 library and binaries.
-remove Scientific Linux 7 libraries.
-load gcc 11.2.0 library and binaries.
-load Scientific Linux 7 libraries.
-Imported /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/03_tabletax/repset.fasta as DNASequencesDirectoryFormat to /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/03_tabletax_qiime2/rep-seqs_16S.qza
-Saved FeatureData[Taxonomy] to: /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/03_tabletax_qiime2/taxonomy_16S.qza
-Exported /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/03_tabletax_qiime2/taxonomy_16S.qza as TSVTaxonomyDirectoryFormat to directory /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/03_tabletax_qiime2/16S_sklearn_taxonomy
