@@ -1,0 +1,4261 @@
+setting eval to TRUE
+[[1]]
+[1] 0
+
+[[2]]
+[1] 0
+
+[[3]]
+[1] 0
+
+[[4]]
+[1] 0
+
+[[5]]
+[1] 0
+
+[[6]]
+[1] 0
+
+[[7]]
+[1] 0
+
+[[8]]
+[1] 0
+
+Creating Rmd files
+Rendering file...
+
+
+processing file: dada2_tutorial_16S_all.Rmd
+  |                                                                              |                                                                      |   0%  |                                                                              |..................                                                    |  25%
+  ordinary text without R code
+
+  |                                                                              |...................................                                   |  50%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                              |....................................................                  |  75%
+label: steps (with options) 
+List of 1
+ $ child: chr [1:8] "R/00_install_dada2_tutorial_16S.Rmd" "R/00_setup_dada2_tutorial_16S.Rmd" "R/01_pre-process_dada2_tutorial_16S.Rmd" "R/02_check_quality_dada2_tutorial_16S.Rmd" ...
+
+
+
+processing file: ./R/00_install_dada2_tutorial_16S.Rmd
+  |                                                                              |                                                                      |   0%  |                                                                              |..............                                                        |  20%
+  ordinary text without R code
+
+  |                                                                              |............................                                          |  40%
+label: unnamed-chunk-1 (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                              |..........................................                            |  60%
+  ordinary text without R code
+
+  |                                                                              |........................................................              |  80%
+label: package installation (with options) 
+List of 2
+ $ eval   : logi FALSE
+ $ include: logi TRUE
+
+  |                                                                              |......................................................................| 100%
+  ordinary text without R code
+
+
+
+
+processing file: ./R/00_setup_dada2_tutorial_16S.Rmd
+  |                                                                              |                                                                      |   0%  |                                                                              |........                                                              |  11%
+  ordinary text without R code
+
+  |                                                                              |................                                                      |  22%
+label: unnamed-chunk-2
+Loading required package: Rcpp
+Loading required package: BiocGenerics
+
+Attaching package: 'BiocGenerics'
+
+The following objects are masked from 'package:stats':
+
+    IQR, mad, sd, var, xtabs
+
+The following objects are masked from 'package:base':
+
+    anyDuplicated, append, as.data.frame, basename, cbind, colnames,
+    dirname, do.call, duplicated, eval, evalq, Filter, Find, get, grep,
+    grepl, intersect, is.unsorted, lapply, Map, mapply, match, mget,
+    order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank,
+    rbind, Reduce, rownames, sapply, setdiff, sort, table, tapply,
+    union, unique, unsplit, which.max, which.min
+
+Loading required package: BiocParallel
+Loading required package: Biostrings
+Loading required package: S4Vectors
+Loading required package: stats4
+
+Attaching package: 'S4Vectors'
+
+The following objects are masked from 'package:base':
+
+    expand.grid, I, unname
+
+Loading required package: IRanges
+Loading required package: XVector
+Loading required package: GenomeInfoDb
+
+Attaching package: 'Biostrings'
+
+The following object is masked from 'package:base':
+
+    strsplit
+
+Loading required package: Rsamtools
+Loading required package: GenomicRanges
+Loading required package: GenomicAlignments
+Loading required package: SummarizedExperiment
+Loading required package: MatrixGenerics
+Loading required package: matrixStats
+
+Attaching package: 'MatrixGenerics'
+
+The following objects are masked from 'package:matrixStats':
+
+    colAlls, colAnyNAs, colAnys, colAvgsPerRowSet, colCollapse,
+    colCounts, colCummaxs, colCummins, colCumprods, colCumsums,
+    colDiffs, colIQRDiffs, colIQRs, colLogSumExps, colMadDiffs,
+    colMads, colMaxs, colMeans2, colMedians, colMins, colOrderStats,
+    colProds, colQuantiles, colRanges, colRanks, colSdDiffs, colSds,
+    colSums2, colTabulates, colVarDiffs, colVars, colWeightedMads,
+    colWeightedMeans, colWeightedMedians, colWeightedSds,
+    colWeightedVars, rowAlls, rowAnyNAs, rowAnys, rowAvgsPerColSet,
+    rowCollapse, rowCounts, rowCummaxs, rowCummins, rowCumprods,
+    rowCumsums, rowDiffs, rowIQRDiffs, rowIQRs, rowLogSumExps,
+    rowMadDiffs, rowMads, rowMaxs, rowMeans2, rowMedians, rowMins,
+    rowOrderStats, rowProds, rowQuantiles, rowRanges, rowRanks,
+    rowSdDiffs, rowSds, rowSums2, rowTabulates, rowVarDiffs, rowVars,
+    rowWeightedMads, rowWeightedMeans, rowWeightedMedians,
+    rowWeightedSds, rowWeightedVars
+
+Loading required package: Biobase
+Welcome to Bioconductor
+
+    Vignettes contain introductory material; view with
+    'browseVignettes()'. To cite Bioconductor, see
+    'citation("Biobase")', and for packages 'citation("pkgname")'.
+
+
+Attaching package: 'Biobase'
+
+The following object is masked from 'package:MatrixGenerics':
+
+    rowMedians
+
+The following objects are masked from 'package:matrixStats':
+
+    anyMissing, rowMedians
+
+
+Attaching package: 'dplyr'
+
+The following object is masked from 'package:ShortRead':
+
+    id
+
+The following objects are masked from 'package:GenomicAlignments':
+
+    first, last
+
+The following object is masked from 'package:Biobase':
+
+    combine
+
+The following object is masked from 'package:matrixStats':
+
+    count
+
+The following objects are masked from 'package:GenomicRanges':
+
+    intersect, setdiff, union
+
+The following objects are masked from 'package:Biostrings':
+
+    collapse, intersect, setdiff, setequal, union
+
+The following object is masked from 'package:GenomeInfoDb':
+
+    intersect
+
+The following object is masked from 'package:XVector':
+
+    slice
+
+The following objects are masked from 'package:IRanges':
+
+    collapse, desc, intersect, setdiff, slice, union
+
+The following objects are masked from 'package:S4Vectors':
+
+    first, intersect, rename, setdiff, setequal, union
+
+The following objects are masked from 'package:BiocGenerics':
+
+    combine, intersect, setdiff, union
+
+The following objects are masked from 'package:stats':
+
+    filter, lag
+
+The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union
+
+
+Attaching package: 'tidyr'
+
+The following object is masked from 'package:S4Vectors':
+
+    expand
+
+Loading required package: lattice
+Loading required package: survival
+Loading required package: Formula
+Loading required package: ggplot2
+
+Attaching package: 'Hmisc'
+
+The following objects are masked from 'package:dplyr':
+
+    src, summarize
+
+The following object is masked from 'package:ShortRead':
+
+    zoom
+
+The following object is masked from 'package:Biobase':
+
+    contents
+
+The following objects are masked from 'package:Biostrings':
+
+    mask, translate
+
+The following objects are masked from 'package:base':
+
+    format.pval, units
+
+
+Attaching package: 'plotly'
+
+The following object is masked from 'package:Hmisc':
+
+    subplot
+
+The following object is masked from 'package:ggplot2':
+
+    last_plot
+
+The following object is masked from 'package:XVector':
+
+    slice
+
+The following object is masked from 'package:IRanges':
+
+    slice
+
+The following object is masked from 'package:S4Vectors':
+
+    rename
+
+The following object is masked from 'package:stats':
+
+    filter
+
+The following object is masked from 'package:graphics':
+
+    layout
+
+4.1
+  |                                                                              |.......................                                               |  33%
+  ordinary text without R code
+
+  |                                                                              |...............................                                       |  44%
+label: unnamed-chunk-3
+  |                                                                              |.......................................                               |  56%
+  ordinary text without R code
+
+  |                                                                              |...............................................                       |  67%
+label: unnamed-chunk-4
+  |                                                                              |......................................................                |  78%
+  ordinary text without R code
+
+  |                                                                              |..............................................................        |  89%
+label: unnamed-chunk-5 (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                              |......................................................................| 100%
+  ordinary text without R code
+
+
+
+
+processing file: ./R/01_pre-process_dada2_tutorial_16S.Rmd
+  |                                                                              |                                                                      |   0%  |                                                                              |....                                                                  |   6%
+  ordinary text without R code
+
+  |                                                                              |........                                                              |  12%
+label: unnamed-chunk-6 (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                              |............                                                          |  18%
+  ordinary text without R code
+
+  |                                                                              |................                                                      |  24%
+label: unnamed-chunk-7 (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                              |.....................                                                 |  29%
+  ordinary text without R code
+
+  |                                                                              |.........................                                             |  35%
+label: unnamed-chunk-8
+  |                                                                              |.............................                                         |  41%
+  ordinary text without R code
+
+  |                                                                              |.................................                                     |  47%
+label: unnamed-chunk-9
+  |                                                                              |.....................................                                 |  53%
+  ordinary text without R code
+
+  |                                                                              |.........................................                             |  59%
+label: unnamed-chunk-10
+  |                                                                              |.............................................                         |  65%
+  ordinary text without R code
+
+  |                                                                              |.................................................                     |  71%
+label: unnamed-chunk-11
+  |                                                                              |......................................................                |  76%
+  ordinary text without R code
+
+  |                                                                              |..........................................................            |  82%
+label: unnamed-chunk-12
+This is cutadapt 4.1 with Python 3.10.6
+Command line parameters: -j 0 -g CCTACGGGNGGCWGCAG -a GGATTAGATACCCBDGTAGTC --minimum-length 50 -G GACTACHVGGGTATCTAATCC -A CTGCWGCCNCCCGTAGG --minimum-length 50 -n 2 --match-read-wildcards --discard-untrimmed -e 0 --overlap 8 -o /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91610_ID2577_16S-20-R11-P05-D03_S305_L001_R1_001.fastq.gz -p /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91610_ID2577_16S-20-R11-P05-D03_S305_L001_R2_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91610_ID2577_16S-20-R11-P05-D03_S305_L001_R1_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91610_ID2577_16S-20-R11-P05-D03_S305_L001_R2_001.fastq.gz
+Processing paired-end reads on 16 cores ...
+Finished in 3.04 s (8 µs/read; 7.22 M reads/minute).
+
+=== Summary ===
+
+Total read pairs processed:            365,723
+  Read 1 with adapter:                 339,817 (92.9%)
+  Read 2 with adapter:                 342,697 (93.7%)
+
+== Read fate breakdown ==
+Pairs that were too short:                  19 (0.0%)
+Pairs discarded as untrimmed:           46,718 (12.8%)
+Pairs written (passing filters):       318,986 (87.2%)
+
+Total basepairs processed:   182,857,454 bp
+  Read 1:    91,427,502 bp
+  Read 2:    91,429,952 bp
+Total written (filtered):    147,364,240 bp (80.6%)
+  Read 1:    74,315,827 bp
+  Read 2:    73,048,413 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: CCTACGGGNGGCWGCAG; Type: regular 5'; Length: 17; Trimmed: 339818 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+11	1	0.1	0	1
+12	1	0.0	0	1
+13	7	0.0	0	7
+14	5	0.0	0	5
+15	15	0.0	0	15
+16	1272	0.0	0	1272
+17	337266	0.0	0	337266
+18	1180	0.0	0	1180
+19	2	0.0	0	2
+79	15	0.0	0	15
+128	1	0.0	0	1
+129	2	0.0	0	2
+130	1	0.0	0	1
+135	8	0.0	0	8
+138	1	0.0	0	1
+147	2	0.0	0	2
+153	1	0.0	0	1
+162	1	0.0	0	1
+163	1	0.0	0	1
+173	19	0.0	0	19
+174	1	0.0	0	1
+175	1	0.0	0	1
+176	1	0.0	0	1
+177	8	0.0	0	8
+183	1	0.0	0	1
+192	1	0.0	0	1
+197	1	0.0	0	1
+234	1	0.0	0	1
+242	2	0.0	0	2
+
+
+=== First read: Adapter 2 ===
+
+Sequence: GGATTAGATACCCBDGTAGTC; Type: regular 3'; Length: 21; Trimmed: 0 times
+
+=== Second read: Adapter 3 ===
+
+Sequence: GACTACHVGGGTATCTAATCC; Type: regular 5'; Length: 21; Trimmed: 342697 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+10	2	0.3	0	2
+13	2	0.0	0	2
+14	1	0.0	0	1
+15	1	0.0	0	1
+16	6	0.0	0	6
+17	3	0.0	0	3
+18	4	0.0	0	4
+19	19	0.0	0	19
+20	942	0.0	0	942
+21	341470	0.0	0	341470
+22	246	0.0	0	246
+23	1	0.0	0	1
+
+
+=== Second read: Adapter 4 ===
+
+Sequence: CTGCWGCCNCCCGTAGG; Type: regular 3'; Length: 17; Trimmed: 13 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Bases preceding removed adapters:
+  A: 46.2%
+  C: 23.1%
+  G: 15.4%
+  T: 15.4%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+9	11	1.4	0	11
+79	1	0.0	0	1
+187	1	0.0	0	1
+This is cutadapt 4.1 with Python 3.10.6
+Command line parameters: -j 0 -g CCTACGGGNGGCWGCAG -a GGATTAGATACCCBDGTAGTC --minimum-length 50 -G GACTACHVGGGTATCTAATCC -A CTGCWGCCNCCCGTAGG --minimum-length 50 -n 2 --match-read-wildcards --discard-untrimmed -e 0 --overlap 8 -o /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91611_ID2577_16S-21-R12-P05-E03_S306_L001_R1_001.fastq.gz -p /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91611_ID2577_16S-21-R12-P05-E03_S306_L001_R2_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91611_ID2577_16S-21-R12-P05-E03_S306_L001_R1_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91611_ID2577_16S-21-R12-P05-E03_S306_L001_R2_001.fastq.gz
+Processing paired-end reads on 16 cores ...
+Finished in 2.41 s (10 µs/read; 6.16 M reads/minute).
+
+=== Summary ===
+
+Total read pairs processed:            247,418
+  Read 1 with adapter:                 229,384 (92.7%)
+  Read 2 with adapter:                 232,569 (94.0%)
+
+== Read fate breakdown ==
+Pairs that were too short:                  10 (0.0%)
+Pairs discarded as untrimmed:           31,571 (12.8%)
+Pairs written (passing filters):       215,837 (87.2%)
+
+Total basepairs processed:   123,706,274 bp
+  Read 1:    61,852,752 bp
+  Read 2:    61,853,522 bp
+Total written (filtered):     99,711,717 bp (80.6%)
+  Read 1:    50,285,112 bp
+  Read 2:    49,426,605 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: CCTACGGGNGGCWGCAG; Type: regular 5'; Length: 17; Trimmed: 229384 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+11	2	0.1	0	2
+13	7	0.0	0	7
+15	26	0.0	0	26
+16	891	0.0	0	891
+17	227637	0.0	0	227637
+18	765	0.0	0	765
+19	6	0.0	0	6
+79	14	0.0	0	14
+92	2	0.0	0	2
+130	2	0.0	0	2
+135	1	0.0	0	1
+138	2	0.0	0	2
+147	2	0.0	0	2
+162	1	0.0	0	1
+163	2	0.0	0	2
+173	14	0.0	0	14
+174	2	0.0	0	2
+175	1	0.0	0	1
+177	1	0.0	0	1
+182	1	0.0	0	1
+183	2	0.0	0	2
+220	1	0.0	0	1
+243	2	0.0	0	2
+
+
+=== First read: Adapter 2 ===
+
+Sequence: GGATTAGATACCCBDGTAGTC; Type: regular 3'; Length: 21; Trimmed: 1 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Bases preceding removed adapters:
+  A: 0.0%
+  C: 0.0%
+  G: 0.0%
+  T: 100.0%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+9	1	0.9	0	1
+
+
+=== Second read: Adapter 3 ===
+
+Sequence: GACTACHVGGGTATCTAATCC; Type: regular 5'; Length: 21; Trimmed: 232567 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+11	2	0.1	0	2
+14	2	0.0	0	2
+16	2	0.0	0	2
+17	3	0.0	0	3
+18	2	0.0	0	2
+19	16	0.0	0	16
+20	690	0.0	0	690
+21	231657	0.0	0	231657
+22	192	0.0	0	192
+23	1	0.0	0	1
+
+
+=== Second read: Adapter 4 ===
+
+Sequence: CTGCWGCCNCCCGTAGG; Type: regular 3'; Length: 17; Trimmed: 16 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Bases preceding removed adapters:
+  A: 75.0%
+  C: 12.5%
+  G: 6.2%
+  T: 6.2%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+8	1	3.8	0	1
+9	13	0.9	0	13
+12	1	0.0	0	1
+128	1	0.0	0	1
+This is cutadapt 4.1 with Python 3.10.6
+Command line parameters: -j 0 -g CCTACGGGNGGCWGCAG -a GGATTAGATACCCBDGTAGTC --minimum-length 50 -G GACTACHVGGGTATCTAATCC -A CTGCWGCCNCCCGTAGG --minimum-length 50 -n 2 --match-read-wildcards --discard-untrimmed -e 0 --overlap 8 -o /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91612_ID2577_16S-22-R13-P05-F03_S307_L001_R1_001.fastq.gz -p /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91612_ID2577_16S-22-R13-P05-F03_S307_L001_R2_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91612_ID2577_16S-22-R13-P05-F03_S307_L001_R1_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91612_ID2577_16S-22-R13-P05-F03_S307_L001_R2_001.fastq.gz
+Processing paired-end reads on 16 cores ...
+Finished in 3.30 s (8 µs/read; 7.22 M reads/minute).
+
+=== Summary ===
+
+Total read pairs processed:            397,643
+  Read 1 with adapter:                 369,490 (92.9%)
+  Read 2 with adapter:                 372,498 (93.7%)
+
+== Read fate breakdown ==
+Pairs that were too short:                  19 (0.0%)
+Pairs discarded as untrimmed:           51,015 (12.8%)
+Pairs written (passing filters):       346,609 (87.2%)
+
+Total basepairs processed:   198,817,829 bp
+  Read 1:    99,408,142 bp
+  Read 2:    99,409,687 bp
+Total written (filtered):    160,128,541 bp (80.5%)
+  Read 1:    80,754,240 bp
+  Read 2:    79,374,301 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: CCTACGGGNGGCWGCAG; Type: regular 5'; Length: 17; Trimmed: 369488 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+11	2	0.1	0	2
+13	16	0.0	0	16
+14	6	0.0	0	6
+15	19	0.0	0	19
+16	1594	0.0	0	1594
+17	366475	0.0	0	366475
+18	1299	0.0	0	1299
+19	11	0.0	0	11
+46	1	0.0	0	1
+48	2	0.0	0	2
+72	2	0.0	0	2
+78	1	0.0	0	1
+79	15	0.0	0	15
+80	3	0.0	0	3
+129	9	0.0	0	9
+130	1	0.0	0	1
+135	4	0.0	0	4
+145	3	0.0	0	3
+146	1	0.0	0	1
+163	4	0.0	0	4
+172	1	0.0	0	1
+173	8	0.0	0	8
+177	2	0.0	0	2
+179	1	0.0	0	1
+180	1	0.0	0	1
+182	1	0.0	0	1
+202	1	0.0	0	1
+241	1	0.0	0	1
+243	1	0.0	0	1
+244	1	0.0	0	1
+249	2	0.0	0	2
+
+
+=== First read: Adapter 2 ===
+
+Sequence: GGATTAGATACCCBDGTAGTC; Type: regular 3'; Length: 21; Trimmed: 4 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Bases preceding removed adapters:
+  A: 50.0%
+  C: 25.0%
+  G: 25.0%
+  T: 0.0%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+8	1	6.1	0	1
+21	2	0.0	0	2
+23	1	0.0	0	1
+
+
+=== Second read: Adapter 3 ===
+
+Sequence: GACTACHVGGGTATCTAATCC; Type: regular 5'; Length: 21; Trimmed: 372497 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+11	3	0.1	0	3
+12	1	0.0	0	1
+13	1	0.0	0	1
+14	4	0.0	0	4
+15	1	0.0	0	1
+16	3	0.0	0	3
+17	8	0.0	0	8
+18	7	0.0	0	7
+19	26	0.0	0	26
+20	1038	0.0	0	1038
+21	371152	0.0	0	371152
+22	252	0.0	0	252
+23	1	0.0	0	1
+
+
+=== Second read: Adapter 4 ===
+
+Sequence: CTGCWGCCNCCCGTAGG; Type: regular 3'; Length: 17; Trimmed: 12 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Bases preceding removed adapters:
+  A: 66.7%
+  C: 16.7%
+  G: 16.7%
+  T: 0.0%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+9	9	1.5	0	9
+10	1	0.4	0	1
+17	1	0.0	0	1
+187	1	0.0	0	1
+This is cutadapt 4.1 with Python 3.10.6
+Command line parameters: -j 0 -g CCTACGGGNGGCWGCAG -a GGATTAGATACCCBDGTAGTC --minimum-length 50 -G GACTACHVGGGTATCTAATCC -A CTGCWGCCNCCCGTAGG --minimum-length 50 -n 2 --match-read-wildcards --discard-untrimmed -e 0 --overlap 8 -o /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91613_ID2577_16S-23-R14-P05-G03_S308_L001_R1_001.fastq.gz -p /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91613_ID2577_16S-23-R14-P05-G03_S308_L001_R2_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91613_ID2577_16S-23-R14-P05-G03_S308_L001_R1_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91613_ID2577_16S-23-R14-P05-G03_S308_L001_R2_001.fastq.gz
+Processing paired-end reads on 16 cores ...
+Finished in 3.20 s (9 µs/read; 6.76 M reads/minute).
+
+=== Summary ===
+
+Total read pairs processed:            360,987
+  Read 1 with adapter:                 334,461 (92.7%)
+  Read 2 with adapter:                 337,616 (93.5%)
+
+== Read fate breakdown ==
+Pairs that were too short:                  22 (0.0%)
+Pairs discarded as untrimmed:           46,522 (12.9%)
+Pairs written (passing filters):       314,443 (87.1%)
+
+Total basepairs processed:   180,489,862 bp
+  Read 1:    90,243,856 bp
+  Read 2:    90,246,006 bp
+Total written (filtered):    145,256,745 bp (80.5%)
+  Read 1:    73,248,719 bp
+  Read 2:    72,008,026 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: CCTACGGGNGGCWGCAG; Type: regular 5'; Length: 17; Trimmed: 334462 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+11	1	0.1	0	1
+12	1	0.0	0	1
+13	10	0.0	0	10
+14	1	0.0	0	1
+15	5	0.0	0	5
+16	820	0.0	0	820
+17	332303	0.0	0	332303
+18	1162	0.0	0	1162
+19	11	0.0	0	11
+20	1	0.0	0	1
+46	1	0.0	0	1
+78	3	0.0	0	3
+79	21	0.0	0	21
+129	14	0.0	0	14
+130	5	0.0	0	5
+134	1	0.0	0	1
+135	9	0.0	0	9
+136	2	0.0	0	2
+137	3	0.0	0	3
+138	2	0.0	0	2
+144	1	0.0	0	1
+146	5	0.0	0	5
+147	1	0.0	0	1
+148	1	0.0	0	1
+163	4	0.0	0	4
+172	1	0.0	0	1
+173	46	0.0	0	46
+174	1	0.0	0	1
+177	7	0.0	0	7
+183	3	0.0	0	3
+184	1	0.0	0	1
+186	1	0.0	0	1
+189	1	0.0	0	1
+190	2	0.0	0	2
+200	2	0.0	0	2
+202	3	0.0	0	3
+241	2	0.0	0	2
+242	2	0.0	0	2
+243	1	0.0	0	1
+249	1	0.0	0	1
+
+
+=== First read: Adapter 2 ===
+
+Sequence: GGATTAGATACCCBDGTAGTC; Type: regular 3'; Length: 21; Trimmed: 1 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Bases preceding removed adapters:
+  A: 0.0%
+  C: 100.0%
+  G: 0.0%
+  T: 0.0%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+14	1	0.0	0	1
+
+
+=== Second read: Adapter 3 ===
+
+Sequence: GACTACHVGGGTATCTAATCC; Type: regular 5'; Length: 21; Trimmed: 337611 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+10	3	0.3	0	3
+13	2	0.0	0	2
+14	1	0.0	0	1
+15	1	0.0	0	1
+16	4	0.0	0	4
+17	2	0.0	0	2
+18	2	0.0	0	2
+19	12	0.0	0	12
+20	829	0.0	0	829
+21	336546	0.0	0	336546
+22	208	0.0	0	208
+23	1	0.0	0	1
+
+
+=== Second read: Adapter 4 ===
+
+Sequence: CTGCWGCCNCCCGTAGG; Type: regular 3'; Length: 17; Trimmed: 21 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Bases preceding removed adapters:
+  A: 52.4%
+  C: 28.6%
+  G: 14.3%
+  T: 4.8%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+8	3	5.5	0	3
+9	16	1.4	0	16
+31	1	0.0	0	1
+128	1	0.0	0	1
+This is cutadapt 4.1 with Python 3.10.6
+Command line parameters: -j 0 -g CCTACGGGNGGCWGCAG -a GGATTAGATACCCBDGTAGTC --minimum-length 50 -G GACTACHVGGGTATCTAATCC -A CTGCWGCCNCCCGTAGG --minimum-length 50 -n 2 --match-read-wildcards --discard-untrimmed -e 0 --overlap 8 -o /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91614_ID2577_16S-24-R15-P05-H03_S309_L001_R1_001.fastq.gz -p /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91614_ID2577_16S-24-R15-P05-H03_S309_L001_R2_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91614_ID2577_16S-24-R15-P05-H03_S309_L001_R1_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91614_ID2577_16S-24-R15-P05-H03_S309_L001_R2_001.fastq.gz
+Processing paired-end reads on 16 cores ...
+Finished in 3.59 s (8 µs/read; 7.78 M reads/minute).
+
+=== Summary ===
+
+Total read pairs processed:            465,648
+  Read 1 with adapter:                 431,190 (92.6%)
+  Read 2 with adapter:                 435,890 (93.6%)
+
+== Read fate breakdown ==
+Pairs that were too short:                  36 (0.0%)
+Pairs discarded as untrimmed:           60,654 (13.0%)
+Pairs written (passing filters):       404,958 (87.0%)
+
+Total basepairs processed:   232,816,078 bp
+  Read 1:   116,406,615 bp
+  Read 2:   116,409,463 bp
+Total written (filtered):    187,076,287 bp (80.4%)
+  Read 1:    94,340,197 bp
+  Read 2:    92,736,090 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: CCTACGGGNGGCWGCAG; Type: regular 5'; Length: 17; Trimmed: 431190 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+11	2	0.1	0	2
+12	1	0.0	0	1
+13	10	0.0	0	10
+14	2	0.0	0	2
+15	26	0.0	0	26
+16	1180	0.0	0	1180
+17	428364	0.0	0	428364
+18	1452	0.0	0	1452
+19	12	0.0	0	12
+47	6	0.0	0	6
+79	28	0.0	0	28
+92	1	0.0	0	1
+129	13	0.0	0	13
+130	1	0.0	0	1
+135	5	0.0	0	5
+138	5	0.0	0	5
+145	2	0.0	0	2
+146	2	0.0	0	2
+148	3	0.0	0	3
+163	6	0.0	0	6
+168	1	0.0	0	1
+171	1	0.0	0	1
+172	1	0.0	0	1
+173	36	0.0	0	36
+174	2	0.0	0	2
+175	2	0.0	0	2
+177	5	0.0	0	5
+183	2	0.0	0	2
+186	2	0.0	0	2
+189	2	0.0	0	2
+190	1	0.0	0	1
+191	2	0.0	0	2
+192	1	0.0	0	1
+241	5	0.0	0	5
+242	1	0.0	0	1
+243	3	0.0	0	3
+249	2	0.0	0	2
+
+
+=== First read: Adapter 2 ===
+
+Sequence: GGATTAGATACCCBDGTAGTC; Type: regular 3'; Length: 21; Trimmed: 3 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Bases preceding removed adapters:
+  A: 100.0%
+  C: 0.0%
+  G: 0.0%
+  T: 0.0%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+15	2	0.0	0	2
+20	1	0.0	0	1
+
+
+=== Second read: Adapter 3 ===
+
+Sequence: GACTACHVGGGTATCTAATCC; Type: regular 5'; Length: 21; Trimmed: 435887 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+11	2	0.1	0	2
+13	2	0.0	0	2
+14	3	0.0	0	3
+15	1	0.0	0	1
+16	10	0.0	0	10
+17	5	0.0	0	5
+18	6	0.0	0	6
+19	22	0.0	0	22
+20	1230	0.0	0	1230
+21	434265	0.0	0	434265
+22	338	0.0	0	338
+23	3	0.0	0	3
+
+
+=== Second read: Adapter 4 ===
+
+Sequence: CTGCWGCCNCCCGTAGG; Type: regular 3'; Length: 17; Trimmed: 24 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Bases preceding removed adapters:
+  A: 70.8%
+  C: 16.7%
+  G: 8.3%
+  T: 4.2%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+8	1	7.1	0	1
+9	20	1.8	0	20
+11	2	0.1	0	2
+16	1	0.0	0	1
+This is cutadapt 4.1 with Python 3.10.6
+Command line parameters: -j 0 -g CCTACGGGNGGCWGCAG -a GGATTAGATACCCBDGTAGTC --minimum-length 50 -G GACTACHVGGGTATCTAATCC -A CTGCWGCCNCCCGTAGG --minimum-length 50 -n 2 --match-read-wildcards --discard-untrimmed -e 0 --overlap 8 -o /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91615_ID2577_16S-25-R16-P05-A04_S310_L001_R1_001.fastq.gz -p /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91615_ID2577_16S-25-R16-P05-A04_S310_L001_R2_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91615_ID2577_16S-25-R16-P05-A04_S310_L001_R1_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91615_ID2577_16S-25-R16-P05-A04_S310_L001_R2_001.fastq.gz
+Processing paired-end reads on 16 cores ...
+Finished in 5.04 s (9 µs/read; 6.98 M reads/minute).
+
+=== Summary ===
+
+Total read pairs processed:            586,875
+  Read 1 with adapter:                 544,272 (92.7%)
+  Read 2 with adapter:                 551,118 (93.9%)
+
+== Read fate breakdown ==
+Pairs that were too short:                  31 (0.0%)
+Pairs discarded as untrimmed:           75,195 (12.8%)
+Pairs written (passing filters):       511,649 (87.2%)
+
+Total basepairs processed:   293,430,089 bp
+  Read 1:   146,713,002 bp
+  Read 2:   146,717,087 bp
+Total written (filtered):    236,374,982 bp (80.6%)
+  Read 1:   119,206,494 bp
+  Read 2:   117,168,488 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: CCTACGGGNGGCWGCAG; Type: regular 5'; Length: 17; Trimmed: 544273 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+10	1	0.6	0	1
+11	5	0.1	0	5
+12	1	0.0	0	1
+13	13	0.0	0	13
+14	3	0.0	0	3
+15	45	0.0	0	45
+16	2354	0.0	0	2354
+17	539914	0.0	0	539914
+18	1854	0.0	0	1854
+19	6	0.0	0	6
+22	1	0.0	0	1
+46	1	0.0	0	1
+47	1	0.0	0	1
+79	14	0.0	0	14
+129	13	0.0	0	13
+135	4	0.0	0	4
+138	1	0.0	0	1
+154	2	0.0	0	2
+162	1	0.0	0	1
+163	3	0.0	0	3
+173	22	0.0	0	22
+174	1	0.0	0	1
+177	1	0.0	0	1
+183	4	0.0	0	4
+189	1	0.0	0	1
+192	1	0.0	0	1
+200	1	0.0	0	1
+217	1	0.0	0	1
+241	1	0.0	0	1
+243	2	0.0	0	2
+244	1	0.0	0	1
+
+
+=== First read: Adapter 2 ===
+
+Sequence: GGATTAGATACCCBDGTAGTC; Type: regular 3'; Length: 21; Trimmed: 0 times
+
+=== Second read: Adapter 3 ===
+
+Sequence: GACTACHVGGGTATCTAATCC; Type: regular 5'; Length: 21; Trimmed: 551113 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+10	5	0.6	0	5
+11	2	0.1	0	2
+12	2	0.0	0	2
+13	2	0.0	0	2
+14	1	0.0	0	1
+15	1	0.0	0	1
+16	2	0.0	0	2
+17	4	0.0	0	4
+18	10	0.0	0	10
+19	17	0.0	0	17
+20	1490	0.0	0	1490
+21	549189	0.0	0	549189
+22	387	0.0	0	387
+23	1	0.0	0	1
+
+
+=== Second read: Adapter 4 ===
+
+Sequence: CTGCWGCCNCCCGTAGG; Type: regular 3'; Length: 17; Trimmed: 23 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Bases preceding removed adapters:
+  A: 60.9%
+  C: 21.7%
+  G: 8.7%
+  T: 8.7%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+8	3	9.0	0	3
+9	18	2.2	0	18
+14	1	0.0	0	1
+112	1	0.0	0	1
+This is cutadapt 4.1 with Python 3.10.6
+Command line parameters: -j 0 -g CCTACGGGNGGCWGCAG -a GGATTAGATACCCBDGTAGTC --minimum-length 50 -G GACTACHVGGGTATCTAATCC -A CTGCWGCCNCCCGTAGG --minimum-length 50 -n 2 --match-read-wildcards --discard-untrimmed -e 0 --overlap 8 -o /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91616_ID2577_16S-26-R17-P05-B04_S311_L001_R1_001.fastq.gz -p /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91616_ID2577_16S-26-R17-P05-B04_S311_L001_R2_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91616_ID2577_16S-26-R17-P05-B04_S311_L001_R1_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91616_ID2577_16S-26-R17-P05-B04_S311_L001_R2_001.fastq.gz
+Processing paired-end reads on 16 cores ...
+Finished in 4.13 s (9 µs/read; 6.87 M reads/minute).
+
+=== Summary ===
+
+Total read pairs processed:            472,432
+  Read 1 with adapter:                 438,370 (92.8%)
+  Read 2 with adapter:                 440,658 (93.3%)
+
+== Read fate breakdown ==
+Pairs that were too short:                  35 (0.0%)
+Pairs discarded as untrimmed:           62,243 (13.2%)
+Pairs written (passing filters):       410,154 (86.8%)
+
+Total basepairs processed:   236,209,639 bp
+  Read 1:   118,102,801 bp
+  Read 2:   118,106,838 bp
+Total written (filtered):    189,478,962 bp (80.2%)
+  Read 1:    95,553,053 bp
+  Read 2:    93,925,909 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: CCTACGGGNGGCWGCAG; Type: regular 5'; Length: 17; Trimmed: 438372 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+13	12	0.0	0	12
+15	35	0.0	0	35
+16	1304	0.0	0	1304
+17	435328	0.0	0	435328
+18	1561	0.0	0	1561
+19	15	0.0	0	15
+20	2	0.0	0	2
+26	1	0.0	0	1
+46	2	0.0	0	2
+47	1	0.0	0	1
+79	16	0.0	0	16
+80	2	0.0	0	2
+92	1	0.0	0	1
+129	10	0.0	0	10
+130	4	0.0	0	4
+135	11	0.0	0	11
+146	2	0.0	0	2
+148	1	0.0	0	1
+153	1	0.0	0	1
+159	1	0.0	0	1
+163	1	0.0	0	1
+173	35	0.0	0	35
+174	2	0.0	0	2
+176	1	0.0	0	1
+177	10	0.0	0	10
+179	1	0.0	0	1
+180	1	0.0	0	1
+183	4	0.0	0	4
+236	2	0.0	0	2
+242	3	0.0	0	3
+243	1	0.0	0	1
+250	1	0.0	0	1
+
+
+=== First read: Adapter 2 ===
+
+Sequence: GGATTAGATACCCBDGTAGTC; Type: regular 3'; Length: 21; Trimmed: 1 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Bases preceding removed adapters:
+  A: 100.0%
+  C: 0.0%
+  G: 0.0%
+  T: 0.0%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+22	1	0.0	0	1
+
+
+=== Second read: Adapter 3 ===
+
+Sequence: GACTACHVGGGTATCTAATCC; Type: regular 5'; Length: 21; Trimmed: 440656 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+11	1	0.1	0	1
+13	2	0.0	0	2
+14	1	0.0	0	1
+15	3	0.0	0	3
+17	2	0.0	0	2
+18	8	0.0	0	8
+19	20	0.0	0	20
+20	1171	0.0	0	1171
+21	439152	0.0	0	439152
+22	293	0.0	0	293
+31	3	0.0	0	3
+
+
+=== Second read: Adapter 4 ===
+
+Sequence: CTGCWGCCNCCCGTAGG; Type: regular 3'; Length: 17; Trimmed: 24 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Bases preceding removed adapters:
+  A: 66.7%
+  C: 20.8%
+  G: 4.2%
+  T: 8.3%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+9	17	1.8	0	17
+18	1	0.0	0	1
+127	1	0.0	0	1
+136	1	0.0	0	1
+187	4	0.0	0	4
+This is cutadapt 4.1 with Python 3.10.6
+Command line parameters: -j 0 -g CCTACGGGNGGCWGCAG -a GGATTAGATACCCBDGTAGTC --minimum-length 50 -G GACTACHVGGGTATCTAATCC -A CTGCWGCCNCCCGTAGG --minimum-length 50 -n 2 --match-read-wildcards --discard-untrimmed -e 0 --overlap 8 -o /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91617_ID2577_16S-27-R18-P05-C04_S312_L001_R1_001.fastq.gz -p /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91617_ID2577_16S-27-R18-P05-C04_S312_L001_R2_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91617_ID2577_16S-27-R18-P05-C04_S312_L001_R1_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91617_ID2577_16S-27-R18-P05-C04_S312_L001_R2_001.fastq.gz
+Processing paired-end reads on 16 cores ...
+Finished in 2.89 s (7 µs/read; 9.20 M reads/minute).
+
+=== Summary ===
+
+Total read pairs processed:            442,932
+  Read 1 with adapter:                 410,910 (92.8%)
+  Read 2 with adapter:                 415,664 (93.8%)
+
+== Read fate breakdown ==
+Pairs that were too short:                  24 (0.0%)
+Pairs discarded as untrimmed:           56,540 (12.8%)
+Pairs written (passing filters):       386,368 (87.2%)
+
+Total basepairs processed:   221,461,182 bp
+  Read 1:   110,729,826 bp
+  Read 2:   110,731,356 bp
+Total written (filtered):    178,494,102 bp (80.6%)
+  Read 1:    90,014,977 bp
+  Read 2:    88,479,125 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: CCTACGGGNGGCWGCAG; Type: regular 5'; Length: 17; Trimmed: 410910 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+11	5	0.1	0	5
+13	11	0.0	0	11
+14	7	0.0	0	7
+15	34	0.0	0	34
+16	1566	0.0	0	1566
+17	407808	0.0	0	407808
+18	1395	0.0	0	1395
+19	5	0.0	0	5
+79	13	0.0	0	13
+92	2	0.0	0	2
+129	5	0.0	0	5
+135	6	0.0	0	6
+148	4	0.0	0	4
+162	1	0.0	0	1
+163	3	0.0	0	3
+173	29	0.0	0	29
+175	2	0.0	0	2
+177	5	0.0	0	5
+189	1	0.0	0	1
+192	2	0.0	0	2
+200	1	0.0	0	1
+241	3	0.0	0	3
+243	2	0.0	0	2
+
+
+=== First read: Adapter 2 ===
+
+Sequence: GGATTAGATACCCBDGTAGTC; Type: regular 3'; Length: 21; Trimmed: 0 times
+
+=== Second read: Adapter 3 ===
+
+Sequence: GACTACHVGGGTATCTAATCC; Type: regular 5'; Length: 21; Trimmed: 415661 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+10	1	0.4	0	1
+11	1	0.1	0	1
+12	1	0.0	0	1
+14	2	0.0	0	2
+16	5	0.0	0	5
+17	4	0.0	0	4
+18	4	0.0	0	4
+19	21	0.0	0	21
+20	1130	0.0	0	1130
+21	414191	0.0	0	414191
+22	300	0.0	0	300
+23	1	0.0	0	1
+
+
+=== Second read: Adapter 4 ===
+
+Sequence: CTGCWGCCNCCCGTAGG; Type: regular 3'; Length: 17; Trimmed: 16 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Bases preceding removed adapters:
+  A: 50.0%
+  C: 31.2%
+  G: 12.5%
+  T: 6.2%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+8	1	6.8	0	1
+9	9	1.7	0	9
+15	1	0.0	0	1
+187	5	0.0	0	5
+This is cutadapt 4.1 with Python 3.10.6
+Command line parameters: -j 0 -g CCTACGGGNGGCWGCAG -a GGATTAGATACCCBDGTAGTC --minimum-length 50 -G GACTACHVGGGTATCTAATCC -A CTGCWGCCNCCCGTAGG --minimum-length 50 -n 2 --match-read-wildcards --discard-untrimmed -e 0 --overlap 8 -o /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91618_ID2577_16S-28-R19-P05-D04_S313_L001_R1_001.fastq.gz -p /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91618_ID2577_16S-28-R19-P05-D04_S313_L001_R2_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91618_ID2577_16S-28-R19-P05-D04_S313_L001_R1_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91618_ID2577_16S-28-R19-P05-D04_S313_L001_R2_001.fastq.gz
+Processing paired-end reads on 16 cores ...
+Finished in 2.78 s (8 µs/read; 7.17 M reads/minute).
+
+=== Summary ===
+
+Total read pairs processed:            331,515
+  Read 1 with adapter:                 307,870 (92.9%)
+  Read 2 with adapter:                 310,594 (93.7%)
+
+== Read fate breakdown ==
+Pairs that were too short:                  16 (0.0%)
+Pairs discarded as untrimmed:           42,184 (12.7%)
+Pairs written (passing filters):       289,315 (87.3%)
+
+Total basepairs processed:   165,755,686 bp
+  Read 1:    82,877,326 bp
+  Read 2:    82,878,360 bp
+Total written (filtered):    133,653,000 bp (80.6%)
+  Read 1:    67,399,699 bp
+  Read 2:    66,253,301 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: CCTACGGGNGGCWGCAG; Type: regular 5'; Length: 17; Trimmed: 307869 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+10	1	0.3	0	1
+11	3	0.1	0	3
+12	4	0.0	0	4
+13	8	0.0	0	8
+15	9	0.0	0	9
+16	875	0.0	0	875
+17	305894	0.0	0	305894
+18	968	0.0	0	968
+19	6	0.0	0	6
+47	1	0.0	0	1
+78	5	0.0	0	5
+79	14	0.0	0	14
+129	14	0.0	0	14
+135	6	0.0	0	6
+136	1	0.0	0	1
+138	1	0.0	0	1
+145	2	0.0	0	2
+147	3	0.0	0	3
+159	2	0.0	0	2
+163	5	0.0	0	5
+172	2	0.0	0	2
+173	32	0.0	0	32
+174	1	0.0	0	1
+180	1	0.0	0	1
+183	1	0.0	0	1
+191	1	0.0	0	1
+241	3	0.0	0	3
+242	4	0.0	0	4
+243	1	0.0	0	1
+244	1	0.0	0	1
+
+
+=== First read: Adapter 2 ===
+
+Sequence: GGATTAGATACCCBDGTAGTC; Type: regular 3'; Length: 21; Trimmed: 1 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Bases preceding removed adapters:
+  A: 100.0%
+  C: 0.0%
+  G: 0.0%
+  T: 0.0%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+13	1	0.0	0	1
+
+
+=== Second read: Adapter 3 ===
+
+Sequence: GACTACHVGGGTATCTAATCC; Type: regular 5'; Length: 21; Trimmed: 310594 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+11	1	0.1	0	1
+14	2	0.0	0	2
+15	2	0.0	0	2
+16	2	0.0	0	2
+19	11	0.0	0	11
+20	839	0.0	0	839
+21	309527	0.0	0	309527
+22	209	0.0	0	209
+38	1	0.0	0	1
+
+
+=== Second read: Adapter 4 ===
+
+Sequence: CTGCWGCCNCCCGTAGG; Type: regular 3'; Length: 17; Trimmed: 16 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Bases preceding removed adapters:
+  A: 56.2%
+  C: 31.2%
+  G: 12.5%
+  T: 0.0%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+9	14	1.3	0	14
+169	1	0.0	0	1
+187	1	0.0	0	1
+This is cutadapt 4.1 with Python 3.10.6
+Command line parameters: -j 0 -g CCTACGGGNGGCWGCAG -a GGATTAGATACCCBDGTAGTC --minimum-length 50 -G GACTACHVGGGTATCTAATCC -A CTGCWGCCNCCCGTAGG --minimum-length 50 -n 2 --match-read-wildcards --discard-untrimmed -e 0 --overlap 8 -o /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91619_ID2577_16S-29-R110-P05-E04_S314_L001_R1_001.fastq.gz -p /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91619_ID2577_16S-29-R110-P05-E04_S314_L001_R2_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91619_ID2577_16S-29-R110-P05-E04_S314_L001_R1_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91619_ID2577_16S-29-R110-P05-E04_S314_L001_R2_001.fastq.gz
+Processing paired-end reads on 16 cores ...
+Finished in 3.30 s (7 µs/read; 8.70 M reads/minute).
+
+=== Summary ===
+
+Total read pairs processed:            478,426
+  Read 1 with adapter:                 444,322 (92.9%)
+  Read 2 with adapter:                 448,883 (93.8%)
+
+== Read fate breakdown ==
+Pairs that were too short:                  36 (0.0%)
+Pairs discarded as untrimmed:           60,311 (12.6%)
+Pairs written (passing filters):       418,079 (87.4%)
+
+Total basepairs processed:   239,204,669 bp
+  Read 1:   119,600,784 bp
+  Read 2:   119,603,885 bp
+Total written (filtered):    193,137,310 bp (80.7%)
+  Read 1:    97,396,977 bp
+  Read 2:    95,740,333 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: CCTACGGGNGGCWGCAG; Type: regular 5'; Length: 17; Trimmed: 444324 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+11	1	0.1	0	1
+12	4	0.0	0	4
+13	9	0.0	0	9
+15	17	0.0	0	17
+16	1233	0.0	0	1233
+17	441295	0.0	0	441295
+18	1620	0.0	0	1620
+19	11	0.0	0	11
+46	3	0.0	0	3
+78	1	0.0	0	1
+79	20	0.0	0	20
+92	2	0.0	0	2
+128	1	0.0	0	1
+129	9	0.0	0	9
+131	1	0.0	0	1
+135	10	0.0	0	10
+138	2	0.0	0	2
+146	2	0.0	0	2
+147	2	0.0	0	2
+148	1	0.0	0	1
+162	1	0.0	0	1
+163	4	0.0	0	4
+164	2	0.0	0	2
+172	1	0.0	0	1
+173	50	0.0	0	50
+174	2	0.0	0	2
+177	4	0.0	0	4
+179	1	0.0	0	1
+181	1	0.0	0	1
+183	3	0.0	0	3
+192	1	0.0	0	1
+208	1	0.0	0	1
+242	1	0.0	0	1
+243	3	0.0	0	3
+244	2	0.0	0	2
+248	1	0.0	0	1
+250	2	0.0	0	2
+
+
+=== First read: Adapter 2 ===
+
+Sequence: GGATTAGATACCCBDGTAGTC; Type: regular 3'; Length: 21; Trimmed: 4 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Bases preceding removed adapters:
+  A: 75.0%
+  C: 0.0%
+  G: 25.0%
+  T: 0.0%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+8	1	7.3	0	1
+14	1	0.0	0	1
+21	2	0.0	0	2
+
+
+=== Second read: Adapter 3 ===
+
+Sequence: GACTACHVGGGTATCTAATCC; Type: regular 5'; Length: 21; Trimmed: 448879 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+11	2	0.1	0	2
+13	2	0.0	0	2
+15	1	0.0	0	1
+17	4	0.0	0	4
+18	10	0.0	0	10
+19	26	0.0	0	26
+20	1134	0.0	0	1134
+21	447360	0.0	0	447360
+22	336	0.0	0	336
+23	1	0.0	0	1
+24	2	0.0	0	2
+193	1	0.0	0	1
+
+
+=== Second read: Adapter 4 ===
+
+Sequence: CTGCWGCCNCCCGTAGG; Type: regular 3'; Length: 17; Trimmed: 20 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Bases preceding removed adapters:
+  A: 55.0%
+  C: 35.0%
+  G: 5.0%
+  T: 5.0%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+8	5	7.3	0	5
+9	13	1.8	0	13
+10	1	0.5	0	1
+169	1	0.0	0	1
+This is cutadapt 4.1 with Python 3.10.6
+Command line parameters: -j 0 -g CCTACGGGNGGCWGCAG -a GGATTAGATACCCBDGTAGTC --minimum-length 50 -G GACTACHVGGGTATCTAATCC -A CTGCWGCCNCCCGTAGG --minimum-length 50 -n 2 --match-read-wildcards --discard-untrimmed -e 0 --overlap 8 -o /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91620_ID2577_16S-30-R2M2-P05-G04_S315_L001_R1_001.fastq.gz -p /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91620_ID2577_16S-30-R2M2-P05-G04_S315_L001_R2_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91620_ID2577_16S-30-R2M2-P05-G04_S315_L001_R1_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91620_ID2577_16S-30-R2M2-P05-G04_S315_L001_R2_001.fastq.gz
+Processing paired-end reads on 16 cores ...
+Finished in 2.92 s (7 µs/read; 9.18 M reads/minute).
+
+=== Summary ===
+
+Total read pairs processed:            447,436
+  Read 1 with adapter:                 412,470 (92.2%)
+  Read 2 with adapter:                 418,290 (93.5%)
+
+== Read fate breakdown ==
+Pairs that were too short:                  31 (0.0%)
+Pairs discarded as untrimmed:           60,257 (13.5%)
+Pairs written (passing filters):       387,148 (86.5%)
+
+Total basepairs processed:   223,711,606 bp
+  Read 1:   111,854,204 bp
+  Read 2:   111,857,402 bp
+Total written (filtered):    178,843,963 bp (79.9%)
+  Read 1:    90,186,754 bp
+  Read 2:    88,657,209 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: CCTACGGGNGGCWGCAG; Type: regular 5'; Length: 17; Trimmed: 412470 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+12	1	0.0	0	1
+13	11	0.0	0	11
+14	8	0.0	0	8
+15	17	0.0	0	17
+16	873	0.0	0	873
+17	410013	0.0	0	410013
+18	1375	0.0	0	1375
+19	5	0.0	0	5
+47	1	0.0	0	1
+49	3	0.0	0	3
+73	3	0.0	0	3
+76	1	0.0	0	1
+79	21	0.0	0	21
+91	2	0.0	0	2
+129	16	0.0	0	16
+130	2	0.0	0	2
+135	3	0.0	0	3
+138	7	0.0	0	7
+145	1	0.0	0	1
+146	6	0.0	0	6
+147	7	0.0	0	7
+152	1	0.0	0	1
+161	1	0.0	0	1
+163	4	0.0	0	4
+173	63	0.0	0	63
+174	3	0.0	0	3
+176	1	0.0	0	1
+177	6	0.0	0	6
+184	2	0.0	0	2
+188	2	0.0	0	2
+200	3	0.0	0	3
+233	1	0.0	0	1
+242	1	0.0	0	1
+243	1	0.0	0	1
+248	5	0.0	0	5
+
+
+=== First read: Adapter 2 ===
+
+Sequence: GGATTAGATACCCBDGTAGTC; Type: regular 3'; Length: 21; Trimmed: 0 times
+
+=== Second read: Adapter 3 ===
+
+Sequence: GACTACHVGGGTATCTAATCC; Type: regular 5'; Length: 21; Trimmed: 418286 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+12	1	0.0	0	1
+13	1	0.0	0	1
+14	8	0.0	0	8
+16	4	0.0	0	4
+17	3	0.0	0	3
+18	2	0.0	0	2
+19	15	0.0	0	15
+20	952	0.0	0	952
+21	417021	0.0	0	417021
+22	275	0.0	0	275
+23	1	0.0	0	1
+74	1	0.0	0	1
+107	2	0.0	0	2
+
+
+=== Second read: Adapter 4 ===
+
+Sequence: CTGCWGCCNCCCGTAGG; Type: regular 3'; Length: 17; Trimmed: 12 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Bases preceding removed adapters:
+  A: 50.0%
+  C: 16.7%
+  G: 33.3%
+  T: 0.0%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+9	9	1.7	0	9
+16	2	0.0	0	2
+187	1	0.0	0	1
+This is cutadapt 4.1 with Python 3.10.6
+Command line parameters: -j 0 -g CCTACGGGNGGCWGCAG -a GGATTAGATACCCBDGTAGTC --minimum-length 50 -G GACTACHVGGGTATCTAATCC -A CTGCWGCCNCCCGTAGG --minimum-length 50 -n 2 --match-read-wildcards --discard-untrimmed -e 0 --overlap 8 -o /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91621_ID2577_16S-31-R2M1-P05-F04_S316_L001_R1_001.fastq.gz -p /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91621_ID2577_16S-31-R2M1-P05-F04_S316_L001_R2_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91621_ID2577_16S-31-R2M1-P05-F04_S316_L001_R1_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91621_ID2577_16S-31-R2M1-P05-F04_S316_L001_R2_001.fastq.gz
+Processing paired-end reads on 16 cores ...
+Finished in 3.03 s (7 µs/read; 8.54 M reads/minute).
+
+=== Summary ===
+
+Total read pairs processed:            431,646
+  Read 1 with adapter:                 398,470 (92.3%)
+  Read 2 with adapter:                 395,129 (91.5%)
+
+== Read fate breakdown ==
+Pairs that were too short:                  19 (0.0%)
+Pairs discarded as untrimmed:           65,455 (15.2%)
+Pairs written (passing filters):       366,172 (84.8%)
+
+Total basepairs processed:   215,819,541 bp
+  Read 1:   107,908,765 bp
+  Read 2:   107,910,776 bp
+Total written (filtered):    169,156,879 bp (78.4%)
+  Read 1:    85,302,819 bp
+  Read 2:    83,854,060 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: CCTACGGGNGGCWGCAG; Type: regular 5'; Length: 17; Trimmed: 398470 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+12	2	0.0	0	2
+13	21	0.0	0	21
+14	3	0.0	0	3
+15	9	0.0	0	9
+16	893	0.0	0	893
+17	396129	0.0	0	396129
+18	1263	0.0	0	1263
+19	9	0.0	0	9
+25	2	0.0	0	2
+31	1	0.0	0	1
+46	3	0.0	0	3
+47	3	0.0	0	3
+78	2	0.0	0	2
+79	14	0.0	0	14
+91	1	0.0	0	1
+128	1	0.0	0	1
+129	10	0.0	0	10
+130	3	0.0	0	3
+135	2	0.0	0	2
+136	2	0.0	0	2
+146	7	0.0	0	7
+147	4	0.0	0	4
+148	1	0.0	0	1
+159	3	0.0	0	3
+161	1	0.0	0	1
+163	1	0.0	0	1
+170	1	0.0	0	1
+171	2	0.0	0	2
+172	2	0.0	0	2
+173	53	0.0	0	53
+174	1	0.0	0	1
+175	4	0.0	0	4
+177	4	0.0	0	4
+180	1	0.0	0	1
+181	3	0.0	0	3
+183	2	0.0	0	2
+218	1	0.0	0	1
+241	3	0.0	0	3
+244	1	0.0	0	1
+248	2	0.0	0	2
+
+
+=== First read: Adapter 2 ===
+
+Sequence: GGATTAGATACCCBDGTAGTC; Type: regular 3'; Length: 21; Trimmed: 0 times
+
+=== Second read: Adapter 3 ===
+
+Sequence: GACTACHVGGGTATCTAATCC; Type: regular 5'; Length: 21; Trimmed: 395127 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+10	1	0.4	0	1
+11	3	0.1	0	3
+13	1	0.0	0	1
+14	1	0.0	0	1
+15	1	0.0	0	1
+16	1	0.0	0	1
+17	4	0.0	0	4
+18	3	0.0	0	3
+19	11	0.0	0	11
+20	928	0.0	0	928
+21	393930	0.0	0	393930
+22	242	0.0	0	242
+23	1	0.0	0	1
+
+
+=== Second read: Adapter 4 ===
+
+Sequence: CTGCWGCCNCCCGTAGG; Type: regular 3'; Length: 17; Trimmed: 14 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Bases preceding removed adapters:
+  A: 57.1%
+  C: 28.6%
+  G: 14.3%
+  T: 0.0%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+8	1	6.6	0	1
+9	13	1.6	0	13
+This is cutadapt 4.1 with Python 3.10.6
+Command line parameters: -j 0 -g CCTACGGGNGGCWGCAG -a GGATTAGATACCCBDGTAGTC --minimum-length 50 -G GACTACHVGGGTATCTAATCC -A CTGCWGCCNCCCGTAGG --minimum-length 50 -n 2 --match-read-wildcards --discard-untrimmed -e 0 --overlap 8 -o /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91622_ID2577_16S-32-R2M3-P05-H04_S317_L001_R1_001.fastq.gz -p /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91622_ID2577_16S-32-R2M3-P05-H04_S317_L001_R2_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91622_ID2577_16S-32-R2M3-P05-H04_S317_L001_R1_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91622_ID2577_16S-32-R2M3-P05-H04_S317_L001_R2_001.fastq.gz
+Processing paired-end reads on 16 cores ...
+Finished in 2.82 s (9 µs/read; 6.91 M reads/minute).
+
+=== Summary ===
+
+Total read pairs processed:            324,949
+  Read 1 with adapter:                 298,305 (91.8%)
+  Read 2 with adapter:                 304,207 (93.6%)
+
+== Read fate breakdown ==
+Pairs that were too short:                  16 (0.0%)
+Pairs discarded as untrimmed:           44,519 (13.7%)
+Pairs written (passing filters):       280,414 (86.3%)
+
+Total basepairs processed:   162,472,133 bp
+  Read 1:    81,235,510 bp
+  Read 2:    81,236,623 bp
+Total written (filtered):    129,540,344 bp (79.7%)
+  Read 1:    65,325,121 bp
+  Read 2:    64,215,223 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: CCTACGGGNGGCWGCAG; Type: regular 5'; Length: 17; Trimmed: 298305 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+13	7	0.0	0	7
+14	2	0.0	0	2
+15	12	0.0	0	12
+16	673	0.0	0	673
+17	296604	0.0	0	296604
+18	900	0.0	0	900
+19	3	0.0	0	3
+46	1	0.0	0	1
+73	1	0.0	0	1
+74	1	0.0	0	1
+79	17	0.0	0	17
+129	14	0.0	0	14
+130	2	0.0	0	2
+134	1	0.0	0	1
+136	1	0.0	0	1
+138	2	0.0	0	2
+147	1	0.0	0	1
+149	1	0.0	0	1
+159	1	0.0	0	1
+162	1	0.0	0	1
+172	1	0.0	0	1
+173	45	0.0	0	45
+177	4	0.0	0	4
+185	1	0.0	0	1
+192	1	0.0	0	1
+208	1	0.0	0	1
+212	1	0.0	0	1
+214	1	0.0	0	1
+241	3	0.0	0	3
+242	2	0.0	0	2
+
+
+=== First read: Adapter 2 ===
+
+Sequence: GGATTAGATACCCBDGTAGTC; Type: regular 3'; Length: 21; Trimmed: 2 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Bases preceding removed adapters:
+  A: 100.0%
+  C: 0.0%
+  G: 0.0%
+  T: 0.0%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+19	2	0.0	0	2
+
+
+=== Second read: Adapter 3 ===
+
+Sequence: GACTACHVGGGTATCTAATCC; Type: regular 5'; Length: 21; Trimmed: 304204 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+11	1	0.1	0	1
+14	1	0.0	0	1
+15	1	0.0	0	1
+17	1	0.0	0	1
+18	2	0.0	0	2
+19	10	0.0	0	10
+20	721	0.0	0	721
+21	303290	0.0	0	303290
+22	176	0.0	0	176
+29	1	0.0	0	1
+
+
+=== Second read: Adapter 4 ===
+
+Sequence: CTGCWGCCNCCCGTAGG; Type: regular 3'; Length: 17; Trimmed: 20 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Bases preceding removed adapters:
+  A: 50.0%
+  C: 40.0%
+  G: 10.0%
+  T: 0.0%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+8	2	5.0	0	2
+9	16	1.2	0	16
+10	1	0.3	0	1
+15	1	0.0	0	1
+This is cutadapt 4.1 with Python 3.10.6
+Command line parameters: -j 0 -g CCTACGGGNGGCWGCAG -a GGATTAGATACCCBDGTAGTC --minimum-length 50 -G GACTACHVGGGTATCTAATCC -A CTGCWGCCNCCCGTAGG --minimum-length 50 -n 2 --match-read-wildcards --discard-untrimmed -e 0 --overlap 8 -o /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91623_ID2577_16S-33-R2M4-P05-A05_S318_L001_R1_001.fastq.gz -p /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91623_ID2577_16S-33-R2M4-P05-A05_S318_L001_R2_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91623_ID2577_16S-33-R2M4-P05-A05_S318_L001_R1_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91623_ID2577_16S-33-R2M4-P05-A05_S318_L001_R2_001.fastq.gz
+Processing paired-end reads on 16 cores ...
+Finished in 2.18 s (7 µs/read; 9.09 M reads/minute).
+
+=== Summary ===
+
+Total read pairs processed:            330,568
+  Read 1 with adapter:                 305,100 (92.3%)
+  Read 2 with adapter:                 308,870 (93.4%)
+
+== Read fate breakdown ==
+Pairs that were too short:                  29 (0.0%)
+Pairs discarded as untrimmed:           44,251 (13.4%)
+Pairs written (passing filters):       286,288 (86.6%)
+
+Total basepairs processed:   165,280,245 bp
+  Read 1:    82,639,634 bp
+  Read 2:    82,640,611 bp
+Total written (filtered):    132,252,039 bp (80.0%)
+  Read 1:    66,691,716 bp
+  Read 2:    65,560,323 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: CCTACGGGNGGCWGCAG; Type: regular 5'; Length: 17; Trimmed: 305102 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+9	1	1.3	0	1
+12	1	0.0	0	1
+13	8	0.0	0	8
+14	1	0.0	0	1
+15	18	0.0	0	18
+16	700	0.0	0	700
+17	303158	0.0	0	303158
+18	1079	0.0	0	1079
+19	9	0.0	0	9
+47	3	0.0	0	3
+78	1	0.0	0	1
+79	11	0.0	0	11
+127	1	0.0	0	1
+129	9	0.0	0	9
+130	5	0.0	0	5
+135	1	0.0	0	1
+136	1	0.0	0	1
+138	1	0.0	0	1
+139	1	0.0	0	1
+146	3	0.0	0	3
+147	5	0.0	0	5
+148	2	0.0	0	2
+149	5	0.0	0	5
+159	3	0.0	0	3
+163	6	0.0	0	6
+168	1	0.0	0	1
+172	2	0.0	0	2
+173	41	0.0	0	41
+174	1	0.0	0	1
+177	3	0.0	0	3
+181	2	0.0	0	2
+192	1	0.0	0	1
+202	1	0.0	0	1
+205	1	0.0	0	1
+207	3	0.0	0	3
+211	2	0.0	0	2
+215	1	0.0	0	1
+228	1	0.0	0	1
+234	1	0.0	0	1
+241	3	0.0	0	3
+242	1	0.0	0	1
+244	1	0.0	0	1
+248	2	0.0	0	2
+250	1	0.0	0	1
+
+
+=== First read: Adapter 2 ===
+
+Sequence: GGATTAGATACCCBDGTAGTC; Type: regular 3'; Length: 21; Trimmed: 0 times
+
+=== Second read: Adapter 3 ===
+
+Sequence: GACTACHVGGGTATCTAATCC; Type: regular 5'; Length: 21; Trimmed: 308869 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+12	1	0.0	0	1
+14	1	0.0	0	1
+15	1	0.0	0	1
+16	1	0.0	0	1
+17	2	0.0	0	2
+18	1	0.0	0	1
+19	9	0.0	0	9
+20	732	0.0	0	732
+21	307928	0.0	0	307928
+22	191	0.0	0	191
+26	1	0.0	0	1
+32	1	0.0	0	1
+
+
+=== Second read: Adapter 4 ===
+
+Sequence: CTGCWGCCNCCCGTAGG; Type: regular 3'; Length: 17; Trimmed: 3 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Bases preceding removed adapters:
+  A: 33.3%
+  C: 33.3%
+  G: 0.0%
+  T: 33.3%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+9	3	1.3	0	3
+This is cutadapt 4.1 with Python 3.10.6
+Command line parameters: -j 0 -g CCTACGGGNGGCWGCAG -a GGATTAGATACCCBDGTAGTC --minimum-length 50 -G GACTACHVGGGTATCTAATCC -A CTGCWGCCNCCCGTAGG --minimum-length 50 -n 2 --match-read-wildcards --discard-untrimmed -e 0 --overlap 8 -o /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91624_ID2577_16S-34-R2M5-P05-B05_S319_L001_R1_001.fastq.gz -p /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91624_ID2577_16S-34-R2M5-P05-B05_S319_L001_R2_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91624_ID2577_16S-34-R2M5-P05-B05_S319_L001_R1_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91624_ID2577_16S-34-R2M5-P05-B05_S319_L001_R2_001.fastq.gz
+Processing paired-end reads on 16 cores ...
+Finished in 1.39 s (10 µs/read; 6.25 M reads/minute).
+
+=== Summary ===
+
+Total read pairs processed:            144,951
+  Read 1 with adapter:                 133,661 (92.2%)
+  Read 2 with adapter:                 136,312 (94.0%)
+
+== Read fate breakdown ==
+Pairs that were too short:                   6 (0.0%)
+Pairs discarded as untrimmed:           18,889 (13.0%)
+Pairs written (passing filters):       126,056 (87.0%)
+
+Total basepairs processed:    72,474,249 bp
+  Read 1:    36,236,871 bp
+  Read 2:    36,237,378 bp
+Total written (filtered):     58,234,403 bp (80.4%)
+  Read 1:    29,367,496 bp
+  Read 2:    28,866,907 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: CCTACGGGNGGCWGCAG; Type: regular 5'; Length: 17; Trimmed: 133661 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+13	3	0.0	0	3
+14	2	0.0	0	2
+15	3	0.0	0	3
+16	294	0.0	0	294
+17	132929	0.0	0	132929
+18	394	0.0	0	394
+19	5	0.0	0	5
+47	1	0.0	0	1
+78	1	0.0	0	1
+79	9	0.0	0	9
+91	1	0.0	0	1
+129	1	0.0	0	1
+138	1	0.0	0	1
+150	2	0.0	0	2
+173	11	0.0	0	11
+194	2	0.0	0	2
+200	1	0.0	0	1
+241	1	0.0	0	1
+
+
+=== First read: Adapter 2 ===
+
+Sequence: GGATTAGATACCCBDGTAGTC; Type: regular 3'; Length: 21; Trimmed: 1 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Bases preceding removed adapters:
+  A: 0.0%
+  C: 0.0%
+  G: 100.0%
+  T: 0.0%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+10	1	0.1	0	1
+
+
+=== Second read: Adapter 3 ===
+
+Sequence: GACTACHVGGGTATCTAATCC; Type: regular 5'; Length: 21; Trimmed: 136311 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+14	2	0.0	0	2
+16	1	0.0	0	1
+17	1	0.0	0	1
+18	2	0.0	0	2
+19	7	0.0	0	7
+20	328	0.0	0	328
+21	135867	0.0	0	135867
+22	103	0.0	0	103
+
+
+=== Second read: Adapter 4 ===
+
+Sequence: CTGCWGCCNCCCGTAGG; Type: regular 3'; Length: 17; Trimmed: 4 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Bases preceding removed adapters:
+  A: 50.0%
+  C: 0.0%
+  G: 25.0%
+  T: 25.0%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+9	3	0.6	0	3
+187	1	0.0	0	1
+This is cutadapt 4.1 with Python 3.10.6
+Command line parameters: -j 0 -g CCTACGGGNGGCWGCAG -a GGATTAGATACCCBDGTAGTC --minimum-length 50 -G GACTACHVGGGTATCTAATCC -A CTGCWGCCNCCCGTAGG --minimum-length 50 -n 2 --match-read-wildcards --discard-untrimmed -e 0 --overlap 8 -o /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91625_ID2577_16S-35-R2M6-P05-C05_S320_L001_R1_001.fastq.gz -p /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91625_ID2577_16S-35-R2M6-P05-C05_S320_L001_R2_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91625_ID2577_16S-35-R2M6-P05-C05_S320_L001_R1_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91625_ID2577_16S-35-R2M6-P05-C05_S320_L001_R2_001.fastq.gz
+Processing paired-end reads on 16 cores ...
+Finished in 2.50 s (7 µs/read; 9.08 M reads/minute).
+
+=== Summary ===
+
+Total read pairs processed:            377,923
+  Read 1 with adapter:                 349,044 (92.4%)
+  Read 2 with adapter:                 354,710 (93.9%)
+
+== Read fate breakdown ==
+Pairs that were too short:                  33 (0.0%)
+Pairs discarded as untrimmed:           49,335 (13.1%)
+Pairs written (passing filters):       328,555 (86.9%)
+
+Total basepairs processed:   188,955,392 bp
+  Read 1:    94,476,640 bp
+  Read 2:    94,478,752 bp
+Total written (filtered):    151,773,826 bp (80.3%)
+  Read 1:    76,534,177 bp
+  Read 2:    75,239,649 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: CCTACGGGNGGCWGCAG; Type: regular 5'; Length: 17; Trimmed: 349044 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+11	2	0.1	0	2
+12	1	0.0	0	1
+13	8	0.0	0	8
+14	3	0.0	0	3
+15	16	0.0	0	16
+16	853	0.0	0	853
+17	346777	0.0	0	346777
+18	1215	0.0	0	1215
+19	5	0.0	0	5
+25	1	0.0	0	1
+74	1	0.0	0	1
+78	2	0.0	0	2
+79	22	0.0	0	22
+90	1	0.0	0	1
+129	16	0.0	0	16
+130	1	0.0	0	1
+135	2	0.0	0	2
+138	1	0.0	0	1
+145	1	0.0	0	1
+153	3	0.0	0	3
+158	1	0.0	0	1
+159	1	0.0	0	1
+162	1	0.0	0	1
+163	3	0.0	0	3
+172	5	0.0	0	5
+173	76	0.0	0	76
+175	3	0.0	0	3
+177	5	0.0	0	5
+183	4	0.0	0	4
+184	1	0.0	0	1
+192	1	0.0	0	1
+212	3	0.0	0	3
+234	1	0.0	0	1
+241	5	0.0	0	5
+244	1	0.0	0	1
+248	2	0.0	0	2
+
+
+=== First read: Adapter 2 ===
+
+Sequence: GGATTAGATACCCBDGTAGTC; Type: regular 3'; Length: 21; Trimmed: 0 times
+
+=== Second read: Adapter 3 ===
+
+Sequence: GACTACHVGGGTATCTAATCC; Type: regular 5'; Length: 21; Trimmed: 354708 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+11	1	0.1	0	1
+13	1	0.0	0	1
+14	1	0.0	0	1
+15	2	0.0	0	2
+16	3	0.0	0	3
+17	1	0.0	0	1
+18	3	0.0	0	3
+19	14	0.0	0	14
+20	900	0.0	0	900
+21	353556	0.0	0	353556
+22	226	0.0	0	226
+
+
+=== Second read: Adapter 4 ===
+
+Sequence: CTGCWGCCNCCCGTAGG; Type: regular 3'; Length: 17; Trimmed: 10 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Bases preceding removed adapters:
+  A: 70.0%
+  C: 30.0%
+  G: 0.0%
+  T: 0.0%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+9	6	1.4	0	6
+128	2	0.0	0	2
+187	2	0.0	0	2
+This is cutadapt 4.1 with Python 3.10.6
+Command line parameters: -j 0 -g CCTACGGGNGGCWGCAG -a GGATTAGATACCCBDGTAGTC --minimum-length 50 -G GACTACHVGGGTATCTAATCC -A CTGCWGCCNCCCGTAGG --minimum-length 50 -n 2 --match-read-wildcards --discard-untrimmed -e 0 --overlap 8 -o /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91626_ID2577_16S-36-R2M7-P05-D05_S321_L001_R1_001.fastq.gz -p /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91626_ID2577_16S-36-R2M7-P05-D05_S321_L001_R2_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91626_ID2577_16S-36-R2M7-P05-D05_S321_L001_R1_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91626_ID2577_16S-36-R2M7-P05-D05_S321_L001_R2_001.fastq.gz
+Processing paired-end reads on 16 cores ...
+Finished in 2.87 s (9 µs/read; 6.89 M reads/minute).
+
+=== Summary ===
+
+Total read pairs processed:            329,692
+  Read 1 with adapter:                 304,602 (92.4%)
+  Read 2 with adapter:                 309,702 (93.9%)
+
+== Read fate breakdown ==
+Pairs that were too short:                  17 (0.0%)
+Pairs discarded as untrimmed:           43,058 (13.1%)
+Pairs written (passing filters):       286,617 (86.9%)
+
+Total basepairs processed:   164,842,025 bp
+  Read 1:    82,420,191 bp
+  Read 2:    82,421,834 bp
+Total written (filtered):    132,414,263 bp (80.3%)
+  Read 1:    66,778,366 bp
+  Read 2:    65,635,897 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: CCTACGGGNGGCWGCAG; Type: regular 5'; Length: 17; Trimmed: 304601 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+11	2	0.1	0	2
+12	1	0.0	0	1
+13	17	0.0	0	17
+14	2	0.0	0	2
+15	17	0.0	0	17
+16	1183	0.0	0	1183
+17	302249	0.0	0	302249
+18	1089	0.0	0	1089
+19	3	0.0	0	3
+78	1	0.0	0	1
+79	6	0.0	0	6
+90	1	0.0	0	1
+91	2	0.0	0	2
+92	2	0.0	0	2
+129	4	0.0	0	4
+147	1	0.0	0	1
+148	1	0.0	0	1
+149	1	0.0	0	1
+152	2	0.0	0	2
+159	2	0.0	0	2
+163	3	0.0	0	3
+173	8	0.0	0	8
+201	1	0.0	0	1
+230	1	0.0	0	1
+244	2	0.0	0	2
+
+
+=== First read: Adapter 2 ===
+
+Sequence: GGATTAGATACCCBDGTAGTC; Type: regular 3'; Length: 21; Trimmed: 1 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Bases preceding removed adapters:
+  A: 100.0%
+  C: 0.0%
+  G: 0.0%
+  T: 0.0%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+43	1	0.0	0	1
+
+
+=== Second read: Adapter 3 ===
+
+Sequence: GACTACHVGGGTATCTAATCC; Type: regular 5'; Length: 21; Trimmed: 309702 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+11	4	0.1	0	4
+12	1	0.0	0	1
+13	1	0.0	0	1
+14	1	0.0	0	1
+15	1	0.0	0	1
+16	3	0.0	0	3
+19	13	0.0	0	13
+20	886	0.0	0	886
+21	308591	0.0	0	308591
+22	199	0.0	0	199
+23	1	0.0	0	1
+29	1	0.0	0	1
+
+
+=== Second read: Adapter 4 ===
+
+Sequence: CTGCWGCCNCCCGTAGG; Type: regular 3'; Length: 17; Trimmed: 15 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Bases preceding removed adapters:
+  A: 40.0%
+  C: 46.7%
+  G: 6.7%
+  T: 6.7%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+8	2	5.0	0	2
+9	12	1.3	0	12
+17	1	0.0	0	1
+This is cutadapt 4.1 with Python 3.10.6
+Command line parameters: -j 0 -g CCTACGGGNGGCWGCAG -a GGATTAGATACCCBDGTAGTC --minimum-length 50 -G GACTACHVGGGTATCTAATCC -A CTGCWGCCNCCCGTAGG --minimum-length 50 -n 2 --match-read-wildcards --discard-untrimmed -e 0 --overlap 8 -o /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91627_ID2577_16S-37-R2M8-P05-E05_S322_L001_R1_001.fastq.gz -p /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91627_ID2577_16S-37-R2M8-P05-E05_S322_L001_R2_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91627_ID2577_16S-37-R2M8-P05-E05_S322_L001_R1_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91627_ID2577_16S-37-R2M8-P05-E05_S322_L001_R2_001.fastq.gz
+Processing paired-end reads on 16 cores ...
+Finished in 3.88 s (9 µs/read; 6.99 M reads/minute).
+
+=== Summary ===
+
+Total read pairs processed:            451,765
+  Read 1 with adapter:                 418,532 (92.6%)
+  Read 2 with adapter:                 420,608 (93.1%)
+
+== Read fate breakdown ==
+Pairs that were too short:                  50 (0.0%)
+Pairs discarded as untrimmed:           60,727 (13.4%)
+Pairs written (passing filters):       390,988 (86.5%)
+
+Total basepairs processed:   225,877,640 bp
+  Read 1:   112,937,570 bp
+  Read 2:   112,940,070 bp
+Total written (filtered):    180,626,676 bp (80.0%)
+  Read 1:    91,089,678 bp
+  Read 2:    89,536,998 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: CCTACGGGNGGCWGCAG; Type: regular 5'; Length: 17; Trimmed: 418531 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+10	3	0.4	0	3
+11	1	0.1	0	1
+12	2	0.0	0	2
+13	16	0.0	0	16
+14	1	0.0	0	1
+15	15	0.0	0	15
+16	943	0.0	0	943
+17	415915	0.0	0	415915
+18	1509	0.0	0	1509
+19	12	0.0	0	12
+32	1	0.0	0	1
+78	2	0.0	0	2
+79	15	0.0	0	15
+129	7	0.0	0	7
+133	1	0.0	0	1
+135	1	0.0	0	1
+139	1	0.0	0	1
+146	1	0.0	0	1
+147	2	0.0	0	2
+148	1	0.0	0	1
+159	2	0.0	0	2
+167	2	0.0	0	2
+172	1	0.0	0	1
+173	40	0.0	0	40
+174	2	0.0	0	2
+177	1	0.0	0	1
+183	1	0.0	0	1
+214	2	0.0	0	2
+242	26	0.0	0	26
+249	5	0.0	0	5
+
+
+=== First read: Adapter 2 ===
+
+Sequence: GGATTAGATACCCBDGTAGTC; Type: regular 3'; Length: 21; Trimmed: 1 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Bases preceding removed adapters:
+  A: 100.0%
+  C: 0.0%
+  G: 0.0%
+  T: 0.0%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+105	1	0.0	0	1
+
+
+=== Second read: Adapter 3 ===
+
+Sequence: GACTACHVGGGTATCTAATCC; Type: regular 5'; Length: 21; Trimmed: 420607 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+10	2	0.4	0	2
+13	1	0.0	0	1
+14	4	0.0	0	4
+15	3	0.0	0	3
+16	3	0.0	0	3
+17	2	0.0	0	2
+18	5	0.0	0	5
+19	19	0.0	0	19
+20	1054	0.0	0	1054
+21	419225	0.0	0	419225
+22	289	0.0	0	289
+
+
+=== Second read: Adapter 4 ===
+
+Sequence: CTGCWGCCNCCCGTAGG; Type: regular 3'; Length: 17; Trimmed: 15 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Bases preceding removed adapters:
+  A: 60.0%
+  C: 33.3%
+  G: 6.7%
+  T: 0.0%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+8	2	6.9	0	2
+9	13	1.7	0	13
+This is cutadapt 4.1 with Python 3.10.6
+Command line parameters: -j 0 -g CCTACGGGNGGCWGCAG -a GGATTAGATACCCBDGTAGTC --minimum-length 50 -G GACTACHVGGGTATCTAATCC -A CTGCWGCCNCCCGTAGG --minimum-length 50 -n 2 --match-read-wildcards --discard-untrimmed -e 0 --overlap 8 -o /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91628_ID2577_16S-38-R2M9-P05-F05_S323_L001_R1_001.fastq.gz -p /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91628_ID2577_16S-38-R2M9-P05-F05_S323_L001_R2_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91628_ID2577_16S-38-R2M9-P05-F05_S323_L001_R1_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91628_ID2577_16S-38-R2M9-P05-F05_S323_L001_R2_001.fastq.gz
+Processing paired-end reads on 16 cores ...
+Finished in 2.64 s (6 µs/read; 9.36 M reads/minute).
+
+=== Summary ===
+
+Total read pairs processed:            411,392
+  Read 1 with adapter:                 379,617 (92.3%)
+  Read 2 with adapter:                 385,856 (93.8%)
+
+== Read fate breakdown ==
+Pairs that were too short:                  23 (0.0%)
+Pairs discarded as untrimmed:           54,421 (13.2%)
+Pairs written (passing filters):       356,948 (86.8%)
+
+Total basepairs processed:   205,690,908 bp
+  Read 1:   102,844,864 bp
+  Read 2:   102,846,044 bp
+Total written (filtered):    164,896,674 bp (80.2%)
+  Read 1:    83,154,901 bp
+  Read 2:    81,741,773 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: CCTACGGGNGGCWGCAG; Type: regular 5'; Length: 17; Trimmed: 379617 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+9	3	1.6	0	3
+11	1	0.1	0	1
+13	12	0.0	0	12
+14	4	0.0	0	4
+15	17	0.0	0	17
+16	1010	0.0	0	1010
+17	377094	0.0	0	377094
+18	1343	0.0	0	1343
+19	10	0.0	0	10
+79	20	0.0	0	20
+91	5	0.0	0	5
+128	1	0.0	0	1
+129	4	0.0	0	4
+130	6	0.0	0	6
+134	1	0.0	0	1
+135	2	0.0	0	2
+138	1	0.0	0	1
+146	2	0.0	0	2
+147	1	0.0	0	1
+149	1	0.0	0	1
+152	2	0.0	0	2
+163	2	0.0	0	2
+172	3	0.0	0	3
+173	57	0.0	0	57
+174	1	0.0	0	1
+177	2	0.0	0	2
+183	4	0.0	0	4
+230	3	0.0	0	3
+241	2	0.0	0	2
+244	1	0.0	0	1
+248	1	0.0	0	1
+249	1	0.0	0	1
+
+
+=== First read: Adapter 2 ===
+
+Sequence: GGATTAGATACCCBDGTAGTC; Type: regular 3'; Length: 21; Trimmed: 1 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Bases preceding removed adapters:
+  A: 100.0%
+  C: 0.0%
+  G: 0.0%
+  T: 0.0%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+21	1	0.0	0	1
+
+
+=== Second read: Adapter 3 ===
+
+Sequence: GACTACHVGGGTATCTAATCC; Type: regular 5'; Length: 21; Trimmed: 385855 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+10	1	0.4	0	1
+13	2	0.0	0	2
+14	4	0.0	0	4
+16	1	0.0	0	1
+17	2	0.0	0	2
+18	6	0.0	0	6
+19	15	0.0	0	15
+20	1023	0.0	0	1023
+21	384569	0.0	0	384569
+22	232	0.0	0	232
+
+
+=== Second read: Adapter 4 ===
+
+Sequence: CTGCWGCCNCCCGTAGG; Type: regular 3'; Length: 17; Trimmed: 6 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Bases preceding removed adapters:
+  A: 0.0%
+  C: 66.7%
+  G: 16.7%
+  T: 16.7%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+8	1	6.3	0	1
+9	4	1.6	0	4
+187	1	0.0	0	1
+This is cutadapt 4.1 with Python 3.10.6
+Command line parameters: -j 0 -g CCTACGGGNGGCWGCAG -a GGATTAGATACCCBDGTAGTC --minimum-length 50 -G GACTACHVGGGTATCTAATCC -A CTGCWGCCNCCCGTAGG --minimum-length 50 -n 2 --match-read-wildcards --discard-untrimmed -e 0 --overlap 8 -o /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91629_ID2577_16S-39-R2M10-P05-G05_S324_L001_R1_001.fastq.gz -p /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91629_ID2577_16S-39-R2M10-P05-G05_S324_L001_R2_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91629_ID2577_16S-39-R2M10-P05-G05_S324_L001_R1_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91629_ID2577_16S-39-R2M10-P05-G05_S324_L001_R2_001.fastq.gz
+Processing paired-end reads on 16 cores ...
+Finished in 2.56 s (7 µs/read; 8.84 M reads/minute).
+
+=== Summary ===
+
+Total read pairs processed:            376,902
+  Read 1 with adapter:                 348,507 (92.5%)
+  Read 2 with adapter:                 354,443 (94.0%)
+
+== Read fate breakdown ==
+Pairs that were too short:                  26 (0.0%)
+Pairs discarded as untrimmed:           48,581 (12.9%)
+Pairs written (passing filters):       328,295 (87.1%)
+
+Total basepairs processed:   188,447,103 bp
+  Read 1:    94,222,574 bp
+  Read 2:    94,224,529 bp
+Total written (filtered):    151,665,092 bp (80.5%)
+  Read 1:    76,484,857 bp
+  Read 2:    75,180,235 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: CCTACGGGNGGCWGCAG; Type: regular 5'; Length: 17; Trimmed: 348507 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+11	1	0.1	0	1
+13	15	0.0	0	15
+14	6	0.0	0	6
+15	21	0.0	0	21
+16	1141	0.0	0	1141
+17	346013	0.0	0	346013
+18	1223	0.0	0	1223
+19	9	0.0	0	9
+78	3	0.0	0	3
+79	11	0.0	0	11
+91	2	0.0	0	2
+129	4	0.0	0	4
+132	1	0.0	0	1
+135	4	0.0	0	4
+138	1	0.0	0	1
+145	3	0.0	0	3
+146	1	0.0	0	1
+152	2	0.0	0	2
+163	1	0.0	0	1
+172	1	0.0	0	1
+173	21	0.0	0	21
+177	3	0.0	0	3
+180	2	0.0	0	2
+189	1	0.0	0	1
+190	2	0.0	0	2
+191	1	0.0	0	1
+192	1	0.0	0	1
+212	1	0.0	0	1
+234	1	0.0	0	1
+241	8	0.0	0	8
+242	1	0.0	0	1
+244	1	0.0	0	1
+249	1	0.0	0	1
+
+
+=== First read: Adapter 2 ===
+
+Sequence: GGATTAGATACCCBDGTAGTC; Type: regular 3'; Length: 21; Trimmed: 2 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Bases preceding removed adapters:
+  A: 100.0%
+  C: 0.0%
+  G: 0.0%
+  T: 0.0%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+21	2	0.0	0	2
+
+
+=== Second read: Adapter 3 ===
+
+Sequence: GACTACHVGGGTATCTAATCC; Type: regular 5'; Length: 21; Trimmed: 354443 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+10	5	0.4	0	5
+11	2	0.1	0	2
+12	1	0.0	0	1
+13	3	0.0	0	3
+14	1	0.0	0	1
+16	2	0.0	0	2
+17	8	0.0	0	8
+18	7	0.0	0	7
+19	12	0.0	0	12
+20	881	0.0	0	881
+21	353293	0.0	0	353293
+22	225	0.0	0	225
+23	3	0.0	0	3
+
+
+=== Second read: Adapter 4 ===
+
+Sequence: CTGCWGCCNCCCGTAGG; Type: regular 3'; Length: 17; Trimmed: 11 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Bases preceding removed adapters:
+  A: 63.6%
+  C: 18.2%
+  G: 9.1%
+  T: 9.1%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+8	1	5.8	0	1
+9	9	1.4	0	9
+17	1	0.0	0	1
+This is cutadapt 4.1 with Python 3.10.6
+Command line parameters: -j 0 -g CCTACGGGNGGCWGCAG -a GGATTAGATACCCBDGTAGTC --minimum-length 50 -G GACTACHVGGGTATCTAATCC -A CTGCWGCCNCCCGTAGG --minimum-length 50 -n 2 --match-read-wildcards --discard-untrimmed -e 0 --overlap 8 -o /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91630_ID2577_16S-40-R2C1-P05-H05_S325_L001_R1_001.fastq.gz -p /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91630_ID2577_16S-40-R2C1-P05-H05_S325_L001_R2_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91630_ID2577_16S-40-R2C1-P05-H05_S325_L001_R1_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91630_ID2577_16S-40-R2C1-P05-H05_S325_L001_R2_001.fastq.gz
+Processing paired-end reads on 16 cores ...
+Finished in 2.46 s (7 µs/read; 8.62 M reads/minute).
+
+=== Summary ===
+
+Total read pairs processed:            353,620
+  Read 1 with adapter:                 327,704 (92.7%)
+  Read 2 with adapter:                 332,326 (94.0%)
+
+== Read fate breakdown ==
+Pairs that were too short:                  23 (0.0%)
+Pairs discarded as untrimmed:           44,908 (12.7%)
+Pairs written (passing filters):       308,689 (87.3%)
+
+Total basepairs processed:   176,806,105 bp
+  Read 1:    88,402,285 bp
+  Read 2:    88,403,820 bp
+Total written (filtered):    142,609,871 bp (80.7%)
+  Read 1:    71,919,309 bp
+  Read 2:    70,690,562 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: CCTACGGGNGGCWGCAG; Type: regular 5'; Length: 17; Trimmed: 327701 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+13	15	0.0	0	15
+14	1	0.0	0	1
+15	12	0.0	0	12
+16	1015	0.0	0	1015
+17	325422	0.0	0	325422
+18	1172	0.0	0	1172
+19	14	0.0	0	14
+78	1	0.0	0	1
+79	7	0.0	0	7
+129	2	0.0	0	2
+138	5	0.0	0	5
+147	4	0.0	0	4
+148	4	0.0	0	4
+171	2	0.0	0	2
+172	2	0.0	0	2
+173	11	0.0	0	11
+177	2	0.0	0	2
+179	1	0.0	0	1
+244	7	0.0	0	7
+249	2	0.0	0	2
+
+
+=== First read: Adapter 2 ===
+
+Sequence: GGATTAGATACCCBDGTAGTC; Type: regular 3'; Length: 21; Trimmed: 3 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Bases preceding removed adapters:
+  A: 66.7%
+  C: 0.0%
+  G: 33.3%
+  T: 0.0%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+9	1	1.3	0	1
+25	1	0.0	0	1
+90	1	0.0	0	1
+
+
+=== Second read: Adapter 3 ===
+
+Sequence: GACTACHVGGGTATCTAATCC; Type: regular 5'; Length: 21; Trimmed: 332326 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+11	5	0.1	0	5
+14	2	0.0	0	2
+16	1	0.0	0	1
+17	1	0.0	0	1
+18	3	0.0	0	3
+19	15	0.0	0	15
+20	991	0.0	0	991
+21	331098	0.0	0	331098
+22	210	0.0	0	210
+
+
+=== Second read: Adapter 4 ===
+
+Sequence: CTGCWGCCNCCCGTAGG; Type: regular 3'; Length: 17; Trimmed: 7 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Bases preceding removed adapters:
+  A: 71.4%
+  C: 14.3%
+  G: 14.3%
+  T: 0.0%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+8	1	5.4	0	1
+9	4	1.3	0	4
+187	2	0.0	0	2
+This is cutadapt 4.1 with Python 3.10.6
+Command line parameters: -j 0 -g CCTACGGGNGGCWGCAG -a GGATTAGATACCCBDGTAGTC --minimum-length 50 -G GACTACHVGGGTATCTAATCC -A CTGCWGCCNCCCGTAGG --minimum-length 50 -n 2 --match-read-wildcards --discard-untrimmed -e 0 --overlap 8 -o /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91631_ID2577_16S-41-R2C2-P05-A06_S326_L001_R1_001.fastq.gz -p /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91631_ID2577_16S-41-R2C2-P05-A06_S326_L001_R2_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91631_ID2577_16S-41-R2C2-P05-A06_S326_L001_R1_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91631_ID2577_16S-41-R2C2-P05-A06_S326_L001_R2_001.fastq.gz
+Processing paired-end reads on 16 cores ...
+Finished in 0.91 s (9 µs/read; 7.02 M reads/minute).
+
+=== Summary ===
+
+Total read pairs processed:            106,320
+  Read 1 with adapter:                  98,369 (92.5%)
+  Read 2 with adapter:                  99,422 (93.5%)
+
+== Read fate breakdown ==
+Pairs that were too short:                   9 (0.0%)
+Pairs discarded as untrimmed:           13,910 (13.1%)
+Pairs written (passing filters):        92,401 (86.9%)
+
+Total basepairs processed:    53,158,767 bp
+  Read 1:    26,579,139 bp
+  Read 2:    26,579,628 bp
+Total written (filtered):     42,683,769 bp (80.3%)
+  Read 1:    21,523,784 bp
+  Read 2:    21,159,985 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: CCTACGGGNGGCWGCAG; Type: regular 5'; Length: 17; Trimmed: 98370 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+13	4	0.0	0	4
+15	2	0.0	0	2
+16	240	0.0	0	240
+17	97719	0.0	0	97719
+18	355	0.0	0	355
+19	1	0.0	0	1
+46	1	0.0	0	1
+47	1	0.0	0	1
+79	9	0.0	0	9
+138	2	0.0	0	2
+146	1	0.0	0	1
+159	1	0.0	0	1
+163	1	0.0	0	1
+172	2	0.0	0	2
+173	20	0.0	0	20
+176	1	0.0	0	1
+177	4	0.0	0	4
+183	2	0.0	0	2
+206	1	0.0	0	1
+241	1	0.0	0	1
+243	2	0.0	0	2
+
+
+=== First read: Adapter 2 ===
+
+Sequence: GGATTAGATACCCBDGTAGTC; Type: regular 3'; Length: 21; Trimmed: 0 times
+
+=== Second read: Adapter 3 ===
+
+Sequence: GACTACHVGGGTATCTAATCC; Type: regular 5'; Length: 21; Trimmed: 99421 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+16	1	0.0	0	1
+17	3	0.0	0	3
+18	1	0.0	0	1
+19	3	0.0	0	3
+20	202	0.0	0	202
+21	99167	0.0	0	99167
+22	42	0.0	0	42
+23	2	0.0	0	2
+
+
+=== Second read: Adapter 4 ===
+
+Sequence: CTGCWGCCNCCCGTAGG; Type: regular 3'; Length: 17; Trimmed: 5 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Bases preceding removed adapters:
+  A: 40.0%
+  C: 40.0%
+  G: 20.0%
+  T: 0.0%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+9	4	0.4	0	4
+187	1	0.0	0	1
+This is cutadapt 4.1 with Python 3.10.6
+Command line parameters: -j 0 -g CCTACGGGNGGCWGCAG -a GGATTAGATACCCBDGTAGTC --minimum-length 50 -G GACTACHVGGGTATCTAATCC -A CTGCWGCCNCCCGTAGG --minimum-length 50 -n 2 --match-read-wildcards --discard-untrimmed -e 0 --overlap 8 -o /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91632_ID2577_16S-42-R2C3-P05-B06_S327_L001_R1_001.fastq.gz -p /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91632_ID2577_16S-42-R2C3-P05-B06_S327_L001_R2_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91632_ID2577_16S-42-R2C3-P05-B06_S327_L001_R1_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91632_ID2577_16S-42-R2C3-P05-B06_S327_L001_R2_001.fastq.gz
+Processing paired-end reads on 16 cores ...
+Finished in 3.44 s (9 µs/read; 6.79 M reads/minute).
+
+=== Summary ===
+
+Total read pairs processed:            388,945
+  Read 1 with adapter:                 360,175 (92.6%)
+  Read 2 with adapter:                 364,709 (93.8%)
+
+== Read fate breakdown ==
+Pairs that were too short:                  38 (0.0%)
+Pairs discarded as untrimmed:           49,936 (12.8%)
+Pairs written (passing filters):       338,971 (87.2%)
+
+Total basepairs processed:   194,467,797 bp
+  Read 1:    97,232,709 bp
+  Read 2:    97,235,088 bp
+Total written (filtered):    156,593,274 bp (80.5%)
+  Read 1:    78,968,455 bp
+  Read 2:    77,624,819 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: CCTACGGGNGGCWGCAG; Type: regular 5'; Length: 17; Trimmed: 360175 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+11	2	0.1	0	2
+12	3	0.0	0	3
+13	7	0.0	0	7
+14	3	0.0	0	3
+15	17	0.0	0	17
+16	828	0.0	0	828
+17	358120	0.0	0	358120
+18	1070	0.0	0	1070
+19	7	0.0	0	7
+47	1	0.0	0	1
+48	2	0.0	0	2
+79	18	0.0	0	18
+91	2	0.0	0	2
+129	14	0.0	0	14
+135	4	0.0	0	4
+138	3	0.0	0	3
+146	2	0.0	0	2
+147	2	0.0	0	2
+148	4	0.0	0	4
+172	2	0.0	0	2
+173	39	0.0	0	39
+177	1	0.0	0	1
+181	2	0.0	0	2
+203	1	0.0	0	1
+241	1	0.0	0	1
+242	13	0.0	0	13
+244	5	0.0	0	5
+249	2	0.0	0	2
+
+
+=== First read: Adapter 2 ===
+
+Sequence: GGATTAGATACCCBDGTAGTC; Type: regular 3'; Length: 21; Trimmed: 0 times
+
+=== Second read: Adapter 3 ===
+
+Sequence: GACTACHVGGGTATCTAATCC; Type: regular 5'; Length: 21; Trimmed: 364709 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+10	1	0.4	0	1
+11	2	0.1	0	2
+13	1	0.0	0	1
+14	2	0.0	0	2
+16	2	0.0	0	2
+18	4	0.0	0	4
+19	11	0.0	0	11
+20	730	0.0	0	730
+21	363731	0.0	0	363731
+22	222	0.0	0	222
+26	1	0.0	0	1
+29	2	0.0	0	2
+
+
+=== Second read: Adapter 4 ===
+
+Sequence: CTGCWGCCNCCCGTAGG; Type: regular 3'; Length: 17; Trimmed: 9 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Bases preceding removed adapters:
+  A: 66.7%
+  C: 11.1%
+  G: 22.2%
+  T: 0.0%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+8	1	5.9	0	1
+9	8	1.5	0	8
+This is cutadapt 4.1 with Python 3.10.6
+Command line parameters: -j 0 -g CCTACGGGNGGCWGCAG -a GGATTAGATACCCBDGTAGTC --minimum-length 50 -G GACTACHVGGGTATCTAATCC -A CTGCWGCCNCCCGTAGG --minimum-length 50 -n 2 --match-read-wildcards --discard-untrimmed -e 0 --overlap 8 -o /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91633_ID2577_16S-43-R2C4-P05-C06_S328_L001_R1_001.fastq.gz -p /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91633_ID2577_16S-43-R2C4-P05-C06_S328_L001_R2_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91633_ID2577_16S-43-R2C4-P05-C06_S328_L001_R1_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91633_ID2577_16S-43-R2C4-P05-C06_S328_L001_R2_001.fastq.gz
+Processing paired-end reads on 16 cores ...
+Finished in 2.76 s (7 µs/read; 8.83 M reads/minute).
+
+=== Summary ===
+
+Total read pairs processed:            406,225
+  Read 1 with adapter:                 375,505 (92.4%)
+  Read 2 with adapter:                 381,750 (94.0%)
+
+== Read fate breakdown ==
+Pairs that were too short:                  17 (0.0%)
+Pairs discarded as untrimmed:           52,616 (13.0%)
+Pairs written (passing filters):       353,592 (87.0%)
+
+Total basepairs processed:   203,108,113 bp
+  Read 1:   101,553,234 bp
+  Read 2:   101,554,879 bp
+Total written (filtered):    163,350,329 bp (80.4%)
+  Read 1:    82,377,239 bp
+  Read 2:    80,973,090 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: CCTACGGGNGGCWGCAG; Type: regular 5'; Length: 17; Trimmed: 375504 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+13	6	0.0	0	6
+14	3	0.0	0	3
+15	19	0.0	0	19
+16	986	0.0	0	986
+17	373122	0.0	0	373122
+18	1268	0.0	0	1268
+19	9	0.0	0	9
+22	1	0.0	0	1
+78	1	0.0	0	1
+79	17	0.0	0	17
+90	1	0.0	0	1
+95	1	0.0	0	1
+128	1	0.0	0	1
+129	26	0.0	0	26
+135	1	0.0	0	1
+136	2	0.0	0	2
+146	1	0.0	0	1
+147	4	0.0	0	4
+148	3	0.0	0	3
+159	2	0.0	0	2
+172	1	0.0	0	1
+173	22	0.0	0	22
+174	1	0.0	0	1
+177	1	0.0	0	1
+190	1	0.0	0	1
+191	1	0.0	0	1
+244	1	0.0	0	1
+249	2	0.0	0	2
+
+
+=== First read: Adapter 2 ===
+
+Sequence: GGATTAGATACCCBDGTAGTC; Type: regular 3'; Length: 21; Trimmed: 3 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Bases preceding removed adapters:
+  A: 33.3%
+  C: 0.0%
+  G: 33.3%
+  T: 33.3%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+19	1	0.0	0	1
+25	1	0.0	0	1
+90	1	0.0	0	1
+
+
+=== Second read: Adapter 3 ===
+
+Sequence: GACTACHVGGGTATCTAATCC; Type: regular 5'; Length: 21; Trimmed: 381747 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+11	1	0.1	0	1
+12	2	0.0	0	2
+13	1	0.0	0	1
+14	3	0.0	0	3
+15	3	0.0	0	3
+16	2	0.0	0	2
+17	1	0.0	0	1
+18	4	0.0	0	4
+19	18	0.0	0	18
+20	993	0.0	0	993
+21	380452	0.0	0	380452
+22	266	0.0	0	266
+23	1	0.0	0	1
+
+
+=== Second read: Adapter 4 ===
+
+Sequence: CTGCWGCCNCCCGTAGG; Type: regular 3'; Length: 17; Trimmed: 20 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Bases preceding removed adapters:
+  A: 45.0%
+  C: 20.0%
+  G: 20.0%
+  T: 15.0%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+8	1	6.2	0	1
+9	16	1.5	0	16
+21	2	0.0	0	2
+112	1	0.0	0	1
+This is cutadapt 4.1 with Python 3.10.6
+Command line parameters: -j 0 -g CCTACGGGNGGCWGCAG -a GGATTAGATACCCBDGTAGTC --minimum-length 50 -G GACTACHVGGGTATCTAATCC -A CTGCWGCCNCCCGTAGG --minimum-length 50 -n 2 --match-read-wildcards --discard-untrimmed -e 0 --overlap 8 -o /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91634_ID2577_16S-44-R2C5-P05-D06_S329_L001_R1_001.fastq.gz -p /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91634_ID2577_16S-44-R2C5-P05-D06_S329_L001_R2_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91634_ID2577_16S-44-R2C5-P05-D06_S329_L001_R1_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91634_ID2577_16S-44-R2C5-P05-D06_S329_L001_R2_001.fastq.gz
+Processing paired-end reads on 16 cores ...
+Finished in 2.08 s (8 µs/read; 7.10 M reads/minute).
+
+=== Summary ===
+
+Total read pairs processed:            245,680
+  Read 1 with adapter:                 224,968 (91.6%)
+  Read 2 with adapter:                 214,153 (87.2%)
+
+== Read fate breakdown ==
+Pairs that were too short:                   8 (0.0%)
+Pairs discarded as untrimmed:           49,060 (20.0%)
+Pairs written (passing filters):       196,612 (80.0%)
+
+Total basepairs processed:   122,838,104 bp
+  Read 1:    61,418,707 bp
+  Read 2:    61,419,397 bp
+Total written (filtered):     90,833,018 bp (73.9%)
+  Read 1:    45,808,527 bp
+  Read 2:    45,024,491 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: CCTACGGGNGGCWGCAG; Type: regular 5'; Length: 17; Trimmed: 224968 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+10	1	0.2	0	1
+11	1	0.1	0	1
+13	5	0.0	0	5
+14	1	0.0	0	1
+15	3	0.0	0	3
+16	596	0.0	0	596
+17	223663	0.0	0	223663
+18	671	0.0	0	671
+19	3	0.0	0	3
+32	1	0.0	0	1
+79	8	0.0	0	8
+129	1	0.0	0	1
+135	5	0.0	0	5
+147	5	0.0	0	5
+148	1	0.0	0	1
+173	1	0.0	0	1
+244	2	0.0	0	2
+
+
+=== First read: Adapter 2 ===
+
+Sequence: GGATTAGATACCCBDGTAGTC; Type: regular 3'; Length: 21; Trimmed: 1 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Bases preceding removed adapters:
+  A: 100.0%
+  C: 0.0%
+  G: 0.0%
+  T: 0.0%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+10	1	0.2	0	1
+
+
+=== Second read: Adapter 3 ===
+
+Sequence: GACTACHVGGGTATCTAATCC; Type: regular 5'; Length: 21; Trimmed: 214148 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+11	1	0.1	0	1
+14	1	0.0	0	1
+15	2	0.0	0	2
+16	1	0.0	0	1
+17	2	0.0	0	2
+18	1	0.0	0	1
+19	13	0.0	0	13
+20	456	0.0	0	456
+21	213500	0.0	0	213500
+22	171	0.0	0	171
+
+
+=== Second read: Adapter 4 ===
+
+Sequence: CTGCWGCCNCCCGTAGG; Type: regular 3'; Length: 17; Trimmed: 11 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Bases preceding removed adapters:
+  A: 45.5%
+  C: 36.4%
+  G: 18.2%
+  T: 0.0%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+8	3	3.7	0	3
+9	8	0.9	0	8
+This is cutadapt 4.1 with Python 3.10.6
+Command line parameters: -j 0 -g CCTACGGGNGGCWGCAG -a GGATTAGATACCCBDGTAGTC --minimum-length 50 -G GACTACHVGGGTATCTAATCC -A CTGCWGCCNCCCGTAGG --minimum-length 50 -n 2 --match-read-wildcards --discard-untrimmed -e 0 --overlap 8 -o /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91635_ID2577_16S-45-R2C6-P05-E06_S330_L001_R1_001.fastq.gz -p /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91635_ID2577_16S-45-R2C6-P05-E06_S330_L001_R2_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91635_ID2577_16S-45-R2C6-P05-E06_S330_L001_R1_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91635_ID2577_16S-45-R2C6-P05-E06_S330_L001_R2_001.fastq.gz
+Processing paired-end reads on 16 cores ...
+Finished in 1.44 s (8 µs/read; 7.62 M reads/minute).
+
+=== Summary ===
+
+Total read pairs processed:            182,990
+  Read 1 with adapter:                 170,279 (93.1%)
+  Read 2 with adapter:                 171,022 (93.5%)
+
+== Read fate breakdown ==
+Pairs that were too short:                  21 (0.0%)
+Pairs discarded as untrimmed:           23,093 (12.6%)
+Pairs written (passing filters):       159,876 (87.4%)
+
+Total basepairs processed:    91,493,113 bp
+  Read 1:    45,746,212 bp
+  Read 2:    45,746,901 bp
+Total written (filtered):     73,860,068 bp (80.7%)
+  Read 1:    37,248,365 bp
+  Read 2:    36,611,703 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: CCTACGGGNGGCWGCAG; Type: regular 5'; Length: 17; Trimmed: 170279 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+11	1	0.0	0	1
+13	3	0.0	0	3
+14	1	0.0	0	1
+15	1	0.0	0	1
+16	485	0.0	0	485
+17	169179	0.0	0	169179
+18	569	0.0	0	569
+19	2	0.0	0	2
+47	1	0.0	0	1
+79	3	0.0	0	3
+129	2	0.0	0	2
+130	1	0.0	0	1
+135	1	0.0	0	1
+136	3	0.0	0	3
+144	1	0.0	0	1
+147	1	0.0	0	1
+166	1	0.0	0	1
+173	8	0.0	0	8
+175	1	0.0	0	1
+236	1	0.0	0	1
+244	14	0.0	0	14
+
+
+=== First read: Adapter 2 ===
+
+Sequence: GGATTAGATACCCBDGTAGTC; Type: regular 3'; Length: 21; Trimmed: 0 times
+
+=== Second read: Adapter 3 ===
+
+Sequence: GACTACHVGGGTATCTAATCC; Type: regular 5'; Length: 21; Trimmed: 171022 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+10	2	0.2	0	2
+17	1	0.0	0	1
+18	4	0.0	0	4
+19	6	0.0	0	6
+20	422	0.0	0	422
+21	170464	0.0	0	170464
+22	121	0.0	0	121
+23	1	0.0	0	1
+74	1	0.0	0	1
+
+
+=== Second read: Adapter 4 ===
+
+Sequence: CTGCWGCCNCCCGTAGG; Type: regular 3'; Length: 17; Trimmed: 3 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Bases preceding removed adapters:
+  A: 100.0%
+  C: 0.0%
+  G: 0.0%
+  T: 0.0%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+9	3	0.7	0	3
+This is cutadapt 4.1 with Python 3.10.6
+Command line parameters: -j 0 -g CCTACGGGNGGCWGCAG -a GGATTAGATACCCBDGTAGTC --minimum-length 50 -G GACTACHVGGGTATCTAATCC -A CTGCWGCCNCCCGTAGG --minimum-length 50 -n 2 --match-read-wildcards --discard-untrimmed -e 0 --overlap 8 -o /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91636_ID2577_16S-46-R2C7-P05-F06_S331_L001_R1_001.fastq.gz -p /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91636_ID2577_16S-46-R2C7-P05-F06_S331_L001_R2_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91636_ID2577_16S-46-R2C7-P05-F06_S331_L001_R1_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91636_ID2577_16S-46-R2C7-P05-F06_S331_L001_R2_001.fastq.gz
+Processing paired-end reads on 16 cores ...
+Finished in 3.95 s (8 µs/read; 7.64 M reads/minute).
+
+=== Summary ===
+
+Total read pairs processed:            503,260
+  Read 1 with adapter:                 467,241 (92.8%)
+  Read 2 with adapter:                 471,113 (93.6%)
+
+== Read fate breakdown ==
+Pairs that were too short:                  58 (0.0%)
+Pairs discarded as untrimmed:           64,359 (12.8%)
+Pairs written (passing filters):       438,843 (87.2%)
+
+Total basepairs processed:   251,623,349 bp
+  Read 1:   125,810,347 bp
+  Read 2:   125,813,002 bp
+Total written (filtered):    202,729,269 bp (80.6%)
+  Read 1:   102,233,599 bp
+  Read 2:   100,495,670 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: CCTACGGGNGGCWGCAG; Type: regular 5'; Length: 17; Trimmed: 467244 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+11	1	0.1	0	1
+12	3	0.0	0	3
+13	11	0.0	0	11
+15	8	0.0	0	8
+16	1056	0.0	0	1056
+17	464355	0.0	0	464355
+18	1615	0.0	0	1615
+19	12	0.0	0	12
+46	2	0.0	0	2
+79	27	0.0	0	27
+91	2	0.0	0	2
+128	3	0.0	0	3
+129	28	0.0	0	28
+130	2	0.0	0	2
+135	3	0.0	0	3
+138	4	0.0	0	4
+147	2	0.0	0	2
+148	2	0.0	0	2
+149	3	0.0	0	3
+151	1	0.0	0	1
+157	1	0.0	0	1
+158	1	0.0	0	1
+159	1	0.0	0	1
+172	1	0.0	0	1
+173	58	0.0	0	58
+176	1	0.0	0	1
+177	4	0.0	0	4
+234	1	0.0	0	1
+241	1	0.0	0	1
+242	4	0.0	0	4
+244	30	0.0	0	30
+249	1	0.0	0	1
+
+
+=== First read: Adapter 2 ===
+
+Sequence: GGATTAGATACCCBDGTAGTC; Type: regular 3'; Length: 21; Trimmed: 2 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Bases preceding removed adapters:
+  A: 50.0%
+  C: 0.0%
+  G: 50.0%
+  T: 0.0%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+24	1	0.0	0	1
+25	1	0.0	0	1
+
+
+=== Second read: Adapter 3 ===
+
+Sequence: GACTACHVGGGTATCTAATCC; Type: regular 5'; Length: 21; Trimmed: 471106 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+13	2	0.0	0	2
+15	1	0.0	0	1
+16	2	0.0	0	2
+17	2	0.0	0	2
+19	24	0.0	0	24
+20	1098	0.0	0	1098
+21	469690	0.0	0	469690
+22	282	0.0	0	282
+23	2	0.0	0	2
+74	3	0.0	0	3
+
+
+=== Second read: Adapter 4 ===
+
+Sequence: CTGCWGCCNCCCGTAGG; Type: regular 3'; Length: 17; Trimmed: 18 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Bases preceding removed adapters:
+  A: 38.9%
+  C: 16.7%
+  G: 27.8%
+  T: 16.7%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+9	16	1.9	0	16
+11	1	0.1	0	1
+21	1	0.0	0	1
+This is cutadapt 4.1 with Python 3.10.6
+Command line parameters: -j 0 -g CCTACGGGNGGCWGCAG -a GGATTAGATACCCBDGTAGTC --minimum-length 50 -G GACTACHVGGGTATCTAATCC -A CTGCWGCCNCCCGTAGG --minimum-length 50 -n 2 --match-read-wildcards --discard-untrimmed -e 0 --overlap 8 -o /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91637_ID2577_16S-47-R2C8-P05-G06_S332_L001_R1_001.fastq.gz -p /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91637_ID2577_16S-47-R2C8-P05-G06_S332_L001_R2_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91637_ID2577_16S-47-R2C8-P05-G06_S332_L001_R1_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91637_ID2577_16S-47-R2C8-P05-G06_S332_L001_R2_001.fastq.gz
+Processing paired-end reads on 16 cores ...
+Finished in 3.01 s (8 µs/read; 7.57 M reads/minute).
+
+=== Summary ===
+
+Total read pairs processed:            379,342
+  Read 1 with adapter:                 351,338 (92.6%)
+  Read 2 with adapter:                 356,853 (94.1%)
+
+== Read fate breakdown ==
+Pairs that were too short:                  18 (0.0%)
+Pairs discarded as untrimmed:           48,412 (12.8%)
+Pairs written (passing filters):       330,912 (87.2%)
+
+Total basepairs processed:   189,666,355 bp
+  Read 1:    94,832,248 bp
+  Read 2:    94,834,107 bp
+Total written (filtered):    152,880,640 bp (80.6%)
+  Read 1:    77,101,029 bp
+  Read 2:    75,779,611 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: CCTACGGGNGGCWGCAG; Type: regular 5'; Length: 17; Trimmed: 351338 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+10	1	0.4	0	1
+13	16	0.0	0	16
+14	6	0.0	0	6
+15	19	0.0	0	19
+16	1513	0.0	0	1513
+17	348574	0.0	0	348574
+18	1185	0.0	0	1185
+19	4	0.0	0	4
+79	5	0.0	0	5
+80	1	0.0	0	1
+91	1	0.0	0	1
+145	1	0.0	0	1
+147	4	0.0	0	4
+173	4	0.0	0	4
+177	1	0.0	0	1
+249	3	0.0	0	3
+
+
+=== First read: Adapter 2 ===
+
+Sequence: GGATTAGATACCCBDGTAGTC; Type: regular 3'; Length: 21; Trimmed: 1 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Bases preceding removed adapters:
+  A: 100.0%
+  C: 0.0%
+  G: 0.0%
+  T: 0.0%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+22	1	0.0	0	1
+
+
+=== Second read: Adapter 3 ===
+
+Sequence: GACTACHVGGGTATCTAATCC; Type: regular 5'; Length: 21; Trimmed: 356845 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+11	1	0.1	0	1
+12	2	0.0	0	2
+13	2	0.0	0	2
+14	4	0.0	0	4
+15	1	0.0	0	1
+16	4	0.0	0	4
+17	2	0.0	0	2
+18	3	0.0	0	3
+19	21	0.0	0	21
+20	976	0.0	0	976
+21	355576	0.0	0	355576
+22	253	0.0	0	253
+
+
+=== Second read: Adapter 4 ===
+
+Sequence: CTGCWGCCNCCCGTAGG; Type: regular 3'; Length: 17; Trimmed: 21 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Bases preceding removed adapters:
+  A: 71.4%
+  C: 19.0%
+  G: 4.8%
+  T: 4.8%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+8	1	5.8	0	1
+9	16	1.4	0	16
+17	1	0.0	0	1
+18	1	0.0	0	1
+136	2	0.0	0	2
+This is cutadapt 4.1 with Python 3.10.6
+Command line parameters: -j 0 -g CCTACGGGNGGCWGCAG -a GGATTAGATACCCBDGTAGTC --minimum-length 50 -G GACTACHVGGGTATCTAATCC -A CTGCWGCCNCCCGTAGG --minimum-length 50 -n 2 --match-read-wildcards --discard-untrimmed -e 0 --overlap 8 -o /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91638_ID2577_16S-48-R2C9-P05-H06_S333_L001_R1_001.fastq.gz -p /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91638_ID2577_16S-48-R2C9-P05-H06_S333_L001_R2_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91638_ID2577_16S-48-R2C9-P05-H06_S333_L001_R1_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91638_ID2577_16S-48-R2C9-P05-H06_S333_L001_R2_001.fastq.gz
+Processing paired-end reads on 16 cores ...
+Finished in 1.32 s (8 µs/read; 7.44 M reads/minute).
+
+=== Summary ===
+
+Total read pairs processed:            163,548
+  Read 1 with adapter:                 151,351 (92.5%)
+  Read 2 with adapter:                 153,583 (93.9%)
+
+== Read fate breakdown ==
+Pairs that were too short:                  11 (0.0%)
+Pairs discarded as untrimmed:           21,207 (13.0%)
+Pairs written (passing filters):       142,330 (87.0%)
+
+Total basepairs processed:    81,771,512 bp
+  Read 1:    40,885,274 bp
+  Read 2:    40,886,238 bp
+Total written (filtered):     65,756,099 bp (80.4%)
+  Read 1:    33,162,189 bp
+  Read 2:    32,593,910 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: CCTACGGGNGGCWGCAG; Type: regular 5'; Length: 17; Trimmed: 151350 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+12	3	0.0	0	3
+13	1	0.0	0	1
+14	1	0.0	0	1
+15	9	0.0	0	9
+16	539	0.0	0	539
+17	150274	0.0	0	150274
+18	510	0.0	0	510
+19	1	0.0	0	1
+79	1	0.0	0	1
+91	1	0.0	0	1
+130	2	0.0	0	2
+145	1	0.0	0	1
+148	1	0.0	0	1
+173	3	0.0	0	3
+242	1	0.0	0	1
+248	1	0.0	0	1
+249	1	0.0	0	1
+
+
+=== First read: Adapter 2 ===
+
+Sequence: GGATTAGATACCCBDGTAGTC; Type: regular 3'; Length: 21; Trimmed: 1 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Bases preceding removed adapters:
+  A: 0.0%
+  C: 0.0%
+  G: 100.0%
+  T: 0.0%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+8	1	2.5	0	1
+
+
+=== Second read: Adapter 3 ===
+
+Sequence: GACTACHVGGGTATCTAATCC; Type: regular 5'; Length: 21; Trimmed: 153583 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+10	1	0.2	0	1
+11	1	0.0	0	1
+13	2	0.0	0	2
+19	7	0.0	0	7
+20	416	0.0	0	416
+21	153068	0.0	0	153068
+22	88	0.0	0	88
+
+
+=== Second read: Adapter 4 ===
+
+Sequence: CTGCWGCCNCCCGTAGG; Type: regular 3'; Length: 17; Trimmed: 1 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Bases preceding removed adapters:
+  A: 0.0%
+  C: 0.0%
+  G: 100.0%
+  T: 0.0%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+9	1	0.6	0	1
+This is cutadapt 4.1 with Python 3.10.6
+Command line parameters: -j 0 -g CCTACGGGNGGCWGCAG -a GGATTAGATACCCBDGTAGTC --minimum-length 50 -G GACTACHVGGGTATCTAATCC -A CTGCWGCCNCCCGTAGG --minimum-length 50 -n 2 --match-read-wildcards --discard-untrimmed -e 0 --overlap 8 -o /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91639_ID2577_16S-49-R2C10-P05-A07_S334_L001_R1_001.fastq.gz -p /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91639_ID2577_16S-49-R2C10-P05-A07_S334_L001_R2_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91639_ID2577_16S-49-R2C10-P05-A07_S334_L001_R1_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91639_ID2577_16S-49-R2C10-P05-A07_S334_L001_R2_001.fastq.gz
+Processing paired-end reads on 16 cores ...
+Finished in 4.18 s (9 µs/read; 6.92 M reads/minute).
+
+=== Summary ===
+
+Total read pairs processed:            482,064
+  Read 1 with adapter:                 446,263 (92.6%)
+  Read 2 with adapter:                 443,908 (92.1%)
+
+== Read fate breakdown ==
+Pairs that were too short:                  28 (0.0%)
+Pairs discarded as untrimmed:           70,132 (14.5%)
+Pairs written (passing filters):       411,904 (85.4%)
+
+Total basepairs processed:   241,027,334 bp
+  Read 1:   120,512,542 bp
+  Read 2:   120,514,792 bp
+Total written (filtered):    190,293,101 bp (79.0%)
+  Read 1:    95,966,148 bp
+  Read 2:    94,326,953 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: CCTACGGGNGGCWGCAG; Type: regular 5'; Length: 17; Trimmed: 446262 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+11	3	0.1	0	3
+12	1	0.0	0	1
+13	14	0.0	0	14
+15	25	0.0	0	25
+16	1130	0.0	0	1130
+17	443488	0.0	0	443488
+18	1515	0.0	0	1515
+19	5	0.0	0	5
+31	1	0.0	0	1
+48	1	0.0	0	1
+79	17	0.0	0	17
+128	5	0.0	0	5
+129	10	0.0	0	10
+135	1	0.0	0	1
+136	2	0.0	0	2
+138	1	0.0	0	1
+146	1	0.0	0	1
+147	3	0.0	0	3
+148	1	0.0	0	1
+159	2	0.0	0	2
+160	1	0.0	0	1
+173	15	0.0	0	15
+174	2	0.0	0	2
+175	1	0.0	0	1
+177	1	0.0	0	1
+180	3	0.0	0	3
+190	1	0.0	0	1
+221	3	0.0	0	3
+242	7	0.0	0	7
+244	1	0.0	0	1
+249	1	0.0	0	1
+
+
+=== First read: Adapter 2 ===
+
+Sequence: GGATTAGATACCCBDGTAGTC; Type: regular 3'; Length: 21; Trimmed: 2 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Bases preceding removed adapters:
+  A: 100.0%
+  C: 0.0%
+  G: 0.0%
+  T: 0.0%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+10	1	0.5	0	1
+19	1	0.0	0	1
+
+
+=== Second read: Adapter 3 ===
+
+Sequence: GACTACHVGGGTATCTAATCC; Type: regular 5'; Length: 21; Trimmed: 443899 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+10	1	0.5	0	1
+11	1	0.1	0	1
+12	3	0.0	0	3
+13	4	0.0	0	4
+14	2	0.0	0	2
+15	3	0.0	0	3
+16	4	0.0	0	4
+17	3	0.0	0	3
+18	3	0.0	0	3
+19	13	0.0	0	13
+20	1285	0.0	0	1285
+21	442265	0.0	0	442265
+22	312	0.0	0	312
+
+
+=== Second read: Adapter 4 ===
+
+Sequence: CTGCWGCCNCCCGTAGG; Type: regular 3'; Length: 17; Trimmed: 35 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Bases preceding removed adapters:
+  A: 71.4%
+  C: 17.1%
+  G: 8.6%
+  T: 2.9%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+8	3	7.4	0	3
+9	29	1.8	0	29
+10	1	0.5	0	1
+11	2	0.1	0	2
+This is cutadapt 4.1 with Python 3.10.6
+Command line parameters: -j 0 -g CCTACGGGNGGCWGCAG -a GGATTAGATACCCBDGTAGTC --minimum-length 50 -G GACTACHVGGGTATCTAATCC -A CTGCWGCCNCCCGTAGG --minimum-length 50 -n 2 --match-read-wildcards --discard-untrimmed -e 0 --overlap 8 -o /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91640_ID2577_16S-50-MOCK5-P05-B07_S335_L001_R1_001.fastq.gz -p /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/trimmed/91640_ID2577_16S-50-MOCK5-P05-B07_S335_L001_R2_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91640_ID2577_16S-50-MOCK5-P05-B07_S335_L001_R1_001.fastq.gz /lustre/nobackup/INDIVIDUAL/kreek001/Pilot3_output_slurm_16S/01_preprocess/filtN/91640_ID2577_16S-50-MOCK5-P05-B07_S335_L001_R2_001.fastq.gz
+Processing paired-end reads on 16 cores ...
+Finished in 2.06 s (6 µs/read; 9.84 M reads/minute).
+
+=== Summary ===
+
+Total read pairs processed:            338,307
+  Read 1 with adapter:                 316,826 (93.7%)
+  Read 2 with adapter:                 315,019 (93.1%)
+
+== Read fate breakdown ==
+Pairs that were too short:                  22 (0.0%)
+Pairs discarded as untrimmed:           42,762 (12.6%)
+Pairs written (passing filters):       295,523 (87.4%)
+
+Total basepairs processed:   169,146,264 bp
+  Read 1:    84,571,871 bp
+  Read 2:    84,574,393 bp
+Total written (filtered):    136,531,437 bp (80.7%)
+  Read 1:    68,856,467 bp
+  Read 2:    67,674,970 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: CCTACGGGNGGCWGCAG; Type: regular 5'; Length: 17; Trimmed: 316826 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+12	1	0.0	0	1
+13	9	0.0	0	9
+14	2	0.0	0	2
+15	15	0.0	0	15
+16	814	0.0	0	814
+17	314941	0.0	0	314941
+18	1032	0.0	0	1032
+19	11	0.0	0	11
+237	1	0.0	0	1
+
+
+=== First read: Adapter 2 ===
+
+Sequence: GGATTAGATACCCBDGTAGTC; Type: regular 3'; Length: 21; Trimmed: 0 times
+
+=== Second read: Adapter 3 ===
+
+Sequence: GACTACHVGGGTATCTAATCC; Type: regular 5'; Length: 21; Trimmed: 315017 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-21 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+15	3	0.0	0	3
+16	2	0.0	0	2
+17	2	0.0	0	2
+18	2	0.0	0	2
+19	11	0.0	0	11
+20	771	0.0	0	771
+21	313987	0.0	0	313987
+22	233	0.0	0	233
+23	3	0.0	0	3
+31	2	0.0	0	2
+194	1	0.0	0	1
+
+
+=== Second read: Adapter 4 ===
+
+Sequence: CTGCWGCCNCCCGTAGG; Type: regular 3'; Length: 17; Trimmed: 6 times
+
+Minimum overlap: 8
+No. of allowed errors:
+1-16 bp: 0
+
+Bases preceding removed adapters:
+  A: 33.3%
+  C: 16.7%
+  G: 50.0%
+  T: 0.0%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+9	6	1.3	0	6
+  |                                                                              |..............................................................        |  88%
+  ordinary text without R code
+
+  |                                                                              |..................................................................    |  94%
+label: unnamed-chunk-13 (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                              |......................................................................| 100%
+  ordinary text without R code
+
+
+
+
+processing file: ./R/02_check_quality_dada2_tutorial_16S.Rmd
+  |                                                                              |                                                                      |   0%  |                                                                              |.....                                                                 |   7%
+  ordinary text without R code
+
+  |                                                                              |..........                                                            |  14%
+label: unnamed-chunk-14 (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                              |...............                                                       |  21%
+  ordinary text without R code
+
+  |                                                                              |....................                                                  |  29%
+label: unnamed-chunk-15 (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                              |.........................                                             |  36%
+  ordinary text without R code
+
+  |                                                                              |..............................                                        |  43%
+label: unnamed-chunk-16
+  |                                                                              |...................................                                   |  50%
+  ordinary text without R code
+
+  |                                                                              |........................................                              |  57%
+label: unnamed-chunk-17
+  |                                                                              |.............................................                         |  64%
+label: plotly quality plots (with options) 
+List of 2
+ $ eval   : logi FALSE
+ $ include: logi TRUE
+
+  |                                                                              |..................................................                    |  71%
+  ordinary text without R code
+
+  |                                                                              |.......................................................               |  79%
+label: unnamed-chunk-18
+  |                                                                              |............................................................          |  86%
+  ordinary text without R code
+
+  |                                                                              |.................................................................     |  93%
+label: unnamed-chunk-19 (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                              |......................................................................| 100%
+  ordinary text without R code
+
+
+
+
+processing file: ./R/03_filter_reads_dada2_tutorial_16S.Rmd
+  |                                                                              |                                                                      |   0%  |                                                                              |......                                                                |   9%
+  ordinary text without R code
+
+  |                                                                              |.............                                                         |  18%
+label: unnamed-chunk-20 (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                              |...................                                                   |  27%
+  ordinary text without R code
+
+  |                                                                              |.........................                                             |  36%
+label: unnamed-chunk-21 (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                              |................................                                      |  45%
+  ordinary text without R code
+
+  |                                                                              |......................................                                |  55%
+label: unnamed-chunk-22
+  |                                                                              |.............................................                         |  64%
+  ordinary text without R code
+
+  |                                                                              |...................................................                   |  73%
+label: unnamed-chunk-23
+  |                                                                              |.........................................................             |  82%
+  ordinary text without R code
+
+  |                                                                              |................................................................      |  91%
+label: unnamed-chunk-24 (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                              |......................................................................| 100%
+  ordinary text without R code
+
+
+
+
+processing file: ./R/04_learn_error_rates_dada2_tutorial_16S.Rmd
+  |                                                                              |                                                                      |   0%  |                                                                              |...                                                                   |   4%
+  ordinary text without R code
+
+  |                                                                              |......                                                                |   9%
+label: unnamed-chunk-25 (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                              |.........                                                             |  13%
+  ordinary text without R code
+
+  |                                                                              |............                                                          |  17%
+label: unnamed-chunk-26 (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                              |...............                                                       |  22%
+  ordinary text without R code
+
+  |                                                                              |..................                                                    |  26%
+label: unnamed-chunk-27
+  |                                                                              |.....................                                                 |  30%
+  ordinary text without R code
+
+  |                                                                              |........................                                              |  35%
+label: unnamed-chunk-28
+  |                                                                              |...........................                                           |  39%
+  ordinary text without R code
+
+  |                                                                              |..............................                                        |  43%
+label: unnamed-chunk-29
+  |                                                                              |.................................                                     |  48%
+  ordinary text without R code
+
+  |                                                                              |.....................................                                 |  52%
+label: unnamed-chunk-30
+Self-consistency loop terminated before convergence.
+  |                                                                              |........................................                              |  57%
+  ordinary text without R code
+
+  |                                                                              |...........................................                           |  61%
+label: unnamed-chunk-31
+  |                                                                              |..............................................                        |  65%
+  ordinary text without R code
+
+  |                                                                              |.................................................                     |  70%
+label: unnamed-chunk-32
+Self-consistency loop terminated before convergence.
+Self-consistency loop terminated before convergence.
+  |                                                                              |....................................................                  |  74%
+  ordinary text without R code
+
+  |                                                                              |.......................................................               |  78%
+label: unnamed-chunk-33
+slurmstepd: error: *** JOB 40665827 ON node123 CANCELLED AT 2022-10-07T21:31:52 DUE TO TIME LIMIT ***

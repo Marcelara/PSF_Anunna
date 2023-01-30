@@ -1,0 +1,17 @@
+remove gcc 11.2.0 library and binaries.
+remove Scientific Linux 7 libraries.
+load gcc 11.2.0 library and binaries.
+load Scientific Linux 7 libraries.
+Saved FeatureData[RNASequence] to: silva-138.1-ssu-nr99-rna-seqs.qza
+Saved FeatureData[Taxonomy] to: silva-138.1-ssu-nr99-tax.qza
+Saved FeatureData[Sequence] to: silva-138-ssu-nr99-seqs.qza
+Saved Visualization to: silva-138-ssu-nr99-seqs.qzv
+Saved FeatureData[Sequence] to: silva-138-ssu-nr99-seqs-cleaned.qza
+Saved FeatureData[Sequence] to: silva-138-ssu-nr99-seqs-filt.qza
+Saved FeatureData[Sequence] to: silva-138-ssu-nr99-seqs-discard.qza
+Saved FeatureData[Sequence] to: silva-138-ssu-nr99-seqs-derep-uniq.qza
+Saved FeatureData[Taxonomy] to: silva-138-ssu-nr99-tax-derep-uniq.qza
+Saved FeatureData[Sequence] to: silva-138-ssu-nr99-seqs-341f-805r.qza
+Saved FeatureData[Sequence] to: silva-138-ssu-nr99-seqs-341f-805r-uniq.qza
+Saved FeatureData[Taxonomy] to: silva-138-ssu-nr99-tax-341f-805r-derep-uniq.qza
+Saved TaxonomicClassifier to: silva-138-ssu-nr99-341f-805r-classifier.qza

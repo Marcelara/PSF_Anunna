@@ -1,0 +1,304 @@
+Loading required package: Rcpp
+[1] ‘1.22.0’
+Loading required package: BiocGenerics
+
+Attaching package: ‘BiocGenerics’
+
+The following objects are masked from ‘package:stats’:
+
+    IQR, mad, sd, var, xtabs
+
+The following objects are masked from ‘package:base’:
+
+    anyDuplicated, append, as.data.frame, basename, cbind, colnames,
+    dirname, do.call, duplicated, eval, evalq, Filter, Find, get, grep,
+    grepl, intersect, is.unsorted, lapply, Map, mapply, match, mget,
+    order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank,
+    rbind, Reduce, rownames, sapply, setdiff, sort, table, tapply,
+    union, unique, unsplit, which.max, which.min
+
+Loading required package: BiocParallel
+Loading required package: Biostrings
+Loading required package: S4Vectors
+Loading required package: stats4
+
+Attaching package: ‘S4Vectors’
+
+The following objects are masked from ‘package:base’:
+
+    expand.grid, I, unname
+
+Loading required package: IRanges
+Loading required package: XVector
+Loading required package: GenomeInfoDb
+
+Attaching package: ‘Biostrings’
+
+The following object is masked from ‘package:base’:
+
+    strsplit
+
+Loading required package: Rsamtools
+Loading required package: GenomicRanges
+Loading required package: GenomicAlignments
+Loading required package: SummarizedExperiment
+Loading required package: MatrixGenerics
+Loading required package: matrixStats
+
+Attaching package: ‘MatrixGenerics’
+
+The following objects are masked from ‘package:matrixStats’:
+
+    colAlls, colAnyNAs, colAnys, colAvgsPerRowSet, colCollapse,
+    colCounts, colCummaxs, colCummins, colCumprods, colCumsums,
+    colDiffs, colIQRDiffs, colIQRs, colLogSumExps, colMadDiffs,
+    colMads, colMaxs, colMeans2, colMedians, colMins, colOrderStats,
+    colProds, colQuantiles, colRanges, colRanks, colSdDiffs, colSds,
+    colSums2, colTabulates, colVarDiffs, colVars, colWeightedMads,
+    colWeightedMeans, colWeightedMedians, colWeightedSds,
+    colWeightedVars, rowAlls, rowAnyNAs, rowAnys, rowAvgsPerColSet,
+    rowCollapse, rowCounts, rowCummaxs, rowCummins, rowCumprods,
+    rowCumsums, rowDiffs, rowIQRDiffs, rowIQRs, rowLogSumExps,
+    rowMadDiffs, rowMads, rowMaxs, rowMeans2, rowMedians, rowMins,
+    rowOrderStats, rowProds, rowQuantiles, rowRanges, rowRanks,
+    rowSdDiffs, rowSds, rowSums2, rowTabulates, rowVarDiffs, rowVars,
+    rowWeightedMads, rowWeightedMeans, rowWeightedMedians,
+    rowWeightedSds, rowWeightedVars
+
+Loading required package: Biobase
+Welcome to Bioconductor
+
+    Vignettes contain introductory material; view with
+    'browseVignettes()'. To cite Bioconductor, see
+    'citation("Biobase")', and for packages 'citation("pkgname")'.
+
+
+Attaching package: ‘Biobase’
+
+The following object is masked from ‘package:MatrixGenerics’:
+
+    rowMedians
+
+The following objects are masked from ‘package:matrixStats’:
+
+    anyMissing, rowMedians
+
+[1] ‘1.52.0’
+
+Attaching package: ‘dplyr’
+
+The following object is masked from ‘package:ShortRead’:
+
+    id
+
+The following objects are masked from ‘package:GenomicAlignments’:
+
+    first, last
+
+The following object is masked from ‘package:Biobase’:
+
+    combine
+
+The following object is masked from ‘package:matrixStats’:
+
+    count
+
+The following objects are masked from ‘package:GenomicRanges’:
+
+    intersect, setdiff, union
+
+The following objects are masked from ‘package:Biostrings’:
+
+    collapse, intersect, setdiff, setequal, union
+
+The following object is masked from ‘package:GenomeInfoDb’:
+
+    intersect
+
+The following object is masked from ‘package:XVector’:
+
+    slice
+
+The following objects are masked from ‘package:IRanges’:
+
+    collapse, desc, intersect, setdiff, slice, union
+
+The following objects are masked from ‘package:S4Vectors’:
+
+    first, intersect, rename, setdiff, setequal, union
+
+The following objects are masked from ‘package:BiocGenerics’:
+
+    combine, intersect, setdiff, union
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+[1] ‘1.0.10’
+
+Attaching package: ‘tidyr’
+
+The following object is masked from ‘package:S4Vectors’:
+
+    expand
+
+[1] ‘1.2.1’
+Loading required package: lattice
+Loading required package: survival
+Loading required package: Formula
+Loading required package: ggplot2
+
+Attaching package: ‘Hmisc’
+
+The following objects are masked from ‘package:dplyr’:
+
+    src, summarize
+
+The following object is masked from ‘package:ShortRead’:
+
+    zoom
+
+The following object is masked from ‘package:Biobase’:
+
+    contents
+
+The following objects are masked from ‘package:Biostrings’:
+
+    mask, translate
+
+The following objects are masked from ‘package:base’:
+
+    format.pval, units
+
+[1] ‘4.7.1’
+[1] ‘3.3.6’
+
+Attaching package: ‘plotly’
+
+The following object is masked from ‘package:Hmisc’:
+
+    subplot
+
+The following object is masked from ‘package:ggplot2’:
+
+    last_plot
+
+The following object is masked from ‘package:XVector’:
+
+    slice
+
+The following object is masked from ‘package:IRanges’:
+
+    slice
+
+The following object is masked from ‘package:S4Vectors’:
+
+    rename
+
+The following object is masked from ‘package:stats’:
+
+    filter
+
+The following object is masked from ‘package:graphics’:
+
+    layout
+
+[1] ‘4.10.0’
+Processing: 91610_ID2577_16S-20-R11-P05-D03_S305_L001 
+Sample 1 - 199433 reads in 69954 unique sequences.
+Sample 1 - 199433 reads in 59365 unique sequences.
+Processing: 91611_ID2577_16S-21-R12-P05-E03_S306_L001 
+Sample 1 - 127296 reads in 52802 unique sequences.
+Sample 1 - 127296 reads in 41343 unique sequences.
+Processing: 91612_ID2577_16S-22-R13-P05-F03_S307_L001 
+Sample 1 - 214379 reads in 73310 unique sequences.
+Sample 1 - 214379 reads in 60879 unique sequences.
+Processing: 91613_ID2577_16S-23-R14-P05-G03_S308_L001 
+Sample 1 - 192217 reads in 69279 unique sequences.
+Sample 1 - 192217 reads in 54454 unique sequences.
+Processing: 91614_ID2577_16S-24-R15-P05-H03_S309_L001 
+Sample 1 - 203618 reads in 85121 unique sequences.
+Sample 1 - 203618 reads in 58013 unique sequences.
+Processing: 91615_ID2577_16S-25-R16-P05-A04_S310_L001 
+Sample 1 - 312780 reads in 103563 unique sequences.
+Sample 1 - 312780 reads in 82444 unique sequences.
+Processing: 91616_ID2577_16S-26-R17-P05-B04_S311_L001 
+Sample 1 - 256357 reads in 82660 unique sequences.
+Sample 1 - 256357 reads in 74420 unique sequences.
+Processing: 91617_ID2577_16S-27-R18-P05-C04_S312_L001 
+Sample 1 - 230504 reads in 87831 unique sequences.
+Sample 1 - 230504 reads in 66139 unique sequences.
+Processing: 91618_ID2577_16S-28-R19-P05-D04_S313_L001 
+Sample 1 - 183826 reads in 62678 unique sequences.
+Sample 1 - 183826 reads in 53226 unique sequences.
+Processing: 91619_ID2577_16S-29-R110-P05-E04_S314_L001 
+Sample 1 - 269833 reads in 86571 unique sequences.
+Sample 1 - 269833 reads in 74989 unique sequences.
+Processing: 91620_ID2577_16S-30-R2M2-P05-G04_S315_L001 
+Sample 1 - 242618 reads in 62062 unique sequences.
+Sample 1 - 242618 reads in 55396 unique sequences.
+Processing: 91621_ID2577_16S-31-R2M1-P05-F04_S316_L001 
+Sample 1 - 159273 reads in 55264 unique sequences.
+Sample 1 - 159273 reads in 47474 unique sequences.
+Processing: 91622_ID2577_16S-32-R2M3-P05-H04_S317_L001 
+Sample 1 - 64549 reads in 31226 unique sequences.
+Sample 1 - 64549 reads in 16900 unique sequences.
+Processing: 91623_ID2577_16S-33-R2M4-P05-A05_S318_L001 
+Sample 1 - 176159 reads in 49856 unique sequences.
+Sample 1 - 176159 reads in 44134 unique sequences.
+Processing: 91624_ID2577_16S-34-R2M5-P05-B05_S319_L001 
+Sample 1 - 42978 reads in 20553 unique sequences.
+Sample 1 - 42978 reads in 12645 unique sequences.
+Processing: 91625_ID2577_16S-35-R2M6-P05-C05_S320_L001 
+Sample 1 - 187329 reads in 60629 unique sequences.
+Sample 1 - 187329 reads in 44526 unique sequences.
+Processing: 91626_ID2577_16S-36-R2M7-P05-D05_S321_L001 
+Sample 1 - 167914 reads in 56939 unique sequences.
+Sample 1 - 167914 reads in 44206 unique sequences.
+Processing: 91627_ID2577_16S-37-R2M8-P05-E05_S322_L001 
+Sample 1 - 205947 reads in 54251 unique sequences.
+Sample 1 - 205947 reads in 41525 unique sequences.
+Processing: 91628_ID2577_16S-38-R2M9-P05-F05_S323_L001 
+Sample 1 - 220939 reads in 61462 unique sequences.
+Sample 1 - 220939 reads in 53254 unique sequences.
+Processing: 91629_ID2577_16S-39-R2M10-P05-G05_S324_L001 
+Sample 1 - 200815 reads in 57945 unique sequences.
+Sample 1 - 200815 reads in 48273 unique sequences.
+Processing: 91630_ID2577_16S-40-R2C1-P05-H05_S325_L001 
+Sample 1 - 194601 reads in 46185 unique sequences.
+Sample 1 - 194601 reads in 38414 unique sequences.
+Processing: 91631_ID2577_16S-41-R2C2-P05-A06_S326_L001 
+Sample 1 - 57793 reads in 19346 unique sequences.
+Sample 1 - 57793 reads in 17402 unique sequences.
+Processing: 91632_ID2577_16S-42-R2C3-P05-B06_S327_L001 
+Sample 1 - 160606 reads in 49529 unique sequences.
+Sample 1 - 160606 reads in 30716 unique sequences.
+Processing: 91633_ID2577_16S-43-R2C4-P05-C06_S328_L001 
+Sample 1 - 193037 reads in 53261 unique sequences.
+Sample 1 - 193037 reads in 37002 unique sequences.
+Processing: 91634_ID2577_16S-44-R2C5-P05-D06_S329_L001 
+Sample 1 - 21424 reads in 10467 unique sequences.
+Sample 1 - 21424 reads in 8568 unique sequences.
+Processing: 91635_ID2577_16S-45-R2C6-P05-E06_S330_L001 
+Sample 1 - 95847 reads in 23013 unique sequences.
+Sample 1 - 95847 reads in 19393 unique sequences.
+Processing: 91636_ID2577_16S-46-R2C7-P05-F06_S331_L001 
+Sample 1 - 269936 reads in 61186 unique sequences.
+Sample 1 - 269936 reads in 50069 unique sequences.
+Processing: 91637_ID2577_16S-47-R2C8-P05-G06_S332_L001 
+Sample 1 - 198459 reads in 52565 unique sequences.
+Sample 1 - 198459 reads in 39681 unique sequences.
+Processing: 91638_ID2577_16S-48-R2C9-P05-H06_S333_L001 
+Sample 1 - 89361 reads in 23342 unique sequences.
+Sample 1 - 89361 reads in 20625 unique sequences.
+Processing: 91639_ID2577_16S-49-R2C10-P05-A07_S334_L001 
+Sample 1 - 201380 reads in 56463 unique sequences.
+Sample 1 - 201380 reads in 45404 unique sequences.
+Processing: 91640_ID2577_16S-50-MOCK5-P05-B07_S335_L001 
+Sample 1 - 172137 reads in 14220 unique sequences.
+Sample 1 - 172137 reads in 12676 unique sequences.
