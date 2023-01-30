@@ -1,0 +1,88 @@
+#!/bin/bash -login
+
+#SBATCH --time=6:00:00				  	### limit of wall clock time - how long the job will run (same as -t)
+#SBATCH --ntasks=1					      ### number of tasks - how many tasks (nodes) that you require (same as -n)
+#SBATCH --cpus-per-task=8			  ### number of CPUs (or cores) per task (same as -c)
+#SBATCH --mem=32G					        ### memory required per node - amount of memory (in bytes)
+#SBATCH --job-name PrepSILVA1			### you can give your job a name for easier identification (same as -J)
+
+# consider this tutorial: https://docs.qiime2.org/2021.2/data-resources/
+
+
+#activates qiime2 environment
+conda activate qiime2-2022.8
+
+
+# perform steps as in https://forum.qiime2.org/t/processing-filtering-and-evaluating-the-silva-database-and-other-reference-sequence-data-with-rescript/15494
+qiime rescript get-silva-data \
+    --p-version '138.1' \
+    --p-target 'SSURef_NR99' \
+    --p-no-include-species-labels \
+    --o-silva-sequences silva-138.1-ssu-nr99-rna-seqs.qza \
+    --o-silva-taxonomy silva-138.1-ssu-nr99-tax.qza
+
+# transform data from an RNA sequence format to an DNA sequence format
+qiime rescript reverse-transcribe \
+    --i-rna-sequences silva-138.1-ssu-nr99-rna-seqs.qza \
+    --o-dna-sequences silva-138-ssu-nr99-seqs.qza
+
+#check downloaded sequences
+qiime feature-table tabulate-seqs \
+  --i-data silva-138-ssu-nr99-seqs.qza \
+  --o-visualization silva-138-ssu-nr99-seqs.qzv
+
+
+# Remove sequences that contain 5 or more ambiguous bases (IUPAC compliant ambiguity bases) and any homopolymers that are 8 or more bases in length
+qiime rescript cull-seqs \
+    --i-sequences silva-138-ssu-nr99-seqs.qza \
+    --o-clean-sequences silva-138-ssu-nr99-seqs-cleaned.qza
+
+
+# We will remove rRNA gene sequences that do not meet the following criteria: Archaea (16S) >= 900 bp, Bacteria (16S) >= 1200 bp, and any Eukaryota (18S) >= 1400 bp. See help text for more info.
+qiime rescript filter-seqs-length-by-taxon \
+    --i-sequences silva-138-ssu-nr99-seqs-cleaned.qza \
+    --i-taxonomy silva-138-ssu-nr99-tax.qza \
+    --p-labels Archaea Bacteria Eukaryota \
+    --p-min-lens 900 1200 1400 \
+    --o-filtered-seqs silva-138-ssu-nr99-seqs-filt.qza \
+    --o-discarded-seqs silva-138-ssu-nr99-seqs-discard.qza 
+
+
+# derreplicate the sequences, so we don't have several identical pieces of data
+qiime rescript dereplicate \
+    --i-sequences silva-138-ssu-nr99-seqs-filt.qza  \
+    --i-taxa silva-138-ssu-nr99-tax.qza \
+    --p-rank-handles 'silva' \
+    --p-mode 'uniq' \
+    --o-dereplicated-sequences silva-138-ssu-nr99-seqs-derep-uniq.qza \
+    --o-dereplicated-taxa silva-138-ssu-nr99-tax-derep-uniq.qza
+
+# Let's extract sequences from the reference dataset, using the priemrs and amplicon lenghts of our study
+qiime feature-classifier extract-reads \
+    --i-sequences silva-138-ssu-nr99-seqs-derep-uniq.qza \
+    --p-f-primer CCTACGGGNGGCWGCAG \
+    --p-r-primer GACTACHVGGGTATCTAATCC \
+    --p-min-length 210 \
+    --p-max-length 465 \
+    --p-n-jobs 2 \
+    --p-read-orientation 'forward' \
+    --o-reads silva-138-ssu-nr99-seqs-341f-805r.qza
+
+
+#dereplicate the dereplicated sequences again, since the primer cutting might have affected unique sequences
+qiime rescript dereplicate \
+    --i-sequences silva-138-ssu-nr99-seqs-341f-805r.qza \
+    --i-taxa silva-138-ssu-nr99-tax-derep-uniq.qza \
+    --p-rank-handles 'silva' \
+    --p-mode 'uniq' \
+    --o-dereplicated-sequences silva-138-ssu-nr99-seqs-341f-805r-uniq.qza \
+    --o-dereplicated-taxa silva-138-ssu-nr99-tax-341f-805r-derep-uniq.qza
+
+# Now that the reference dataset accounts for priemrs used in our sequencing run, let's train it
+qiime feature-classifier fit-classifier-naive-bayes \
+    --i-reference-reads silva-138-ssu-nr99-seqs-341f-805r-uniq.qza \
+    --i-reference-taxonomy silva-138-ssu-nr99-tax-341f-805r-derep-uniq.qza \
+    --o-classifier silva-138-ssu-nr99-341f-805r-classifier.qza
+
+
+conda deactivate
