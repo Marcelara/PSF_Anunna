@@ -57,14 +57,22 @@ cd /lustre/nobackup/INDIVIDUAL/arago004
 
 ## Entering the HPC
 
+There are many options to access the HPC, we will explain the 2 that we know of and that have worked for us: 1. Using PuTTY and 2. Using Ubuntu
+
+### 1.With PuTTY
+
 After you have received access to the HPC, you need to install software that can connect your computer to the HPC. There are multiple ways to do this. [PuTTY](https://putty.org/) is a software that can connect to a remote terminal to work on the HPC. When opening **PuTTY**, you have to specify the host name (login.anunna.wur.nl) and the Port 22 with connection type SSH. You can save your basic login settings. More information about this and other settings can be found on the [Annuna wiki](https://wiki.anunna.wur.nl/index.php/Log_in_to_Anunna). 
    
 ![PuTTY login window](images/Putty.png)
    
-You will have to type your password When entering the HPC. Your password is not visible (not even dots). This may be confusing. After this step, you are ready to use the HPC!    
+You will have to type your password When entering the HPC. Your password is not visible (not even dots). This may be confusing. After this step, you are ready to use the HPC!  
+
+### 2.With Ubuntu
+*[@Marcela, you use another way to enter the HPC right?]* 
+
+**[MA] I'll add text of how to install Ubuntu and access the HPC, links to the youtube video could be useful as well as screenshots from the Ubuntu terminal when accessing**
    
-*[@Marcela, you use another way to enter the HPC right?]*   
-   
+  
 # Get prepared
 
 If you are not familiar with bash, linux and using a super computer and you are also doing other things at the same time as I was let me tell you in advance that **this takes a lot of time: as in WEEKS!**. We really hope to help you making this time shorter with this guide, but still getting familiar with a new language and finding your way around the terminal will be a hassle. Also get prepared for some of your scripts to not run at the first time and to find that maybe after you've been waiting for some days your code had an error! We are telling you all this not to kill your hopes but on the contrary so you know that this is normal and for you to be mentally ready for the task ahead (both in spirit and in your time planning ;).
@@ -152,21 +160,21 @@ The sequencing company will provide you the information for downloading the data
 # Password : xxexamplexx
 ```
 
-As the email stats, there are two options to access the data, directly from the HPC with Bash commands or via a FTP client like FileZilla. The first option may be a bit more exiting wile the second one is a bit more intuitive. I would advice to store a copy of the data on the archive and on lustre. And make a backup of the data on an external hard drive to have an extra copy, just in case.
+As the email stats, there are two options to access the data, directly from the HPC with Bash commands or via a FTP client like [FileZilla](https://filezilla-project.org/). The first option may be a bit more exciting wile the second one is a bit more intuitive. I would advice to store a copy of the data on the archive and on lustre. And make a backup of the data on an external hard drive to have an extra copy, just in case.
 
 **Downloading data with Bash commands**
 
 So, you go to the folder on the HPC where you want to store the data. First, you need to connect to the remote server of the sequencing company. The email states that you can do this via `SFTP`. After some googling, we found a [tutorial](https://linuxize.com/post/how-to-use-linux-sftp-command-to-transfer-files/) to explain how to do this. In short you first access the server of the sequencing company with the information provided in the email:
 
 
-```bach
+```bash
 sftp beschoren-da-costa_pedro@support.igatech.it
 ```
 
 After that, you can navigate through the directories and you should see the same files as when you open the internet link in the email. After that you can use the `get` command to download the data. The `-r` argument is used to specify that you want to download a directory.
 
 
-```bach
+```bash
 sftp get -r remote_directory
 ```
 
@@ -193,7 +201,7 @@ Next, you can download the data to and external hard drive and the HPC.
 We would like to know whether all files are downloaded well. We can compare this by comparing the checksums of the files with sequencing data before and after downloading. A checksum is a unique code of a file. This code does not change when the file is downloaded correctly. The sequencing company will provide a file with the checksums of all files. Such a file is called a md5file. After downloading, you can make your own md5file and compare the two. Go to the directory with your sequencing data files and do the following:
 
 
-```bach
+```bash
 md5sum * > filename
 ```
 
@@ -203,7 +211,7 @@ Next, copy the checksums and file of the md5file before and after downloading in
 
 *Show of screen shot of the Excel file*
 
-# Seperating data
+# Separating data
 
 It can happen that samples of multiple of your experiments are sequenced at once. In that case, you have to separate the sequence data of the experiments before doing the analysis. It is wise to backup your data before doing this. Regular expressions can be used to select the files of one experiment. A very nice tutorial about regular expressions can be found [here](https://www.howtogeek.com/661101/how-to-use-regular-expressions-regexes-on-linux/). 
 
@@ -219,7 +227,7 @@ After that, you can try to build a regular expression that covers all the files 
 You can try your own regular expression on a file with all file names in there. The `grep` function takes out of the `Filename` file all file names that match with the regular expression and puts it in a new file called `Selectedfilenames`. Afterwards, you can count the number of lines in the new file to check whether you greped the right number of names.
 
 
-```bach
+```bash
 grep -E "[2-5][0-9]-.*-P05" Filenames > SelectedFilenames # grep the file names
 wc -l SelectedFilenames # count the number of lines
 ```
@@ -229,7 +237,7 @@ When this works well and you can select all files you need, you can copy or move
 For instance, here I was in a directory with the ITS and 16S directory. I moved from the ITS and 16S directory these files, one directory back and then into two other directories. Mind here that the coding of regular expressions is a little bit differed for files than for lines in a file. In stead of a `.*`, we use a `*` to indicate there can be anything for a given number of characters. We have to put a `*` at the beginning and the end of the expression when the general expression does not start at the beginning of the file name and does not end at the end.
 
 
-```bach
+```bash
 mv ITS/*[2-5][0-9]-*-P05* ../raw_reads_Kris/ITS # move files
 mv 16S/*[2-5][0-9]-*-P05* ../raw_reads_Kris/16S # move files
 
@@ -240,7 +248,7 @@ ls ../raw_reads_Kris/ITS | wc -l # count the number of files
 
 # Running the DADA2 (Ernakovich pipeline) for NovaSeq data
 
-Before starting, we would strongly recommend to read the information about the [Ernakovich pipeline on GitHub](https://github.com/ErnakovichLab/dada2_ernakovichlab). The next part of this file is an addition to this information given by the Ernakovich lab. By this file we would like to give you a better understanding of the code, more information on interpreting the output, and specific information on running the pipeline on Annuna in stead of premise (HPC of the Ernakovich lab). 
+Before starting, we would strongly recommend to read the information about the [Ernakovich pipeline on GitHub](https://github.com/ErnakovichLab/dada2_ernakovichlab). The next part of this file is an addition to this information given by the Ernakovich lab. With this file we would like to give you a better understanding of the code, more information on interpreting the output, and specific information on running the pipeline on Annuna in stead of premise (HPC of the Ernakovich lab). 
 
 
 # Preperations 
@@ -294,7 +302,7 @@ Before running the slurm script, check in the slurm script and the corresponding
 
 ## 00_setup_dada2
 
-We first have to setup the data2 pipeline by installing the necessary R packages and creating an R environment by running the 00_setup slurm script. Before doing so, change the file of where data is stored and where the output will to be stored in the R script. You do not have to create the output directory yourself as the R script will do this for you. You can add the mapping file as well but you can skip this as well.
+We first have to setup the data2 pipeline by installing the necessary R packages and creating an R environment by running the `00_setup` slurm script. Before doing so, change the file of where data is stored and where the output will to be stored in the R script. You do not have to create the output directory yourself as the R script will do this for you. You can add the mapping file as well but you can skip this as well. You only have to install the dada2_ernakovich environment with the R packages once, if you run first for 16S and then for ITS you can skip this step the second time for instance.
 
 **slurm script**
 
@@ -326,7 +334,7 @@ Here, we will remove sequences with many unknown nucleotides (Ns) and the primer
 
 **R script**
 
-Change the primer sequences in the R script to the primer sequences you have used. An example is shown in a snapshot of the chunck below.
+Change the primer sequences in the R script to the primer sequences you have used. An example is shown in a snapshot of the chunk below.
 
 
 ```r
@@ -358,7 +366,7 @@ for (i in seq_along(fnFs)) {
 This slurm script is run with the minimal CPUs and memory to run the R script. 
 
 
-```rbash
+```bash
 #!/bin/bash -login 	            ### -login is essential to activate conda environment
 
 #SBATCH --time=1:00:00          ### limit of wall clock time - how long the job will run
@@ -378,11 +386,22 @@ conda deactivate
 
 **output**
 
+At the end of your .output file you should check that there are no primers found and left in your sequences by having only zero's **(Fig. X)**.
+
+
+![Fig.X Check of cutadapt removing primers](./images/02_output.jpg)
+
 
 
 ## 02_check-quality
 
+
+
+
 ## 03_filter_reads
+
+
+
 
 ## 04_learn_error_rates_dada2_tutorial_16S
 
@@ -703,15 +722,15 @@ And that's it, you've made it! Now you are ready to import your data to R. The f
 * and your **metadata** file, in my case `Mapping_file_16S_Family_experiment.txt` that will be your metadata (sample_data) 
 
 
-![Fig.X Location of seqtab_final.txt and repset.fasta files](./images/07_refseq_and_otutable.JPG)
+Fig.X Location of seqtab_final.txt and repset.fasta files
 
-![Fig.X Location of taxonomy.tsv file](./images/07_taxtable.JPG)
+Fig.X Location of taxonomy.tsv file
 
-![Fig.X Location of metadata file](./images/07_metadata.JPG)
+Fig.X Location of metadata file
 
 Finally, transfer these 4 files to your local computer and think about whether you would like to re-name them so their title is a bit more informative. For instance to track back that were for 16S and not ITS ;)
 
-![Fig.X Location of metadata file](./images/07_final_files_renamed.JPG)
+Fig.X Location of metadata file
 
 
 ## 08_Importing data to R
