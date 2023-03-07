@@ -1,0 +1,46 @@
+[1] ‘1.22.0’
+[1] ‘1.52.0’
+[1] ‘1.0.9’
+[1] ‘1.2.0’
+[1] ‘4.7.0’
+[1] ‘3.3.6’
+[1] ‘4.10.0’
+[1] 99.23712
+[1]   97 1972
+[1]   97 1972
+[1]   97 1972
+[1]   97 1931
+[1]   97 1896
+                                                                                           Sample
+NS.1717.001.FLD_ill_046_i7---IDT_i5_4.125_ch_ITS NS.1717.001.FLD_ill_046_i7---IDT_i5_4.125_ch_ITS
+NS.1717.001.FLD_ill_065_i7---IDT_i5_8.85_ch_ITS   NS.1717.001.FLD_ill_065_i7---IDT_i5_8.85_ch_ITS
+NS.1717.001.FLD_ill_066_i7---IDT_i5_8.86_ch_ITS   NS.1717.001.FLD_ill_066_i7---IDT_i5_8.86_ch_ITS
+NS.1717.001.FLD_ill_067_i7---IDT_i5_8.87_ch_ITS   NS.1717.001.FLD_ill_067_i7---IDT_i5_8.87_ch_ITS
+NS.1717.001.FLD_ill_068_i7---IDT_i5_8.88_ch_ITS   NS.1717.001.FLD_ill_068_i7---IDT_i5_8.88_ch_ITS
+NS.1717.001.FLD_ill_069_i7---IDT_i5_8.89_ch_ITS   NS.1717.001.FLD_ill_069_i7---IDT_i5_8.89_ch_ITS
+                                                  input filtered denoisedF
+NS.1717.001.FLD_ill_046_i7---IDT_i5_4.125_ch_ITS 132563   105957    105671
+NS.1717.001.FLD_ill_065_i7---IDT_i5_8.85_ch_ITS  156001   135008    134674
+NS.1717.001.FLD_ill_066_i7---IDT_i5_8.86_ch_ITS  111253    94676     94386
+NS.1717.001.FLD_ill_067_i7---IDT_i5_8.87_ch_ITS  146735   124653    124319
+NS.1717.001.FLD_ill_068_i7---IDT_i5_8.88_ch_ITS  116253    94871     94600
+NS.1717.001.FLD_ill_069_i7---IDT_i5_8.89_ch_ITS  165854   138485    138202
+                                                 denoisedR merged nonchim
+NS.1717.001.FLD_ill_046_i7---IDT_i5_4.125_ch_ITS    105692 104801  104248
+NS.1717.001.FLD_ill_065_i7---IDT_i5_8.85_ch_ITS     134740 133780  132478
+NS.1717.001.FLD_ill_066_i7---IDT_i5_8.86_ch_ITS      94301  93845   92508
+NS.1717.001.FLD_ill_067_i7---IDT_i5_8.87_ch_ITS     124321 123721  122614
+NS.1717.001.FLD_ill_068_i7---IDT_i5_8.88_ch_ITS      94604  91223   89768
+NS.1717.001.FLD_ill_069_i7---IDT_i5_8.89_ch_ITS     138204 137090  135099
+  filtered_pct_avg denoisedF_pct_avg denoisedR_pct_avg merged_pct_avg
+1         79.85667          96.49376          96.47188        97.2914
+  nonchim_pct_avg total_pct_avg
+1        99.38059      75.20544
+  filtered_pct_avg denoisedF_pct_avg denoisedR_pct_avg merged_pct_avg
+1         79.85667          96.49376          96.47188        97.2914
+  nonchim_pct_avg total_pct_avg
+1        99.38059      75.20544
+  filtered_pct_avg denoisedF_pct_avg denoisedR_pct_avg merged_pct_avg
+1         82.53189            99.757          99.74072       98.75033
+  nonchim_pct_avg total_pct_avg
+1        99.60309      80.50226

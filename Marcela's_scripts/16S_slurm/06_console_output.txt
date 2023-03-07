@@ -1,0 +1,130 @@
+[1] ‘1.22.0’
+[1] ‘1.52.0’
+[1] ‘1.0.9’
+[1] ‘1.2.0’
+[1] ‘4.7.0’
+[1] ‘3.3.6’
+[1] ‘4.10.0’
+                                              input filtered
+NS.1717.002.FLD_ill_097_i7---IDT_i5_11.1_16S  83740    72185
+NS.1717.002.FLD_ill_098_i7---IDT_i5_11.2_16S 305786   266225
+NS.1717.002.FLD_ill_099_i7---IDT_i5_11.3_16S 394242   344957
+NS.1717.002.FLD_ill_100_i7---IDT_i5_11.4_16S 254879   221814
+NS.1717.002.FLD_ill_101_i7---IDT_i5_11.5_16S 384840   335331
+NS.1717.002.FLD_ill_102_i7---IDT_i5_11.6_16S 303217   263954
+                                                                                   Sample
+NS.1717.002.FLD_ill_097_i7---IDT_i5_11.1_16S NS.1717.002.FLD_ill_097_i7---IDT_i5_11.1_16S
+NS.1717.002.FLD_ill_098_i7---IDT_i5_11.2_16S NS.1717.002.FLD_ill_098_i7---IDT_i5_11.2_16S
+NS.1717.002.FLD_ill_099_i7---IDT_i5_11.3_16S NS.1717.002.FLD_ill_099_i7---IDT_i5_11.3_16S
+NS.1717.002.FLD_ill_100_i7---IDT_i5_11.4_16S NS.1717.002.FLD_ill_100_i7---IDT_i5_11.4_16S
+NS.1717.002.FLD_ill_101_i7---IDT_i5_11.5_16S NS.1717.002.FLD_ill_101_i7---IDT_i5_11.5_16S
+NS.1717.002.FLD_ill_102_i7---IDT_i5_11.6_16S NS.1717.002.FLD_ill_102_i7---IDT_i5_11.6_16S
+[1] "denoisedF"
+                                             denoisedF
+NS.1717.002.FLD_ill_097_i7---IDT_i5_11.1_16S     68545
+NS.1717.002.FLD_ill_098_i7---IDT_i5_11.2_16S    249887
+NS.1717.002.FLD_ill_099_i7---IDT_i5_11.3_16S    336379
+NS.1717.002.FLD_ill_100_i7---IDT_i5_11.4_16S    208294
+NS.1717.002.FLD_ill_101_i7---IDT_i5_11.5_16S    327548
+NS.1717.002.FLD_ill_102_i7---IDT_i5_11.6_16S    247611
+                                                                                   Sample
+NS.1717.002.FLD_ill_097_i7---IDT_i5_11.1_16S NS.1717.002.FLD_ill_097_i7---IDT_i5_11.1_16S
+NS.1717.002.FLD_ill_098_i7---IDT_i5_11.2_16S NS.1717.002.FLD_ill_098_i7---IDT_i5_11.2_16S
+NS.1717.002.FLD_ill_099_i7---IDT_i5_11.3_16S NS.1717.002.FLD_ill_099_i7---IDT_i5_11.3_16S
+NS.1717.002.FLD_ill_100_i7---IDT_i5_11.4_16S NS.1717.002.FLD_ill_100_i7---IDT_i5_11.4_16S
+NS.1717.002.FLD_ill_101_i7---IDT_i5_11.5_16S NS.1717.002.FLD_ill_101_i7---IDT_i5_11.5_16S
+NS.1717.002.FLD_ill_102_i7---IDT_i5_11.6_16S NS.1717.002.FLD_ill_102_i7---IDT_i5_11.6_16S
+[1] "denoisedR"
+                                             denoisedR
+NS.1717.002.FLD_ill_097_i7---IDT_i5_11.1_16S     68697
+NS.1717.002.FLD_ill_098_i7---IDT_i5_11.2_16S    254449
+NS.1717.002.FLD_ill_099_i7---IDT_i5_11.3_16S    340930
+NS.1717.002.FLD_ill_100_i7---IDT_i5_11.4_16S    211969
+NS.1717.002.FLD_ill_101_i7---IDT_i5_11.5_16S    331491
+NS.1717.002.FLD_ill_102_i7---IDT_i5_11.6_16S    252767
+                                                                                   Sample
+NS.1717.002.FLD_ill_097_i7---IDT_i5_11.1_16S NS.1717.002.FLD_ill_097_i7---IDT_i5_11.1_16S
+NS.1717.002.FLD_ill_098_i7---IDT_i5_11.2_16S NS.1717.002.FLD_ill_098_i7---IDT_i5_11.2_16S
+NS.1717.002.FLD_ill_099_i7---IDT_i5_11.3_16S NS.1717.002.FLD_ill_099_i7---IDT_i5_11.3_16S
+NS.1717.002.FLD_ill_100_i7---IDT_i5_11.4_16S NS.1717.002.FLD_ill_100_i7---IDT_i5_11.4_16S
+NS.1717.002.FLD_ill_101_i7---IDT_i5_11.5_16S NS.1717.002.FLD_ill_101_i7---IDT_i5_11.5_16S
+NS.1717.002.FLD_ill_102_i7---IDT_i5_11.6_16S NS.1717.002.FLD_ill_102_i7---IDT_i5_11.6_16S
+[1] "merged"
+                                             merged
+NS.1717.002.FLD_ill_097_i7---IDT_i5_11.1_16S  57443
+NS.1717.002.FLD_ill_098_i7---IDT_i5_11.2_16S 183862
+NS.1717.002.FLD_ill_099_i7---IDT_i5_11.3_16S 288625
+NS.1717.002.FLD_ill_100_i7---IDT_i5_11.4_16S 147102
+NS.1717.002.FLD_ill_101_i7---IDT_i5_11.5_16S 285795
+NS.1717.002.FLD_ill_102_i7---IDT_i5_11.6_16S 176696
+                                                                                   Sample
+NS.1717.002.FLD_ill_097_i7---IDT_i5_11.1_16S NS.1717.002.FLD_ill_097_i7---IDT_i5_11.1_16S
+NS.1717.002.FLD_ill_098_i7---IDT_i5_11.2_16S NS.1717.002.FLD_ill_098_i7---IDT_i5_11.2_16S
+NS.1717.002.FLD_ill_099_i7---IDT_i5_11.3_16S NS.1717.002.FLD_ill_099_i7---IDT_i5_11.3_16S
+NS.1717.002.FLD_ill_100_i7---IDT_i5_11.4_16S NS.1717.002.FLD_ill_100_i7---IDT_i5_11.4_16S
+NS.1717.002.FLD_ill_101_i7---IDT_i5_11.5_16S NS.1717.002.FLD_ill_101_i7---IDT_i5_11.5_16S
+NS.1717.002.FLD_ill_102_i7---IDT_i5_11.6_16S NS.1717.002.FLD_ill_102_i7---IDT_i5_11.6_16S
+[1] "non-chimeras"
+                                             nonchim
+NS.1717.002.FLD_ill_097_i7---IDT_i5_11.1_16S   55037
+NS.1717.002.FLD_ill_098_i7---IDT_i5_11.2_16S  122738
+NS.1717.002.FLD_ill_099_i7---IDT_i5_11.3_16S  253635
+NS.1717.002.FLD_ill_100_i7---IDT_i5_11.4_16S  103141
+NS.1717.002.FLD_ill_101_i7---IDT_i5_11.5_16S  248992
+NS.1717.002.FLD_ill_102_i7---IDT_i5_11.6_16S  109377
+                                                                                   Sample
+NS.1717.002.FLD_ill_097_i7---IDT_i5_11.1_16S NS.1717.002.FLD_ill_097_i7---IDT_i5_11.1_16S
+NS.1717.002.FLD_ill_098_i7---IDT_i5_11.2_16S NS.1717.002.FLD_ill_098_i7---IDT_i5_11.2_16S
+NS.1717.002.FLD_ill_099_i7---IDT_i5_11.3_16S NS.1717.002.FLD_ill_099_i7---IDT_i5_11.3_16S
+NS.1717.002.FLD_ill_100_i7---IDT_i5_11.4_16S NS.1717.002.FLD_ill_100_i7---IDT_i5_11.4_16S
+NS.1717.002.FLD_ill_101_i7---IDT_i5_11.5_16S NS.1717.002.FLD_ill_101_i7---IDT_i5_11.5_16S
+NS.1717.002.FLD_ill_102_i7---IDT_i5_11.6_16S NS.1717.002.FLD_ill_102_i7---IDT_i5_11.6_16S
+[1] "Checking left_join"
+                                        Sample  input filtered denoisedF
+1 NS.1717.002.FLD_ill_097_i7---IDT_i5_11.1_16S  83740    72185     68545
+2 NS.1717.002.FLD_ill_098_i7---IDT_i5_11.2_16S 305786   266225    249887
+3 NS.1717.002.FLD_ill_099_i7---IDT_i5_11.3_16S 394242   344957    336379
+4 NS.1717.002.FLD_ill_100_i7---IDT_i5_11.4_16S 254879   221814    208294
+5 NS.1717.002.FLD_ill_101_i7---IDT_i5_11.5_16S 384840   335331    327548
+6 NS.1717.002.FLD_ill_102_i7---IDT_i5_11.6_16S 303217   263954    247611
+  denoisedR merged nonchim
+1     68697  57443   55037
+2    254449 183862  122738
+3    340930 288625  253635
+4    211969 147102  103141
+5    331491 285795  248992
+6    252767 176696  109377
+[1] "Checking up after changing name"
+                                                                                   Sample
+NS.1717.002.FLD_ill_097_i7---IDT_i5_11.1_16S NS.1717.002.FLD_ill_097_i7---IDT_i5_11.1_16S
+NS.1717.002.FLD_ill_098_i7---IDT_i5_11.2_16S NS.1717.002.FLD_ill_098_i7---IDT_i5_11.2_16S
+NS.1717.002.FLD_ill_099_i7---IDT_i5_11.3_16S NS.1717.002.FLD_ill_099_i7---IDT_i5_11.3_16S
+NS.1717.002.FLD_ill_100_i7---IDT_i5_11.4_16S NS.1717.002.FLD_ill_100_i7---IDT_i5_11.4_16S
+NS.1717.002.FLD_ill_101_i7---IDT_i5_11.5_16S NS.1717.002.FLD_ill_101_i7---IDT_i5_11.5_16S
+NS.1717.002.FLD_ill_102_i7---IDT_i5_11.6_16S NS.1717.002.FLD_ill_102_i7---IDT_i5_11.6_16S
+                                              input filtered denoisedF
+NS.1717.002.FLD_ill_097_i7---IDT_i5_11.1_16S  83740    72185     68545
+NS.1717.002.FLD_ill_098_i7---IDT_i5_11.2_16S 305786   266225    249887
+NS.1717.002.FLD_ill_099_i7---IDT_i5_11.3_16S 394242   344957    336379
+NS.1717.002.FLD_ill_100_i7---IDT_i5_11.4_16S 254879   221814    208294
+NS.1717.002.FLD_ill_101_i7---IDT_i5_11.5_16S 384840   335331    327548
+NS.1717.002.FLD_ill_102_i7---IDT_i5_11.6_16S 303217   263954    247611
+                                             denoisedR merged nonchim
+NS.1717.002.FLD_ill_097_i7---IDT_i5_11.1_16S     68697  57443   55037
+NS.1717.002.FLD_ill_098_i7---IDT_i5_11.2_16S    254449 183862  122738
+NS.1717.002.FLD_ill_099_i7---IDT_i5_11.3_16S    340930 288625  253635
+NS.1717.002.FLD_ill_100_i7---IDT_i5_11.4_16S    211969 147102  103141
+NS.1717.002.FLD_ill_101_i7---IDT_i5_11.5_16S    331491 285795  248992
+NS.1717.002.FLD_ill_102_i7---IDT_i5_11.6_16S    252767 176696  109377
+  filtered_pct_avg denoisedF_pct_avg denoisedR_pct_avg merged_pct_avg
+1         80.12062          92.46938          94.09187       74.41949
+  nonchim_pct_avg total_pct_avg
+1        74.80256      43.11614
+  filtered_pct_avg denoisedF_pct_avg denoisedR_pct_avg merged_pct_avg
+1         80.12062          92.46938          94.09187       74.41949
+  nonchim_pct_avg total_pct_avg
+1        74.80256      43.11614
+  filtered_pct_avg denoisedF_pct_avg denoisedR_pct_avg merged_pct_avg
+1         84.58812          94.15785          95.76176       71.07503
+  nonchim_pct_avg total_pct_avg
+1        74.19599      39.29142
