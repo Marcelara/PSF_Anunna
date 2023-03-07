@@ -1,6 +1,6 @@
 ---
 title: "Pipeline for Anunna"
-author: "Marcela Aragon"
+author: "Marcela Aragon & Kris de Kreek"
 date: "10/6/2022"
 output: 
   html_document:
@@ -67,11 +67,21 @@ After you have received access to the HPC, you need to install software that can
    
 You will have to type your password When entering the HPC. Your password is not visible (not even dots). This may be confusing. After this step, you are ready to use the HPC!  
 
-### 2.With Ubuntu
-*[@Marcela, you use another way to enter the HPC right?]* 
+### 2.With Ubuntu 
 
-**[MA] I'll add text of how to install Ubuntu and access the HPC, links to the youtube video could be useful as well as screenshots from the Ubuntu terminal when accessing**
-   
+You can also install a complete Ubuntu terminal environment in your Windows (Windows Subsystem for Linux (WSL)), and use this terminal to access the HPC. You'll need to download the [**Ubuntu for Windows** app](https://apps.microsoft.com/store/detail/ubuntu-on-windows/9NBLGGH4MSV6?hl=nl-nl&gl=nl&rtc=1) 
+
+![Figure X. Accessing Anunna in the Ubuntu terminal](./images/Ubuntu_Terminal.jpg)
+You access Anunna with the command:
+
+
+```bash
+
+ssh arago004@login.anunna.wur.nl 
+
+```
+
+And afterwards type your password and press `Enter`, same as with PuTTY you will not see your password written. 
   
 # Get prepared
 
@@ -140,9 +150,20 @@ It can take a while to navigate through the directories of the HPC to get into t
 
 ## Checking differences in code
 
-[Diffchecker]()
+To double-check if your code is correct, or what is the difference between one script and other you can use this
+[Diffchecker](https://www.diffchecker.com/text-compare/) tool (Fig X). 
+
+![Figure X. Diffchecker](./images/Checking_differences_in_code.jpg)
 
 ## Pimping your terminal
+
+Your slurm and R scripts are edited in [Nano](https://linuxize.com/post/how-to-use-nano-text-editor/), a command line text editor. You will not be able to use Ctrl+C, Ctrl+V nor to click to move around the script, so to make your life easier and be able to distinguish the different parts of your script you can opt to modify the syntax highlighting rules so you can get different colors (Fig. X), in my experience it really helps to detect mistakes faster than having only the black screen with white font!
+
+![Figure X. Nano with highlighted syntax](./images/Pimping_terminal_nano.jpg)
+
+Watch this [YouTube video](https://www.youtube.com/watch?v=BSM4ATQdYF0) with instructions and use this code (https://gist.github.com/benjamin-chan/4ef37955eabf5fa8b9e70053c80b7d76) in your .nanorc file.
+
+
 
 # Downloading data
 
@@ -251,7 +272,7 @@ ls ../raw_reads_Kris/ITS | wc -l # count the number of files
 Before starting, we would strongly recommend to read the information about the [Ernakovich pipeline on GitHub](https://github.com/ErnakovichLab/dada2_ernakovichlab). The next part of this file is an addition to this information given by the Ernakovich lab. With this file we would like to give you a better understanding of the code, more information on interpreting the output, and specific information on running the pipeline on Annuna in stead of premise (HPC of the Ernakovich lab). 
 
 
-# Preperations 
+## Do this before you start! 
 
 There are a few things you need to do before you can start as listed in [Set up part 1](https://github.com/ErnakovichLab/dada2_ernakovichlab). 
 
@@ -328,6 +349,28 @@ conda deactivate
 ```
 
 
+After you've checked that your `00_setup_dada2_tutorial_16S.slurm` file is correct, you will send it to the HPC to process by typing from the /slurm folder;
+
+
+```bash
+
+sbatch 00_setup_dada2_tutorial_16S.slurm
+
+```
+
+You'll see that your job has been submitted and will have a jobid number which can be used to track down the status of your job. You can use the `squeue` command with your username to see this. 
+
+
+
+```bash
+
+squeue -u arago004 
+
+```
+
+After your job has ben done, you will get an `.output` file in your `/slurm` folder, in there you can see if the job was correct or not.
+
+
 ## 01_pre-processed
 
 Here, we will remove sequences with many unknown nucleotides (Ns) and the primer sequences by using cutadapt. 
@@ -389,18 +432,93 @@ conda deactivate
 At the end of your .output file you should check that there are no primers found and left in your sequences by having only zero's **(Fig. X)**.
 
 
-![Fig.X Check of cutadapt removing primers](./images/02_output.jpg)
-
+![Fig.X Check of cutadapt removing primers](./images/01_output_zero-check.jpg)
 
 
 ## 02_check-quality
 
+In this script you'll get qualit plots which tell you from 20 random samples how is the quality of your reads (quality score) according to the place of the bp 
 
+**slurm script**
+
+
+```bash
+
+#!/bin/bash -login
+
+#SBATCH --time=01:00:00                            ### limit of wall clock time - how long the job will run (same as -t)
+#SBATCH --ntasks=1                                ### number of tasks - how many tasks (nodes) that you require (same as -n)
+#SBATCH --cpus-per-task=16                         ### number of CPUs (or cores) per task (same as -c)
+#SBATCH --mem=64G                                  ### memory required per node - amount of memory (in bytes)
+
+conda activate dada2_ernakovich
+
+Rscript ../R/02_check_quality_dada2_tutorial_16S.R
+
+conda deactivate
+
+```
+
+**R script**
+
+Nothing changes
+
+
+**Output**
+
+After this script there will be a new folder named `02_filter` in your working directory, in there you can check the read quality profiles of 20 random samples for both reverse and forward reads **(Fig.X)**. 
+
+
+![Fig.X Read quality profile Forward](./images/02_output_qualityplot.JPG)
+
+
+In this plot, each plot is one randome sample, the red line shows the percentage of reads that reach at least that position. In this example we can see that 100% of the reads from all the 20 random samples have >150 bp but not all get to 200bp (i.e. sample 126 in the upper right), showing the variable length of the ITS region. We can also get a sense of how many reads more or less we have per sample, in this example there are 3 samples with very few reads (~ <200). 
 
 
 ## 03_filter_reads
 
+In here you will filter out those reads that don't match your criteria based on the quality plots from script 02. 
 
+**slurm script**
+
+
+```bash
+
+#!/bin/bash -login
+
+#SBATCH --time=01:00:00                            ### limit of wall clock time - how long the job will run (same as -t)
+#SBATCH --ntasks=1                                ### number of tasks - how many tasks (nodes) that you require (same as -n)
+#SBATCH --cpus-per-task=16                         ### number of CPUs (or cores) per task (same as -c)
+#SBATCH --mem=64G                                  ### memory required per node - amount of memory (in bytes)
+
+conda activate dada2_ernakovich
+
+Rscript ../R/03_filter_reads_dada2_tutorial_16S.R
+
+conda deactivate
+
+```
+
+**R script**
+
+
+```r
+# PEDRO's ajustment was to remove truncation (our reads are very short) and reduce max error allowed maxEE to 1 (we have good quality)
+filt_out <- filterAndTrim(fwd=file.path(subF.fp, fastqFs), filt=file.path(filtpathF, fastqFs),
+                          rev=file.path(subR.fp, fastqRs), filt.rev=file.path(filtpathR, fastqRs),
+                          truncLen=c(0,0), maxEE=c(1,1), truncQ=2, maxN=0, rm.phix=TRUE, 		# Kris changed: truncLen = c(250,220)
+                          compress=TRUE, verbose=TRUE, multithread=TRUE)                    # to c(0,0) maxEE=c(2,2) to c(2,2)
+```
+
+As for ITS data the length is variable is important to remove the `truncLen` argument. See more explanation in this tutorial (https://benjjneb.github.io/dada2/ITS_workflow.html)
+
+**output**
+
+You'll get new quality score plots after the adjustments of the same 20 random samples. 
+
+![Figure X. Quality score plots after filtering](./images/03_output.jpg)
+
+You can see that now there are less reads per sample (filtered out). 
 
 
 ## 04_learn_error_rates_dada2_tutorial_16S
@@ -411,19 +529,19 @@ Because we don't fully understand it, we will not go into details of how and why
 
 Now, let's look at what changes we've made to the slurm and .R files:
 
-**R**
-
-
-
 **Slurm**
 
 ![Fig.X Settings for HPC to run script 04](./images/04_slurm.JPG)
+
+**R**
+
+
 
 **Description about why these settings are changed**
 
 After you run the `04_learn_error_rates_dada2_tutorial_16S.R` script you can find different plots that will show you how, according to each of the 4 options, your learned error rates (black dots and lines) match an expected value (red lines). You'll see that in any of the 4 options there's a perfect match but what Ernakovich's lab recommend is to check that your dots are somewhat close to your black lines and that this lines should decrease along the x-axis (see their better explanation for this).
 
-You can find these plots on your `processed` folder --> `02_filter` --> `preprocessed_F` & `preprocessed_R` --> `filtered` (all the way down, after you've passed all your .gz sequences, **Fig. X**).
+You can find these plots on your *working directory* folder --> `02_filter` --> `preprocessed_F` & `preprocessed_R` --> `filtered` (all the way down, after you've passed all your .gz sequences, **Fig. X**).
 
 ![Fig.X_04_output_plot-location](./images/04_output_plot-location.JPG)
 
@@ -473,6 +591,12 @@ On this script you infer which reads belong to which ASV taking into account the
 
 Now, let's look at what changes we've made to the .R and .slurm files:
 
+**slurm**
+
+Fig.X Settings for HPC to run script 05
+
+
+
 **R**
 
 
@@ -496,9 +620,11 @@ for(sam in sample.names) {
 }
 ```
 
-**slurm** Fig.X Settings for HPC to run script 05
 
-**output** After sbatching this script and if everything goes well you should have in your `05_infer_ASVs_dada2_numberX.output` file something like this:
+
+**output** 
+
+After sbatching this script and if everything goes well you should have in your `05_infer_ASVs_dada2_numberX.output` file something like this:
 
 ![Fig.X Slurm output Script 05 1/2](./images/05_output_1.JPG)
 
@@ -713,27 +839,28 @@ Exported /lustre/nobackup/INDIVIDUAL/arago004/ernakovichlab_pipeline/16S_process
 ```
 
 
+## 08_Importing data to R
+
+
 And that's it, you've made it! Now you are ready to import your data to R. The files that you will need are inside of the 03.Taxonomy folder and are:
 
-* The `seqtab_final.txt` --> that will be your OTU table (otu_table)
+* The `seqtab_final.txt` or `seqtab_final.rds`--> that will be your OTU table (otu_table) The .rds is lighter than the .txt
 * `repset.fasta` --> that will be the DNA sequences for each ASV (refseq)
 * `taxonomy.tsv` --> that will be your the taxonomy table (tax_table)
 
-* and your **metadata** file, in my case `Mapping_file_16S_Family_experiment.txt` that will be your metadata (sample_data) 
+* and your **metadata** file, in my case `Mapping_file_16S_Family_experiment.txt` that will be my metadata (sample_data) 
 
+![Fig.X Location of seqtab_final.txt/.rds and repset.fasta files](./images/08_OTU_and_Sequence_files.jpg)
 
-Fig.X Location of seqtab_final.txt and repset.fasta files
+![Fig.X Location of taxonomy.tsv file](./images/08_Taxonomy_file.jpg)
 
-Fig.X Location of taxonomy.tsv file
-
-Fig.X Location of metadata file
+![Fig.X Location of metadata (mapping) file](./images/08_Metadata-mapping_file.jpg)
 
 Finally, transfer these 4 files to your local computer and think about whether you would like to re-name them so their title is a bit more informative. For instance to track back that were for 16S and not ITS ;)
 
-Fig.X Location of metadata file
 
+![Fig.X All files in local folder](./images/08_all_Files_in_local_folder.jpg)
 
-## 08_Importing data to R
 
 
 
