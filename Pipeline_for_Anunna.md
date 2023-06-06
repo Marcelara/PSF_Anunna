@@ -1,5 +1,5 @@
 ---
-title: "Pipeline for Anunna"
+title: "Pipeline for pre-processing amplicon data in Anunna"
 author: "Marcela Aragon & Kris de Kreek"
 date: "10/6/2022"
 output: 
@@ -22,7 +22,7 @@ editor_options:
 
 # Summary
 
-This file aims to keep track of how microbiome samples from the plant-soil feedback (PSF) experiment were pre-processed. This document was mainly written by Marcela Aragon and Kris de Kreek but gathers tips and tricks given by Pedro Beschoren da Costa and Roland Berdager from WUR, as well as several online resources.
+This file aims to keep track of how microbiome samples from the plant-soil feedback (PSF) experiment were pre-processed. This document was mainly written by Marcela Aragón and Kris de Kreek but gathers tips and tricks given by Pedro Beschoren da Costa and Roland Berdager from WUR, as well as several online resources.
 
 # Why doing this?
 
@@ -34,36 +34,30 @@ If, however, your samples were sequenced with NovaSeq the story changes.
 
 # Working in the HPC: Anunna
 
-Making use of an HPC is tricky, as it works on **Linux** as an operating system and requires that you use a terminal/command line (**Shell**) with a completely new language to ask for what you want. As I understand, the HPC works with **Bash** which is just a type of command line interpreter (language) that runs in the Shell (?).
+Making use of an HPC is tricky, as it works on **Linux** as an operating system and requires that you use a terminal/command line (**Shell**) with a completely new language to ask for what you want. As I understand, the HPC works with **Bash** which is just a type of command line interpreter (language) that runs in the Shell. See this small [introduction of the Unix Shell](https://swcarpentry.github.io/shell-novice/index.html) if you want to know more 
 
 ## Access to Anunna
 
-Before going too technical, if you need to use Anunna from WUR, you first need to ask for access as there are costs involved with using it. To do this, you'll need to send an email to a staff member from Anunna stating that:
+Before going too technical, if you need to use Anunna from WUR, you first need to ask for access as there are costs involved with using it. To do this, you'll need to send an email to a staff member from Anunna (Fig. 1) stating that:
 
 1.  you have permission from your manager/supervisor
 2.  your WUR user account and,
 3.  Your project number.
 
-![email to ask Anunna access](images/access_anunna_email.jpg)
+![Figure 1. Email to ask access for Anunna](images/access_anunna_email.jpg)
 
 Always check the Anunna wiki (<https://wiki.anunna.wur.nl/index.php/Main_Page>) for more updated instructions.
 
 
-```bash
-
-cd /lustre/nobackup/INDIVIDUAL/arago004 
-
-```
-
 ## Entering the HPC
 
-There are many options to access the HPC, we will explain the 2 that we know of and that have worked for us: 1. Using PuTTY and 2. Using Ubuntu
+There are many options to access the HPC, we will explain the 2 that we know of and that have worked for us: 1. Using PuTTY (Kris) and 2. Using Ubuntu (Marcela).
 
 ### 1.With PuTTY
 
-After you have received access to the HPC, you need to install software that can connect your computer to the HPC. There are multiple ways to do this. [PuTTY](https://putty.org/) is a software that can connect to a remote terminal to work on the HPC. When opening **PuTTY**, you have to specify the host name (login.anunna.wur.nl) and the Port 22 with connection type SSH. You can save your basic login settings. More information about this and other settings can be found on the [Annuna wiki](https://wiki.anunna.wur.nl/index.php/Log_in_to_Anunna). 
+After you have received access to the HPC, you need to install software that can connect your computer to the HPC. There are multiple ways to do this. [PuTTY](https://putty.org/) is a software that can connect to a remote terminal to work on the HPC. When opening **PuTTY**, you have to specify the host name (login.anunna.wur.nl) and the Port 22 with connection type SSH (Fig. 2). You can save your basic login settings. More information about this and other settings can be found on the [Annuna wiki](https://wiki.anunna.wur.nl/index.php/Log_in_to_Anunna). 
    
-![PuTTY login window](images/Putty.png)
+![Figure 2. PuTTY login window](images/Putty.png)
    
 You will have to type your password When entering the HPC. Your password is not visible (not even dots). This may be confusing. After this step, you are ready to use the HPC!  
 
@@ -71,7 +65,7 @@ You will have to type your password When entering the HPC. Your password is not 
 
 You can also install a complete Ubuntu terminal environment in your Windows (Windows Subsystem for Linux (WSL)), and use this terminal to access the HPC. You'll need to download the [**Ubuntu for Windows** app](https://apps.microsoft.com/store/detail/ubuntu-on-windows/9NBLGGH4MSV6?hl=nl-nl&gl=nl&rtc=1) 
 
-![Figure X. Accessing Anunna in the Ubuntu terminal](./images/Ubuntu_Terminal.jpg)
+![Figure 3. Accessing Anunna in the Ubuntu terminal](./images/Ubuntu_Terminal.jpg)
 You access Anunna with the command:
 
 
@@ -82,7 +76,8 @@ ssh arago004@login.anunna.wur.nl
 ```
 
 And afterwards type your password and press `Enter`, same as with PuTTY you will not see your password written. 
-  
+
+
 # Get prepared
 
 If you are not familiar with bash, linux and using a super computer and you are also doing other things at the same time as I was let me tell you in advance that **this takes a lot of time: as in WEEKS!**. We really hope to help you making this time shorter with this guide, but still getting familiar with a new language and finding your way around the terminal will be a hassle. Also get prepared for some of your scripts to not run at the first time and to find that maybe after you've been waiting for some days your code had an error! We are telling you all this not to kill your hopes but on the contrary so you know that this is normal and for you to be mentally ready for the task ahead (both in spirit and in your time planning ;).
@@ -91,7 +86,7 @@ Having said that, you could start to get familiar with bash by practicing some o
 
 ## Linux commands
 
-Before you can get started in the HPC, you need to get familiar with Bash. There are many tutorials on the internet that can help you with this *[Do we have some examples?]*. Furthermore, the staff members of Annuna offer some basic courses. I can recommend the **Linux Basic course** which is offered multiple times a year. There are also the **HPC Basic Course** and the **HPC Advanced Course**. I did not join these two last courses but they may be helpful as well. An overview of the upcoming courses can be found on the [Wiki](https://wiki.anunna.wur.nl/index.php/Main_Page#Events). 
+Before you can get started in the HPC, you need to get familiar with Bash. There are many [tutorials](https://ubuntu.com/tutorials/command-line-for-beginners#1-overview) on the internet that can help you with this. Furthermore, the staff members of Annuna offer some basic courses. I can recommend the **Linux Basic course** which is offered multiple times a year. There are also the **HPC Basic Course** and the **HPC Advanced Course**. I did not join these two last courses but they may be helpful as well. An overview of the upcoming courses can be found on the [Wiki](https://wiki.anunna.wur.nl/index.php/Main_Page#Events). 
 
 There are some basic commands that you will use all the time. We will discuss them down here.
 
@@ -122,44 +117,51 @@ As you can see, you can add extra arguments to a command by using a `-` in front
 There are some very handy keys that will accelerate coding in Linux. Like in R, the name of a function, directory or file can be completed by pressing `tab` when typing the first few letters. When there are multiple options, i.e. multiple folder start with these same letters, you can show all options by pressing `tab` twice.   
 Furthermore, you may sometimes print a file in the console that is very large. You can stop the printing by pressing `CTRL C`.    
 
-Many, many things are possible in Linux. So Google is your friend when you want to do something and you do not know the commands to do it.
+Many, many things are possible in Linux. So Google is your friend when you want to do something and you do not know the commands to do it. Here's a link to a [cheat sheet of the most common used Linux commands](https://www.guru99.com/linux-commands-cheat-sheet.html) 
 
 
 ## File structure of the HPC
 
 The structure of the HPC can be puzzling. From the root of the HPC, there are a bunch of folders of which we only need a few.
-When you enter the HPC, you are in your home directory, for instance: `/home/WUR/kreek001`. The first `/` we call the root, so your home directory is a directory in the `WUR` directory and that directory is a directory in the `home` directory in the root of the HPC. Every user of the HPC does have its own home directory. To be honest, you will not use your home directory much. You will use two other directories in the root of the HPC: `lustre` and `archive`.
+When you enter the HPC, you are in your home directory, for instance: `/home/WUR/kreek001`. The first `/` we call the root, so your home directory is a directory in the `WUR` directory and that directory is a directory in the `home` directory in the root of the HPC. Every user of the HPC does have its own home directory. To be honest, you will not use your home directory much. You will use two other directories in the root of the HPC: `lustre` and `archive` (Fig. 4). 
 
-You will use your `lustre` directory as your own 'working directory' where you will store your data and scripts you are working with at that moment. From  here, you can submit jobs to the HPC. The file path to get to your own `lustre` directory will be similar to this: `/lustre/nobackup/INDIVIDUAL/kreek001/`. As there is no shared directory from the Plans science group, yo will have a shared directory in `INDIVIDUAL`.
+![Figure 4. File structure of root directory (arago004)](./images/Annuna_root.jpg)
+
+You will use your `lustre` directory as your own 'working directory' where you will store your data and scripts you are working with at that moment. From  here, you can submit jobs to the HPC. The file path to get to your own `lustre` directory will be similar to this: `/lustre/nobackup/INDIVIDUAL/kreek001/`. As there is no shared directory from the Plant science group, you will have a shared directory in `INDIVIDUAL` (Fig. 5).
+
+![Figure 5. Accesing individual folder in Lustre (arago004)](./images/Anunna_lustre.jpg)
+
 
 `archive` is mostly used for storing a backup of your data and data and scripts from `lustre` on which you do not work anymore. After finishing a project on `lustre`, it is wise to move all you files to `archive` as there is limited storage capacity on `lustre`. The file path to there will be similar to this: `/archive/INDIVIDUAL/kreek001/`.
 
-Try yourself navigating through the directories of the HPC using de `cd` and `ls` commands to get familiar with it.
+Try yourself navigating through the directories of the HPC using de `cd` and `ls -l` commands to get familiar with it.
 
 
 ## Moving files between the HPC and your local computer
 
-The easiest way to move files between your local computer and the HPC is via an FTP client like FileZilla. After downloading and opening the FileZilla software, you will see multiple windows. The files of you local computer are shown in the middle on the right. The files of the HPC can be shown on the left of that. You have to connect to the HPC to do so and this will be similar as log in in via PuTTY. Go to File > Site manager. Click on New site. You need `SFTP - SSH File Transfer Protocol` and the `login.annuna.wur.nl` as host with port `22`. You can fill out your own username and pass word. Click on Connect and you will connect to the HPC. These settings are stored and you can connect to the HPC the next time via the Site manager without filling out the settings again.
+The easiest way to move files between your local computer and the HPC is via an FTP client like [FileZilla](https://en.wikipedia.org/wiki/FileZilla). After downloading and opening the FileZilla software, you will see multiple windows. The files of you local computer are shown in the middle on the right. The files of the HPC can be shown on the left of that. You have to connect to the HPC to do so and this will be similar as log in via PuTTY. 
 
-*add screen shot of FileZilla and the site manager*
+Go to File > Site manager. Click on New site. You need `SFTP - SSH File Transfer Protocol` and the `login.annuna.wur.nl` as host. You can fill out your own username and pass word. Click on Connect and you will connect to the HPC (Fig. 6). These settings are stored and you can connect to the HPC the next time via the Site manager without filling out the settings again.
 
-Now, you can drag and drop files from the HPC to your local computer and the other way around. Files will also be transferred when you double click on a file. When yo want to open a file, click with the right mouse button on a file and chose Open.
+![Figure 6. FileZilla login](./images/FileZilla_login.JPG)
 
-It can take a while to navigate through the directories of the HPC to get into the right folder as it may take a while before the folder is loaded. You can make bookmarks of frequently used directories to reduce the navigation time. You can do this at the drop down menu bookmarks.
+Now, you can drag and drop files from the HPC to your local computer and the other way around. Files will also be transferred when you double click on a file. When yo want to just open a file, click with the right mouse button on a file and chose View/Edit, in this way you can edit .R scripts directly in R Studio for instance.
+
+It can take a while to navigate through the directories of the HPC to get into the right folder as it may take a while before the folder is loaded. You can make bookmarks of frequently used directories, such as your lustre folder, to reduce the navigation time. You can do this at the drop down menu bookmarks.
 
 
 ## Checking differences in code
 
-To double-check if your code is correct, or what is the difference between one script and other you can use this
-[Diffchecker](https://www.diffchecker.com/text-compare/) tool (Fig X). 
+To double-check if your code is correct, or what is the difference between one script and other, you can use this
+[Diffchecker](https://www.diffchecker.com/text-compare/) tool (Fig 7). This is quite handy if you are recycling code from somebody else and want to know very quickly what is the difference between the old and the new version.
 
-![Figure X. Diffchecker](./images/Checking_differences_in_code.jpg)
+![Figure 7. Diffchecker](./images/Checking_differences_in_code.jpg)
 
 ## Pimping your terminal
 
-Your slurm and R scripts are edited in [Nano](https://linuxize.com/post/how-to-use-nano-text-editor/), a command line text editor. You will not be able to use Ctrl+C, Ctrl+V nor to click to move around the script, so to make your life easier and be able to distinguish the different parts of your script you can opt to modify the syntax highlighting rules so you can get different colors (Fig. X), in my experience it really helps to detect mistakes faster than having only the black screen with white font!
+Your slurm and R scripts are edited in [Nano](https://linuxize.com/post/how-to-use-nano-text-editor/), a command line text editor. You will not be able to use Ctrl+C, Ctrl+V nor to click to move around the script, so to make your life easier and be able to distinguish the different parts of your script you can opt to modify the syntax highlighting rules so you can get different colors (Fig. 8), in my experience it really helps to detect mistakes faster than having only the black screen with white font!
 
-![Figure X. Nano with highlighted syntax](./images/Pimping_terminal_nano.jpg)
+![Figure 8. Nano with highlighted syntax](./images/Pimping_terminal_nano.jpg)
 
 Watch this [YouTube video](https://www.youtube.com/watch?v=BSM4ATQdYF0) with instructions and use this code (https://gist.github.com/benjamin-chan/4ef37955eabf5fa8b9e70053c80b7d76) in your .nanorc file.
 
@@ -167,7 +169,7 @@ Watch this [YouTube video](https://www.youtube.com/watch?v=BSM4ATQdYF0) with ins
 
 # Downloading data
 
-The sequencing company will provide you the information for downloading the data from there remote server to the HPC. This is an example of the email we received:
+The sequencing company will provide you the information for downloading the data from their remote server to the HPC. This is an example of the email we received:
 
 
 ```r
@@ -228,11 +230,11 @@ md5sum * > filename
 
 The `*` means you want to target all files and store the checksums in the file called `filename`. 
 
-Next, copy the checksums and file of the md5file before and after downloading into two different Excel sheets. Order the file names both sheets in the same way. Next, copy the check sums and file names of one sheet next to the file names and check sums of the other sheet and lat Excel compare the checksums. For instance, when the checksums of the sequencing company are in column A and the checksums after downloading are in column D, you can type in column F `=A1=D1`. Excel will print `TRUE` when the checksums are the same and `FALSE` when they are not. You can use a function to count the number of False. This number should be 0.
+Next, copy the checksums and file of the md5file before and after downloading into two different Excel sheets. Order the file names both sheets in the same way. Next, copy the check sums and file names of one sheet next to the file names and check sums of the other sheet and lat Excel compare the checksums. For instance, when the checksums of the sequencing company are in column A and the checksums after downloading are in column D, you can type in column F `=A1=D1`. Excel will print `TRUE` when the checksums are the same and `FALSE` when they are not (Fig. 9). You can use a function to count the number of False. This number should be 0.
 
-*Show of screen shot of the Excel file*
+*Figure 9. Show of screen shot of the Excel file*
 
-# Separating data
+## Separating data
 
 It can happen that samples of multiple of your experiments are sequenced at once. In that case, you have to separate the sequence data of the experiments before doing the analysis. It is wise to backup your data before doing this. Regular expressions can be used to select the files of one experiment. A very nice tutorial about regular expressions can be found [here](https://www.howtogeek.com/661101/how-to-use-regular-expressions-regexes-on-linux/). 
 
@@ -249,8 +251,10 @@ You can try your own regular expression on a file with all file names in there. 
 
 
 ```bash
+
 grep -E "[2-5][0-9]-.*-P05" Filenames > SelectedFilenames # grep the file names
 wc -l SelectedFilenames # count the number of lines
+
 ```
 
 When this works well and you can select all files you need, you can copy or move all the files itself to another directory. Afterwards, you can count the number of files again to check if the expected number of files are moved.
@@ -259,17 +263,18 @@ For instance, here I was in a directory with the ITS and 16S directory. I moved 
 
 
 ```bash
-mv ITS/*[2-5][0-9]-*-P05* ../raw_reads_Kris/ITS # move files
-mv 16S/*[2-5][0-9]-*-P05* ../raw_reads_Kris/16S # move files
 
-ls ../raw_reads_Kris/16S | wc -l # count the number of files
-ls ../raw_reads_Kris/ITS | wc -l # count the number of files
+mv ITS/*[2-5][0-9]-*-P05* ../raw_reads_Kris/ITS # move ITS files from where I am to two folders back
+mv 16S/*[2-5][0-9]-*-P05* ../raw_reads_Kris/16S # move 16S files from where I am to two folders back
+
+ls ../raw_reads_Kris/16S | wc -l # count the number of 16S files that were copied
+ls ../raw_reads_Kris/ITS | wc -l # count the number of ITS files that were copied
 ```
 
 
 # Running the DADA2 (Ernakovich pipeline) for NovaSeq data
 
-Before starting, we would strongly recommend to read the information about the [Ernakovich pipeline on GitHub](https://github.com/ErnakovichLab/dada2_ernakovichlab). The next part of this file is an addition to this information given by the Ernakovich lab. With this file we would like to give you a better understanding of the code, more information on interpreting the output, and specific information on running the pipeline on Annuna in stead of premise (HPC of the Ernakovich lab). 
+Before starting, we would strongly recommend to read the information about the [Ernakovich pipeline on GitHub](https://github.com/ErnakovichLab/dada2_ernakovichlab). The next part of this file is an addition to this information given by the Ernakovich Lab. With this file we would like to give you a better understanding of the code, more information on interpreting the output, and specific information on running the pipeline on Annuna instead of _premise_ (HPC of the Ernakovich lab). 
 
 
 ## Do this before you start! 
@@ -278,8 +283,10 @@ There are a few things you need to do before you can start as listed in [Set up 
 
 1. Install the tutorial in your `lustre` directory. 
 
-2. Install conda or [miniconda](https://ostechnix.com/how-to-install-miniconda-in-linux/)    
+2. Install conda or [miniconda](https://ostechnix.com/how-to-install-miniconda-in-linux/)  
+
 Miniconda is smaller than conda and works perfect. I used the version: Miniconda3-py39_4.12.0-Linux-x86_64. You can use the following code to make sure that miniconda is not activated automatically at start up.
+
 
 ```bash
 conda config --set auto_activate_base false
@@ -287,13 +294,16 @@ conda config --set auto_activate_base false
 
 You can activate and deactivate the conda environment like the code below. You will see a conda appearing in front of your working directory.
 
+
 ```bash
 conda activate
 conda deactivate
 ```
 
 3. Create environment to conda-dada2
+
 Now you will create a special conda dada2_Ernakovich environment in which you are going to run the pipeline. Navigate to the Ernakovich pipeline directory and run the following code to install the environment.
+
 
 ```bash
 module purge 		#Deactivates all activated modules
@@ -305,17 +315,18 @@ conda activate dada2_ernakovich
 
 Now, the conda dada2_ernakovich environment is installed and activated. You can deactivate it for now. You will activate and deactivate this environment every time you are running a slurm script.
 
+
 ```bash
 conda activate dada2_ernakovich
 conda deactivate
 ```
 
 
-You will run this pipeline twice in case you have both a data set of ITS and 16S. In that case, I would advice to copy the data2_ernakovichlab directory for analysing ITS after running the pipeline for 16S. Many changes in the scripts for 16S also apply for ITS. Before running the pipeline for the first time, change the name of the original folder data2_ernakovichlab_main to data2_ernakovichlab_16S (or _ITS) for clarity. 
+You will run this pipeline twice in case you have both a data set of ITS and 16S. In that case, I would advice to copy the data2_ernakovichlab-main directory for analyzing ITS after running the whole pipeline for 16S. Many changes in the scripts for 16S also apply for ITS. Before running the pipeline for the first time, change the name of the original folder data2_ernakovichlab_main to data2_ernakovichlab_16S (or _ITS) for clarity. 
 
 # Running the pipeline
 
-Okay, finally we can start with running the pipeline in lustre. Keep in mind that you will encounter some errors on the way, and that it may take hours to find a solution every. But to give you some mental support, you will get to the end!
+Okay, finally we can start with running the pipeline in lustre. Keep in mind that you will encounter some errors on the way, and that it may take hours to find a solution every time. But to give you some mental support, you will get to the end!
 
 There are two kind of scripts: **slurm** scripts and **R** scripts. A slurm script is the script that is needed to run a job on the HPC. In here, you define parameters like the memory the script needs and the time the script is allowed to run. Furthermore, this script can contain commands that define what you want the script to do. Most of the time in this pipeline, we will only write in the slurm script that is has to run an R script as you can not directly run an R script in the HPC. 
 
@@ -331,6 +342,7 @@ The Ernakovich lab has made very elaborate slurm scripts that contains a lot of 
 
 
 ```bash
+
 #!/bin/bash -login 	            ### -login is essential to activate conda environment
 
 #SBATCH --time=2:00:00          ### limit of wall clock time - how long the job will run
@@ -410,6 +422,7 @@ This slurm script is run with the minimal CPUs and memory to run the R script.
 
 
 ```bash
+
 #!/bin/bash -login 	            ### -login is essential to activate conda environment
 
 #SBATCH --time=1:00:00          ### limit of wall clock time - how long the job will run
@@ -429,15 +442,21 @@ conda deactivate
 
 **output**
 
-At the end of your .output file you should check that there are no primers found and left in your sequences by having only zero's **(Fig. X)**.
+At the end of your .output file you should check that there are no primers found and left in your sequences by having only zero's (Fig. 10).
 
 
-![Fig.X Check of cutadapt removing primers](./images/01_output_zero-check.jpg)
+![Figure 10. Check of cutadapt removing primers](./images/01_output_zero-check.jpg)
 
 
 ## 02_check-quality
 
 In this script you'll get qualit plots which tell you from 20 random samples how is the quality of your reads (quality score) according to the place of the bp 
+
+
+**R script**
+
+Nothing changes
+
 
 **slurm script**
 
@@ -459,17 +478,13 @@ conda deactivate
 
 ```
 
-**R script**
-
-Nothing changes
-
 
 **Output**
 
-After this script there will be a new folder named `02_filter` in your working directory, in there you can check the read quality profiles of 20 random samples for both reverse and forward reads **(Fig.X)**. 
+After this script there will be a new folder named `02_filter` in your working directory, in there you (Fig. 11). 
 
 
-![Fig.X Read quality profile Forward](./images/02_output_qualityplot.JPG)
+![Figure 11. Read quality profile ITS-Forward](./images/02_output_qualityplot.JPG)
 
 
 In this plot, each plot is one randome sample, the red line shows the percentage of reads that reach at least that position. In this example we can see that 100% of the reads from all the 20 random samples have >150 bp but not all get to 200bp (i.e. sample 126 in the upper right), showing the variable length of the ITS region. We can also get a sense of how many reads more or less we have per sample, in this example there are 3 samples with very few reads (~ <200). 
@@ -478,6 +493,20 @@ In this plot, each plot is one randome sample, the red line shows the percentage
 ## 03_filter_reads
 
 In here you will filter out those reads that don't match your criteria based on the quality plots from script 02. 
+
+**R script**
+
+
+```r
+# PEDRO's ajustment was to remove truncation (our reads are very short) and reduce max error allowed maxEE to 1 (we have good quality)
+filt_out <- filterAndTrim(fwd=file.path(subF.fp, fastqFs), filt=file.path(filtpathF, fastqFs),
+                          rev=file.path(subR.fp, fastqRs), filt.rev=file.path(filtpathR, fastqRs),
+                          truncLen=c(0,0), maxEE=c(1,1), truncQ=2, maxN=0, rm.phix=TRUE, 		# Kris changed: truncLen = c(250,220)
+                          compress=TRUE, verbose=TRUE, multithread=TRUE)                    # to c(0,0) maxEE=c(2,2) to c(2,2)
+```
+
+As for ITS data the length is variable is important to remove the `truncLen` argument. See more explanation in this tutorial (https://benjjneb.github.io/dada2/ITS_workflow.html)
+
 
 **slurm script**
 
@@ -499,103 +528,115 @@ conda deactivate
 
 ```
 
-**R script**
-
-
-```r
-# PEDRO's ajustment was to remove truncation (our reads are very short) and reduce max error allowed maxEE to 1 (we have good quality)
-filt_out <- filterAndTrim(fwd=file.path(subF.fp, fastqFs), filt=file.path(filtpathF, fastqFs),
-                          rev=file.path(subR.fp, fastqRs), filt.rev=file.path(filtpathR, fastqRs),
-                          truncLen=c(0,0), maxEE=c(1,1), truncQ=2, maxN=0, rm.phix=TRUE, 		# Kris changed: truncLen = c(250,220)
-                          compress=TRUE, verbose=TRUE, multithread=TRUE)                    # to c(0,0) maxEE=c(2,2) to c(2,2)
-```
-
-As for ITS data the length is variable is important to remove the `truncLen` argument. See more explanation in this tutorial (https://benjjneb.github.io/dada2/ITS_workflow.html)
 
 **output**
 
-You'll get new quality score plots after the adjustments of the same 20 random samples. 
+You'll get new quality score plots after the adjustments of the same 20 random samples (Fig. 11). 
 
-![Figure X. Quality score plots after filtering](./images/03_output.jpg)
+![Figure 11. Quality score plots after filtering](./images/03_output.jpg)
 
 You can see that now there are less reads per sample (filtered out). 
 
 
 ## 04_learn_error_rates_dada2_tutorial_16S
 
-Training and testing 4 different methods to distinguish between sequencing errors and biological differences. THIS is the reason why we are doing all this, because NovaSeq data "bins" error scores to just 4 categories instead of 40 like MiSeq, therefore it has less "resolution" (only 10%) to understand the "real" error rates (you have to "pay" this as you have more reads, otherwise it will be way too much information). There's not yet a standard solution to fix this, but it is clear that using the traditional way its not suitable **(see Fig. X)**, thus what Ernakovich lab does is to put together 4 different ways to learn error rates so you can choose, according to your data, which one is better (or less worse you can also say).
+Training and testing 4 different methods to distinguish between sequencing errors and biological differences. THIS is the reason why we are doing all this, because NovaSeq data "bins" error scores to just 4 categories instead of 40 like MiSeq, therefore it has less "resolution" (only 10%) to understand the "real" error rates (you have to "pay" this as you have more reads, otherwise it will be way too much information). There's not yet a standard solution to fix this, but it is clear that using the traditional way its not suitable (see Fig. 13), thus what Ernakovich lab does is to put together 4 different ways to learn error rates so you can choose, according to your data, which one is better (or less worse you can also say).
 
 Because we don't fully understand it, we will not go into details of how and why these 4 error rates learning options are different. If you would like to know more you can check the explanation on their GitHub page and try to understand the different codes. What we believe is important is to realize that there are different ways to do it, and that which one is better to choose will depend **every time** entirely on your dataset. The way I see it is it's like checking your data distribution before you run a statistical test, sometimes is normal and sometimes is not and when it's not you have to select the appropriate data distribution so your statistical test has meaning.
 
 Now, let's look at what changes we've made to the slurm and .R files:
 
-**Slurm**
-
-![Fig.X Settings for HPC to run script 04](./images/04_slurm.JPG)
 
 **R**
 
 
+```r
+# Sample names in order #PEDRO's alteration
+sample.names <- basename(filtFs) # doesn't drop fastq.gz
+sample.names <- gsub("_R1.fastq.gz", "", sample.names)
+sample.namesR <- basename(filtRs) # doesn't drop fastq.gz 
+sample.namesR <- gsub("_R2.fastq.gz", "", sample.namesR)
+```
 
-**Description about why these settings are changed**
+In the R script just be sure to check how your file names are ended.
+
+
+**Slurm**
+
+
+```bash
+
+#!/bin/bash -login
+
+#SBATCH --time=12:00:00
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=128G
+#SBATCH --job-name="04_learn_error_rates_dada2"
+#SBATCH --output="04_learn_error_rates_%j.output"
+
+conda activate dada2_ernakovich
+
+Rscript ../R/04_learn_error_rates_dada2_tutorial_16S.R
+
+conda deactivate
+
+```
+
+
+**Output**
 
 After you run the `04_learn_error_rates_dada2_tutorial_16S.R` script you can find different plots that will show you how, according to each of the 4 options, your learned error rates (black dots and lines) match an expected value (red lines). You'll see that in any of the 4 options there's a perfect match but what Ernakovich's lab recommend is to check that your dots are somewhat close to your black lines and that this lines should decrease along the x-axis (see their better explanation for this).
 
-You can find these plots on your *working directory* folder --> `02_filter` --> `preprocessed_F` & `preprocessed_R` --> `filtered` (all the way down, after you've passed all your .gz sequences, **Fig. X**).
+You can find these plots named `eerF_plot.rds`, `eerF_plot1.rds`, `eerF_plot2.rds`, `eerF_plot3.rds` and `eerF_plot4.rds` on your *working directory* folder --> `02_filter` --> `preprocessed_F` & `preprocessed_R` --> `filtered` (all the way down, after you've passed all your .gz sequences, Fig. 12).
 
-![Fig.X_04_output_plot-location](./images/04_output_plot-location.JPG)
+![Figure 12. Location of Forward error plots within Working Directory](./images/04_output_plot-location.JPG)
 
-As you see, you'll have 2 plots per option per forward and reverse = 8 plots (+2 of traditional example just to compare). We suggest you to transfer them to you computer and paste them on some slides so you can compare between them on one go.
+As you see, you'll have 2 plots per error model per forward and reverse = 8 plots (+2 of traditional example just to compare). We suggest you to transfer them to you computer and paste them on some slides so you can compare between them on one go.
 
 With my samples I got this output:
 
 **Traditional way**
 
-![Fig.X_04_output_0-traditional](./images/04_output_0-traditional.JPG)
+![Figure 13. Traditional way of learning error rates - 16S ](./images/04_output_0-traditional.JPG)
 
 As you can see if I was to use the traditional way my results would be a bit crappy
 
 **Option 1**
 
-![Fig.X Option 1](./images/04_output_1.JPG)
+![Figure 14. Option 1](./images/04_output_1.JPG)
 
 Doesn't look that bad
 
 **Option 2**
 
-![Fig.X Option 2](./images/04_output_2.JPG)
+![Figure 15. Option 2](./images/04_output_2.JPG)
 
 It looks off --> not the one to choose
 
 **Option 3**
 
-![Fig.X Option 3](./images/04_output_3.JPG)
+![Figure 16. Option 3](./images/04_output_3.JPG)
 
 Doesn't look that bad but Option 1 still looks better
 
 **Option 4**
 
-![Fig.X Option 4](./images/04_output_4.JPG)
+![Figure 17. Option 4](./images/04_output_4.JPG)
 
 Also doesn't look that bad, so now it's between Option 1 and Option 4.
 
 **Comparison between 1 and 4**
 
-![Fig.X Comparison between Option 1 and 4](./images/04_output_1vs4.JPG)
+![Figure 18. Comparison between Option 1 and 4 error rates](./images/04_output_1vs4.JPG)
 
 Honestly I can't see a difference between these 2 options, both of them go down across the x axis and points seem to be scattered in the same way across the black line. Looking at this **I will choose Option IV**, only for the reason of keeping it consistent with Pedro's choice for the Family Experiment (where half of my samples come from). This error rate learning option will be used on Script 05.
 
 ## 05_infer_ASVs_dada2_tutorial_16S
 
-On this script you infer which reads belong to which ASV taking into account the error rates from step 04. Dada2 allows you to assign this by either pooling all your samples (`pool=TRUE`) or processing each sample independently (`pool=FALSE`), the difference between these 2 options are that pooling increases your "resolution" on rare taxa but requires much more computational time. As explained in the [dada2 site](https://benjjneb.github.io/dada2/pool.html), differences between these 2 options are \[in the example that they used\] less than 1% on the total number of ASVs. For this reason, we'll go without pooling and choose the fast method. If you are interested in rare taxa, consider changing to `pool=FALSE` setting.
+On this script you infer which reads belong to which ASV taking into account the error rates from step 04. Dada2 allows you to assign this by either pooling all your samples (`pool=TRUE`) or processing each sample independently (`pool=FALSE`), the difference between these 2 options are that pooling increases your "resolution" on rare taxa but requires much more computational time. As explained in the [dada2 site](https://benjjneb.github.io/dada2/pool.html), differences between these 2 options are in the example that they used less than 1% on the total number of ASVs. For this reason, we'll go without pooling and choose the fast method. If you are interested in rare taxa, consider changing to `pool=FALSE` setting.
 
 Now, let's look at what changes we've made to the .R and .slurm files:
-
-**slurm**
-
-Fig.X Settings for HPC to run script 05
-
-
 
 **R**
 
@@ -621,26 +662,51 @@ for(sam in sample.names) {
 ```
 
 
+**slurm**
+
+
+```bash
+
+#!/bin/bash -login
+
+#SBATCH --time=16:00:00
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=64G
+#SBATCH --job-name="05_infer_ASVs_dada2"
+#SBATCH --output="05_infer_ASVs_dada2_%j.output"
+
+conda activate dada2_ernakovich
+
+## Instruct your program to make use of the number of desired threads.
+## As your job will be allocated an entire node, this should normally
+## be 24.
+Rscript ../R/05_infer_ASVs_dada2_tutorial_16S.R
+
+conda deactivate
+
+```
+
 
 **output** 
 
 After sbatching this script and if everything goes well you should have in your `05_infer_ASVs_dada2_numberX.output` file something like this:
 
-![Fig.X Slurm output Script 05 1/2](./images/05_output_1.JPG)
+![Figure 19. Slurm output Script 05 1/2](./images/05_output_1.JPG)
 
 followed by a tail of this:
 
-![Fig.X Slurm output Script 05 2/2](./images/05_output_2.JPG)
+![Figure 20. Slurm output Script 05 2/2](./images/05_output_2.JPG)
 
 --> Now you are ready for Script 06!
 
 ## 06_remove_chimeras_dada2_tutorial_16S
 
-Now comes the last script from the dada2-Ernakovich pipeline in which you will remove chimeras (and originally also asign the taxonomy to your ASV sequences). [Chimeras](https://en.wikipedia.org/wiki/Chimera_(molecular_biology)) are hybrid ASV sequences that are a by-product of the PCR amplification in which the extension step on ASV 'A' gets aborted and the resulting short aborted sequence is then used in the next cycle as a "primer" to amplify another ASV 'B'. The product of this is a 'ASV A-B' chimeric sequence, and you don't want those in your data as they are not real (but some sort of Frankestein ASV) and could take you to misleading results. Hence, in this part the pipeline looks for those chimeric sequences and removes them from your ASV table, for details check the [Ernakovich GitHub](**Missing%20link**) or [Dada2](**Missing%20link**) pipeline.
+Now comes the last script from the dada2-Ernakovich pipeline in which you will remove chimeras (and originally also asign the taxonomy to your ASV sequences). [Chimeras](https://en.wikipedia.org/wiki/Chimera_(molecular_biology)) are hybrid ASV sequences that are a by-product of the PCR amplification in which the extension step on ASV 'A' gets aborted and the resulting short aborted sequence is then used in the next cycle as a "primer" to amplify another ASV 'B'. The product of this is a 'ASV A-B' chimeric sequence, and you don't want those in your data as they are not real (but some sort of Frankestein ASV) and could take you to misleading results. Hence, in this part the pipeline looks for those chimeric sequences and removes them from your ASV table, for details check the [Ernakovich GitHub](https://github.com/ErnakovichLab/dada2_ernakovichlab) or [Dada2](https://benjjneb.github.io/dada2/tutorial.html) pipeline.
 
 Originally, this script's name is `06_remove_chimeras_assign_taxonomy_dada2_tutorial_16S.R` as it also included a step in which you use a reference database to assign taxonomy to your ASV table. We will not do this as it was noticed by Pedro Beschoren and Roland Berdaguer that assigning taxonomy with dada2 `dada2::assignTaxonomy()` resulted in much more 'NAs' (taxonomy not assigned) than when using Qiime2 (classify-sklearn) instead. For this reason we'll keep this step 06 to just remove chimeras and get a final ASV table that we'll use later as input for step 07 in which we will assign taxonomy with Qiime2.
 
-I ussed diffcheck to see [differences in the code](https://www.diffchecker.com/KLRB94HM) between Roland (removed taxonomy) and Pedro (extra filtering step) and renamed the files to remove the `assign_taxonomy` part from the title:
+I used diffcheck to see [differences in the code](https://www.diffchecker.com/KLRB94HM) between Roland (removed taxonomy) and Pedro (extra filtering step) and renamed the files to remove the `assign_taxonomy` part from the title:
 
 
 ```bash
@@ -660,7 +726,7 @@ Part 04 removes chimeras and part 05 makes a summary of all the reads across the
 
 **R**
 
-**All parts from assigning taxonomy were removed.**
+_All parts from assigning taxonomy were removed_
 
 An extra filtering step (Pedro Beschoren) was added so final object was not that heavy to handle locally in R studio
 
@@ -720,7 +786,26 @@ write.table(seqtab.t, file = paste0(table.fp, "/seqtab_final.txt"),
 
 **slurm**
 
-![Fig.X Settings for HPC to run script 06](./images/06_slurm.JPG)
+
+```bash
+
+#!/bin/bash -login
+
+#SBATCH --time=16:00:00
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=128G
+#SBATCH --job-name="06_remove_chimeras"
+#SBATCH --output="06_remove_chimeras_dada2_%j.output"
+
+conda activate dada2_ernakovich
+
+Rscript ../R/06_remove_chimeras_dada2_tutorial_16S.R
+
+conda deactivate
+
+```
+
 
 **output**
 
@@ -728,17 +813,17 @@ For my samples it took about \~2 hours to run,
 
 In my `06_remove_chimeras_dada2_###.output` file I had something like this at the beginning:
 
-![Fig.X Slurm output Script 06 1/2](./images/06_output1.JPG)
+![Figure 21. Slurm output Script 06 1/2](./images/06_output1.JPG)
 
 that finished with this:
 
-![Fig.X Slurm output Script 06 2/2](./images/06_output2.JPG)
+![Figure 22. Slurm output Script 06 2/2](./images/06_output2.JPG)
 
-I found strange that in denoised F and denoised R I have `0`, so I check the `tracking_reads_summary_plot.png` file and saw that something must have gone wrong after the filtering step!!
+I found strange that in denoised F and denoised R I have `0`, so I check the `tracking_reads_summary_plot.png` file (Fig. 23) and saw that something must have gone wrong after the filtering step!!
 
-![Fig.X Summary plot of reads throughout pipeline](images/06_tracking_reads_summary_plot-fail.png)
+![Figure 23. Summary plot of reads throughout pipeline - 16S](images/06_tracking_reads_summary_plot-fail.png)
 
-After trying several things I realized that the process was okay & I didn't have 0 reads at the end but the 'Sample' names were not the same for all dataframes that were joined so I had to modify a bit again the script to:
+After trying several things I realized that the process was okay and I didn't have 0 reads at the end but the 'Sample' names were not the same for all dataframes that were joined so I had to modify a bit again the R script to:
 
 
 ```r
@@ -754,19 +839,26 @@ Be careful to change in between the "" with how your files are ending!!
 
 After doing this, then I get this new `tracking_reads_summary_plot.png`:
 
-![Fig.X Summary plot of reads throughout pipeline-Good one](./images/06_tracking_reads_summary_plot-good.png)
+![Figure 24. Summary plot of reads throughout pipeline- 16S Good one](./images/06_tracking_reads_summary_plot-good.png)
 
-It looks like something went wrong in the 'Merging' step as the number of reads drop about 20%. ***This needs to be checked***
+It looks like something went wrong in the 'Merging' step of the 16S data as the number of reads drop about 20%. 
 
+***This needs to be checked (MA)***
 STILL NEED TO GO BACK AND CHECK 'MERGE PAIRED READS' STEP from DADA2!! ([\<https://benjjneb.github.io/dada2/tutorial.html>](https://benjjneb.github.io/dada2/tutorial.html){.uri})
+
+Not like the ITS data that looks a bit better (Fig. 25)
+
+![Figure 25. Summary plot of reads throughout pipeline - ITS](./images/06_tracking_reads_summary_plot-ITS.jpg)]
 
 ## 07_Assigning taxonomies to ASVs
 
 As mentioned before we will now assign taxonomy to each of our ASVs according to the [SILVA rRNA database](https://www.arb-silva.de/) which is a huge database that matches taxonomy with the sequence of the small subunit of ribosomal RNA (16S/18S). This step will be a bit different of what we've been doing as it will not run in R but in Qiime2.
 
-[Qiime2](https://docs.qiime2.org/2022.8/about/) is a streamlined pipeline used to analyze microbiome data. It takes you from the very start (raw reads) and it finishes with multiple options of statistical analysis and visualizations. For another explanation/summary of Qiime2, you can visit this tutorial: [https://hackmd.io/\@MAE-MBL/HylpoaOF5#Bioinformatics-III-qiime2](https://hackmd.io/@MAE-MBL/HylpoaOF5#Bioinformatics-III-qiime2){.uri} that I find easier to follow than the original one. One of the steps of the Qiime2 pipeline is, of course, to assign taxonomy to ASVs according to a (*trained*) database.
+[Qiime2](https://docs.qiime2.org/2022.8/about/) is a streamlined pipeline used to analyze microbiome data. It takes you from the very start (raw reads) and it finishes with multiple options of statistical analysis and visualizations. For another explanation/summary of Qiime2, you can visit this tutorial: [https://hackmd.io/\@MAE-MBL/HylpoaOF5#Bioinformatics-III-qiime2](https://hackmd.io/@MAE-MBL/HylpoaOF5#Bioinformatics-III-qiime2) that I find easier to follow than the original one. One of the steps of the Qiime2 pipeline is, of course, to assign taxonomy to ASVs according to a (*trained*) database.
 
 I highlight the word *trained* as this is an **extra step** that you will have to do in case you didn't use the same primers we did (see table below) for your 16S/ITS regions. In a nutshell, training means that you keep only the region of your interest so the SILVA database can assign taxonomy with more accuracy.If you need to train your classifier, please follow [this tutorial to train your SILVA database with RESCRIPt](https://forum.qiime2.org/t/processing-filtering-and-evaluating-the-silva-database-and-other-reference-sequence-data-with-rescript/15494).
+
+Set of 16S and ITS primers used
 
 +-----------+-----------+-------------------------+-----------+--------------------------+
 |           | 16S       | 16S                     | ITS       | ITS                      |
@@ -778,13 +870,16 @@ I highlight the word *trained* as this is an **extra step** that you will have t
 | Reverse   | 805r      | "GACTACHVGGGTATCTAATCC" | ITS2R     | "GCTGCGTTCTTCATCGATGC"   |
 +-----------+-----------+-------------------------+-----------+--------------------------+
 
-: Set of 16S and ITS primers used
 
 As I'm using the same primers to amplify the V3-V4 16S region that both Pedro and Roland used, I can use the same already-trained SILVA database that they used and skip the training step.
 
 To run Qiime2 you need to [install it, and activate within a conda environment inside the HPC](https://docs.qiime2.org/2022.8/install/native/#install-qiime-2-within-a-conda-environment) if you don't have it already installed. The instructions are straightforward, but most likely this step will take you time as you'll have to wait some time for conda and plug-ins to get downloaded (so take it into account).
 
-Once installed, you'll have to run script 07 which it will be the actual script that you'll run directly with *sbatch* (not like the previous R scripts)
+Once installed, you'll have to run script 07 which it will be the actual script that you'll run directly with *sbatch* (not like the previous R scripts).
+
+You'll find your ASV table inside of _Working directory_ --> `03_tabletax` --> `repset.fasta`. First you convert it to an 'artifact' that Qiime2 understands (from .fasta to .qza), then you assign taxonomy with your trained database, in my case `silva-138.1-ssu-nr99-341f-805r-classifier.qza` that I obtained from Roland and Pedro and copied to the main folder beforehand. And then, you export the final taxonomy file into a new folder `16S_sklearn_taxonomy`. 
+
+For ITS, we used the UNITE database `unite-tax-ver9_dynamic_all_29.11.2022_dev.qza` 
 
 **slurm**
 
@@ -801,7 +896,7 @@ Once installed, you'll have to run script 07 which it will be the actual script 
 #SBATCH --output="07_assign_taxonomy_sklearn_%j.output"
 
 # activates qiime2 environment
-conda activate qiime2-2022.8
+conda activate qiime2-2022.8 #change here for your version of qiime2
 
 # imports representative sequences in FASTA format
 qiime tools import \
@@ -817,7 +912,7 @@ qiime feature-classifier classify-sklearn \
   --o-classification /lustre/nobackup/INDIVIDUAL/arago004/ernakovichlab_pipeline/16S_processed_MA/03_tabletax/taxonomy_16S.qza
 
 
-# Export the taxonomy from the .qza taxonomy assingment trained with the correct priemr set, it also crates a new folder in the process
+# Export the taxonomy from the .qza taxonomy assignment trained with the correct primer set, it also creates a new folder in the process
 qiime tools export \
 --input-path /lustre/nobackup/INDIVIDUAL/arago004/ernakovichlab_pipeline/16S_processed_MA/03_tabletax/taxonomy_16S.qza \
 --output-path /lustre/nobackup/INDIVIDUAL/arago004/ernakovichlab_pipeline/16S_processed_MA/03_tabletax/16S_sklearn_taxonomy
@@ -838,28 +933,87 @@ Exported /lustre/nobackup/INDIVIDUAL/arago004/ernakovichlab_pipeline/16S_process
 
 ```
 
+## 08_Making phylogenetic tree 
 
-## 08_Importing data to R
+This extra step is not necessary, but recommended before you start importing your data into R. So far you have almost everything ready, except you will be missing the phylogeny of your microbial ASVs. This is important as it will help you calculate distance metrics based on phylogenetic relationships such as [UniFrac](https://en.wikipedia.org/wiki/UniFrac).
+
+To create a 'quick' phylogenetic tree you can follow this [Qiime2 tutorial for phylogenetic inference](https://docs.qiime2.org/2023.5/tutorials/phylogeny/) and use the summarized pipeline `align-to-tree-mafft-fasttree` to create your phylogenetic tree by using only one command. 
 
 
-And that's it, you've made it! Now you are ready to import your data to R. The files that you will need are inside of the 03.Taxonomy folder and are:
 
-* The `seqtab_final.txt` or `seqtab_final.rds`--> that will be your OTU table (otu_table) The .rds is lighter than the .txt
-* `repset.fasta` --> that will be the DNA sequences for each ASV (refseq)
-* `taxonomy.tsv` --> that will be your the taxonomy table (tax_table)
+```bash
 
-* and your **metadata** file, in my case `Mapping_file_16S_Family_experiment.txt` that will be my metadata (sample_data) 
+#!/bin/bash -login
 
-![Fig.X Location of seqtab_final.txt/.rds and repset.fasta files](./images/08_OTU_and_Sequence_files.jpg)
+#SBATCH --time=08:00:00				  	### limit of wall clock time - original time was 8 hours
+#SBATCH --ntasks=1					      ### number of tasks - how many tasks (nodes) that you require (same as -n)
+#SBATCH --cpus-per-task=16			  ### number of CPUs (or cores) per task (same as -c)
+#SBATCH --mem=32G					        ### memory required per node - amount of memory (in bytes)
+#SBATCH --job-name="tree"			### you can give your job a name for easier identification (same as -J)
+#SBATCH --output="tree_%j.output"
 
-![Fig.X Location of taxonomy.tsv file](./images/08_Taxonomy_file.jpg)
 
-![Fig.X Location of metadata (mapping) file](./images/08_Metadata-mapping_file.jpg)
+# activates qiime2 environment
+conda activate qiime2-2022.8
+
+#From Qiime2(https://docs.qiime2.org/2022.8/tutorials/phylogeny/):
+#This pipeline will start by creating a sequence alignment using MAFFT,
+#after which any alignment columns that are phylogenetically uninformative or ambiguously aligned will be removed (masked).
+#The resulting masked alignment will be used to infer a phylogenetic tree and then subsequently rooted at its midpoint.
+#Output files from each step of the pipeline will be saved.
+#This includes both the unmasked and masked MAFFT alignment from q2-alignment methods, and both the rooted and unrooted phylogenies from q2-phylogeny methods.
+
+#Import refseq from R in fasta format and change it to .qza for the pipeline to work
+qiime tools import \
+  --input-path /lustre/nobackup/INDIVIDUAL/arago004/ernakovichlab_pipeline/ITS_processed_MA/03_tabletax/repset.fasta \
+  --output-path /lustre/nobackup/INDIVIDUAL/arago004/ernakovichlab_pipeline/ITS_processed_MA/repset_ITS.qza \
+  --type 'FeatureData[Sequence]'
+
+#Run qiime2 fast pipeline to make a phylogenetic tree
+qiime phylogeny align-to-tree-mafft-fasttree \
+  --i-sequences /lustre/nobackup/INDIVIDUAL/arago004/ernakovichlab_pipeline/ITS_processed_MA/repset_ITS.qza \
+  --output-dir /lustre/nobackup/INDIVIDUAL/arago004/ernakovichlab_pipeline/ITS_processed_MA/04_phylogenetic_tree
+
+# export tree from .qza to .nwk format
+qiime tools export \
+  --input-path /lustre/nobackup/INDIVIDUAL/arago004/ernakovichlab_pipeline/ITS_processed_MA/04_phylogenetic_tree/rooted_tree.qza \
+  --output-path /lustre/nobackup/INDIVIDUAL/arago004/ernakovichlab_pipeline/ITS_processed_MA/04_phylogenetic_tree/exported_rooted_tree
+
+conda deactivate
+
+```
+
+Now you'll have your tree in a `tree.nwk` file inside of _Working directory_ --> `04_phylogenetic_tree` --> `exported_rooted_tree`
+
+
+## 09_Importing data to R
+
+And that's it, you've made it! Now you are ready to import your data to R. The files that you will need are:
+
+Inside of the `03_tabletax` folder(3):
+
+1. The `seqtab_final.txt` or `seqtab_final.rds`--> that will be your OTU table (otu_table) The .rds is lighter than the .txt
+2. `repset.fasta` --> that will be the DNA sequences for each ASV (refseq)
+3. `taxonomy.tsv` --> that will be your the taxonomy table (tax_table)
+
+Inside of the `04_phylogenetic_tree` (1):
+
+4.`tree.nkw`  --> the phylogenetic tree [Optional]
+
+And finally, inside of your main _Working directory_ folder (1):
+
+5. The **metadata** file, in my case `Mapping_file_16S_Family_experiment.txt` that will be my metadata (sample_data) 
+
+![Figure 26. Location of seqtab_final.txt/.rds and repset.fasta files](./images/08_OTU_and_Sequence_files.jpg)
+
+![Figure 27. Location of taxonomy.tsv file](./images/08_Taxonomy_file.jpg)
+
+![Figure 28. Location of metadata (mapping) file](./images/08_Metadata-mapping_file.jpg)
 
 Finally, transfer these 4 files to your local computer and think about whether you would like to re-name them so their title is a bit more informative. For instance to track back that were for 16S and not ITS ;)
 
 
-![Fig.X All files in local folder](./images/08_all_Files_in_local_folder.jpg)
+![Figure 29. All files in local folder](./images/08_all_Files_in_local_folder.jpg)
 
 
 
