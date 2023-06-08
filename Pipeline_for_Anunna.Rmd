@@ -233,6 +233,17 @@ The `*` means you want to target all files and store the checksums in the file c
 
 Next, copy the checksums and file of the md5file before and after downloading into two different Excel sheets. Order the file names both sheets in the same way. Next, copy the check sums and file names of one sheet next to the file names and check sums of the other sheet and lat Excel compare the checksums. For instance, when the checksums of the sequencing company are in column A and the checksums after downloading are in column D, you can type in column F `=A1=D1`. Excel will print `TRUE` when the checksums are the same and `FALSE` when they are not (Fig. 9). You can use a function to count the number of False. This number should be 0.
 
+I use these formula in Excel to determine whether the name in column A equals the name of column D. And I count the number of trues and falses;
+
+=A2=D2
+
+=COUNTIF(F2:F1681, "TRUE")
+
+=COUNTIF(F3:F1682, "FALSE")
+
+
+![Figure 9. Screenshot of excel sheet used to verify checksums](./images/09_CheckingSumsExcel.png)
+
 *Figure 9. Show of screen shot of the Excel file*
 
 ## Separating data
