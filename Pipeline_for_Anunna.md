@@ -69,7 +69,7 @@ You can also install a complete Ubuntu terminal environment in your Windows (Win
 You access Anunna with the command:
 
 
-```bash
+``` bash
 
 ssh arago004@login.anunna.wur.nl 
 
@@ -91,7 +91,7 @@ Before you can get started in the HPC, you need to get familiar with Bash. There
 There are some basic commands that you will use all the time. We will discuss them down here.
 
 
-```bash
+``` bash
 ls    # print a list with all files in the current directory
 ll    # print a long (elaborate) list with all files in the current directory
 ls -l # other option for print a long (elaborate) list with all files in the current directory
@@ -172,7 +172,7 @@ Watch this [YouTube video](https://www.youtube.com/watch?v=BSM4ATQdYF0) with ins
 The sequencing company will provide you the information for downloading the data from their remote server to the HPC. This is an example of the email we received:
 
 
-```r
+``` r
 # Dear Pedro,
 # your 16S/ITS metabarcoding data (internal ID2577) is ready for download (delivery_20220922) via:
 # web-app: http://support.igatech.it/delivery
@@ -190,14 +190,14 @@ As the email stats, there are two options to access the data, directly from the 
 So, you go to the folder on the HPC where you want to store the data. First, you need to connect to the remote server of the sequencing company. The email states that you can do this via `SFTP`. After some googling, we found a [tutorial](https://linuxize.com/post/how-to-use-linux-sftp-command-to-transfer-files/) to explain how to do this. In short you first access the server of the sequencing company with the information provided in the email:
 
 
-```bash
+``` bash
 sftp beschoren-da-costa_pedro@support.igatech.it
 ```
 
 After that, you can navigate through the directories and you should see the same files as when you open the internet link in the email. After that you can use the `get` command to download the data. The `-r` argument is used to specify that you want to download a directory.
 
 
-```bash
+``` bash
 sftp get -r remote_directory
 ```
 
@@ -208,7 +208,7 @@ You can read the tutorial for more information.
 Just like you connected to the HPC in FileZilla, you can connect to the remote sever of the sequencing company. So go to the Site manager, click on New site and fill out the open fields like for instance:
 
 
-```r
+``` r
 #	Protocol: SFTP
 #	Host: support.igatech.it
 #	Port: 22 (provided by igatch)
@@ -224,7 +224,7 @@ Next, you can download the data to and external hard drive and the HPC.
 We would like to know whether all files are downloaded well. We can compare this by comparing the checksums of the files with sequencing data before and after downloading. A checksum is a unique code of a file. This code does not change when the file is downloaded correctly. The sequencing company will provide a file with the checksums of all files. Such a file is called a md5file. After downloading, you can make your own md5file and compare the two. Go to the directory with your sequencing data files and do the following:
 
 
-```bash
+``` bash
 md5sum * > filename
 ```
 
@@ -232,11 +232,24 @@ The `*` means you want to target all files and store the checksums in the file c
 
 Next, copy the checksums and file of the md5file before and after downloading into two different Excel sheets. Order the file names both sheets in the same way. Next, copy the check sums and file names of one sheet next to the file names and check sums of the other sheet and lat Excel compare the checksums. For instance, when the checksums of the sequencing company are in column A and the checksums after downloading are in column D, you can type in column F `=A1=D1`. Excel will print `TRUE` when the checksums are the same and `FALSE` when they are not (Fig. 9). You can use a function to count the number of False. This number should be 0.
 
+I use these formula in Excel to determine whether the name in column A equals the name of column D. And I count the number of trues and falses;
+
+=A2=D2
+
+=COUNTIF(F2:F1681, "TRUE")
+
+=COUNTIF(F3:F1682, "FALSE")
+
+
+![Figure 9. Screenshot of excel sheet used to verify checksums](./images/09_CheckingSumsExcel.png)
+
 *Figure 9. Show of screen shot of the Excel file*
 
-## Separating data
+## Separating/finding files
 
 It can happen that samples of multiple of your experiments are sequenced at once. In that case, you have to separate the sequence data of the experiments before doing the analysis. It is wise to backup your data before doing this. Regular expressions can be used to select the files of one experiment. A very nice tutorial about regular expressions can be found [here](https://www.howtogeek.com/661101/how-to-use-regular-expressions-regexes-on-linux/). 
+
+### Kris'example
 
 First, determine what the sample names are of the samples you want to select. For instance, I wanted the samples
    `IDXXXX_20-R11-P05-D03`   
@@ -250,7 +263,7 @@ After that, you can try to build a regular expression that covers all the files 
 You can try your own regular expression on a file with all file names in there. The `grep` function takes out of the `Filename` file all file names that match with the regular expression and puts it in a new file called `Selectedfilenames`. Afterwards, you can count the number of lines in the new file to check whether you greped the right number of names.
 
 
-```bash
+``` bash
 
 grep -E "[2-5][0-9]-.*-P05" Filenames > SelectedFilenames # grep the file names
 wc -l SelectedFilenames # count the number of lines
@@ -262,7 +275,7 @@ When this works well and you can select all files you need, you can copy or move
 For instance, here I was in a directory with the ITS and 16S directory. I moved from the ITS and 16S directory these files, one directory back and then into two other directories. Mind here that the coding of regular expressions is a little bit differed for files than for lines in a file. In stead of a `.*`, we use a `*` to indicate there can be anything for a given number of characters. We have to put a `*` at the beginning and the end of the expression when the general expression does not start at the beginning of the file name and does not end at the end.
 
 
-```bash
+``` bash
 
 mv ITS/*[2-5][0-9]-*-P05* ../raw_reads_Kris/ITS # move ITS files from where I am to two folders back
 mv 16S/*[2-5][0-9]-*-P05* ../raw_reads_Kris/16S # move 16S files from where I am to two folders back
@@ -271,6 +284,60 @@ ls ../raw_reads_Kris/16S | wc -l # count the number of 16S files that were copie
 ls ../raw_reads_Kris/ITS | wc -l # count the number of ITS files that were copied
 ```
 
+
+### Marcela's example
+
+In my case, in this example, I want to only get those files belonging to Brassica oleracea - Medium (48 samples for 16S and 48 samples for ITS) amongst the pool of all the samples from the family experiment (~3,500 samples). The files are not really in the same order as the are in the mapping file, so I have to look for them specifically. 
+
+
+``` bash
+
+#example
+
+ls | head -10
+
+NS.1717.001.FLD_ill_001_i7---IDT_i5_11.1585_ITS_R2.fastq.gz
+NS.1717.001.FLD_ill_001_i7---IDT_i5_12.ERF_Z5_1_div_ITS2_R1.fastq.gz
+NS.1717.001.FLD_ill_001_i7---IDT_i5_12.ERF_Z5_1_div_ITS2_R2.fastq.gz
+NS.1717.001.FLD_ill_001_i7---IDT_i5_2.S1_nod_ITS2_R2.fastq.gz
+NS.1717.001.FLD_ill_001_i7---IDT_i5_3.1345_ITS_R1.fastq.gz
+NS.1717.001.FLD_ill_001_i7---IDT_i5_4.193_ITS_R2.fastq.gz
+NS.1717.001.FLD_ill_001_i7---IDT_i5_7.913_ITS_I2.fastq.gz
+NS.1717.001.FLD_ill_001_i7---IDT_i5_8.1241_ITS_R1.fastq.gz
+NS.1717.001.FLD_ill_001_i7---IDT_i5_9.577_ITS_R2.fastq.gz
+
+```
+
+If we take the last file `NS.1717.001.FLD_ill_001_i7---IDT_i5_9.577_ITS_R2.fastq.gz` the Sample ID name is `577` which means that if I run `find . -type f -iname "*i5_*\.577_*"` I will get all the matches of sample 577, both 16S and ITS. 
+
+The Bole-Medium samples I'm looking for go from Harvest_ID 1153 to 1200 and includes a sample named 'Blank_S9' so I need to find a command with regular expressions that allows me to do this.
+
+If we start with the blank samples;
+
+
+``` bash
+
+find . -type f -iname "*Blank_S9_*_R*"
+
+./NS.1717.001.FLD_ill_096_i7---IDT_i5_2.Blank_S9_ITS_R1.fastq.gz
+./NS.1717.001.FLD_ill_192_i7---IDT_i5_2.Blank_S9_16S_R1.fastq.gz
+./NS.1717.001.FLD_ill_192_i7---IDT_i5_2.Blank_S9_16S_R2.fastq.gz
+./NS.1717.001.FLD_ill_096_i7---IDT_i5_2.Blank_S9_ITS_R2.fastq.gz
+
+#This is what I want
+```
+
+Now to copy those files I add this extra line `find . -type f -iname "*Blank_S9_16S_R*" -exec cp {} /archive/INDIVIDUAL/arago004/BKim_raw_fastq/16S/ \;`which means that I would like to copy what it found to a folder called 16S in another location.
+
+I first used:
+`find . -type f -iname "*115[3-9]_16S_R[1-2]*" -exec cp {} /archive/INDIVIDUAL/arago004/BKim_raw_fastq/16S/ \;` to get samples 1153 to 1159.
+
+Then
+`find . -type f -iname "*11[6-9][0-9]_16S_R[1-2]*" -exec cp {} /archive/INDIVIDUAL/arago004/BKim_raw_fastq/16S/ \;` to get samples 1160 to 1199.
+
+and finally, `find . -type f -iname "*1200_16S_R[1-2]*" -exec cp {} /archive/INDIVIDUAL/arago004/BKim_raw_fastq/16S/ \;`to get sample 1200
+
+Ready!
 
 # Running the DADA2 (Ernakovich pipeline) for NovaSeq data
 
@@ -288,14 +355,14 @@ There are a few things you need to do before you can start as listed in [Set up 
 Miniconda is smaller than conda and works perfect. I used the version: Miniconda3-py39_4.12.0-Linux-x86_64. You can use the following code to make sure that miniconda is not activated automatically at start up.
 
 
-```bash
+``` bash
 conda config --set auto_activate_base false
 ```
 
 You can activate and deactivate the conda environment like the code below. You will see a conda appearing in front of your working directory.
 
 
-```bash
+``` bash
 conda activate
 conda deactivate
 ```
@@ -305,7 +372,7 @@ conda deactivate
 Now you will create a special conda dada2_Ernakovich environment in which you are going to run the pipeline. Navigate to the Ernakovich pipeline directory and run the following code to install the environment.
 
 
-```bash
+``` bash
 module purge 		#Deactivates all activated modules
 conda activate
 cd dada2_ernakovichlab-main
@@ -316,7 +383,7 @@ conda activate dada2_ernakovich
 Now, the conda dada2_ernakovich environment is installed and activated. You can deactivate it for now. You will activate and deactivate this environment every time you are running a slurm script.
 
 
-```bash
+``` bash
 conda activate dada2_ernakovich
 conda deactivate
 ```
@@ -341,7 +408,7 @@ We first have to setup the data2 pipeline by installing the necessary R packages
 The Ernakovich lab has made very elaborate slurm scripts that contains a lot of interesting information. You can reed this once. After that, you can reduce the script to the following essential elements. `#SBATCH` is a command for the slurm script, the line is a command when having two or more #s.
 
 
-```bash
+``` bash
 
 #!/bin/bash -login 	            ### -login is essential to activate conda environment
 
@@ -364,7 +431,7 @@ conda deactivate
 After you've checked that your `00_setup_dada2_tutorial_16S.slurm` file is correct, you will send it to the HPC to process by typing from the /slurm folder;
 
 
-```bash
+``` bash
 
 sbatch 00_setup_dada2_tutorial_16S.slurm
 
@@ -374,7 +441,7 @@ You'll see that your job has been submitted and will have a jobid number which c
 
 
 
-```bash
+``` bash
 
 squeue -u arago004 
 
@@ -392,7 +459,7 @@ Here, we will remove sequences with many unknown nucleotides (Ns) and the primer
 Change the primer sequences in the R script to the primer sequences you have used. An example is shown in a snapshot of the chunk below.
 
 
-```r
+``` r
 # Set up the primer sequences to pass along to cutadapt
 FWD <- "CCTACGGGNGGCWGCAG"  ## changed to 16S-341R
 REV <- "GACTACHVGGGTATCTAATCC"  ## Changed to 16S-805R
@@ -404,7 +471,7 @@ REV <- "GACTACHVGGGTATCTAATCC"  ## Changed to 16S-805R
 Furthermore, Pedro added some lines to the function that runs cutadapt.
 
 
-```r
+``` r
 # Run Cutadapt                    ## Some additions of Pedro used by Kris
 for (i in seq_along(fnFs)) {
   system2(cutadapt, args = c("-j", 0, R1.flags, R2.flags, "-n", 2, # -n 2 required to remove FWD and REV from reads
@@ -421,7 +488,7 @@ for (i in seq_along(fnFs)) {
 This slurm script is run with the minimal CPUs and memory to run the R script. 
 
 
-```bash
+``` bash
 
 #!/bin/bash -login 	            ### -login is essential to activate conda environment
 
@@ -461,7 +528,7 @@ Nothing changes
 **slurm script**
 
 
-```bash
+``` bash
 
 #!/bin/bash -login
 
@@ -497,7 +564,7 @@ In here you will filter out those reads that don't match your criteria based on 
 **R script**
 
 
-```r
+``` r
 # PEDRO's ajustment was to remove truncation (our reads are very short) and reduce max error allowed maxEE to 1 (we have good quality)
 filt_out <- filterAndTrim(fwd=file.path(subF.fp, fastqFs), filt=file.path(filtpathF, fastqFs),
                           rev=file.path(subR.fp, fastqRs), filt.rev=file.path(filtpathR, fastqRs),
@@ -511,7 +578,7 @@ As for ITS data the length is variable is important to remove the `truncLen` arg
 **slurm script**
 
 
-```bash
+``` bash
 
 #!/bin/bash -login
 
@@ -550,7 +617,7 @@ Now, let's look at what changes we've made to the slurm and .R files:
 **R**
 
 
-```r
+``` r
 # Sample names in order #PEDRO's alteration
 sample.names <- basename(filtFs) # doesn't drop fastq.gz
 sample.names <- gsub("_R1.fastq.gz", "", sample.names)
@@ -564,7 +631,7 @@ In the R script just be sure to check how your file names are ended.
 **Slurm**
 
 
-```bash
+``` bash
 
 #!/bin/bash -login
 
@@ -641,7 +708,7 @@ Now, let's look at what changes we've made to the .R and .slurm files:
 **R**
 
 
-```r
+``` r
 # For each sample, get a list of merged and denoised sequences
 for(sam in sample.names) {
   cat("Processing:", sam, "\n")
@@ -665,7 +732,7 @@ for(sam in sample.names) {
 **slurm**
 
 
-```bash
+``` bash
 
 #!/bin/bash -login
 
@@ -709,7 +776,7 @@ Originally, this script's name is `06_remove_chimeras_assign_taxonomy_dada2_tuto
 I used diffcheck to see [differences in the code](https://www.diffchecker.com/KLRB94HM) between Roland (removed taxonomy) and Pedro (extra filtering step) and renamed the files to remove the `assign_taxonomy` part from the title:
 
 
-```bash
+``` bash
 
 #' In the R folder 
 mv 06_remove_chimeras_assign_taxonomy_dada2_16S.R 06_remove_chimeras_dada2_16S.R
@@ -733,7 +800,7 @@ An extra filtering step (Pedro Beschoren) was added so final object was not that
 I included a step to save the taxonomy table without filtering first so we can compare it later:
 
 
-```r
+``` r
 # Write results to disk
 saveRDS(seqtab.nochim, paste0(table.fp, "/seqtab_final_nofiltered.rds")) #save it so you see the difference in size 
 ```
@@ -741,7 +808,7 @@ saveRDS(seqtab.nochim, paste0(table.fp, "/seqtab_final_nofiltered.rds")) #save i
 Then added Pedro's filtering steps
 
 
-```r
+``` r
 # PEDRO'S ALTERATION: check number of columns (ASV) per rows (samples) of the original object and when reducing the number of ASVs by minimal abundance
 # number of samplex X ASVs in full dataset, and then the same dataset by filtering more than 0, 1, 2, 3 occurences
 dim(seqtab.nochim)
@@ -762,7 +829,7 @@ saveRDS(seqtab.nochim, paste0(table.fp, "/seqtab_final.rds"))
 Changed names inside of function and save only the repset in .fasta and .txt formats
 
 
-```r
+``` r
 # Write repset to fasta file
 # create a function that writes fasta sequences
 writeRepSetFasta<-function(data, filename){
@@ -787,7 +854,7 @@ write.table(seqtab.t, file = paste0(table.fp, "/seqtab_final.txt"),
 **slurm**
 
 
-```bash
+``` bash
 
 #!/bin/bash -login
 
@@ -826,7 +893,7 @@ I found strange that in denoised F and denoised R I have `0`, so I check the `tr
 After trying several things I realized that the process was okay and I didn't have 0 reads at the end but the 'Sample' names were not the same for all dataframes that were joined so I had to modify a bit again the R script to:
 
 
-```r
+``` r
 # tracking reads by counts
 filt_out_track <- filt_out %>%
   data.frame() %>%
@@ -884,7 +951,7 @@ For ITS, we used the UNITE database `unite-tax-ver9_dynamic_all_29.11.2022_dev.q
 **slurm**
 
 
-```bash
+``` bash
 
 #!/bin/bash -login
 
@@ -926,7 +993,7 @@ conda deactivate
 the `07_assign_taxonomy_sklearn_#.output` file should contain just a couple of lines letting you know that all the steps you asked for were made:
 
 
-```bash
+``` bash
 
 Imported /lustre/nobackup/INDIVIDUAL/arago004/ernakovichlab_pipeline/16S_processed_MA/03_tabletax/repset.fasta as DNASequencesDirectoryFormat to /lustre/nobackup/INDIVIDUAL/arago004/ernakovichlab_pipeline/16S_processed_MA/03_tabletax/re$Saved FeatureData[Taxonomy] to: /lustre/nobackup/INDIVIDUAL/arago004/ernakovichlab_pipeline/16S_processed_MA/03_tabletax/taxonomy_16S.qza
 Exported /lustre/nobackup/INDIVIDUAL/arago004/ernakovichlab_pipeline/16S_processed_MA/03_tabletax/taxonomy_16S.qza as TSVTaxonomyDirectoryFormat to directory /lustre/nobackup/INDIVIDUAL/arago004/ernakovichlab_pipeline/16S_processes/03_t$
@@ -941,7 +1008,7 @@ To create a 'quick' phylogenetic tree you can follow this [Qiime2 tutorial for p
 
 
 
-```bash
+``` bash
 
 #!/bin/bash -login
 
