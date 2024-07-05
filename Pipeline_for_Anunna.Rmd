@@ -246,9 +246,11 @@ I use these formula in Excel to determine whether the name in column A equals th
 
 *Figure 9. Show of screen shot of the Excel file*
 
-## Separating data
+## Separating/finding files
 
 It can happen that samples of multiple of your experiments are sequenced at once. In that case, you have to separate the sequence data of the experiments before doing the analysis. It is wise to backup your data before doing this. Regular expressions can be used to select the files of one experiment. A very nice tutorial about regular expressions can be found [here](https://www.howtogeek.com/661101/how-to-use-regular-expressions-regexes-on-linux/). 
+
+### Kris'example
 
 First, determine what the sample names are of the samples you want to select. For instance, I wanted the samples
    `IDXXXX_20-R11-P05-D03`   
@@ -281,6 +283,58 @@ ls ../raw_reads_Kris/16S | wc -l # count the number of 16S files that were copie
 ls ../raw_reads_Kris/ITS | wc -l # count the number of ITS files that were copied
 ```
 
+
+### Marcela's example
+
+In my case, in this example, I want to only get those files belonging to Brassica oleracea - Medium (48 samples for 16S and 48 samples for ITS) amongst the pool of all the samples from the family experiment (~3,500 samples). The files are not really in the same order as the are in the mapping file, so I have to look for them specifically. 
+
+```{bash eval=F, echo=T, error=T}
+
+#example
+
+ls | head -10
+
+NS.1717.001.FLD_ill_001_i7---IDT_i5_11.1585_ITS_R2.fastq.gz
+NS.1717.001.FLD_ill_001_i7---IDT_i5_12.ERF_Z5_1_div_ITS2_R1.fastq.gz
+NS.1717.001.FLD_ill_001_i7---IDT_i5_12.ERF_Z5_1_div_ITS2_R2.fastq.gz
+NS.1717.001.FLD_ill_001_i7---IDT_i5_2.S1_nod_ITS2_R2.fastq.gz
+NS.1717.001.FLD_ill_001_i7---IDT_i5_3.1345_ITS_R1.fastq.gz
+NS.1717.001.FLD_ill_001_i7---IDT_i5_4.193_ITS_R2.fastq.gz
+NS.1717.001.FLD_ill_001_i7---IDT_i5_7.913_ITS_I2.fastq.gz
+NS.1717.001.FLD_ill_001_i7---IDT_i5_8.1241_ITS_R1.fastq.gz
+NS.1717.001.FLD_ill_001_i7---IDT_i5_9.577_ITS_R2.fastq.gz
+
+```
+
+If we take the last file `NS.1717.001.FLD_ill_001_i7---IDT_i5_9.577_ITS_R2.fastq.gz` the Sample ID name is `577` which means that if I run `find . -type f -iname "*i5_*\.577_*"` I will get all the matches of sample 577, both 16S and ITS. 
+
+The Bole-Medium samples I'm looking for go from Harvest_ID 1153 to 1200 and includes a sample named 'Blank_S9' so I need to find a command with regular expressions that allows me to do this.
+
+If we start with the blank samples;
+
+```{bash}
+
+find . -type f -iname "*Blank_S9_*_R*"
+
+./NS.1717.001.FLD_ill_096_i7---IDT_i5_2.Blank_S9_ITS_R1.fastq.gz
+./NS.1717.001.FLD_ill_192_i7---IDT_i5_2.Blank_S9_16S_R1.fastq.gz
+./NS.1717.001.FLD_ill_192_i7---IDT_i5_2.Blank_S9_16S_R2.fastq.gz
+./NS.1717.001.FLD_ill_096_i7---IDT_i5_2.Blank_S9_ITS_R2.fastq.gz
+
+#This is what I want
+```
+
+Now to copy those files I add this extra line `find . -type f -iname "*Blank_S9_16S_R*" -exec cp {} /archive/INDIVIDUAL/arago004/BKim_raw_fastq/16S/ \;`which means that I would like to copy what it found to a folder called 16S in another location.
+
+I first used:
+`find . -type f -iname "*115[3-9]_16S_R[1-2]*" -exec cp {} /archive/INDIVIDUAL/arago004/BKim_raw_fastq/16S/ \;` to get samples 1153 to 1159.
+
+Then
+`find . -type f -iname "*11[6-9][0-9]_16S_R[1-2]*" -exec cp {} /archive/INDIVIDUAL/arago004/BKim_raw_fastq/16S/ \;` to get samples 1160 to 1199.
+
+and finally, `find . -type f -iname "*1200_16S_R[1-2]*" -exec cp {} /archive/INDIVIDUAL/arago004/BKim_raw_fastq/16S/ \;`to get sample 1200
+
+Ready!
 
 # Running the DADA2 (Ernakovich pipeline) for NovaSeq data
 
