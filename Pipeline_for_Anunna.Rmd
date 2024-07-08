@@ -1050,7 +1050,7 @@ Inside of the `03_tabletax` folder(3):
 2. `repset.fasta` --> that will be the DNA sequences for each ASV (refseq)
 3. `taxonomy.tsv` --> that will be your the taxonomy table (tax_table)
 
-Inside of the `04_phylogenetic_tree` (1):
+Inside of the `04_phylogenetic_tree` --> `exported_rooted_tree`(1):
 
 4.`tree.nkw`  --> the phylogenetic tree [Optional]
 
@@ -1062,9 +1062,14 @@ And finally, inside of your main _Working directory_ folder (1):
 
 ![Figure 27. Location of taxonomy.tsv file](./images/08_Taxonomy_file.jpg)
 
-![Figure 28. Location of metadata (mapping) file](./images/08_Metadata-mapping_file.jpg)
+![Figure 28. Location of phylogenetic tree file](./images/09_phylogenetic_tree_file.JPG)
 
-Finally, transfer these 4 files to your local computer and think about whether you would like to re-name them so their title is a bit more informative. For instance to track back that were for 16S and not ITS ;)
+![Figure 29. Location of metadata (mapping) file](./images/08_Metadata-mapping_file.jpg)
+
+
+
+Finally, transfer these 5 files to your local computer and think about whether you would like to re-name them so their title is a bit more informative. For instance to track back that were for 16S and not ITS ;)
+
 
 
 ![Figure 29. All files in local folder](./images/08_all_Files_in_local_folder.jpg)
