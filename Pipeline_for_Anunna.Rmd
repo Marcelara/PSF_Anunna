@@ -143,8 +143,9 @@ Try yourself navigating through the directories of the HPC using de `cd` and `ls
 
 ## Moving files between the HPC and your local computer
 
-The easiest way to move files between your local computer and the HPC is via an FTP client like [FileZilla](https://en.wikipedia.org/wiki/FileZilla). After downloading and opening the FileZilla software, you will see multiple windows. The files of you local computer are shown in the middle on the right. The files of the HPC can be shown on the left of that. You have to connect to the HPC to do so and this will be similar as log in via PuTTY. 
+The easiest way to move files between your local computer and the HPC is via an FTP client like [FileZilla](https://en.wikipedia.org/wiki/FileZilla) or [WinSCP](https://winscp.net/eng/index.php?). After downloading and opening the FTP client software you will have to login with the credentials you use for the HPC and then see at least two windows; one with your local computer files and one with the files in the HPC. The files of you local computer are shown in the middle on the right in the case of FileZilla and to the right in the case of WinSCP. You can transfer files between these two platforms just by dragging them.
 
+_Example with FileZilla_
 Go to File > Site manager. Click on New site. You need `SFTP - SSH File Transfer Protocol` and the `login.annuna.wur.nl` as host. You can fill out your own username and pass word. Click on Connect and you will connect to the HPC (Fig. 6). These settings are stored and you can connect to the HPC the next time via the Site manager without filling out the settings again.
 
 ![Figure 6. FileZilla login](./images/FileZilla_login.JPG)
@@ -173,7 +174,11 @@ Watch this [YouTube video](https://www.youtube.com/watch?v=BSM4ATQdYF0) with ins
 
 # Downloading data
 
-The sequencing company will provide you the information for downloading the data from their remote server to the HPC. This is an example of the email we received:
+So you've received your data, and now what? Usually, the sequencing company will provide you the information for downloading the data from their remote server to the HPC. We'll show you the two ways we've experienced according to the sequencing company; 1.Genome Quebec or 2.Novogene
+
+## Version 1: Genome Quebec
+
+This is an example of the email we received from Genome Quebec:
 
 ```{r eval=F, echo=T, error=T}
 
@@ -221,7 +226,39 @@ Just like you connected to the HPC in FileZilla, you can connect to the remote s
 
 Next, you can download the data to and external hard drive and the HPC.
 
-## Checking download with checksums
+## Version 2: Novogene
+
+**Downloading data with Bash commands** 
+
+In the case of **Novogene** you only receive an email that states that your data is ready with a new BatchID number and password along with a link (Fig. 9).Once in the portal, you can batch download all the files directly in the HPC by first selecting all of them and clicking on 'Export Link' which will make a .csv file with the links to all of the files (Fig. 10). You will copy this .csv file to a new directory in the HPC (in your archive or lustre directly) and then from that directory just run one line, after that you'll have all of your files downloaded.
+
+```{bash eval=F, echo=T, error=T}
+
+#Batch download using Wget
+#1. click the “Export Link” button to export all links
+#2. Use wget -i ./X204SC24032638-Z01-F003.csv to batch downloads
+
+wget -i thenameofyourcsvfile.csv 
+
+```
+
+![Figure 9. Email from Novogene stating data is ready for download](./images/Novogene_email_data_ready.JPG)
+
+
+![Figure 10. Getting .csv file for batch downloading in the HPC](./images/Novogene_download_link.jpg)
+
+Now you only have to unzip the .zip file containing your raw data with a single line as well;
+```{bash eval=F, echo=T, error=T}
+
+cd thenameofthedirectorywherethezipfileis
+
+unzip thenameofyourzipfile.zip
+
+```
+
+Now your data is unziped and ready to be processed, just in case don't forget to store the data in another place such as your W drive or a hard drive.
+
+# Checking download with checksums
 
 We would like to know whether all files are downloaded well. We can compare this by comparing the checksums of the files with sequencing data before and after downloading. A checksum is a unique code of a file. This code does not change when the file is downloaded correctly. The sequencing company will provide a file with the checksums of all files. Such a file is called a md5file. After downloading, you can make your own md5file and compare the two. Go to the directory with your sequencing data files and do the following:
 
@@ -246,7 +283,7 @@ I use these formula in Excel to determine whether the name in column A equals th
 
 *Figure 9. Show of screen shot of the Excel file*
 
-## Separating/finding files
+# Separating/finding files
 
 It can happen that samples of multiple of your experiments are sequenced at once. In that case, you have to separate the sequence data of the experiments before doing the analysis. It is wise to backup your data before doing this. Regular expressions can be used to select the files of one experiment. A very nice tutorial about regular expressions can be found [here](https://www.howtogeek.com/661101/how-to-use-regular-expressions-regexes-on-linux/). 
 
