@@ -299,11 +299,12 @@ First, determine what the sample names are of the samples you want to select. Fo
 
 After that, you can try to build a regular expression that covers all the files you need but does not cover any of the other files. I used the following expression for the files I wanted to grep: `"[2-5][0-9]-.*-P05`. It means I want a value in my file name that starts with a number 2 to 5 followed by a number 0 to 9. After that, there should be a dash. After that, there can by something else of an undefined length that I define by `.*`. finally, I want to have a dash and P05 in my name. Before and after this expression, there can be other things in the name as I do not define that the expressions in my regular expression are at the beginning or the end of the expression.
 
-You can try your own regular expression on a file with all file names in there. The `grep` function takes out of the `Filename` file all file names that match with the regular expression and puts it in a new file called `Selectedfilenames`. Afterwards, you can count the number of lines in the new file to check whether you greped the right number of names.
+You can try your own regular expression on a file with all file names in there. The `grep` function takes out of the `Filename` file all file names that match with the regular expression and puts it in a new file called `Selectedfilenames`. Afterwards, you can count the number of lines in the new file to check whether you greped the right number of names. You can make a file with all file names by using the `ls -l` command and storing it in a new file.
 
 
 ``` bash
 
+ls -l > Filename # make a file with all file names
 grep -E "[2-5][0-9]-.*-P05" Filenames > SelectedFilenames # grep the file names
 wc -l SelectedFilenames # count the number of lines
 
