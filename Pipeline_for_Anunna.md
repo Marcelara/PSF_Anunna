@@ -284,6 +284,7 @@ I use these formula in Excel to determine whether the name in column A equals th
 
 *Figure 9. Show of screen shot of the Excel file*
 
+
 # Separating/finding files
 
 It can happen that samples of multiple of your experiments are sequenced at once. In that case, you have to separate the sequence data of the experiments before doing the analysis. It is wise to backup your data before doing this. Regular expressions can be used to select the files of one experiment. A very nice tutorial about regular expressions can be found [here](https://www.howtogeek.com/661101/how-to-use-regular-expressions-regexes-on-linux/). 
@@ -299,14 +300,13 @@ First, determine what the sample names are of the samples you want to select. Fo
 
 After that, you can try to build a regular expression that covers all the files you need but does not cover any of the other files. I used the following expression for the files I wanted to grep: `"[2-5][0-9]-.*-P05`. It means I want a value in my file name that starts with a number 2 to 5 followed by a number 0 to 9. After that, there should be a dash. After that, there can by something else of an undefined length that I define by `.*`. finally, I want to have a dash and P05 in my name. Before and after this expression, there can be other things in the name as I do not define that the expressions in my regular expression are at the beginning or the end of the expression.
 
-You can try your own regular expression on a file with all file names in there. The `grep` function takes out of the `Filename` file all file names that match with the regular expression and puts it in a new file called `Selectedfilenames`. Afterwards, you can count the number of lines in the new file to check whether you greped the right number of names.
+You can try your own regular expression on a file with all file names in there. The `grep` function takes out of the `Filename` file all file names that match with the regular expression and puts it in a new file called `Selectedfilenames`. Afterwards, you can count the number of lines in the new file to check whether you greped the right number of names.  You can make a file with all file names by using the `ls -l` command and storing it in a new file.
 
 
 ``` bash
-
+ls > Filename # make a file with all file names
 grep -E "[2-5][0-9]-.*-P05" Filenames > SelectedFilenames # grep the file names
 wc -l SelectedFilenames # count the number of lines
-
 ```
 
 When this works well and you can select all files you need, you can copy or move all the files itself to another directory. Afterwards, you can count the number of files again to check if the expected number of files are moved.
@@ -377,6 +377,27 @@ Then
 and finally, `find . -type f -iname "*1200_16S_R[1-2]*" -exec cp {} /archive/INDIVIDUAL/arago004/BKim_raw_fastq/16S/ \;`to get sample 1200
 
 Ready!
+
+
+# Moving fastq files of all samples into one folder
+Some sequencing companies (like Novogene) provide raw data of each sample in a different folder. This data is stored in two files per sample with raw sequencing data (.fastq.gz files). These fastq files of all samples need to be together in one folder in order to analyse the data. We can use the `find` function to grep the fastq files from each folder and put them in a new folder (see the code below, adapted from code provided by Melissa).   
+First, come up with a regular expression that matches tha names of all files that you want to find, for instance `"*[0-9]_[1-2].fastq.gz"`. Next, use the find function to find these files by defining the location of the folders in which the desired files are, and define that you want to find files `-type f`. If you this function prints all the files you are interested in, you can add extra commands to the find function that move `mv` or copy `cp` your files to a new directory. This command included `-exec`, `{}` and `\;`. More information on this can be found [here](https://superuser.com/questions/638375/what-does-mean-in-find-in-linux). Always check whether coping or moving the files was successful by for instance printing the content of your new directory and/or counting the number of files.
+
+
+``` bash
+# Check whether you find the right files
+find /archive/INDIVIDUAL/kreek001/TwelveAccessionExperiment/MetabarcodingData_12AccessionExp/01.RawData -type f -name "*[0-9]_[1-2].fastq.gz"
+
+# make a folder to move the files to
+mkdir /archive/INDIVIDUAL/kreek001/TwelveAccessionExperiment/MetabarcodingData_12AccessionExp/02.RawReads_Together
+
+# copy files
+find /archive/INDIVIDUAL/kreek001/TwelveAccessionExperiment/MetabarcodingData_12AccessionExp/01.RawData -type f -name "*[0-9]_[1-2].fastq.gz" -exec cp {} /archive/INDIVIDUAL/kreek001/TwelveAccessionExperiment/MetabarcodingData_12AccessionExp/02.RawReads_Together \;
+
+# Check number of files
+ls | wc -l
+```
+
 
 # Running the DADA2 (Ernakovich pipeline) for NovaSeq data
 
