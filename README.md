@@ -304,7 +304,7 @@ You can try your own regular expression on a file with all file names in there. 
 
 ``` bash
 
-ls -l > Filename # make a file with all file names
+ls > Filename # make a file with all file names
 grep -E "[2-5][0-9]-.*-P05" Filenames > SelectedFilenames # grep the file names
 wc -l SelectedFilenames # count the number of lines
 
