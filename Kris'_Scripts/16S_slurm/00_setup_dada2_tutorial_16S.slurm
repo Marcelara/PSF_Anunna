@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -login
 
 #SBATCH --time=2:00:00                            ### limit of wall clock time - how long the job will run (same as -t)
 #SBATCH --ntasks=1                                ### number of tasks - how many tasks (nodes) that you require (same as -n)
@@ -42,10 +42,10 @@
 ## programs, though some are contained within the anaconda/colsa
 ## module.  Refer to http://premise.sr.unh.edu for more info.
 
-##conda activate dada2_ernakovich
+conda activate dada2_ernakovich
 
 ## Instruct your program to make use of the number of desired threads.
 ## As your job will be allocated an entire node, this should normally
 ## be 24.
 Rscript ../R/00_setup_dada2_tutorial_16S.R
-##conda deactivate
+conda deactivate
