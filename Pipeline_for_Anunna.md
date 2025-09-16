@@ -495,9 +495,7 @@ After you've checked that your `00_setup_dada2_tutorial_16S.slurm` file is corre
 
 
 ``` bash
-
 sbatch 00_setup_dada2_tutorial_16S.slurm
-
 ```
 
 You'll see that your job has been submitted and will have a jobid number which can be used to track down the status of your job. You can use the `squeue` command with your username to see this. 
@@ -505,9 +503,7 @@ You'll see that your job has been submitted and will have a jobid number which c
 
 
 ``` bash
-
 squeue -u arago004 
-
 ```
 
 After your job has been done, you will get an `.output` file in your `/slurm` folder, in there you can see if the job was correct or not.

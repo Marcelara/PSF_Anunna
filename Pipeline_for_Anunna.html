@@ -3409,15 +3409,11 @@ conda deactivate</code></pre>
 <p>After you’ve checked that your
 <code>00_setup_dada2_tutorial_16S.slurm</code> file is correct, you will
 send it to the HPC to process by typing from the /slurm folder;</p>
-<pre class="bash"><code>
-sbatch 00_setup_dada2_tutorial_16S.slurm
-</code></pre>
+<pre class="bash"><code>sbatch 00_setup_dada2_tutorial_16S.slurm</code></pre>
 <p>You’ll see that your job has been submitted and will have a jobid
 number which can be used to track down the status of your job. You can
 use the <code>squeue</code> command with your username to see this.</p>
-<pre class="bash"><code>
-squeue -u arago004 
-</code></pre>
+<pre class="bash"><code>squeue -u arago004 </code></pre>
 <p>After your job has been done, you will get an <code>.output</code>
 file in your <code>/slurm</code> folder, in there you can see if the job
 was correct or not.</p>
