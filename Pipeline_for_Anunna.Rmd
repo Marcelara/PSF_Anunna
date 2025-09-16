@@ -515,7 +515,7 @@ It may happen that packages (libraries) that you need are not installed in the b
 # create a new library in my home directory where new installed packages can be stored
 new_library = '/home/WUR/kreek001/.R_442_ext/' # set the path for a new folder the folder is named after R version 4.2.2
 dir.create(file.path(new_library), showWarnings = TRUE) # create a new folder
-.libPaths(c(new_library, .libPaths())) # Tell R where the packages are stored: in your new folder and in the folder where the already install packeges are
+.libPaths(c(new_library, .libPaths())) # Tell R where the packages are stored: in your new folder and in the folder where the already install packages are
 .libPaths() # print this to check if the right directories are defined
 ```
 
@@ -585,7 +585,6 @@ REV <- "GACTACHVGGGTATCTAATCC"  ## Changed to 16S-805R
 Furthermore, Pedro added some lines to the function that runs cutadapt.
 
 ```{r eval=F, echo=T, error=T}
-
 # Run Cutadapt                    ## Some additions of Pedro used by Kris
 for (i in seq_along(fnFs)) {
   system2(cutadapt, args = c("-j", 0, R1.flags, R2.flags, "-n", 2, # -n 2 required to remove FWD and REV from reads
@@ -630,6 +629,8 @@ At the end of your .output file you should check that there are no primers found
 
 ![Figure 10. Check of cutadapt removing primers](./images/01_output_zero-check.jpg)
 
+The raw data of Novogene may not contain primer sequences. It seem to happen that they already removed these sequences. You can skip the cutadapt step in that case. See at step 02 how to access the files if you skip this step. Alternatively, you can cut a fixed length of the beginning of each sequence. This length can be the length of the primers.
+
 
 ## 02_check-quality
 
@@ -638,7 +639,15 @@ In this script you'll get qualit plots which tell you from 20 random samples how
 
 **R script**
 
-Nothing changes
+Nothing changes unless you skip cutadapt. When you do that, you need to access the N filtered files and not the trimmed files.
+
+```{r eval=F, echo=T, error=T}
+# Move R1 and R2 from trimmed to separate forward/reverse sub-directories
+fnFs.Q <- file.path(subF.fp,  basename(fnFs))
+fnRs.Q <- file.path(subR.fp,  basename(fnRs))
+file.copy(from = fnFs.filtN, to = fnFs.Q) #Kris: As cutadapt is not used: fnFs.cut is replaced by fnFs.filtN to access the reads
+file.copy(from = fnRs.filtN, to = fnRs.Q) #Kris: As cutadapt is not used: fnRs.cut is replaced by fnRs.filtN to access the reads
+```
 
 
 **slurm script**
