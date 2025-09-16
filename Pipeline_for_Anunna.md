@@ -480,6 +480,9 @@ The Ernakovich lab has made very elaborate slurm scripts that contains a lot of 
 #SBATCH --job-name 00_setup_dada2         ### you can give your job a name
 #SBATCH --output=00_setup_dada2_%j.output ### name of the output file
 
+module load 2024 #optional, see below
+module load R/4.4.2-gfbf-2024a #optional, see below
+
 conda activate dada2_ernakovich
 
 Rscript ../R/00_setup_dada2_tutorial_16S.R    ### Run R script
@@ -507,7 +510,79 @@ squeue -u arago004
 
 ```
 
-After your job has ben done, you will get an `.output` file in your `/slurm` folder, in there you can see if the job was correct or not.
+After your job has been done, you will get an `.output` file in your `/slurm` folder, in there you can see if the job was correct or not.
+
+### Accessing software and installing packages
+Annuna has stored different versions of software that you will need. R is one of these. Each version is stored in a different 'bucket'. Old versions may be loaded by default. It is wise to load the bucket with the most recent software versions. You can do this in your slurm script, for instance before activating the conda environment. Below I give an example of what I put in the slurm script to load the newest available version of R. More information on which buckets are available and how to find out what software versions are present can be found on the [wiki of Annuna](https://wiki.anunna.wur.nl/index.php/Modules).
+
+
+``` bash
+module load 2024
+module load R/4.4.2-gfbf-2024a
+```
+
+You can print the r version in your r script to check whether the right version is loaded when running the script.
+
+
+``` r
+R.version$version.string # prints R version
+```
+
+It may happen that packages (libraries) that you need are not installed in the bucket you use. You can install packages yourself in you home directory. First, you need to make a folder where you install the new packages. Next, you need to tell R were to install the packages using `.libPaths()`. You can install new packages afterwards. All this code can be run in an R script. More information can be found on the [wiki of Annuna](https://wiki.anunna.wur.nl/index.php/R).
+
+
+``` r
+# create a new library in my home directory where new installed packages can be stored
+new_library = '/home/WUR/kreek001/.R_442_ext/' # set the path for a new folder the folder is named after R version 4.2.2
+dir.create(file.path(new_library), showWarnings = TRUE) # create a new folder
+.libPaths(c(new_library, .libPaths())) # Tell R where the packages are stored: in your new folder and in the folder where the already install packeges are
+.libPaths() # print this to check if the right directories are defined
+```
+
+Afterwards, you can install the packages you need. I give an example here below.You need to specify in which directory the package need to be installed using `lib = `.
+
+
+``` bash
+# Install BiocManager if not already installed
+if (!requireNamespace("BiocManager", quietly = TRUE)) {
+    install.packages("BiocManager", lib = new_library, repos = "https://cloud.r-project.org")
+}
+
+# Install DADA2 using BiocManager
+if (!requireNamespace("dada2", quietly = TRUE)) {
+    BiocManager::install("dada2", lib = new_library, ask = FALSE, update = TRUE)
+}
+
+# Install ShortRead using BiocManager
+if (!requireNamespace("ShortRead", quietly = TRUE)) {
+    BiocManager::install("ShortRead", lib = new_library, ask = FALSE, update = TRUE)
+}
+
+# Install dplyr if needed
+if (!requireNamespace("dplyr", quietly = TRUE)) {
+    install.packages("dplyr", repos = "http://cran.r-project.org", lib = new_library, dependencies = TRUE)
+}
+
+# Install tidyr if needed
+if (!requireNamespace("tidyr", quietly = TRUE)) {
+    install.packages("tidyr", repos = "http://cran.r-project.org", lib = new_library, dependencies = TRUE)
+}
+
+# Install Hmisc if needed
+if (!requireNamespace("Hmisc", quietly = TRUE)) {
+    install.packages("Hmisc", repos = "http://cran.r-project.org", lib = new_library, dependencies = TRUE)
+}
+
+# Install ggplot2 if needed
+if (!requireNamespace("ggplot2", quietly = TRUE)) {
+    install.packages("ggplot2", repos = "http://cran.r-project.org", lib = new_library, dependencies = TRUE)
+}
+
+# Install plotly if needed
+if (!requireNamespace("plotly", quietly = TRUE)) {
+    install.packages("plotly", repos = "http://cran.r-project.org", lib = new_library, dependencies = TRUE)
+}
+```
 
 
 ## 01_pre-processed
@@ -560,6 +635,9 @@ This slurm script is run with the minimal CPUs and memory to run the R script.
 #SBATCH --job-name 01_pre-process_dada2            ### you can give your job a name
 #SBATCH --output=01_pre-process_dada2_%j.output    ### output name
 
+module load 2024 #optional
+module load R/4.4.2-gfbf-2024a #optional
+
 conda activate dada2_ernakovich
 
 Rscript ../R/01_pre-process_dada2_tutorial_16S.R
@@ -596,6 +674,9 @@ Nothing changes
 #SBATCH --ntasks=1                                ### number of tasks - how many tasks (nodes) that you require (same as -n)
 #SBATCH --cpus-per-task=16                         ### number of CPUs (or cores) per task (same as -c)
 #SBATCH --mem=64G                                  ### memory required per node - amount of memory (in bytes)
+
+module load 2024 #optional
+module load R/4.4.2-gfbf-2024a #optional
 
 conda activate dada2_ernakovich
 
@@ -646,6 +727,9 @@ As for ITS data the length is variable is important to remove the `truncLen` arg
 #SBATCH --ntasks=1                                ### number of tasks - how many tasks (nodes) that you require (same as -n)
 #SBATCH --cpus-per-task=16                         ### number of CPUs (or cores) per task (same as -c)
 #SBATCH --mem=64G                                  ### memory required per node - amount of memory (in bytes)
+
+module load 2024 #optional
+module load R/4.4.2-gfbf-2024a #optional
 
 conda activate dada2_ernakovich
 
@@ -701,6 +785,9 @@ In the R script just be sure to check how your file names are ended.
 #SBATCH --mem=128G
 #SBATCH --job-name="04_learn_error_rates_dada2"
 #SBATCH --output="04_learn_error_rates_%j.output"
+
+module load 2024 #optional
+module load R/4.4.2-gfbf-2024a #optional
 
 conda activate dada2_ernakovich
 
@@ -803,15 +890,14 @@ for(sam in sample.names) {
 #SBATCH --job-name="05_infer_ASVs_dada2"
 #SBATCH --output="05_infer_ASVs_dada2_%j.output"
 
+module load 2024 #optional
+module load R/4.4.2-gfbf-2024a #optional
+
 conda activate dada2_ernakovich
 
-## Instruct your program to make use of the number of desired threads.
-## As your job will be allocated an entire node, this should normally
-## be 24.
 Rscript ../R/05_infer_ASVs_dada2_tutorial_16S.R
 
 conda deactivate
-
 ```
 
 
@@ -925,12 +1011,14 @@ write.table(seqtab.t, file = paste0(table.fp, "/seqtab_final.txt"),
 #SBATCH --job-name="06_remove_chimeras"
 #SBATCH --output="06_remove_chimeras_dada2_%j.output"
 
+module load 2024 #optional
+module load R/4.4.2-gfbf-2024a #optional
+
 conda activate dada2_ernakovich
 
 Rscript ../R/06_remove_chimeras_dada2_tutorial_16S.R
 
 conda deactivate
-
 ```
 
 
@@ -1146,9 +1234,3 @@ Finally, transfer these 5 files to your local computer and think about whether y
 
 
 ![Figure 29. All files in local folder](./images/08_all_Files_in_local_folder.jpg)
-
-
-
-
-
-

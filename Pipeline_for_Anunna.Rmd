@@ -469,6 +469,9 @@ The Ernakovich lab has made very elaborate slurm scripts that contains a lot of 
 #SBATCH --job-name 00_setup_dada2         ### you can give your job a name
 #SBATCH --output=00_setup_dada2_%j.output ### name of the output file
 
+module load 2024 #optional, see below
+module load R/4.4.2-gfbf-2024a #optional, see below
+
 conda activate dada2_ernakovich
 
 Rscript ../R/00_setup_dada2_tutorial_16S.R    ### Run R script
