@@ -469,10 +469,10 @@ The Ernakovich lab has made very elaborate slurm scripts that contains a lot of 
 #SBATCH --job-name 00_setup_dada2         ### you can give your job a name
 #SBATCH --output=00_setup_dada2_%j.output ### name of the output file
 
+conda activate dada2_ernakovich
+
 module load 2024 #optional, see below
 module load R/4.4.2-gfbf-2024a #optional, see below
-
-conda activate dada2_ernakovich
 
 Rscript ../R/00_setup_dada2_tutorial_16S.R    ### Run R script
 
@@ -612,10 +612,10 @@ This slurm script is run with the minimal CPUs and memory to run the R script.
 #SBATCH --job-name 01_pre-process_dada2            ### you can give your job a name
 #SBATCH --output=01_pre-process_dada2_%j.output    ### output name
 
+conda activate dada2_ernakovich
+
 module load 2024 #optional
 module load R/4.4.2-gfbf-2024a #optional
-
-conda activate dada2_ernakovich
 
 Rscript ../R/01_pre-process_dada2_tutorial_16S.R
 
@@ -661,10 +661,10 @@ file.copy(from = fnRs.filtN, to = fnRs.Q) #Kris: As cutadapt is not used: fnRs.c
 #SBATCH --cpus-per-task=16                         ### number of CPUs (or cores) per task (same as -c)
 #SBATCH --mem=64G                                  ### memory required per node - amount of memory (in bytes)
 
+conda activate dada2_ernakovich
+
 module load 2024 #optional
 module load R/4.4.2-gfbf-2024a #optional
-
-conda activate dada2_ernakovich
 
 Rscript ../R/02_check_quality_dada2_tutorial_16S.R
 
@@ -772,10 +772,10 @@ In the R script just be sure to check how your file names are ended.
 #SBATCH --job-name="04_learn_error_rates_dada2"
 #SBATCH --output="04_learn_error_rates_%j.output"
 
+conda activate dada2_ernakovich
+
 module load 2024 #optional
 module load R/4.4.2-gfbf-2024a #optional
-
-conda activate dada2_ernakovich
 
 Rscript ../R/04_learn_error_rates_dada2_tutorial_16S.R
 
@@ -875,10 +875,10 @@ for(sam in sample.names) {
 #SBATCH --job-name="05_infer_ASVs_dada2"
 #SBATCH --output="05_infer_ASVs_dada2_%j.output"
 
+conda activate dada2_ernakovich
+
 module load 2024 #optional
 module load R/4.4.2-gfbf-2024a #optional
-
-conda activate dada2_ernakovich
 
 Rscript ../R/05_infer_ASVs_dada2_tutorial_16S.R
 
@@ -996,10 +996,10 @@ write.table(seqtab.t, file = paste0(table.fp, "/seqtab_final.txt"),
 #SBATCH --job-name="06_remove_chimeras"
 #SBATCH --output="06_remove_chimeras_dada2_%j.output"
 
+conda activate dada2_ernakovich
+
 module load 2024 #optional
 module load R/4.4.2-gfbf-2024a #optional
-
-conda activate dada2_ernakovich
 
 Rscript ../R/06_remove_chimeras_dada2_tutorial_16S.R
 

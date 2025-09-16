@@ -480,10 +480,10 @@ The Ernakovich lab has made very elaborate slurm scripts that contains a lot of 
 #SBATCH --job-name 00_setup_dada2         ### you can give your job a name
 #SBATCH --output=00_setup_dada2_%j.output ### name of the output file
 
+conda activate dada2_ernakovich
+
 module load 2024 #optional, see below
 module load R/4.4.2-gfbf-2024a #optional, see below
-
-conda activate dada2_ernakovich
 
 Rscript ../R/00_setup_dada2_tutorial_16S.R    ### Run R script
 
@@ -531,7 +531,7 @@ It may happen that packages (libraries) that you need are not installed in the b
 # create a new library in my home directory where new installed packages can be stored
 new_library = '/home/WUR/kreek001/.R_442_ext/' # set the path for a new folder the folder is named after R version 4.2.2
 dir.create(file.path(new_library), showWarnings = TRUE) # create a new folder
-.libPaths(c(new_library, .libPaths())) # Tell R where the packages are stored: in your new folder and in the folder where the already install packeges are
+.libPaths(c(new_library, .libPaths())) # Tell R where the packages are stored: in your new folder and in the folder where the already install packages are
 .libPaths() # print this to check if the right directories are defined
 ```
 
@@ -631,10 +631,10 @@ This slurm script is run with the minimal CPUs and memory to run the R script.
 #SBATCH --job-name 01_pre-process_dada2            ### you can give your job a name
 #SBATCH --output=01_pre-process_dada2_%j.output    ### output name
 
+conda activate dada2_ernakovich
+
 module load 2024 #optional
 module load R/4.4.2-gfbf-2024a #optional
-
-conda activate dada2_ernakovich
 
 Rscript ../R/01_pre-process_dada2_tutorial_16S.R
 
@@ -648,6 +648,8 @@ At the end of your .output file you should check that there are no primers found
 
 ![Figure 10. Check of cutadapt removing primers](./images/01_output_zero-check.jpg)
 
+The raw data of Novogene may not contain primer sequences. It seem to happen that they already removed these sequences. You can skip the cutadapt step in that case. See at step 02 how to access the files if you skip this step. Alternatively, you can cut a fixed length of the beginning of each sequence. This length can be the length of the primers.
+
 
 ## 02_check-quality
 
@@ -656,7 +658,16 @@ In this script you'll get qualit plots which tell you from 20 random samples how
 
 **R script**
 
-Nothing changes
+Nothing changes unless you skip cutadapt. When you do that, you need to access the N filtered files and not the trimmed files.
+
+
+``` r
+# Move R1 and R2 from trimmed to separate forward/reverse sub-directories
+fnFs.Q <- file.path(subF.fp,  basename(fnFs))
+fnRs.Q <- file.path(subR.fp,  basename(fnRs))
+file.copy(from = fnFs.filtN, to = fnFs.Q) #Kris: As cutadapt is not used: fnFs.cut is replaced by fnFs.filtN to access the reads
+file.copy(from = fnRs.filtN, to = fnRs.Q) #Kris: As cutadapt is not used: fnRs.cut is replaced by fnRs.filtN to access the reads
+```
 
 
 **slurm script**
@@ -671,10 +682,10 @@ Nothing changes
 #SBATCH --cpus-per-task=16                         ### number of CPUs (or cores) per task (same as -c)
 #SBATCH --mem=64G                                  ### memory required per node - amount of memory (in bytes)
 
+conda activate dada2_ernakovich
+
 module load 2024 #optional
 module load R/4.4.2-gfbf-2024a #optional
-
-conda activate dada2_ernakovich
 
 Rscript ../R/02_check_quality_dada2_tutorial_16S.R
 
@@ -782,10 +793,10 @@ In the R script just be sure to check how your file names are ended.
 #SBATCH --job-name="04_learn_error_rates_dada2"
 #SBATCH --output="04_learn_error_rates_%j.output"
 
+conda activate dada2_ernakovich
+
 module load 2024 #optional
 module load R/4.4.2-gfbf-2024a #optional
-
-conda activate dada2_ernakovich
 
 Rscript ../R/04_learn_error_rates_dada2_tutorial_16S.R
 
@@ -886,10 +897,10 @@ for(sam in sample.names) {
 #SBATCH --job-name="05_infer_ASVs_dada2"
 #SBATCH --output="05_infer_ASVs_dada2_%j.output"
 
+conda activate dada2_ernakovich
+
 module load 2024 #optional
 module load R/4.4.2-gfbf-2024a #optional
-
-conda activate dada2_ernakovich
 
 Rscript ../R/05_infer_ASVs_dada2_tutorial_16S.R
 
@@ -1007,10 +1018,10 @@ write.table(seqtab.t, file = paste0(table.fp, "/seqtab_final.txt"),
 #SBATCH --job-name="06_remove_chimeras"
 #SBATCH --output="06_remove_chimeras_dada2_%j.output"
 
+conda activate dada2_ernakovich
+
 module load 2024 #optional
 module load R/4.4.2-gfbf-2024a #optional
-
-conda activate dada2_ernakovich
 
 Rscript ../R/06_remove_chimeras_dada2_tutorial_16S.R
 
