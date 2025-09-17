@@ -233,13 +233,11 @@ Next, you can download the data to and external hard drive and the HPC.
 In the case of **Novogene** you only receive an email that states that your data is ready with a new BatchID number and password along with a link (Fig. 9).Once in the portal, you can batch download all the files directly in the HPC by first selecting all of them and clicking on 'Export Link' which will make a .csv file with the links to all of the files (Fig. 10). You will copy this .csv file to a new directory in the HPC (in your archive or lustre directly) and then from that directory just run one line, after that you'll have all of your files downloaded.
 
 ```{bash eval=F, echo=T, error=T}
-
 #Batch download using Wget
 #1. click the “Export Link” button to export all links
 #2. Use wget -i ./X204SC24032638-Z01-F003.csv to batch downloads
 
 wget -i thenameofyourcsvfile.csv 
-
 ```
 
 ![Figure 9. Email from Novogene stating data is ready for download](./images/Novogene_email_data_ready.JPG)
@@ -248,12 +246,10 @@ wget -i thenameofyourcsvfile.csv
 ![Figure 10. Getting .csv file for batch downloading in the HPC](./images/Novogene_download_link.jpg)
 
 Now you only have to unzip the .zip file containing your raw data with a single line as well;
+
 ```{bash eval=F, echo=T, error=T}
-
 cd thenameofthedirectorywherethezipfileis
-
 unzip thenameofyourzipfile.zip
-
 ```
 
 Now your data is unziped and ready to be processed, just in case don't forget to store the data in another place such as your W drive or a hard drive.
@@ -312,7 +308,6 @@ When this works well and you can select all files you need, you can copy or move
 For instance, here I was in a directory with the ITS and 16S directory. I moved from the ITS and 16S directory these files, one directory back and then into two other directories. Mind here that the coding of regular expressions is a little bit differed for files than for lines in a file. In stead of a `.*`, we use a `*` to indicate there can be anything for a given number of characters. We have to put a `*` at the beginning and the end of the expression when the general expression does not start at the beginning of the file name and does not end at the end.
 
 ```{bash eval=F, echo=T, error=T}
-
 mv ITS/*[2-5][0-9]-*-P05* ../raw_reads_Kris/ITS # move ITS files from where I am to two folders back
 mv 16S/*[2-5][0-9]-*-P05* ../raw_reads_Kris/16S # move 16S files from where I am to two folders back
 
@@ -326,7 +321,6 @@ ls ../raw_reads_Kris/ITS | wc -l # count the number of ITS files that were copie
 In my case, in this example, I want to only get those files belonging to Brassica oleracea - Medium (48 samples for 16S and 48 samples for ITS) amongst the pool of all the samples from the family experiment (~3,500 samples). The files are not really in the same order as the are in the mapping file, so I have to look for them specifically. 
 
 ```{bash eval=F, echo=T, error=T}
-
 #example
 
 ls | head -10
@@ -340,7 +334,6 @@ NS.1717.001.FLD_ill_001_i7---IDT_i5_4.193_ITS_R2.fastq.gz
 NS.1717.001.FLD_ill_001_i7---IDT_i5_7.913_ITS_I2.fastq.gz
 NS.1717.001.FLD_ill_001_i7---IDT_i5_8.1241_ITS_R1.fastq.gz
 NS.1717.001.FLD_ill_001_i7---IDT_i5_9.577_ITS_R2.fastq.gz
-
 ```
 
 If we take the last file `NS.1717.001.FLD_ill_001_i7---IDT_i5_9.577_ITS_R2.fastq.gz` the Sample ID name is `577` which means that if I run `find . -type f -iname "*i5_*\.577_*"` I will get all the matches of sample 577, both 16S and ITS. 
@@ -350,7 +343,6 @@ The Bole-Medium samples I'm looking for go from Harvest_ID 1153 to 1200 and incl
 If we start with the blank samples;
 
 ```{bash}
-
 find . -type f -iname "*Blank_S9_*_R*"
 
 ./NS.1717.001.FLD_ill_096_i7---IDT_i5_2.Blank_S9_ITS_R1.fastq.gz
@@ -376,7 +368,7 @@ Ready!
 
 # Moving fastq files of all samples into one folder
 Some sequencing companies (like Novogene) provide raw data of each sample in a different folder. This data is stored in two files per sample with raw sequencing data (.fastq.gz files). These fastq files of all samples need to be together in one folder in order to analyse the data. We can use the `find` function to grep the fastq files from each folder and put them in a new folder (see the code below, adapted from code provided by Melissa).   
-First, come up with a regular expression that matches tha names of all files that you want to find, for instance `"*[0-9]_[1-2].fastq.gz"`. Next, use the find function to find these files by defining the location of the folders in which the desired files are, and define that you want to find files `-type f`. If you this function prints all the files you are interested in, you can add extra commands to the find function that move `mv` or copy `cp` your files to a new directory. This command included `-exec`, `{}` and `\;`. More information on this can be found [here](https://superuser.com/questions/638375/what-does-mean-in-find-in-linux). Always check whether coping or moving the files was successful by for instance printing the content of your new directory and/or counting the number of files.
+First, come up with a regular expression that matches tha names of all files that you want to find, for instance `"*[0-9].raw_[1-2].fastq.gz"`. Next, use the find function to find these files by defining the location of the folders in which the desired files are, and define that you want to find files `-type f`. If you this function prints all the files you are interested in, you can add extra commands to the find function that move `mv` or copy `cp` your files to a new directory. This command included `-exec`, `{}` and `\;`. More information on this can be found [here](https://superuser.com/questions/638375/what-does-mean-in-find-in-linux). Always check whether coping or moving the files was successful by for instance printing the content of your new directory and/or counting the number of files.
 
 ```{bash eval=F, echo=T, error=T}
 # Check whether you find the right files
@@ -391,6 +383,9 @@ find /archive/INDIVIDUAL/kreek001/TwelveAccessionExperiment/MetabarcodingData_12
 # Check number of files
 ls | wc -l
 ```
+
+*Attention!*
+Novogene provides raw and processed data. In my case, the fully raw data was provided in a folder called `01.RawData`. In this folder, five compressed folders were present. The folders with `raw` in the name like `C005.raw_1.fastq.gz`and `C005.raw_2.fastq.gz` contain raw sequences. The other folder may contain sequences in which the primer sequences are already remove.
 
 
 # Running the DADA2 (Ernakovich pipeline) for NovaSeq data
@@ -629,31 +624,32 @@ At the end of your .output file you should check that there are no primers found
 
 ![Figure 10. Check of cutadapt removing primers](./images/01_output_zero-check.jpg)
 
-The raw data of Novogene may not contain primer sequences. It seem to happen that they already removed these sequences. You can skip the cutadapt step in that case. See at step 02 how to access the files if you skip this step. Alternatively, you can cut a fixed length of the beginning of each sequence. This length can be the length of the primers.
-
 
 ## 02_check-quality
 
-In this script you'll get qualit plots which tell you from 20 random samples how is the quality of your reads (quality score) according to the place of the bp 
+In this script you'll get quality plots which tell you from 20 random samples how is the quality of your reads (quality score) according to the place of the bp. 
 
 
 **R script**
 
-Nothing changes unless you skip cutadapt. When you do that, you need to access the N filtered files and not the trimmed files.
+Nothing changes 
 
 ```{r eval=F, echo=T, error=T}
-# Move R1 and R2 from trimmed to separate forward/reverse sub-directories
-fnFs.Q <- file.path(subF.fp,  basename(fnFs))
-fnRs.Q <- file.path(subR.fp,  basename(fnRs))
-file.copy(from = fnFs.filtN, to = fnFs.Q) #Kris: As cutadapt is not used: fnFs.cut is replaced by fnFs.filtN to access the reads
-file.copy(from = fnRs.filtN, to = fnRs.Q) #Kris: As cutadapt is not used: fnRs.cut is replaced by fnRs.filtN to access the reads
+
+```
+
+Older versions of the scripts may contain these lines of code. Out commending this code may prevent errors.
+```{r eval=F, echo=T, error=T}
+#+ plotly quality plots, eval = FALSE, include=TRUE
+# Or, to make these quality plots interactive, just call the plots through plotly
+#ggplotly(fwd_qual_plots)
+#ggplotly(rev_qual_plots)
 ```
 
 
 **slurm script**
 
 ```{bash, eval=F, echo=T, error=T}
-
 #!/bin/bash -login
 
 #SBATCH --time=01:00:00                            ### limit of wall clock time - how long the job will run (same as -t)
