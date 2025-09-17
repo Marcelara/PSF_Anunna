@@ -102,7 +102,7 @@ cd ../   # set the working directory one directory back
 cat text.R         # Print the R script in the console
 zcat text.fastq.qz # Print the compressed (zipped) file in the console
 nano text.R        # Open the R script in a text editor
-head text.R        # Print the head of the R script in the console
+head -n 40 text.R        # Print the head of the R script in the console, -n defines the number of rows printed
 
 mv text.R /RScripts/ # move the R script to the directory RScripts that is existing the current directory
 cp text.R /RScripts/ # copy the R script to the directory RScripts that is existing the current directory
@@ -232,13 +232,11 @@ In the case of **Novogene** you only receive an email that states that your data
 
 
 ``` bash
-
 #Batch download using Wget
 #1. click the “Export Link” button to export all links
 #2. Use wget -i ./X204SC24032638-Z01-F003.csv to batch downloads
 
 wget -i thenameofyourcsvfile.csv 
-
 ```
 
 ![Figure 9. Email from Novogene stating data is ready for download](./images/Novogene_email_data_ready.JPG)
@@ -248,12 +246,10 @@ wget -i thenameofyourcsvfile.csv
 
 Now you only have to unzip the .zip file containing your raw data with a single line as well;
 
+
 ``` bash
-
 cd thenameofthedirectorywherethezipfileis
-
 unzip thenameofyourzipfile.zip
-
 ```
 
 Now your data is unziped and ready to be processed, just in case don't forget to store the data in another place such as your W drive or a hard drive.
@@ -315,7 +311,6 @@ For instance, here I was in a directory with the ITS and 16S directory. I moved 
 
 
 ``` bash
-
 mv ITS/*[2-5][0-9]-*-P05* ../raw_reads_Kris/ITS # move ITS files from where I am to two folders back
 mv 16S/*[2-5][0-9]-*-P05* ../raw_reads_Kris/16S # move 16S files from where I am to two folders back
 
@@ -330,7 +325,6 @@ In my case, in this example, I want to only get those files belonging to Brassic
 
 
 ``` bash
-
 #example
 
 ls | head -10
@@ -344,7 +338,6 @@ NS.1717.001.FLD_ill_001_i7---IDT_i5_4.193_ITS_R2.fastq.gz
 NS.1717.001.FLD_ill_001_i7---IDT_i5_7.913_ITS_I2.fastq.gz
 NS.1717.001.FLD_ill_001_i7---IDT_i5_8.1241_ITS_R1.fastq.gz
 NS.1717.001.FLD_ill_001_i7---IDT_i5_9.577_ITS_R2.fastq.gz
-
 ```
 
 If we take the last file `NS.1717.001.FLD_ill_001_i7---IDT_i5_9.577_ITS_R2.fastq.gz` the Sample ID name is `577` which means that if I run `find . -type f -iname "*i5_*\.577_*"` I will get all the matches of sample 577, both 16S and ITS. 
@@ -355,7 +348,6 @@ If we start with the blank samples;
 
 
 ``` bash
-
 find . -type f -iname "*Blank_S9_*_R*"
 
 ./NS.1717.001.FLD_ill_096_i7---IDT_i5_2.Blank_S9_ITS_R1.fastq.gz
@@ -381,22 +373,26 @@ Ready!
 
 # Moving fastq files of all samples into one folder
 Some sequencing companies (like Novogene) provide raw data of each sample in a different folder. This data is stored in two files per sample with raw sequencing data (.fastq.gz files). These fastq files of all samples need to be together in one folder in order to analyse the data. We can use the `find` function to grep the fastq files from each folder and put them in a new folder (see the code below, adapted from code provided by Melissa).   
-First, come up with a regular expression that matches tha names of all files that you want to find, for instance `"*[0-9]_[1-2].fastq.gz"`. Next, use the find function to find these files by defining the location of the folders in which the desired files are, and define that you want to find files `-type f`. If you this function prints all the files you are interested in, you can add extra commands to the find function that move `mv` or copy `cp` your files to a new directory. This command included `-exec`, `{}` and `\;`. More information on this can be found [here](https://superuser.com/questions/638375/what-does-mean-in-find-in-linux). Always check whether coping or moving the files was successful by for instance printing the content of your new directory and/or counting the number of files.
+First, come up with a regular expression that matches that names of all files that you want to find, for instance `"*[0-9].raw_[1-2].fastq.gz"`. Next, use the find function to find these files by defining the location of the folders in which the desired files are, and define that you want to find files `-type f`. If you this function prints all the files you are interested in, you can add extra commands to the find function that move `mv` or copy `cp` your files to a new directory. This command included `-exec`, `{}` and `\;`. More information on this can be found [here](https://superuser.com/questions/638375/what-does-mean-in-find-in-linux). Always check whether copying or moving the files was successful by for instance printing the content of your new directory and/or counting the number of files.
 
 
 ``` bash
-# Check whether you find the right files
-find /archive/INDIVIDUAL/kreek001/TwelveAccessionExperiment/MetabarcodingData_12AccessionExp/01.RawData -type f -name "*[0-9]_[1-2].fastq.gz"
+# Check whether you find the right (number of) files
+find /archive/INDIVIDUAL/kreek001/TwelveAccessionExperiment/MetabarcodingData_12AccessionExp/01.RawData -type f -name "*[0-9].raw_[1-2].fastq.gz"
+find /archive/INDIVIDUAL/kreek001/TwelveAccessionExperiment/MetabarcodingData_12AccessionExp/01.RawData -type f -name "*[0-9].raw_[1-2].fastq.gz" } | wc -l
 
 # make a folder to move the files to
-mkdir /archive/INDIVIDUAL/kreek001/TwelveAccessionExperiment/MetabarcodingData_12AccessionExp/02.RawReads_Together
+mkdir /archive/INDIVIDUAL/kreek001/TwelveAccessionExperiment/MetabarcodingData_12AccessionExp/02.RawReads_Together
 
 # copy files
-find /archive/INDIVIDUAL/kreek001/TwelveAccessionExperiment/MetabarcodingData_12AccessionExp/01.RawData -type f -name "*[0-9]_[1-2].fastq.gz" -exec cp {} /archive/INDIVIDUAL/kreek001/TwelveAccessionExperiment/MetabarcodingData_12AccessionExp/02.RawReads_Together \;
+find /archive/INDIVIDUAL/kreek001/TwelveAccessionExperiment/MetabarcodingData_12AccessionExp/01.RawData -type f -name "*[0-9].raw_[1-2].fastq.gz" -exec cp {} /archive/INDIVIDUAL/kreek001/TwelveAccessionExperiment/MetabarcodingData_12AccessionExp/02.RawReads_Together \;
 
 # Check number of files
 ls | wc -l
 ```
+
+*Attention!*   
+Novogene provides raw and processed data. In my case, the fully raw data was provided in a folder called `01.RawData`. In this folder, five compressed folders were present. The folders with `raw` in the name like `C005.raw_1.fastq.gz`and `C005.raw_2.fastq.gz` contain raw sequences. The other folder may contain sequences in which the primer sequences are already remove.
 
 
 # Running the DADA2 (Ernakovich pipeline) for NovaSeq data
@@ -469,7 +465,6 @@ The Ernakovich lab has made very elaborate slurm scripts that contains a lot of 
 
 
 ``` bash
-
 #!/bin/bash -login 	            ### -login is essential to activate conda environment
 
 #SBATCH --time=2:00:00          ### limit of wall clock time - how long the job will run
@@ -614,19 +609,21 @@ for (i in seq_along(fnFs)) {
 }
 ```
 
+If you encounter an error like: `Error in names(answer) <- names1 : 'names' attribute [298] must be the same length as the vector [144] ...`, change `multithread=TRUE` to `multithread=FALSE` in `filterAndTrim` function in the r script. 
+
+
 **slurm script**
 
 This slurm script is run with the minimal CPUs and memory to run the R script. 
 
 
 ``` bash
-
 #!/bin/bash -login 	            ### -login is essential to activate conda environment
 
-#SBATCH --time=1:00:00          ### limit of wall clock time - how long the job will run
-#SBATCH --ntasks=1              ### number of tasks - how many nodes you need
-#SBATCH --cpus-per-task=16      ### number of CPUs (or cores) per task
-#SBATCH --mem=64G               ### memory required per node (in bytes)
+#SBATCH --time=01:00:00          ### limit of wall clock time - how long the job will run (same as -t)
+#SBATCH --ntasks=1               ### number of tasks - how many tasks (nodes) that you require (same as -n)
+#SBATCH --cpus-per-task=16       ### number of CPUs (or cores) per task (same as -c)
+#SBATCH --mem=64G                ### memory required per node - amount of memory (in bytes)
 
 #SBATCH --job-name 01_pre-process_dada2            ### you can give your job a name
 #SBATCH --output=01_pre-process_dada2_%j.output    ### output name
@@ -643,30 +640,30 @@ conda deactivate
 
 **output**
 
-At the end of your .output file you should check that there are no primers found and left in your sequences by having only zero's (Fig. 10).
+At the end of your .output file you should check that there are no primers found and left in your sequences of the first sample by having only zero's (Fig. 10). At the beginning of the script, there should be a similar table showing how much primer sequences are detected in the first sample before running cutadapt.
 
 
 ![Figure 10. Check of cutadapt removing primers](./images/01_output_zero-check.jpg)
 
-The raw data of Novogene may not contain primer sequences. It seem to happen that they already removed these sequences. You can skip the cutadapt step in that case. See at step 02 how to access the files if you skip this step. Alternatively, you can cut a fixed length of the beginning of each sequence. This length can be the length of the primers.
-
 
 ## 02_check-quality
 
-In this script you'll get qualit plots which tell you from 20 random samples how is the quality of your reads (quality score) according to the place of the bp 
+In this script you'll get quality plots which tell you from 20 random samples how is the quality of your reads (quality score) according to the place of the bp. 
 
 
 **R script**
 
-Nothing changes unless you skip cutadapt. When you do that, you need to access the N filtered files and not the trimmed files.
+Nothing changes 
 
+
+
+Older versions of the scripts may contain these lines of code. Out commending this code may prevent errors.
 
 ``` r
-# Move R1 and R2 from trimmed to separate forward/reverse sub-directories
-fnFs.Q <- file.path(subF.fp,  basename(fnFs))
-fnRs.Q <- file.path(subR.fp,  basename(fnRs))
-file.copy(from = fnFs.filtN, to = fnFs.Q) #Kris: As cutadapt is not used: fnFs.cut is replaced by fnFs.filtN to access the reads
-file.copy(from = fnRs.filtN, to = fnRs.Q) #Kris: As cutadapt is not used: fnRs.cut is replaced by fnRs.filtN to access the reads
+#+ plotly quality plots, eval = FALSE, include=TRUE
+# Or, to make these quality plots interactive, just call the plots through plotly
+#ggplotly(fwd_qual_plots)
+#ggplotly(rev_qual_plots)
 ```
 
 
@@ -674,13 +671,15 @@ file.copy(from = fnRs.filtN, to = fnRs.Q) #Kris: As cutadapt is not used: fnRs.c
 
 
 ``` bash
-
 #!/bin/bash -login
 
-#SBATCH --time=01:00:00                            ### limit of wall clock time - how long the job will run (same as -t)
-#SBATCH --ntasks=1                                ### number of tasks - how many tasks (nodes) that you require (same as -n)
-#SBATCH --cpus-per-task=16                         ### number of CPUs (or cores) per task (same as -c)
-#SBATCH --mem=64G                                  ### memory required per node - amount of memory (in bytes)
+#SBATCH --time=01:00:00          ### limit of wall clock time - how long the job will run (same as -t)
+#SBATCH --ntasks=1               ### number of tasks - how many tasks (nodes) that you require (same as -n)
+#SBATCH --cpus-per-task=16       ### number of CPUs (or cores) per task (same as -c)
+#SBATCH --mem=64G                ### memory required per node - amount of memory (in bytes)
+
+#SBATCH --job-name="02_check_quality_dada2"
+#SBATCH --output="02_check_quality_dada2_%j.output"
 
 conda activate dada2_ernakovich
 
@@ -702,48 +701,49 @@ After this script there will be a new folder named `02_filter` in your working d
 ![Figure 11. Read quality profile ITS-Forward](./images/02_output_qualityplot.JPG)
 
 
-In this plot, each plot is one randome sample, the red line shows the percentage of reads that reach at least that position. In this example we can see that 100% of the reads from all the 20 random samples have >150 bp but not all get to 200bp (i.e. sample 126 in the upper right), showing the variable length of the ITS region. We can also get a sense of how many reads more or less we have per sample, in this example there are 3 samples with very few reads (~ <200). 
+In this plot, each plot is one randome sample, the red line shows the percentage of reads that reach at least that position. In this example we can see that 100% of the reads from all the 20 random samples have >150 bp but not all get to 200bp (i.e. sample 126 in the upper right), showing the variable length of the ITS region. We can also get a sense of how many reads more or less we have per sample, in this example there are 3 samples with very few reads (~ <200). Furthermore, we get a view on the qualty of the reads as the green line shows the medean quality score and the orange lines the quantiles of this score.
 
 
 ## 03_filter_reads
 
-In here you will filter out those reads that don't match your criteria based on the quality plots from script 02. 
+In here you will filter out those reads that don't match your criteria based on the quality plots from script 02. `truncLen` filters away sequences that are shorter than the values you give for forward and reverse sequences c(for, rev). `maxEE` filters reads on quality. The `filterAndTrim` function can do more like cutting base pairs from the beginning or the end of the sequence. See the help file of this function for more information.
 
 **R script**
 
 
 ``` r
-# PEDRO's ajustment was to remove truncation (our reads are very short) and reduce max error allowed maxEE to 1 (we have good quality)
+# Pedro's adjustment was to remove truncation (our reads were very short) and reduce max error allowed maxEE to 1 (we have good quality)
 filt_out <- filterAndTrim(fwd=file.path(subF.fp, fastqFs), filt=file.path(filtpathF, fastqFs),
                           rev=file.path(subR.fp, fastqRs), filt.rev=file.path(filtpathR, fastqRs),
-                          truncLen=c(0,0), maxEE=c(1,1), truncQ=2, maxN=0, rm.phix=TRUE, 		# Kris changed: truncLen = c(250,220)
-                          compress=TRUE, verbose=TRUE, multithread=TRUE)                    # to c(0,0) maxEE=c(2,2) to c(2,2)
+                          truncLen=c(0,0), maxEE=c(1,1), truncQ=2, maxN=0, rm.phix=TRUE,
+                          compress=TRUE, verbose=TRUE, multithread=TRUE)
 ```
 
-As for ITS data the length is variable is important to remove the `truncLen` argument. See more explanation in this tutorial (https://benjjneb.github.io/dada2/ITS_workflow.html)
+As for ITS data the length is variable is important to remove the `truncLen` argument. See more explanation in this tutorial (https://benjjneb.github.io/dada2/ITS_workflow.html). Furthermore, you may want to change `multithread=TRUE` to `multithread=FALSE` in `filterAndTrim` function in the r script to prevent errors like in script 01.
 
 
 **slurm script**
 
 
 ``` bash
-
 #!/bin/bash -login
 
-#SBATCH --time=01:00:00                            ### limit of wall clock time - how long the job will run (same as -t)
-#SBATCH --ntasks=1                                ### number of tasks - how many tasks (nodes) that you require (same as -n)
-#SBATCH --cpus-per-task=16                         ### number of CPUs (or cores) per task (same as -c)
-#SBATCH --mem=64G                                  ### memory required per node - amount of memory (in bytes)
+#SBATCH --time=01:00:00          ### limit of wall clock time - how long the job will run (same as -t)
+#SBATCH --ntasks=1               ### number of tasks - how many tasks (nodes) that you require (same as -n)
+#SBATCH --cpus-per-task=16       ### number of CPUs (or cores) per task (same as -c)
+#SBATCH --mem=64G                ### memory required per node - amount of memory (in bytes)
+
+#SBATCH --job-name="03_filter_reads_dada2"
+#SBATCH --output="03_filter_reads_dada2_%j.output"
+
+conda activate dada2_ernakovich
 
 module load 2024 #optional
 module load R/4.4.2-gfbf-2024a #optional
 
-conda activate dada2_ernakovich
-
 Rscript ../R/03_filter_reads_dada2_tutorial_16S.R
 
 conda deactivate
-
 ```
 
 
@@ -760,7 +760,7 @@ You can see that now there are less reads per sample (filtered out).
 
 Training and testing 4 different methods to distinguish between sequencing errors and biological differences. THIS is the reason why we are doing all this, because NovaSeq data "bins" error scores to just 4 categories instead of 40 like MiSeq, therefore it has less "resolution" (only 10%) to understand the "real" error rates (you have to "pay" this as you have more reads, otherwise it will be way too much information). There's not yet a standard solution to fix this, but it is clear that using the traditional way its not suitable (see Fig. 13), thus what Ernakovich lab does is to put together 4 different ways to learn error rates so you can choose, according to your data, which one is better (or less worse you can also say).
 
-Because we don't fully understand it, we will not go into details of how and why these 4 error rates learning options are different. If you would like to know more you can check the explanation on their GitHub page and try to understand the different codes. What we believe is important is to realize that there are different ways to do it, and that which one is better to choose will depend **every time** entirely on your dataset. The way I see it is it's like checking your data distribution before you run a statistical test, sometimes is normal and sometimes is not and when it's not you have to select the appropriate data distribution so your statistical test has meaning.
+Because we don't fully understand it, we will not go into details of how and why these 4 error rates learning options are different. If you would like to know more you can check the explanation on their GitHub page and try to understand the different codes. What we believe is important is to realize that there are different ways to do it, and that which one is better to choose will depend **every time** entirely on your data set. The way I see it is it's like checking your data distribution before you run a statistical test, sometimes is normal and sometimes is not and when it's not you have to select the appropriate data distribution so your statistical test has meaning.
 
 Now, let's look at what changes we've made to the slurm and .R files:
 
