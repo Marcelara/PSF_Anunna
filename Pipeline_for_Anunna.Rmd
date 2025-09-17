@@ -558,6 +558,15 @@ if (!requireNamespace("plotly", quietly = TRUE)) {
 }
 ```
 
+I define the directories where the r packages are stored in every r script that I use in the following pipeline.
+
+```{r eval=F, echo=T, error=T}
+# Indicate location where packages are stored
+new_library='/home/WUR/kreek001/.R_442_ext/'
+.libPaths(c(new_library, .libPaths()) )
+.libPaths()
+```
+
 
 ## 01_pre-processed
 
@@ -686,7 +695,7 @@ In this plot, each plot is one randome sample, the red line shows the percentage
 
 ## 03_filter_reads
 
-In here you will filter out those reads that don't match your criteria based on the quality plots from script 02. `truncLen` filters away sequences that are shorter than the values you give for forward and reverse sequences c(for, rev). `maxEE` filters reads on quality. The `filterAndTrim` function can do more like cutting base pairs from the beginning or the end of the sequence. See the help file of this function for more information.
+In here you will filter out those reads that don't match your criteria based on the quality plots from script 02. `truncLen` cuts off sequences at the end (you may want this as the quality of sequences drops at the end) and filters away sequences that are shorter than the values you give for forward and reverse sequences c(for, rev). `maxEE` filters reads on quality. The `filterAndTrim` function can do more like cutting base pairs from the beginning or the end of the sequence. See the help file of this function for more information.
 
 **R script**
 

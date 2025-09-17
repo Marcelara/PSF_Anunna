@@ -3487,6 +3487,12 @@ if (!requireNamespace(&quot;ggplot2&quot;, quietly = TRUE)) {
 if (!requireNamespace(&quot;plotly&quot;, quietly = TRUE)) {
     install.packages(&quot;plotly&quot;, repos = &quot;http://cran.r-project.org&quot;, lib = new_library, dependencies = TRUE)
 }</code></pre>
+<p>I define the directories where the r packages are stored in every r
+script that I use in the following pipeline.</p>
+<pre class="r"><code># Indicate location where packages are stored
+new_library=&#39;/home/WUR/kreek001/.R_442_ext/&#39;
+.libPaths(c(new_library, .libPaths()) )
+.libPaths()</code></pre>
 </div>
 </div>
 <div id="pre-processed" class="section level2">
@@ -3606,9 +3612,10 @@ quality score and the orange lines the quantiles of this score.</p>
 <h2>03_filter_reads</h2>
 <p>In here you will filter out those reads that don’t match your
 criteria based on the quality plots from script 02.
-<code>truncLen</code> filters away sequences that are shorter than the
-values you give for forward and reverse sequences c(for, rev).
-<code>maxEE</code> filters reads on quality. The
+<code>truncLen</code> cuts off sequences at the end (you may want this
+as the quality of sequences drops at the end) and filters away sequences
+that are shorter than the values you give for forward and reverse
+sequences c(for, rev). <code>maxEE</code> filters reads on quality. The
 <code>filterAndTrim</code> function can do more like cutting base pairs
 from the beginning or the end of the sequence. See the help file of this
 function for more information.</p>
