@@ -371,14 +371,15 @@ Some sequencing companies (like Novogene) provide raw data of each sample in a d
 First, come up with a regular expression that matches tha names of all files that you want to find, for instance `"*[0-9].raw_[1-2].fastq.gz"`. Next, use the find function to find these files by defining the location of the folders in which the desired files are, and define that you want to find files `-type f`. If you this function prints all the files you are interested in, you can add extra commands to the find function that move `mv` or copy `cp` your files to a new directory. This command included `-exec`, `{}` and `\;`. More information on this can be found [here](https://superuser.com/questions/638375/what-does-mean-in-find-in-linux). Always check whether coping or moving the files was successful by for instance printing the content of your new directory and/or counting the number of files.
 
 ```{bash eval=F, echo=T, error=T}
-# Check whether you find the right files
-find /archive/INDIVIDUAL/kreek001/TwelveAccessionExperiment/MetabarcodingData_12AccessionExp/01.RawData -type f -name "*[0-9]_[1-2].fastq.gz"
+# Check whether you find the right (number of) files
+find /archive/INDIVIDUAL/kreek001/TwelveAccessionExperiment/MetabarcodingData_12AccessionExp/01.RawData -type f -name "*[0-9].raw_[1-2].fastq.gz"
+find /archive/INDIVIDUAL/kreek001/TwelveAccessionExperiment/MetabarcodingData_12AccessionExp/01.RawData -type f -name "*[0-9].raw_[1-2].fastq.gz" } | wc -l
 
 # make a folder to move the files to
-mkdir /archive/INDIVIDUAL/kreek001/TwelveAccessionExperiment/MetabarcodingData_12AccessionExp/02.RawReads_Together
+mkdir /archive/INDIVIDUAL/kreek001/TwelveAccessionExperiment/MetabarcodingData_12AccessionExp/02.RawReads_Together
 
 # copy files
-find /archive/INDIVIDUAL/kreek001/TwelveAccessionExperiment/MetabarcodingData_12AccessionExp/01.RawData -type f -name "*[0-9]_[1-2].fastq.gz" -exec cp {} /archive/INDIVIDUAL/kreek001/TwelveAccessionExperiment/MetabarcodingData_12AccessionExp/02.RawReads_Together \;
+find /archive/INDIVIDUAL/kreek001/TwelveAccessionExperiment/MetabarcodingData_12AccessionExp/01.RawData -type f -name "*[0-9].raw_[1-2].fastq.gz" -exec cp {} /archive/INDIVIDUAL/kreek001/TwelveAccessionExperiment/MetabarcodingData_12AccessionExp/02.RawReads_Together \;
 
 # Check number of files
 ls | wc -l
