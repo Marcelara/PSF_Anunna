@@ -454,7 +454,6 @@ We first have to setup the data2 pipeline by installing the necessary R packages
 The Ernakovich lab has made very elaborate slurm scripts that contains a lot of interesting information. You can reed this once. After that, you can reduce the script to the following essential elements. `#SBATCH` is a command for the slurm script, the line is a command when having two or more #s.
 
 ```{bash eval=F, echo=T, error=T}
-
 #!/bin/bash -login 	            ### -login is essential to activate conda environment
 
 #SBATCH --time=2:00:00          ### limit of wall clock time - how long the job will run
@@ -569,7 +568,6 @@ Here, we will remove sequences with many unknown nucleotides (Ns) and the primer
 Change the primer sequences in the R script to the primer sequences you have used. An example is shown in a snapshot of the chunk below.
 
 ```{r eval=F, echo=T, error=T}
-
 # Set up the primer sequences to pass along to cutadapt
 FWD <- "CCTACGGGNGGCWGCAG"  ## changed to 16S-341R
 REV <- "GACTACHVGGGTATCTAATCC"  ## Changed to 16S-805R
@@ -597,7 +595,6 @@ for (i in seq_along(fnFs)) {
 This slurm script is run with the minimal CPUs and memory to run the R script. 
 
 ```{bash eval=F, echo=T, error=T}
-
 #!/bin/bash -login 	            ### -login is essential to activate conda environment
 
 #SBATCH --time=1:00:00          ### limit of wall clock time - how long the job will run
@@ -620,7 +617,7 @@ conda deactivate
 
 **output**
 
-At the end of your .output file you should check that there are no primers found and left in your sequences by having only zero's (Fig. 10).
+At the end of your .output file you should check that there are no primers found and left in your sequences of the first sample by having only zero's (Fig. 10). At the beginning of the script, there should be a similar table showing how much primer sequences are detected in the first sample before running cutadapt.
 
 
 ![Figure 10. Check of cutadapt removing primers](./images/01_output_zero-check.jpg)
