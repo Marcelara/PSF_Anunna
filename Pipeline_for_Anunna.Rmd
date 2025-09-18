@@ -678,7 +678,6 @@ module load R/4.4.2-gfbf-2024a #optional
 Rscript ../R/02_check_quality_dada2_tutorial_16S.R
 
 conda deactivate
-
 ```
 
 
@@ -968,7 +967,6 @@ saveRDS(seqtab.nochim, paste0(table.fp, "/seqtab_final.rds"))
 Changed names inside of function and save only the repset in .fasta and .txt formats
 
 ```{r eval=F, echo=T}
-
 # Write repset to fasta file
 # create a function that writes fasta sequences
 writeRepSetFasta<-function(data, filename){
@@ -988,13 +986,13 @@ writeRepSetFasta(rep_set_ASVs, paste0(table.fp, "/repset.fasta"))
 # Also export files as .txt
 write.table(seqtab.t, file = paste0(table.fp, "/seqtab_final.txt"),
             sep = "\t", row.names = TRUE, col.names = NA)
-
 ```
+
+See below extra things that need to be changed in this R script!
 
 **slurm**
 
 ```{bash, eval=F, echo=T, error=T}
-
 #!/bin/bash -login
 
 #SBATCH --time=16:00:00
