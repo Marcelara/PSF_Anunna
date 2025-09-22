@@ -1032,15 +1032,12 @@ I found strange that in denoised F and denoised R I have `0`, so I check the `tr
 After trying several things I realized that the process was okay and I didn't have 0 reads at the end but the 'Sample' names were not the same for all dataframes that were joined so I had to modify a bit again the R script to:
 
 ```{r eval=F, echo=T}
-
 # tracking reads by counts
 filt_out_track <- filt_out %>%
   data.frame() %>%
   mutate(Sample = gsub("_R1.fastq.gz","",rownames(.))) %>% #changed to avoid mistake
   rename(input = reads.in, filtered = reads.out)
 rownames(filt_out_track) <- filt_out_track$Sample
-
-
 ```
 
 Be careful to change in between the "" with how your files are ending!!
@@ -1054,9 +1051,11 @@ It looks like something went wrong in the 'Merging' step of the 16S data as the 
 ***This needs to be checked (MA)***
 STILL NEED TO GO BACK AND CHECK 'MERGE PAIRED READS' STEP from DADA2!! ([\<https://benjjneb.github.io/dada2/tutorial.html>](https://benjjneb.github.io/dada2/tutorial.html){.uri})
 
+Trunking a bit more with `cutAndTrim()` function in script 03 may increase the quality of the ends of the sequences. This can improve merging and reduce the loss of sequences at the merging step. Keep in mind that the forward and reverse sequence should still overlap after trunking otherwise sequences cannot match. The forward and reverse sequence should together be longer than 460 bp.
+
 Not like the ITS data that looks a bit better (Fig. 25)
 
-![Figure 25. Summary plot of reads throughout pipeline - ITS](./images/06_tracking_reads_summary_plot-ITS.jpg)]
+![Figure 25. Summary plot of reads throughout pipeline - ITS](./images/06_tracking_reads_summary_plot-ITS.jpg)
 
 ## 07_Assigning taxonomies to ASVs
 
@@ -1064,9 +1063,40 @@ As mentioned before we will now assign taxonomy to each of our ASVs according to
 
 [Qiime2](https://docs.qiime2.org/2022.8/about/) is a streamlined pipeline used to analyze microbiome data. It takes you from the very start (raw reads) and it finishes with multiple options of statistical analysis and visualizations. For another explanation/summary of Qiime2, you can visit this tutorial: [https://hackmd.io/\@MAE-MBL/HylpoaOF5#Bioinformatics-III-qiime2](https://hackmd.io/@MAE-MBL/HylpoaOF5#Bioinformatics-III-qiime2) that I find easier to follow than the original one. One of the steps of the Qiime2 pipeline is, of course, to assign taxonomy to ASVs according to a (*trained*) database.
 
-I highlight the word *trained* as this is an **extra step** that you will have to do in case you didn't use the same primers we did (see table below) for your 16S/ITS regions. In a nutshell, training means that you keep only the region of your interest so the SILVA database can assign taxonomy with more accuracy.If you need to train your classifier, please follow [this tutorial to train your SILVA database with RESCRIPt](https://forum.qiime2.org/t/processing-filtering-and-evaluating-the-silva-database-and-other-reference-sequence-data-with-rescript/15494).
 
-Set of 16S and ITS primers used
+### Training classifier
+
+I highlight the word *trained* as this is an **extra step** that you will have to do in case you didn't use the same primers we did (see table below) for your 16S/ITS regions. In a nutshell, training means that you keep only the region of your interest so the SILVA database can assign taxonomy with more accuracy. If you need to train your classifier, please follow [this tutorial to train your SILVA database with RESCRIPt](https://forum.qiime2.org/t/processing-filtering-and-evaluating-the-silva-database-and-other-reference-sequence-data-with-rescript/15494). 
+
+Before starting with that you may need to install [Rescript](https://github.com/bokulich-lab/RESCRIPt) after installing Qiime2. I had quite some issues with this and it finally worked using mamba.
+
+```{bash, eval=F, echo=T, error=T}
+# Install mamba
+conda install mamba -n base -c conda-forge
+
+# Install rescipt
+conda activate using-qiime2
+mamba create -n rescript \
+-c https://packages.qiime2.org/qiime2/2025.10/amplicon/passed/ \
+-c qiime2 -c conda-forge -c bioconda \
+qiime2 q2cli rescript
+
+# Activate rescipt environment
+conda activate rescript
+
+# Check whether qiime2 and rescipt can be run in the same environment
+qiime info
+qiime rescript --help
+
+conda deactivate
+```
+
+See the our github page for the script to train the the classifier. Make sure to start the script with `conda activate rescript` if you installed rescript the way it is presented above.
+
+
+### Assigning taxonomy
+
+When you have a trained classifier, set of 16S and ITS primers used. An example is given in the table below. Novogene used slightly different primers for the same 16S region. 
 
 +-----------+-----------+-------------------------+-----------+--------------------------+
 |           | 16S       | 16S                     | ITS       | ITS                      |
@@ -1081,7 +1111,7 @@ Set of 16S and ITS primers used
 
 As I'm using the same primers to amplify the V3-V4 16S region that both Pedro and Roland used, I can use the same already-trained SILVA database that they used and skip the training step.
 
-To run Qiime2 you need to [install it, and activate within a conda environment inside the HPC](https://docs.qiime2.org/2022.8/install/native/#install-qiime-2-within-a-conda-environment) if you don't have it already installed. The instructions are straightforward, but most likely this step will take you time as you'll have to wait some time for conda and plug-ins to get downloaded (so take it into account).
+To run Qiime2 you need to [install it, and activate within a conda environment inside the HPC](https://use.qiime2.org/en/2025.4/tutorials/intro.html) (Check whether this is still the newest version) if you don't have it already installed. The instructions are straightforward, but most likely this step will take you time as you'll have to wait some time for conda and plug-ins to get downloaded (so take it into account).
 
 Once installed, you'll have to run script 07 which it will be the actual script that you'll run directly with *sbatch* (not like the previous R scripts).
 
@@ -1092,7 +1122,6 @@ For ITS, we used the UNITE database `unite-tax-ver9_dynamic_all_29.11.2022_dev.q
 **slurm**
 
 ```{bash, eval=F, echo=T}
-
 #!/bin/bash -login
 
 #SBATCH --time=16:00:00                                 ### limit of wall clock time - how long the job will run (same as -t)
@@ -1125,7 +1154,6 @@ qiime tools export \
 --output-path /lustre/nobackup/INDIVIDUAL/arago004/ernakovichlab_pipeline/16S_processed_MA/03_tabletax/16S_sklearn_taxonomy
 
 conda deactivate
-
 ```
 
 **output**
@@ -1133,10 +1161,8 @@ conda deactivate
 the `07_assign_taxonomy_sklearn_#.output` file should contain just a couple of lines letting you know that all the steps you asked for were made:
 
 ```{bash eval=F, echo=T}
-
 Imported /lustre/nobackup/INDIVIDUAL/arago004/ernakovichlab_pipeline/16S_processed_MA/03_tabletax/repset.fasta as DNASequencesDirectoryFormat to /lustre/nobackup/INDIVIDUAL/arago004/ernakovichlab_pipeline/16S_processed_MA/03_tabletax/re$Saved FeatureData[Taxonomy] to: /lustre/nobackup/INDIVIDUAL/arago004/ernakovichlab_pipeline/16S_processed_MA/03_tabletax/taxonomy_16S.qza
 Exported /lustre/nobackup/INDIVIDUAL/arago004/ernakovichlab_pipeline/16S_processed_MA/03_tabletax/taxonomy_16S.qza as TSVTaxonomyDirectoryFormat to directory /lustre/nobackup/INDIVIDUAL/arago004/ernakovichlab_pipeline/16S_processes/03_t$
-
 ```
 
 ## 08_Making phylogenetic tree 
@@ -1147,7 +1173,6 @@ To create a 'quick' phylogenetic tree you can follow this [Qiime2 tutorial for p
 
 
 ```{bash, eval=F, echo=T}
-
 #!/bin/bash -login
 
 #SBATCH --time=08:00:00				  	### limit of wall clock time - original time was 8 hours
@@ -1185,7 +1210,6 @@ qiime tools export \
   --output-path /lustre/nobackup/INDIVIDUAL/arago004/ernakovichlab_pipeline/ITS_processed_MA/04_phylogenetic_tree/exported_rooted_tree
 
 conda deactivate
-
 ```
 
 Now you'll have your tree in a `tree.nwk` file inside of _Working directory_ --> `04_phylogenetic_tree` --> `exported_rooted_tree`
