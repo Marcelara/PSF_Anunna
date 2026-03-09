@@ -3500,6 +3500,14 @@ new_library=&#39;/home/WUR/kreek001/.R_442_ext/&#39;
 <p>Here, we will remove sequences with many unknown nucleotides (Ns) and
 the primer sequences by using cutadapt.</p>
 <p><strong>R script</strong></p>
+<p>In the R script, change the patterns to extract and separate files of
+forward and reverse reads. My files had for instance the pattern in the
+file names <code>_1.fastq.gz</code> for forward reads and
+<code>_2.fastq.gz</code>for reverse reads.</p>
+<pre class="r"><code># Get full paths for all files and save them for downstream analyses
+# Forward and reverse fastq filenames have format: 
+fnFs &lt;- sort(list.files(data.fp, pattern=&quot;_1.fastq.gz&quot;, full.names = TRUE)) # old pattern: &quot;R1_&quot;
+fnRs &lt;- sort(list.files(data.fp, pattern=&quot;_2.fastq.gz&quot;, full.names = TRUE)) # old pattern: &quot;R2_&quot;</code></pre>
 <p>Change the primer sequences in the R script to the primer sequences
 you have used. An example is shown in a snapshot of the chunk below.</p>
 <pre class="r"><code># Set up the primer sequences to pass along to cutadapt
@@ -4040,30 +4048,6 @@ nutshell, training means that you keep only the region of your interest
 so the SILVA database can assign taxonomy with more accuracy. If you
 need to train your classifier, please follow <a href="https://forum.qiime2.org/t/processing-filtering-and-evaluating-the-silva-database-and-other-reference-sequence-data-with-rescript/15494">this
 tutorial to train your SILVA database with RESCRIPt</a>.</p>
-<p>Before starting with that you may need to install <a href="https://github.com/bokulich-lab/RESCRIPt">Rescript</a> after
-installing Qiime2. I had quite some issues with this and it finally
-worked using mamba.</p>
-<pre class="bash"><code># Install mamba
-conda install mamba -n base -c conda-forge
-
-# Install rescipt
-conda activate using-qiime2
-mamba create -n rescript \
--c https://packages.qiime2.org/qiime2/2025.10/amplicon/passed/ \
--c qiime2 -c conda-forge -c bioconda \
-qiime2 q2cli rescript
-
-# Activate rescipt environment
-conda activate rescript
-
-# Check whether qiime2 and rescipt can be run in the same environment
-qiime info
-qiime rescript --help
-
-conda deactivate</code></pre>
-<p>See the our github page for the script to train the the classifier.
-Make sure to start the script with <code>conda activate rescript</code>
-if you installed rescript the way it is presented above.</p>
 </div>
 <div id="assigning-taxonomy" class="section level3">
 <h3>Assigning taxonomy</h3>
