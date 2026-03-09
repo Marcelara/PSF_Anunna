@@ -1068,31 +1068,6 @@ As mentioned before we will now assign taxonomy to each of our ASVs according to
 
 I highlight the word *trained* as this is an **extra step** that you will have to do in case you didn't use the same primers we did (see table below) for your 16S/ITS regions. In a nutshell, training means that you keep only the region of your interest so the SILVA database can assign taxonomy with more accuracy. If you need to train your classifier, please follow [this tutorial to train your SILVA database with RESCRIPt](https://forum.qiime2.org/t/processing-filtering-and-evaluating-the-silva-database-and-other-reference-sequence-data-with-rescript/15494). 
 
-Before starting with that you may need to install [Rescript](https://github.com/bokulich-lab/RESCRIPt) after installing Qiime2. I had quite some issues with this and it finally worked using mamba.
-
-```{bash, eval=F, echo=T, error=T}
-# Install mamba
-conda install mamba -n base -c conda-forge
-
-# Install rescipt
-conda activate using-qiime2
-mamba create -n rescript \
--c https://packages.qiime2.org/qiime2/2025.10/amplicon/passed/ \
--c qiime2 -c conda-forge -c bioconda \
-qiime2 q2cli rescript
-
-# Activate rescipt environment
-conda activate rescript
-
-# Check whether qiime2 and rescipt can be run in the same environment
-qiime info
-qiime rescript --help
-
-conda deactivate
-```
-
-See the our github page for the script to train the the classifier. Make sure to start the script with `conda activate rescript` if you installed rescript the way it is presented above.
-
 
 ### Assigning taxonomy
 
