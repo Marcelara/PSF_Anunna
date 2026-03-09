@@ -573,6 +573,15 @@ new_library='/home/WUR/kreek001/.R_442_ext/'
 Here, we will remove sequences with many unknown nucleotides (Ns) and the primer sequences by using cutadapt. 
 
 **R script**
+   
+In the R script, change the patterns to extract and separate files of forward and reverse reads. My files had for instance the pattern in the file names `_1.fastq.gz` for forward reads and `_2.fastq.gz`for reverse reads.     
+   
+```{r eval=F, echo=T, error=T}
+# Get full paths for all files and save them for downstream analyses
+# Forward and reverse fastq filenames have format: 
+fnFs <- sort(list.files(data.fp, pattern="_1.fastq.gz", full.names = TRUE)) # old pattern: "R1_"
+fnRs <- sort(list.files(data.fp, pattern="_2.fastq.gz", full.names = TRUE)) # old pattern: "R2_"
+```
 
 Change the primer sequences in the R script to the primer sequences you have used. An example is shown in a snapshot of the chunk below.
 
