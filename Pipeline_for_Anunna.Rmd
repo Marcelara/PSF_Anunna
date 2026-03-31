@@ -448,9 +448,12 @@ Before running the slurm script, check in the slurm script and the corresponding
 ## 00_setup_dada2
 
 We first have to setup the data2 pipeline by installing the necessary R packages and creating an R environment by running the `00_setup` slurm script. Before doing so, change the file of where data is stored and where the output will to be stored in the R script. You do not have to create the output directory yourself as the R script will do this for you. You can add the mapping file as well but you can skip this as well. You only have to install the dada2_ernakovich environment with the R packages once, if you run first for 16S and then for ITS you can skip this step the second time for instance.
-
-**slurm script**
-
+   
+**R script**   
+For installing packages, you need to change the r scripts. See more information at `Accessing software and installing packages` below.   
+   
+**slurm script**   
+   
 The Ernakovich lab has made very elaborate slurm scripts that contains a lot of interesting information. You can reed this once. After that, you can reduce the script to the following essential elements. `#SBATCH` is a command for the slurm script, the line is a command when having two or more #s.
 
 ```{bash eval=F, echo=T, error=T}
@@ -469,6 +472,7 @@ conda activate dada2_ernakovich
 module load 2024 #optional, see below
 module load R/4.4.2-gfbf-2024a #optional, see below
 
+Rscript ../R/00_install_dada2_tutorial_16S.R
 Rscript ../R/00_setup_dada2_tutorial_16S.R    ### Run R script
 
 conda deactivate

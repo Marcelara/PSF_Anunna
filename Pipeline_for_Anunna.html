@@ -3381,6 +3381,10 @@ script will do this for you. You can add the mapping file as well but
 you can skip this as well. You only have to install the dada2_ernakovich
 environment with the R packages once, if you run first for 16S and then
 for ITS you can skip this step the second time for instance.</p>
+<p><strong>R script</strong><br />
+For installing packages, you need to change the r scripts. See more
+information at <code>Accessing software and installing packages</code>
+below.</p>
 <p><strong>slurm script</strong></p>
 <p>The Ernakovich lab has made very elaborate slurm scripts that
 contains a lot of interesting information. You can reed this once. After
@@ -3402,6 +3406,7 @@ conda activate dada2_ernakovich
 module load 2024 #optional, see below
 module load R/4.4.2-gfbf-2024a #optional, see below
 
+Rscript ../R/00_install_dada2_tutorial_16S.R
 Rscript ../R/00_setup_dada2_tutorial_16S.R    ### Run R script
 
 conda deactivate</code></pre>
