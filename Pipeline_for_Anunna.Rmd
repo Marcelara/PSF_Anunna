@@ -170,8 +170,68 @@ Your slurm and R scripts are edited in [Nano](https://linuxize.com/post/how-to-u
 
 Watch this [YouTube video](https://www.youtube.com/watch?v=BSM4ATQdYF0) with instructions and use this code (https://gist.github.com/benjamin-chan/4ef37955eabf5fa8b9e70053c80b7d76) in your .nanorc file.
 
+## Run R code in HPC with slurm 
+You can run R code on the HPC. First you create an R file (or load the R file into the HPC).   
+   
+```{bash eval=F, echo=T, error=T}
+nano testscript.R #Create new R script and directly open text editor interface
+```
+   
+Now you can add lines of code. A simple example:   
+   
+```{r eval=F, echo=T, error=T}
+# construct vector
+vect <- c(1,2,3,4,8)
 
+# print vector
+print(vect)
 
+# print text
+print("I hope it works")
+```
+   
+You can run this R script inside a slurm script. Slurm scripts have commands starting with `#SBatch` that indicate the required time, memory, nodes, etc. You can also specify the job name and name of the output file that includes the results of the script. In the slurm script, you also have the specify which R software versions you want to use. See more information on that topic [later in this file](#accessing-software-and-installing-packages). You first have to construct a slurm script (or load the R file into the HPC).   
+   
+```{bash eval=F, echo=T, error=T}
+nano testscript.slurm #Create new slurm script and directly open text editor interface
+```
+   
+This is an example of a slurm script:      
+   
+```{bash eval=F, echo=T, error=T}
+#!/bin/bash
+
+#SBATCH --time=2:00:00  ### limit of wall clock time - how long the job will run
+#SBATCH --ntasks=1          ### number of tasks - how many nodes you need
+#SBATCH --cpus-per-task=1   ### number of CPUs (or cores) per task
+#SBATCH --mem=4G            ### memory required per node (in bytes)
+#SBATCH --nodes=1           ### Number of nodes used
+
+#SBATCH --job-name='testscript'       ### you can give your job a name
+#SBATCH --output=testscript_%j.output ### name of the output file
+
+module load 2024
+module load R/4.4.2-gfbf-2024a
+
+Rscript testscript.R # run R script
+``` 
+   
+You can run (submit a job) the script with `sbatch` command and check the progress of the job with `squeue`.   
+   
+```{bash eval=F, echo=T, error=T}
+sbatch testscript.slurm
+
+squeue -u kreek001 # change to your own user name
+```   
+   
+An output file will be created in your current working directory with the results from the slurm and r script. Think about where you want to store your output and make that your current working directory (navigate there with `cd`) before submitting a job. You can print the output with `cat`.
+
+```{bash eval=F, echo=T, error=T}
+cat testscript_12345678
+```
+
+   
+   
 # Downloading data
 
 So you've received your data, and now what? Usually, the sequencing company will provide you the information for downloading the data from their remote server to the HPC. We'll show you the two ways we've experienced according to the sequencing company; 1.Genome Quebec or 2.Novogene
