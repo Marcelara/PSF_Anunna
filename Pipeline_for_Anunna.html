@@ -2883,24 +2883,47 @@ courses but they may be helpful as well. An overview of the upcoming
 courses can be found on the <a href="https://wiki.anunna.wur.nl/index.php/Main_Page#Events">Wiki</a>.</p>
 <p>There are some basic commands that you will use all the time. We will
 discuss them down here.</p>
-<pre class="bash"><code>ls    # print a list with all files in the current directory
-ll    # print a long (elaborate) list with all files in the current directory
-ls -l # other option for print a long (elaborate) list with all files in the current directory
+<pre class="bash"><code># Handy tricks
+  #^C                         #Kills job in console
+  #Highlight code       #copy code
+  #Right mouse click    #paste  
+  #Arrow up             #reuse previous lines of code
+  #Tab complete         #finish code or file path
 
-cd Test/ # set the working directory to the directory &quot;Test&quot;
-cd ../   # set the working directory one directory back
+# Basic commands
+pwd                         #print working directory
+cd                          #change working directory to home
+cd /directory_name      #change working directory up
+cd ..                       #Change working directory down
+cd ../directory_name/   #change working directory to parallel directory
+ls                          #print list of file
+ls -l                       #print long list of file
+cat                       #print file
+cat &gt; test                #make new file
+zcat                        #print compressed file
+head –n 40                #print head (first 40 lines) of file
+nano                        #open file editor
+nano test                   #make new file and directly edit
+mkdir                     #create directory
+mv                        #move and/or rename file or directory
+cp                          #copy file
+cp -r                       #copy directory
+rm                          #remove file
+rm --help                   #open help file rm
+rm -r                       #remove directory
+rmdir                       #remove directory
+rm -r test test.txt     #remove multiple directories
+ls &gt; filenames            #save list of files names in file
+wc -l filenames         #count number of lines in file
+ls | wc -l                #count number of lines (files) in file list
 
-cat text.R         # Print the R script in the console
-zcat text.fastq.qz # Print the compressed (zipped) file in the console
-nano text.R        # Open the R script in a text editor
-head -n 40 text.R        # Print the head of the R script in the console, -n defines the number of rows printed
+# Regular expressions
+cp Directory1/F* Directory2/
+grep -e &quot;C.*[0-9]&quot; -e &quot;Blank&quot; FileNames_withprimes
 
-mv text.R /RScripts/ # move the R script to the directory RScripts that is existing the current directory
-cp text.R /RScripts/ # copy the R script to the directory RScripts that is existing the current directory
-mv text.R script1.R  # rename a the R script
-
-sbach test1.slurm  #running a slurm script (submit a job)
-squeue -u kreek001 #check the status of the jobs you submitted</code></pre>
+#Running slurm scripts
+sbatch                  #Run slurm script
+squeue -u kreek001    #Check progress of running slurm script</code></pre>
 <p>As you can see, you can add extra arguments to a command by using a
 <code>-</code> in front of a command. The help file of the command lists
 all the differed arguments that can be uses.</p>
@@ -3035,10 +3058,10 @@ print(&quot;I hope it works&quot;)</code></pre>
 commands starting with <code>#SBatch</code> that indicate the required
 time, memory, nodes, etc. You can also specify the job name and name of
 the output file that includes the results of the script. In the slurm
-script, you also have the specify which R software versions you want to
-use. See more information on that topic <a href="#accessing-software-and-installing-packages">later in this
-file</a>. You first have to construct a slurm script (or load the R file
-into the HPC).</p>
+script, you have to specify which R software version you want to use.
+See more information on that topic <a href="#accessing-software-and-installing-packages">later in this
+file</a>. You first have to construct a slurm script (or load the slurm
+file into the HPC).</p>
 <pre class="bash"><code>nano testscript.slurm #Create new slurm script and directly open text editor interface</code></pre>
 <p>This is an example of a slurm script:</p>
 <pre class="bash"><code>#!/bin/bash
