@@ -457,14 +457,15 @@ For installing packages, you need to change the r scripts. See more information 
 The Ernakovich lab has made very elaborate slurm scripts that contains a lot of interesting information. You can reed this once. After that, you can reduce the script to the following essential elements. `#SBATCH` is a command for the slurm script, the line is a command when having two or more #s.
 
 ```{bash eval=F, echo=T, error=T}
-#!/bin/bash -login 	            ### -login is essential to activate conda environment
+#!/bin/bash
 
 #SBATCH --time=2:00:00          ### limit of wall clock time - how long the job will run
 #SBATCH --ntasks=1              ### number of tasks - how many nodes you need
 #SBATCH --cpus-per-task=1       ### number of CPUs (or cores) per task
 #SBATCH --mem=4G                ### memory required per node (in bytes)
+#SBATCH --nodes=1
 
-#SBATCH --job-name 00_setup_dada2         ### you can give your job a name
+#SBATCH --job-name='00_setup_dada2'         ### you can give your job a name
 #SBATCH --output=00_setup_dada2_%j.output ### name of the output file
 
 conda activate dada2_ernakovich
@@ -620,14 +621,15 @@ If you encounter an error like: `Error in names(answer) <- names1 : 'names' attr
 This slurm script is run with the minimal CPUs and memory to run the R script. 
 
 ```{bash eval=F, echo=T, error=T}
-#!/bin/bash -login 	            ### -login is essential to activate conda environment
+#!/bin/bash         ### -login is essential to activate conda environment
 
 #SBATCH --time=01:00:00          ### limit of wall clock time - how long the job will run (same as -t)
 #SBATCH --ntasks=1               ### number of tasks - how many tasks (nodes) that you require (same as -n)
 #SBATCH --cpus-per-task=16       ### number of CPUs (or cores) per task (same as -c)
 #SBATCH --mem=64G                ### memory required per node - amount of memory (in bytes)
+#SBATCH --nodes=1
 
-#SBATCH --job-name 01_pre-process_dada2            ### you can give your job a name
+#SBATCH --job-name='01_pre-process_dada2'            ### you can give your job a name
 #SBATCH --output=01_pre-process_dada2_%j.output    ### output name
 
 conda activate dada2_ernakovich
@@ -673,12 +675,13 @@ Older versions of the scripts may contain these lines of code. Out commending th
 **slurm script**
 
 ```{bash, eval=F, echo=T, error=T}
-#!/bin/bash -login
+#!/bin/bash
 
 #SBATCH --time=01:00:00          ### limit of wall clock time - how long the job will run (same as -t)
 #SBATCH --ntasks=1               ### number of tasks - how many tasks (nodes) that you require (same as -n)
 #SBATCH --cpus-per-task=16       ### number of CPUs (or cores) per task (same as -c)
 #SBATCH --mem=64G                ### memory required per node - amount of memory (in bytes)
+#SBATCH --nodes=1
 
 #SBATCH --job-name="02_check_quality_dada2"
 #SBATCH --output="02_check_quality_dada2_%j.output"
@@ -725,12 +728,13 @@ As for ITS data the length is variable is important to remove the `truncLen` arg
 **slurm script**
 
 ```{bash, eval=F, echo=T, error=T}
-#!/bin/bash -login
+#!/bin/bash
 
 #SBATCH --time=01:00:00          ### limit of wall clock time - how long the job will run (same as -t)
 #SBATCH --ntasks=1               ### number of tasks - how many tasks (nodes) that you require (same as -n)
 #SBATCH --cpus-per-task=16       ### number of CPUs (or cores) per task (same as -c)
 #SBATCH --mem=64G                ### memory required per node - amount of memory (in bytes)
+#SBATCH --nodes=1
 
 #SBATCH --job-name="03_filter_reads_dada2"
 #SBATCH --output="03_filter_reads_dada2_%j.output"
@@ -783,12 +787,13 @@ In the R script just be sure to check how your file names are ended.
 
 ```{bash, eval=F, echo=T, error=T}
 
-#!/bin/bash -login
+#!/bin/bash
 
 #SBATCH --time=12:00:00
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=128G
+#SBATCH --nodes=1
 #SBATCH --job-name="04_learn_error_rates_dada2"
 #SBATCH --output="04_learn_error_rates_%j.output"
 
@@ -800,7 +805,6 @@ module load R/4.4.2-gfbf-2024a #optional
 Rscript ../R/04_learn_error_rates_dada2_tutorial_16S.R
 
 conda deactivate
-
 ```
 
 
@@ -885,13 +889,13 @@ for(sam in sample.names) {
 **slurm**
 
 ```{bash, eval=F, echo=T, error=T}
-
-#!/bin/bash -login
+#!/bin/bash
 
 #SBATCH --time=16:00:00
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=64G
+#SBATCH --nodes=1
 #SBATCH --job-name="05_infer_ASVs_dada2"
 #SBATCH --output="05_infer_ASVs_dada2_%j.output"
 
@@ -1006,12 +1010,13 @@ See below extra things that need to be changed in this R script!
 **slurm**
 
 ```{bash, eval=F, echo=T, error=T}
-#!/bin/bash -login
+#!/bin/bash
 
 #SBATCH --time=16:00:00
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=128G
+#SBATCH --nodes=1
 #SBATCH --job-name="06_remove_chimeras"
 #SBATCH --output="06_remove_chimeras_dada2_%j.output"
 
@@ -1110,13 +1115,14 @@ For ITS, we used the UNITE database `unite-tax-ver9_dynamic_all_29.11.2022_dev.q
 **slurm**
 
 ```{bash, eval=F, echo=T}
-#!/bin/bash -login
+#!/bin/bash
 
-#SBATCH --time=16:00:00                                 ### limit of wall clock time - how long the job will run (same as -t)
-#SBATCH --ntasks=1                                            ### number of tasks - how many tasks (nodes) that you require (same as -n)
-#SBATCH --cpus-per-task=16                        ### number of CPUs (or cores) per task (same as -c)
-#SBATCH --mem=64G                                               ### memory required per node - amount of memory (in bytes)
-#SBATCH --job-name="07_assing_taxonomy_sklearn"                 ### you can give your job a name for easier identification (same as -J)
+#SBATCH --time=16:00:00                        ### limit of wall clock time - how long the job will run (same as -t)
+#SBATCH --ntasks=1                             ### number of tasks - how many tasks (nodes) that you require (same as -n)
+#SBATCH --cpus-per-task=16                     ### number of CPUs (or cores) per task (same as -c)
+#SBATCH --mem=64G                                  ### memory required per node - amount of memory (in bytes)
+#SBATCH --nodes=1
+#SBATCH --job-name="07_assing_taxonomy_sklearn"    ### you can give your job a name for easier identification (same as -J)
 #SBATCH --output="07_assign_taxonomy_sklearn_%j.output"
 
 # activates qiime2 environment
@@ -1161,12 +1167,13 @@ To create a 'quick' phylogenetic tree you can follow this [Qiime2 tutorial for p
 
 
 ```{bash, eval=F, echo=T}
-#!/bin/bash -login
+#!/bin/bash
 
 #SBATCH --time=08:00:00				  	### limit of wall clock time - original time was 8 hours
 #SBATCH --ntasks=1					      ### number of tasks - how many tasks (nodes) that you require (same as -n)
 #SBATCH --cpus-per-task=16			  ### number of CPUs (or cores) per task (same as -c)
 #SBATCH --mem=32G					        ### memory required per node - amount of memory (in bytes)
+#SBATCH --nodes=1
 #SBATCH --job-name="tree"			### you can give your job a name for easier identification (same as -J)
 #SBATCH --output="tree_%j.output"
 

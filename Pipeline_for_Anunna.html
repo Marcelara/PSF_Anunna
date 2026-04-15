@@ -3391,14 +3391,15 @@ contains a lot of interesting information. You can reed this once. After
 that, you can reduce the script to the following essential elements.
 <code>#SBATCH</code> is a command for the slurm script, the line is a
 command when having two or more #s.</p>
-<pre class="bash"><code>#!/bin/bash -login              ### -login is essential to activate conda environment
+<pre class="bash"><code>#!/bin/bash
 
 #SBATCH --time=2:00:00          ### limit of wall clock time - how long the job will run
 #SBATCH --ntasks=1              ### number of tasks - how many nodes you need
 #SBATCH --cpus-per-task=1       ### number of CPUs (or cores) per task
 #SBATCH --mem=4G                ### memory required per node (in bytes)
+#SBATCH --nodes=1
 
-#SBATCH --job-name 00_setup_dada2         ### you can give your job a name
+#SBATCH --job-name=&#39;00_setup_dada2&#39;         ### you can give your job a name
 #SBATCH --output=00_setup_dada2_%j.output ### name of the output file
 
 conda activate dada2_ernakovich
@@ -3539,14 +3540,15 @@ in <code>filterAndTrim</code> function in the r script.</p>
 <p><strong>slurm script</strong></p>
 <p>This slurm script is run with the minimal CPUs and memory to run the
 R script.</p>
-<pre class="bash"><code>#!/bin/bash -login              ### -login is essential to activate conda environment
+<pre class="bash"><code>#!/bin/bash         ### -login is essential to activate conda environment
 
 #SBATCH --time=01:00:00          ### limit of wall clock time - how long the job will run (same as -t)
 #SBATCH --ntasks=1               ### number of tasks - how many tasks (nodes) that you require (same as -n)
 #SBATCH --cpus-per-task=16       ### number of CPUs (or cores) per task (same as -c)
 #SBATCH --mem=64G                ### memory required per node - amount of memory (in bytes)
+#SBATCH --nodes=1
 
-#SBATCH --job-name 01_pre-process_dada2            ### you can give your job a name
+#SBATCH --job-name=&#39;01_pre-process_dada2&#39;            ### you can give your job a name
 #SBATCH --output=01_pre-process_dada2_%j.output    ### output name
 
 conda activate dada2_ernakovich
@@ -3583,12 +3585,13 @@ commending this code may prevent errors.</p>
 #ggplotly(fwd_qual_plots)
 #ggplotly(rev_qual_plots)</code></pre>
 <p><strong>slurm script</strong></p>
-<pre class="bash"><code>#!/bin/bash -login
+<pre class="bash"><code>#!/bin/bash
 
 #SBATCH --time=01:00:00          ### limit of wall clock time - how long the job will run (same as -t)
 #SBATCH --ntasks=1               ### number of tasks - how many tasks (nodes) that you require (same as -n)
 #SBATCH --cpus-per-task=16       ### number of CPUs (or cores) per task (same as -c)
 #SBATCH --mem=64G                ### memory required per node - amount of memory (in bytes)
+#SBATCH --nodes=1
 
 #SBATCH --job-name=&quot;02_check_quality_dada2&quot;
 #SBATCH --output=&quot;02_check_quality_dada2_%j.output&quot;
@@ -3644,12 +3647,13 @@ Furthermore, you may want to change <code>multithread=TRUE</code> to
 <code>multithread=FALSE</code> in <code>filterAndTrim</code> function in
 the r script to prevent errors like in script 01.</p>
 <p><strong>slurm script</strong></p>
-<pre class="bash"><code>#!/bin/bash -login
+<pre class="bash"><code>#!/bin/bash
 
 #SBATCH --time=01:00:00          ### limit of wall clock time - how long the job will run (same as -t)
 #SBATCH --ntasks=1               ### number of tasks - how many tasks (nodes) that you require (same as -n)
 #SBATCH --cpus-per-task=16       ### number of CPUs (or cores) per task (same as -c)
 #SBATCH --mem=64G                ### memory required per node - amount of memory (in bytes)
+#SBATCH --nodes=1
 
 #SBATCH --job-name=&quot;03_filter_reads_dada2&quot;
 #SBATCH --output=&quot;03_filter_reads_dada2_%j.output&quot;
@@ -3708,12 +3712,13 @@ sample.namesR &lt;- gsub(&quot;_R2.fastq.gz&quot;, &quot;&quot;, sample.namesR)<
 ended.</p>
 <p><strong>Slurm</strong></p>
 <pre class="bash"><code>
-#!/bin/bash -login
+#!/bin/bash
 
 #SBATCH --time=12:00:00
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=128G
+#SBATCH --nodes=1
 #SBATCH --job-name=&quot;04_learn_error_rates_dada2&quot;
 #SBATCH --output=&quot;04_learn_error_rates_%j.output&quot;
 
@@ -3724,8 +3729,7 @@ module load R/4.4.2-gfbf-2024a #optional
 
 Rscript ../R/04_learn_error_rates_dada2_tutorial_16S.R
 
-conda deactivate
-</code></pre>
+conda deactivate</code></pre>
 <p><strong>Output</strong></p>
 <p>After you run the
 <code>04_learn_error_rates_dada2_tutorial_16S.R</code> script you can
@@ -3833,13 +3837,13 @@ for(sam in sample.names) {
   mergers[[sam]] &lt;- merger
 }</code></pre>
 <p><strong>slurm</strong></p>
-<pre class="bash"><code>
-#!/bin/bash -login
+<pre class="bash"><code>#!/bin/bash
 
 #SBATCH --time=16:00:00
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=64G
+#SBATCH --nodes=1
 #SBATCH --job-name=&quot;05_infer_ASVs_dada2&quot;
 #SBATCH --output=&quot;05_infer_ASVs_dada2_%j.output&quot;
 
@@ -3953,12 +3957,13 @@ write.table(seqtab.t, file = paste0(table.fp, &quot;/seqtab_final.txt&quot;),
             sep = &quot;\t&quot;, row.names = TRUE, col.names = NA)</code></pre>
 <p>See below extra things that need to be changed in this R script!</p>
 <p><strong>slurm</strong></p>
-<pre class="bash"><code>#!/bin/bash -login
+<pre class="bash"><code>#!/bin/bash
 
 #SBATCH --time=16:00:00
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=128G
+#SBATCH --nodes=1
 #SBATCH --job-name=&quot;06_remove_chimeras&quot;
 #SBATCH --output=&quot;06_remove_chimeras_dada2_%j.output&quot;
 
@@ -4123,13 +4128,14 @@ And then, you export the final taxonomy file into a new folder
 <p>For ITS, we used the UNITE database
 <code>unite-tax-ver9_dynamic_all_29.11.2022_dev.qza</code></p>
 <p><strong>slurm</strong></p>
-<pre class="bash"><code>#!/bin/bash -login
+<pre class="bash"><code>#!/bin/bash
 
-#SBATCH --time=16:00:00                                 ### limit of wall clock time - how long the job will run (same as -t)
-#SBATCH --ntasks=1                                            ### number of tasks - how many tasks (nodes) that you require (same as -n)
-#SBATCH --cpus-per-task=16                        ### number of CPUs (or cores) per task (same as -c)
-#SBATCH --mem=64G                                               ### memory required per node - amount of memory (in bytes)
-#SBATCH --job-name=&quot;07_assing_taxonomy_sklearn&quot;                 ### you can give your job a name for easier identification (same as -J)
+#SBATCH --time=16:00:00                        ### limit of wall clock time - how long the job will run (same as -t)
+#SBATCH --ntasks=1                             ### number of tasks - how many tasks (nodes) that you require (same as -n)
+#SBATCH --cpus-per-task=16                     ### number of CPUs (or cores) per task (same as -c)
+#SBATCH --mem=64G                                  ### memory required per node - amount of memory (in bytes)
+#SBATCH --nodes=1
+#SBATCH --job-name=&quot;07_assing_taxonomy_sklearn&quot;    ### you can give your job a name for easier identification (same as -J)
 #SBATCH --output=&quot;07_assign_taxonomy_sklearn_%j.output&quot;
 
 # activates qiime2 environment
@@ -4174,12 +4180,13 @@ phylogenetic relationships such as <a href="https://en.wikipedia.org/wiki/UniFra
 tutorial for phylogenetic inference</a> and use the summarized pipeline
 <code>align-to-tree-mafft-fasttree</code> to create your phylogenetic
 tree by using only one command.</p>
-<pre class="bash"><code>#!/bin/bash -login
+<pre class="bash"><code>#!/bin/bash
 
 #SBATCH --time=08:00:00                 ### limit of wall clock time - original time was 8 hours
 #SBATCH --ntasks=1                        ### number of tasks - how many tasks (nodes) that you require (same as -n)
 #SBATCH --cpus-per-task=16            ### number of CPUs (or cores) per task (same as -c)
 #SBATCH --mem=32G                           ### memory required per node - amount of memory (in bytes)
+#SBATCH --nodes=1
 #SBATCH --job-name=&quot;tree&quot;           ### you can give your job a name for easier identification (same as -J)
 #SBATCH --output=&quot;tree_%j.output&quot;
 
