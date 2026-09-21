@@ -1,6 +1,6 @@
 Pipeline for pre-processing amplicon data in Anunna
 ================
-Marcela Aragón & Kris de Kreek
+Written by Marcela Aragón & Kris de Kreek
 
 - [Summary](#summary)
 - [Why doing this?](#why-doing-this)
@@ -16,7 +16,6 @@ Marcela Aragón & Kris de Kreek
     computer](#moving-files-between-the-hpc-and-your-local-computer)
   - [Checking differences in code](#checking-differences-in-code)
   - [Pimping your terminal](#pimping-your-terminal)
-  - [Run R code in HPC with slurm](#run-r-code-in-hpc-with-slurm)
 - [Downloading data](#downloading-data)
   - [Version 1: Genome Quebec](#version-1-genome-quebec)
   - [Version 2: Novogene](#version-2-novogene)
@@ -30,6 +29,7 @@ Marcela Aragón & Kris de Kreek
   data](#running-the-dada2-ernakovich-pipeline-for-novaseq-data)
   - [Do this before you start!](#do-this-before-you-start)
 - [Running the pipeline](#running-the-pipeline)
+  - [Run R code in HPC with slurm](#run-r-code-in-hpc-with-slurm)
   - [00_setup_dada2](#00_setup_dada2)
     - [Accessing software and installing
       packages](#accessing-software-and-installing-packages)
@@ -362,80 +362,6 @@ Watch this [YouTube video](https://www.youtube.com/watch?v=BSM4ATQdYF0)
 with instructions and use this code
 (<https://gist.github.com/benjamin-chan/4ef37955eabf5fa8b9e70053c80b7d76>)
 in your .nanorc file.
-
-## Run R code in HPC with slurm
-
-You can run R code on the HPC. First you create an R file (or load the R
-file into the HPC).
-
-``` bash
-nano testscript.R #Create new R script and directly open text editor interface
-```
-
-Now you can add lines of code. A simple example:
-
-``` r
-# construct vector
-vect <- c(1,2,3,4,8)
-
-# print vector
-print(vect)
-
-# print text
-print("I hope it works")
-```
-
-You can run this R script inside a slurm script. Slurm scripts have
-commands starting with `#SBatch` that indicate the required time,
-memory, nodes, etc. You can also specify the job name and name of the
-output file that includes the results of the script. In the slurm
-script, you have to specify which R software version you want to use.
-See more information on that topic [later in this
-file](#accessing-software-and-installing-packages). You first have to
-construct a slurm script (or load the slurm file into the HPC).
-
-``` bash
-nano testscript.slurm #Create new slurm script and directly open text editor interface
-```
-
-This is an example of a slurm script:
-
-``` bash
-#!/bin/bash
-
-#SBATCH --time=2:00:00  ### limit of wall clock time - how long the job will run
-#SBATCH --ntasks=1          ### number of tasks - how many nodes you need
-#SBATCH --cpus-per-task=1   ### number of CPUs (or cores) per task
-#SBATCH --mem=4G            ### memory required per node (in bytes)
-#SBATCH --nodes=1           ### Number of nodes used
-
-#SBATCH --job-name='testscript'       ### you can give your job a name
-#SBATCH --output=testscript_%j.output ### name of the output file
-
-module load 2024
-module load R/4.4.2-gfbf-2024a
-
-Rscript testscript.R # run R script
-```
-
-You can run (submit a job) the script with `sbatch` command and check
-the progress of the job with `squeue`.
-
-``` bash
-sbatch testscript.slurm
-
-squeue -u kreek001 # change to your own user name
-```
-
-An output file will be created in your current working directory with
-the results from the slurm and r script. Think about where you want to
-store your output and make that your current working directory (navigate
-there with `cd`) before submitting a job. You can print the output with
-`cat`.
-
-``` bash
-cat testscript_12345678
-```
 
 # Downloading data
 
@@ -863,12 +789,90 @@ slurm script is the script that is needed to run a job on the HPC. In
 here, you define parameters like the memory the script needs and the
 time the script is allowed to run. Furthermore, this script can contain
 commands that define what you want the script to do. Most of the time in
-this pipeline, we will only write in the slurm script that is has to run
-an R script as you can not directly run an R script in the HPC.
+this pipeline, we will only write in the slurm script the instruction to
+run certain R script.
+
+See here if you need more explanation:
+
+## Run R code in HPC with slurm
+
+You can run R code on the HPC. First you create an R file (or load the R
+file into the HPC).
+
+``` bash
+nano testscript.R #Create new R script and directly open text editor interface
+```
+
+Now you can add lines of code. A simple example:
+
+``` r
+# construct vector
+vect <- c(1,2,3,4,8)
+
+# print vector
+print(vect)
+
+# print text
+print("I hope it works")
+```
+
+You can run this R script inside a slurm script. Slurm scripts have
+commands starting with `#SBatch` that indicate the required time,
+memory, nodes, etc. You can also specify the job name and name of the
+output file that includes the results of the script. In the slurm
+script, you have to specify which R software version you want to use.
+See more information on that topic [later in this
+file](#accessing-software-and-installing-packages). You first have to
+construct a slurm script (or load the slurm file into the HPC).
+
+``` bash
+nano testscript.slurm #Create new slurm script and directly open text editor interface
+```
+
+This is an example of a slurm script:
+
+``` bash
+#!/bin/bash
+
+#SBATCH --time=2:00:00  ### limit of wall clock time - how long the job will run
+#SBATCH --ntasks=1          ### number of tasks - how many nodes you need
+#SBATCH --cpus-per-task=1   ### number of CPUs (or cores) per task
+#SBATCH --mem=4G            ### memory required per node (in bytes)
+#SBATCH --nodes=1           ### Number of nodes used
+
+#SBATCH --job-name='testscript'       ### you can give your job a name
+#SBATCH --output=testscript_%j.output ### name of the output file
+
+module load 2024
+module load R/4.4.2-gfbf-2024a
+
+Rscript testscript.R # run R script
+```
+
+You can run (submit a job) the script with `sbatch` command and check
+the progress of the job with `squeue`.
+
+``` bash
+sbatch testscript.slurm
+
+squeue -u kreek001 # change to your own user name
+```
+
+An output file will be created in your current working directory with
+the results from the slurm and r script. Think about where you want to
+store your output and make that your current working directory (navigate
+there with `cd`) before submitting a job. You can print the output with
+`cat`.
+
+``` bash
+cat testscript_12345678
+```
 
 Before running the slurm script, check in the slurm script and the
 corresponding R script whether the file paths are correct. You can use
 nano to change the paths when this is not the case.
+
+Now you are ready to start with the pipeline!
 
 ## 00_setup_dada2
 
