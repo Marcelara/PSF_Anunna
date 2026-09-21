@@ -1,18 +1,11 @@
 ---
 title: "Pipeline for pre-processing amplicon data in Anunna"
-author: "Marcela Aragon & Kris de Kreek"
-date: "10/6/2022"
-output: 
-  html_document:
+author: "Marcela Aragón & Kris de Kreek"
+output:
+  github_document:
     toc: true
     toc_depth: 4
-    toc_float: 
-     collapsed: false
-     smooth_scroll: false
-    df_print: paged
-    keep_md: true
-editor_options: 
-  chunk_output_type: console
+knit: (function(inputFile, encoding) { rmarkdown::render(inputFile, encoding = encoding, output_file = "README.md") })
 ---
 
 
@@ -23,7 +16,6 @@ knitr::opts_chunk$set(eval = FALSE)
 knitr::opts_chunk$set(echo = TRUE)
 
 ```
-
 
 
 # Summary
@@ -181,13 +173,13 @@ It can take a while to navigate through the directories of the HPC to get into t
 ## Checking differences in code
 
 To double-check if your code is correct, or what is the difference between one script and other, you can use this
-[Diffchecker](https://www.diffchecker.com/text-compare/) tool (Fig 7). This is quite handy if you are recycling code from somebody else and want to know very quickly what is the difference between the old and the new version.
+[Diffchecker](https://www.diffchecker.com/text-compare/) tool (Fig. 7). This is quite handy if you are recycling code from somebody else and want to know very quickly what is the difference between the old and the new version.
 
 ![Figure 7. Diffchecker](./images/Checking_differences_in_code.jpg)
 
 ## Pimping your terminal
 
-Your slurm and R scripts are edited in [Nano](https://linuxize.com/post/how-to-use-nano-text-editor/), a command line text editor. You will not be able to use Ctrl+C, Ctrl+V nor to click to move around the script, so to make your life easier and be able to distinguish the different parts of your script you can opt to modify the syntax highlighting rules so you can get different colors (Fig. 8), in my experience it really helps to detect mistakes faster than having only the black screen with white font!
+Your slurm and R scripts are edited in [Nano](https://linuxize.com/post/how-to-use-nano-text-editor/), a command line text editor. You will not be able to click to move around the script, so to make your life easier and be able to distinguish the different parts of your script you can opt to modify the syntax highlighting rules so you can get different colors (Fig. 8), in my experience it really helps to detect mistakes faster than having only the black screen with white font!
 
 ![Figure 8. Nano with highlighted syntax](./images/Pimping_terminal_nano.jpg)
 
